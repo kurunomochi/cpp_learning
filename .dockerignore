@@ -1,0 +1,8 @@
+build
+install
+.git
+.env
+*.db*
+*.log
+index.html
+教程.md

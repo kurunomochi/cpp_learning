@@ -1,0 +1,16 @@
+services:
+  api:
+    build: .
+    ports:
+      - "127.0.0.1:8080:8080"
+    environment:
+      APP_HOST: 0.0.0.0
+      APP_PORT: "8080"
+      APP_DB: /data/tasks.db
+      APP_TOKEN: ${APP_TOKEN:?Set APP_TOKEN to a random token of at least 32 bytes}
+    volumes:
+      - task_data:/data
+    restart: unless-stopped
+    stop_grace_period: 15s
+volumes:
+  task_data:

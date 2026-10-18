@@ -1,0 +1,1112 @@
+<!doctype html><html lang="zh-CN"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>从调用关系 · 读懂完整源码</title><style>
+[hidden]{display:none!important}
+:root{--bg:#f5f3ee;--paper:#fffefb;--ink:#25352f;--muted:#67746d;--line:#dedfd5;--accent:#137768;--code:#142d29;--codeink:#e1ede5;--aside:280px}
+*{box-sizing:border-box}html{scroll-behavior:smooth;scroll-padding-top:95px}body{margin:0;background:var(--bg);color:var(--ink);font-family:Segoe UI,Microsoft YaHei,Noto Sans SC,sans-serif;font-size:16px;line-height:1.85}a{color:var(--accent);text-decoration:none}a:hover{text-decoration:underline}button,input{font:inherit}button{cursor:pointer}header{height:68px;position:fixed;inset:0 0 auto;z-index:20;background:var(--paper);border-bottom:1px solid var(--line);display:flex;align-items:center;justify-content:space-between;padding:0 28px;gap:24px}.brand{font-size:16px;font-weight:750;letter-spacing:.4px;color:var(--ink)}.brand span{background:var(--accent);color:white;padding:4px 7px;border-radius:4px;margin-right:10px;font:700 15px Consolas,monospace}header nav{display:flex;gap:20px;font-size:14px}header nav a.active{font-weight:700;border-bottom:2px solid var(--accent)}.tools{display:flex;gap:8px}.tools button{border:1px solid var(--line);border-radius:6px;background:transparent;padding:4px 10px;font-size:13px;color:var(--ink)}#progress{position:fixed;top:66px;left:0;height:3px;background:var(--accent);z-index:30;width:0}
+aside{position:fixed;top:68px;bottom:0;left:0;width:var(--aside);padding:25px 18px 22px 24px;border-right:1px solid var(--line);overflow-y:auto;background:var(--paper)}.nav-caption{font-size:11px;letter-spacing:2px;color:var(--muted);font-weight:700;margin:0 0 10px}#filter{width:100%;border:1px solid var(--line);padding:8px 10px;border-radius:6px;margin-bottom:15px;background:var(--bg);color:var(--ink);font-size:13px}aside a{display:block;padding:7px 10px;margin:2px 0;border-radius:5px;color:var(--muted);line-height:1.55;font-size:13px}aside a:hover,aside a.current{background:#e7f1e9;color:var(--accent);text-decoration:none}aside a.done:before{content:'✓ ';font-weight:700;color:var(--accent)}.nav-note{font-size:12px;color:var(--muted);padding:15px 10px;border-top:1px solid var(--line);margin-top:16px}#resume{font-size:12px;display:none;margin-bottom:10px}
+main{margin:68px 0 0 var(--aside);padding:42px 48px 80px;max-width:1290px}.hero{background:#123f35;color:#fbfff7;padding:46px 44px 36px;border-radius:12px;margin-bottom:34px;position:relative;overflow:hidden}.hero:after{content:'{ }';font:130px Consolas,monospace;position:absolute;right:28px;top:23px;color:#ffffff0c;pointer-events:none}.eyebrow{font:12px Consolas,monospace;letter-spacing:2px;color:#b2d1b7}.hero h1{font-size:36px;line-height:1.45;letter-spacing:-.5px;font-weight:700;margin:17px 0}.hero p{margin:0;color:#d4e3d7;max-width:600px;font-size:15px}.stats{display:flex;gap:27px;margin-top:27px;padding-top:22px;border-top:1px solid #ffffff2e;font-size:13px;color:#b9d0c0}.stats b{display:block;font-size:23px;color:#fff;font-weight:650}.document{max-width:880px;margin:auto}.document>p:first-child{font-size:18px}.document h2{font-size:26px;line-height:1.55;margin:62px 0 24px;padding:22px 0 14px;border-top:2px solid var(--accent);letter-spacing:-.4px}.document h3{font-size:20px;line-height:1.6;margin:32px 0 13px}.document h4{font-size:18px}.document p{margin:13px 0 19px}.document ul,.document ol{padding-left:27px}.document li{padding-left:3px;margin:7px 0}.document strong{font-weight:700}.document :not(pre)>code{background:#e9ede4;border:1px solid #e0e6da;border-radius:4px;padding:1px 5px;font-size:.88em;color:#285b45;overflow-wrap:anywhere}pre{margin:20px 0 24px;background:var(--code);color:var(--codeink);border-radius:8px;padding:24px 22px 20px;overflow-x:auto;position:relative;line-height:1.65;font-size:13px;tab-size:4}pre code{font-family:Cascadia Code,Consolas,monospace;white-space:pre}pre .language-label{display:block;font:10px Segoe UI,sans-serif;letter-spacing:1.5px;color:#8eafa2;text-transform:uppercase;margin-bottom:10px;user-select:none}.table-scroll{overflow-x:auto;margin:20px 0 27px;border:1px solid var(--line);border-radius:8px}table{border-collapse:collapse;width:100%;font-size:14px}th{text-align:left;background:#e9eee5;font-weight:650}th,td{padding:12px 14px;border-bottom:1px solid var(--line);vertical-align:top}tr:last-child td{border-bottom:0}tbody tr:nth-child(even){background:#ffffff55}blockquote{margin:20px 0;border-left:3px solid var(--accent);padding:8px 20px;background:#e9f1e7;color:var(--muted)}.chapter-tools{display:flex;justify-content:flex-end;margin:-12px 0 18px}.complete-button{font-size:12px;border:1px solid var(--line);color:var(--muted);border-radius:16px;padding:3px 12px;background:var(--paper)}.complete-button.checked{background:#d9ecde;color:#206d48;border-color:#a8c9af}footer{margin-top:55px;padding-top:20px;border-top:1px solid var(--line);color:var(--muted);font-size:13px}
+body[data-theme=dark]{--bg:#14221e;--paper:#1a2b24;--ink:#e1e7df;--muted:#afbeb1;--line:#3b4d41;--accent:#91c8a0;--code:#0b1b15;--codeink:#dce9dc}body[data-theme=dark] :not(pre)>code{background:#263e2e;border-color:#3b513f;color:#c4e6c6}body[data-theme=dark] th{background:#2d4131}body[data-theme=dark] tbody tr:nth-child(even){background:#ffffff05}body[data-theme=dark] aside a.current,body[data-theme=dark] aside a:hover{background:#2a4030}body[data-theme=dark] blockquote{background:#253b2b}body[data-theme=dark] .complete-button.checked{background:#2e4936;color:#c1e3ca}
+@media(min-width:1500px){main{margin-left:calc(var(--aside) + (100vw - 1500px)/3)}}@media(max-width:1050px){:root{--aside:238px}main{padding:32px 28px}.hero{padding:32px 28px}.hero h1{font-size:30px}header{padding:0 18px}header nav{gap:13px}.brand{font-size:14px}.tools button{padding:4px 7px}}@media(max-width:760px){header{position:static;height:auto;min-height:68px;flex-wrap:wrap;padding:15px 20px;gap:10px}header nav{order:3;width:100%;justify-content:space-between}aside{position:static;width:auto;padding:20px;border-right:0;border-bottom:1px solid var(--line);max-height:260px}main{margin:0;padding:24px 19px 50px}.hero{padding:30px 24px}.hero h1{font-size:28px}.stats{gap:21px}.document h2{font-size:23px}.document h3{font-size:19px}pre{font-size:12px;padding:18px}#progress{top:0}body{font-size:15px}.tools{margin-left:auto}}
+@media print{header,aside,.tools,#progress,.chapter-tools{display:none!important}main{margin:0;padding:0;max-width:none}.hero{background:white;color:#111;padding:15px 0}.hero p,.eyebrow,.stats,.stats b{color:#333}.hero:after{display:none}.document{max-width:none}body{font-size:10.5pt;line-height:1.7;background:white;color:#111}pre{white-space:pre-wrap;overflow:visible;background:#f2f4f1;color:#111;border:1px solid #ccc;font-size:8.5pt}pre code{white-space:pre-wrap;overflow-wrap:anywhere}.document h2{break-before:page;margin-top:10px}.document h3{break-after:avoid}table{font-size:9pt}.table-scroll{overflow:visible}a{color:#222}}
+</style></head><body><header><a class="brand" href="index.html"><span>C++</span>后端实战手册</a><nav><a href="index.html">教材</a><a class="active" href="code.html">源码</a><a href="verification.html">验证</a><a href="start.html">开始运行</a></nav><div class="tools"><button id="theme" aria-label="切换明暗主题">明暗</button><button id="print">打印</button></div></header><div id="progress"></div><aside><p class="nav-caption">LEARNING PATH / 阅读导航</p><input id="filter" type="search" aria-label="筛选章节" placeholder="筛选章节 · 全文搜索 Ctrl+F"><a id="resume">继续上次阅读 →</a><div id="toc"><a href="#section-1">examples/01_hello.cpp</a><a href="#section-2">examples/02_modern.cpp</a><a href="#section-3">include/task/domain.hpp</a><a href="#section-4">src/domain.cpp</a><a href="#section-5">examples/03_cli.cpp</a><a href="#section-6">examples/04_http.cpp</a><a href="#section-7">include/task/repository.hpp</a><a href="#section-8">src/repository.cpp</a><a href="#section-9">include/task/http_api.hpp</a><a href="#section-10">src/http_api.cpp</a><a href="#section-11">src/main.cpp</a><a href="#section-12">CMakeLists.txt</a><a href="#section-13">CMakePresets.json</a><a href="#section-14">tests/core_tests.cpp</a><a href="#section-15">tests/http_test.py</a><a href="#section-16">scripts/backup_db.py</a><a href="#section-17">scripts/load_test.py</a><a href="#section-18">scripts/migrate_priority_example.py</a><a href="#section-19">Dockerfile</a><a href="#section-20">compose.yaml</a><a href="#section-21">deploy/task-server.service</a><a href="#section-22">deploy/Caddyfile</a><a href="#section-23">.github/workflows/ci.yml</a><a href="#section-24">.clang-format</a><a href="#section-25">.gitignore</a><a href="#section-26">.dockerignore</a></div><div class="nav-note">离线可读 · 无外部字体或脚本<br>学习标记仅保存在当前浏览器<br>整理日期 2026.10.18</div></aside><main><section class="hero"><div class="eyebrow">MODERN C++ / BUILD A BACKEND</div><h1>从调用关系<br>读懂完整源码</h1><p>全部自有实现与主要配置，按学习顺序排列。先自己实现，再来核对。</p><div class="stats"><div><b>26</b>源码与配置</div><div><b>C++20</b>主语言</div><div><b>离线</b>依赖已附带</div></div></section><article class="document">
+<p>下面收录全部自有实现与主要配置，和磁盘源码逐字一致。建议先按《教程》第 11、13、16、17 章自己实现，再到这里核对。第三方库源码另见 third_party，不在此重复展示。</p>
+<h2 id="section-1">examples/01_hello.cpp</h2>
+<p>对应文件可直接在编辑器中打开；修改后按 README 重新构建并运行相关测试。</p>
+<pre><span class="language-label">cpp</span><code class="language-cpp">#include &lt;iostream&gt;
+int main() {
+    std::cout &lt;&lt; &quot;Hello, modern C++!\n&quot;;
+}
+</code></pre>
+<h2 id="section-2">examples/02_modern.cpp</h2>
+<p>对应文件可直接在编辑器中打开；修改后按 README 重新构建并运行相关测试。</p>
+<pre><span class="language-label">cpp</span><code class="language-cpp">#include &lt;algorithm&gt;
+#include &lt;concepts&gt;
+#include &lt;iostream&gt;
+#include &lt;memory&gt;
+#include &lt;mutex&gt;
+#include &lt;ranges&gt;
+#include &lt;span&gt;
+#include &lt;string&gt;
+#include &lt;thread&gt;
+#include &lt;utility&gt;
+#include &lt;vector&gt;
+
+struct Note { int id; std::string title; bool done{false}; };
+template&lt;std::integral T&gt;
+T twice(T value) { return value + value; }
+int sum(std::span&lt;const int&gt; values) {
+    int result{};
+    for (int n : values) result += n;
+    return result;
+}
+int main() {
+    std::vector&lt;Note&gt; notes{{1, &quot;Learn RAII&quot;, false}, {2, &quot;Learn CMake&quot;, true}};
+    auto found = std::ranges::find_if(notes, [](const Note&amp; n) { return n.id == 1; });
+    if (found != notes.end()) found-&gt;done = true;
+    auto active = notes | std::views::filter([](const Note&amp; n) { return n.done; });
+    for (const auto&amp; n : active) std::cout &lt;&lt; n.title &lt;&lt; &#39;\n&#39;;
+    auto owner = std::make_unique&lt;Note&gt;(Note{3, &quot;Unique ownership&quot;});
+    auto moved = std::move(owner);
+    if (owner || !moved) return 1;
+    const int values[]{1, 2, 3};
+    if (sum(values) != 6 || twice(4) != 8) return 2;
+    int count{};
+    std::mutex mutex;
+    {
+        std::vector&lt;std::jthread&gt; workers;
+        for (int i = 0; i &lt; 4; ++i) {
+            workers.emplace_back([&amp;] {
+                for (int j = 0; j &lt; 1000; ++j) {
+                    std::lock_guard lock(mutex);
+                    ++count;
+                }
+            });
+        }
+    } // jthread joins before count is examined.
+    std::cout &lt;&lt; &quot;count=&quot; &lt;&lt; count &lt;&lt; &#39;\n&#39;;
+    return count == 4000 ? 0 : 3;
+}
+</code></pre>
+<h2 id="section-3">include/task/domain.hpp</h2>
+<p>对应文件可直接在编辑器中打开；修改后按 README 重新构建并运行相关测试。</p>
+<pre><span class="language-label">cpp</span><code class="language-cpp">#pragma once
+#include &lt;cstdint&gt;
+#include &lt;optional&gt;
+#include &lt;string&gt;
+#include &lt;string_view&gt;
+
+namespace task {
+struct Task {
+    std::int64_t id{};
+    std::string title;
+    bool completed{false};
+};
+struct TaskPatch {
+    std::optional&lt;std::string&gt; title;
+    std::optional&lt;bool&gt; completed;
+};
+// Length is measured in UTF-8 bytes, not displayed characters.
+[[nodiscard]] std::optional&lt;std::string&gt; title_error(std::string_view title);
+[[nodiscard]] std::optional&lt;std::int64_t&gt; parse_id(std::string_view text);
+void validate_patch(const TaskPatch&amp; patch);
+} // namespace task
+</code></pre>
+<h2 id="section-4">src/domain.cpp</h2>
+<p>先看 title_error 与 parse_id：领域规则是如何独立于 HTTP 和 SQLite 表达的。</p>
+<pre><span class="language-label">cpp</span><code class="language-cpp">#include &quot;task/domain.hpp&quot;
+#include &lt;algorithm&gt;
+#include &lt;charconv&gt;
+#include &lt;stdexcept&gt;
+#include &lt;system_error&gt;
+
+namespace task {
+std::optional&lt;std::string&gt; title_error(std::string_view title) {
+    if (title.empty() || title.size() &gt; 200) return &quot;title must contain 1..200 UTF-8 bytes&quot;;
+    if (std::ranges::any_of(title, [](unsigned char c) { return c &lt; 32 || c == 127; }))
+        return &quot;title must not contain ASCII control characters&quot;;
+    if (std::ranges::all_of(title, [](char c) { return c == &#39; &#39;; }))
+        return &quot;title must not contain only ASCII spaces&quot;;
+    return std::nullopt;
+}
+std::optional&lt;std::int64_t&gt; parse_id(std::string_view text) {
+    if (text.empty() || text.front() == &#39;+&#39; || text.front() == &#39;-&#39;) return std::nullopt;
+    std::int64_t value{};
+    const auto [end, error] = std::from_chars(text.data(), text.data() + text.size(), value);
+    if (error != std::errc{} || end != text.data() + text.size() || value &lt;= 0) return std::nullopt;
+    return value;
+}
+void validate_patch(const TaskPatch&amp; patch) {
+    if (!patch.title &amp;&amp; !patch.completed) throw std::invalid_argument(&quot;patch must contain title or completed&quot;);
+    if (patch.title) {
+        if (auto error = title_error(*patch.title)) throw std::invalid_argument(*error);
+    }
+}
+} // namespace task
+</code></pre>
+<h2 id="section-5">examples/03_cli.cpp</h2>
+<p>对应文件可直接在编辑器中打开；修改后按 README 重新构建并运行相关测试。</p>
+<pre><span class="language-label">cpp</span><code class="language-cpp">#include &quot;task/domain.hpp&quot;
+#include &lt;algorithm&gt;
+#include &lt;iostream&gt;
+#include &lt;sstream&gt;
+#include &lt;string&gt;
+#include &lt;vector&gt;
+
+int main() {
+    std::vector&lt;task::Task&gt; tasks;
+    std::int64_t next_id = 1;
+    std::cout &lt;&lt; &quot;Commands: add TITLE | list | done ID | delete ID | quit\n&quot;;
+    for (std::string line; std::cout &lt;&lt; &quot;&gt; &quot; &amp;&amp; std::getline(std::cin, line);) {
+        std::istringstream input(line);
+        std::string command;
+        input &gt;&gt; command;
+        if (command == &quot;quit&quot;) break;
+        if (command == &quot;add&quot;) {
+            std::string title;
+            std::getline(input &gt;&gt; std::ws, title);
+            if (auto error = task::title_error(title)) { std::cout &lt;&lt; *error &lt;&lt; &#39;\n&#39;; continue; }
+            tasks.push_back({next_id++, title, false});
+            std::cout &lt;&lt; &quot;created &quot; &lt;&lt; tasks.back().id &lt;&lt; &#39;\n&#39;;
+        } else if (command == &quot;list&quot;) {
+            for (const auto&amp; t : tasks) std::cout &lt;&lt; t.id &lt;&lt; &quot; [&quot; &lt;&lt; (t.completed ? &#39;x&#39; : &#39; &#39;) &lt;&lt; &quot;] &quot; &lt;&lt; t.title &lt;&lt; &#39;\n&#39;;
+        } else if (command == &quot;done&quot; || command == &quot;delete&quot;) {
+            std::string raw, extra;
+            input &gt;&gt; raw;
+            auto id = task::parse_id(raw);
+            if (!id || (input &gt;&gt; extra)) { std::cout &lt;&lt; &quot;invalid id\n&quot;; continue; }
+            auto it = std::ranges::find(tasks, *id, &amp;task::Task::id);
+            if (it == tasks.end()) { std::cout &lt;&lt; &quot;not found\n&quot;; continue; }
+            if (command == &quot;done&quot;) it-&gt;completed = true; else tasks.erase(it);
+            std::cout &lt;&lt; &quot;ok\n&quot;;
+        } else if (!command.empty()) std::cout &lt;&lt; &quot;unknown command\n&quot;;
+    }
+}
+</code></pre>
+<h2 id="section-6">examples/04_http.cpp</h2>
+<p>对应文件可直接在编辑器中打开；修改后按 README 重新构建并运行相关测试。</p>
+<pre><span class="language-label">cpp</span><code class="language-cpp">#include &lt;httplib.h&gt;
+#include &lt;nlohmann/json.hpp&gt;
+#include &lt;iostream&gt;
+
+int main() {
+    httplib::Server server;
+    server.Get(&quot;/healthz&quot;, [](const httplib::Request&amp;, httplib::Response&amp; response) {
+        response.set_content(nlohmann::json{{&quot;status&quot;, &quot;ok&quot;}}.dump(), &quot;application/json&quot;);
+    });
+    std::cout &lt;&lt; &quot;http://127.0.0.1:8081/healthz\n&quot; &lt;&lt; std::flush;
+    return server.listen(&quot;127.0.0.1&quot;, 8081) ? 0 : 1;
+}
+</code></pre>
+<h2 id="section-7">include/task/repository.hpp</h2>
+<p>对应文件可直接在编辑器中打开；修改后按 README 重新构建并运行相关测试。</p>
+<pre><span class="language-label">cpp</span><code class="language-cpp">#pragma once
+#include &quot;task/domain.hpp&quot;
+#include &lt;memory&gt;
+#include &lt;mutex&gt;
+#include &lt;stdexcept&gt;
+#include &lt;vector&gt;
+
+struct sqlite3;
+namespace task {
+class DatabaseError : public std::runtime_error {
+public:
+    DatabaseError(int code, const std::string&amp; message) : std::runtime_error(message), code_(code) {}
+    [[nodiscard]] int code() const noexcept { return code_; }
+private:
+    int code_;
+};
+struct DatabaseCloser { void operator()(sqlite3* db) const noexcept; };
+class TaskRepository {
+public:
+    explicit TaskRepository(const std::string&amp; path);
+    TaskRepository(const TaskRepository&amp;) = delete;
+    TaskRepository&amp; operator=(const TaskRepository&amp;) = delete;
+    [[nodiscard]] Task create(const std::string&amp; title);
+    [[nodiscard]] std::vector&lt;Task&gt; list(int limit = 20, int offset = 0);
+    [[nodiscard]] std::optional&lt;Task&gt; get(std::int64_t id);
+    [[nodiscard]] std::optional&lt;Task&gt; update(std::int64_t id, const TaskPatch&amp; patch);
+    [[nodiscard]] bool erase(std::int64_t id);
+private:
+    std::unique_ptr&lt;sqlite3, DatabaseCloser&gt; db_;
+    std::mutex mutex_;
+};
+} // namespace task
+</code></pre>
+<h2 id="section-8">src/repository.cpp</h2>
+<p>按 Statement → 连接构造 → CRUD 的顺序读。逐一指出资源拥有者、参数绑定、锁范围和错误路径。</p>
+<pre><span class="language-label">cpp</span><code class="language-cpp">#include &quot;task/repository.hpp&quot;
+#include &lt;sqlite3.h&gt;
+#include &lt;utility&gt;
+
+namespace task {
+namespace {
+void check(sqlite3* db, int code) {
+    if (code != SQLITE_OK) throw DatabaseError(code, sqlite3_errmsg(db));
+}
+class Statement {
+public:
+    Statement(sqlite3* db, const char* sql) : db_(db) {
+        sqlite3_stmt* raw{};
+        const int code = sqlite3_prepare_v2(db, sql, -1, &amp;raw, nullptr);
+        stmt_.reset(raw);
+        check(db, code);
+    }
+    void bind(int index, const std::string&amp; value) {
+        check(db_, sqlite3_bind_text(stmt_.get(), index, value.data(),
+                                     static_cast&lt;int&gt;(value.size()), SQLITE_TRANSIENT));
+    }
+    void bind(int index, std::int64_t value) { check(db_, sqlite3_bind_int64(stmt_.get(), index, value)); }
+    void bind_null(int index) { check(db_, sqlite3_bind_null(stmt_.get(), index)); }
+    bool row() {
+        const int code = sqlite3_step(stmt_.get());
+        if (code == SQLITE_ROW) return true;
+        if (code == SQLITE_DONE) return false;
+        throw DatabaseError(code, sqlite3_errmsg(db_));
+    }
+    Task task() const {
+        const auto* text = sqlite3_column_text(stmt_.get(), 1);
+        if (!text) throw DatabaseError(SQLITE_NOMEM, &quot;cannot read task title&quot;);
+        const auto size = sqlite3_column_bytes(stmt_.get(), 1);
+        return {sqlite3_column_int64(stmt_.get(), 0),
+                std::string(reinterpret_cast&lt;const char*&gt;(text), static_cast&lt;std::size_t&gt;(size)),
+                sqlite3_column_int(stmt_.get(), 2) != 0};
+    }
+private:
+    struct Finalize { void operator()(sqlite3_stmt* p) const noexcept { sqlite3_finalize(p); } };
+    sqlite3* db_; // Non-owning; repository outlives every statement.
+    std::unique_ptr&lt;sqlite3_stmt, Finalize&gt; stmt_;
+};
+void execute(sqlite3* db, const char* sql) { check(db, sqlite3_exec(db, sql, nullptr, nullptr, nullptr)); }
+} // namespace
+
+void DatabaseCloser::operator()(sqlite3* db) const noexcept { sqlite3_close_v2(db); }
+TaskRepository::TaskRepository(const std::string&amp; path) {
+    sqlite3* raw{};
+    const int code = sqlite3_open_v2(path.c_str(), &amp;raw,
+        SQLITE_OPEN_READWRITE | SQLITE_OPEN_CREATE | SQLITE_OPEN_FULLMUTEX, nullptr);
+    db_.reset(raw); // Also closes a non-null handle when open failed.
+    if (code != SQLITE_OK) throw DatabaseError(code, raw ? sqlite3_errmsg(raw) : &quot;SQLite allocation failure&quot;);
+    check(raw, sqlite3_busy_timeout(raw, 3000));
+    execute(raw, &quot;PRAGMA journal_mode=WAL;&quot;);
+    execute(raw, &quot;PRAGMA foreign_keys=ON;&quot;);
+    execute(raw, &quot;CREATE TABLE IF NOT EXISTS tasks(&quot;
+        &quot;id INTEGER PRIMARY KEY AUTOINCREMENT,&quot;
+        &quot;title TEXT NOT NULL CHECK(length(CAST(title AS BLOB)) BETWEEN 1 AND 200),&quot;
+        &quot;completed INTEGER NOT NULL DEFAULT 0 CHECK(completed IN (0,1))); &quot;);
+}
+Task TaskRepository::create(const std::string&amp; title) {
+    if (auto error = title_error(title)) throw std::invalid_argument(*error);
+    std::lock_guard lock(mutex_);
+    Statement stmt(db_.get(), &quot;INSERT INTO tasks(title) VALUES(?1) RETURNING id,title,completed;&quot;);
+    stmt.bind(1, title);
+    if (!stmt.row()) throw DatabaseError(SQLITE_ERROR, &quot;insert returned no task&quot;);
+    auto result = stmt.task();
+    (void)stmt.row(); // Finish the write before returning; commit failures surface here.
+    return result;
+}
+std::vector&lt;Task&gt; TaskRepository::list(int limit, int offset) {
+    if (limit &lt; 1 || limit &gt; 100 || offset &lt; 0 || offset &gt; 1000000)
+        throw std::invalid_argument(&quot;invalid pagination&quot;);
+    std::lock_guard lock(mutex_);
+    Statement stmt(db_.get(), &quot;SELECT id,title,completed FROM tasks ORDER BY id LIMIT ?1 OFFSET ?2;&quot;);
+    stmt.bind(1, static_cast&lt;std::int64_t&gt;(limit));
+    stmt.bind(2, static_cast&lt;std::int64_t&gt;(offset));
+    std::vector&lt;Task&gt; result;
+    while (stmt.row()) result.push_back(stmt.task());
+    return result;
+}
+std::optional&lt;Task&gt; TaskRepository::get(std::int64_t id) {
+    std::lock_guard lock(mutex_);
+    Statement stmt(db_.get(), &quot;SELECT id,title,completed FROM tasks WHERE id=?1;&quot;);
+    stmt.bind(1, id);
+    if (!stmt.row()) return std::nullopt;
+    return stmt.task();
+}
+std::optional&lt;Task&gt; TaskRepository::update(std::int64_t id, const TaskPatch&amp; patch) {
+    validate_patch(patch);
+    std::lock_guard lock(mutex_);
+    Statement stmt(db_.get(), &quot;UPDATE tasks SET title=COALESCE(?1,title),&quot;
+        &quot;completed=COALESCE(?2,completed) WHERE id=?3 RETURNING id,title,completed;&quot;);
+    if (patch.title) stmt.bind(1, *patch.title); else stmt.bind_null(1);
+    if (patch.completed) stmt.bind(2, static_cast&lt;std::int64_t&gt;(*patch.completed)); else stmt.bind_null(2);
+    stmt.bind(3, id);
+    if (!stmt.row()) return std::nullopt;
+    auto result = stmt.task();
+    (void)stmt.row();
+    return result;
+}
+bool TaskRepository::erase(std::int64_t id) {
+    std::lock_guard lock(mutex_);
+    Statement stmt(db_.get(), &quot;DELETE FROM tasks WHERE id=?1;&quot;);
+    stmt.bind(1, id);
+    (void)stmt.row();
+    return sqlite3_changes(db_.get()) == 1;
+}
+} // namespace task
+</code></pre>
+<h2 id="section-9">include/task/http_api.hpp</h2>
+<p>对应文件可直接在编辑器中打开；修改后按 README 重新构建并运行相关测试。</p>
+<pre><span class="language-label">cpp</span><code class="language-cpp">#pragma once
+#include &lt;string&gt;
+namespace httplib { class Server; }
+namespace task {
+class TaskRepository;
+void register_routes(httplib::Server&amp; server, TaskRepository&amp; repository, std::string api_token);
+}
+</code></pre>
+<h2 id="section-10">src/http_api.cpp</h2>
+<p>先读 respond/fail/body_object 等辅助函数，再读 register_routes。观察协议错误与数据库错误怎样映射为状态码。</p>
+<pre><span class="language-label">cpp</span><code class="language-cpp">#include &quot;task/http_api.hpp&quot;
+#include &quot;task/repository.hpp&quot;
+#include &lt;httplib.h&gt;
+#include &lt;nlohmann/json.hpp&gt;
+#include &lt;algorithm&gt;
+#include &lt;atomic&gt;
+#include &lt;charconv&gt;
+#include &lt;cctype&gt;
+#include &lt;iostream&gt;
+#include &lt;memory&gt;
+#include &lt;syncstream&gt;
+
+namespace task {
+namespace {
+using Json = nlohmann::json;
+class HttpError : public std::runtime_error {
+public:
+    HttpError(int status_value, std::string code_value, std::string message)
+        : std::runtime_error(std::move(message)), status(status_value), code(std::move(code_value)) {}
+    int status;
+    std::string code;
+};
+void respond(httplib::Response&amp; response, int status, const Json&amp; body) {
+    response.status = status;
+    response.set_content(body.dump(), &quot;application/json; charset=utf-8&quot;);
+}
+void fail(httplib::Response&amp; response, int status, const std::string&amp; code, const std::string&amp; message) {
+    respond(response, status, {{&quot;error&quot;, {{&quot;code&quot;, code}, {&quot;message&quot;, message}}}});
+}
+Json as_json(const Task&amp; value) {
+    return {{&quot;id&quot;, value.id}, {&quot;title&quot;, value.title}, {&quot;completed&quot;, value.completed}};
+}
+Json body_object(const httplib::Request&amp; request) {
+    auto type = request.get_header_value(&quot;Content-Type&quot;);
+    type = type.substr(0, type.find(&#39;;&#39;));
+    while (!type.empty() &amp;&amp; type.back() == &#39; &#39;) type.pop_back();
+    std::ranges::transform(type, type.begin(), [](unsigned char c) { return static_cast&lt;char&gt;(std::tolower(c)); });
+    if (type != &quot;application/json&quot;) throw HttpError(415, &quot;unsupported_media_type&quot;, &quot;Content-Type must be application/json&quot;);
+    auto body = Json::parse(request.body, nullptr, false);
+    if (body.is_discarded()) throw HttpError(400, &quot;invalid_json&quot;, &quot;request body is not valid JSON&quot;);
+    if (!body.is_object()) throw HttpError(422, &quot;validation_error&quot;, &quot;request body must be a JSON object&quot;);
+    return body;
+}
+std::string read_title(const Json&amp; body) {
+    if (!body.contains(&quot;title&quot;) || !body.at(&quot;title&quot;).is_string())
+        throw HttpError(422, &quot;validation_error&quot;, &quot;title must be a string&quot;);
+    auto title = body.at(&quot;title&quot;).get&lt;std::string&gt;();
+    if (auto error = title_error(title)) throw HttpError(422, &quot;validation_error&quot;, *error);
+    return title;
+}
+std::int64_t request_id(const httplib::Request&amp; request) {
+    auto id = parse_id(request.path_params.at(&quot;id&quot;));
+    if (!id) throw HttpError(400, &quot;invalid_id&quot;, &quot;id must be a positive 64-bit integer&quot;);
+    return *id;
+}
+int query_int(const httplib::Request&amp; request, const char* name, int fallback, int minimum, int maximum) {
+    if (!request.has_param(name)) return fallback;
+    const auto text = request.get_param_value(name);
+    int result{};
+    const auto [end, error] = std::from_chars(text.data(), text.data() + text.size(), result);
+    if (request.get_param_value_count(name) != 1 || error != std::errc{} ||
+        end != text.data() + text.size() || result &lt; minimum || result &gt; maximum)
+        throw HttpError(400, &quot;invalid_query&quot;, std::string(name) + &quot; is out of range or not an integer&quot;);
+    return result;
+}
+} // namespace
+
+void register_routes(httplib::Server&amp; server, TaskRepository&amp; repository, std::string api_token) {
+    auto sequence = std::make_shared&lt;std::atomic&lt;std::uint64_t&gt;&gt;(0);
+    server.set_pre_routing_handler([token = std::move(api_token), sequence](const auto&amp; request, auto&amp; response) {
+        response.set_header(&quot;X-Request-Id&quot;, std::to_string(sequence-&gt;fetch_add(1, std::memory_order_relaxed) + 1));
+        response.set_header(&quot;Cache-Control&quot;, &quot;no-store&quot;);
+        if (request.path.starts_with(&quot;/api/&quot;) &amp;&amp; !token.empty() &amp;&amp;
+            request.get_header_value(&quot;Authorization&quot;) != &quot;Bearer &quot; + token) {
+            response.set_header(&quot;WWW-Authenticate&quot;, &quot;Bearer&quot;);
+            fail(response, 401, &quot;unauthorized&quot;, &quot;a valid bearer token is required&quot;);
+            return httplib::Server::HandlerResponse::Handled;
+        }
+        return httplib::Server::HandlerResponse::Unhandled;
+    });
+    server.set_exception_handler([](const auto&amp;, auto&amp; response, std::exception_ptr error) {
+        try {
+            std::rethrow_exception(error);
+        } catch (const HttpError&amp; e) {
+            fail(response, e.status, e.code, e.what());
+        } catch (const DatabaseError&amp; e) {
+            // SQLite primary error codes: BUSY=5, LOCKED=6.
+            const bool busy = (e.code() &amp; 0xff) == 5 || (e.code() &amp; 0xff) == 6;
+            fail(response, busy ? 503 : 500, busy ? &quot;database_busy&quot; : &quot;internal_error&quot;,
+                 busy ? &quot;database is busy; retry later&quot; : &quot;an internal error occurred&quot;);
+            std::osyncstream(std::cerr) &lt;&lt; Json{{&quot;event&quot;, &quot;database_error&quot;}, {&quot;sqlite_code&quot;, e.code()}}.dump() &lt;&lt; &#39;\n&#39;;
+        } catch (const std::exception&amp;) {
+            fail(response, 500, &quot;internal_error&quot;, &quot;an internal error occurred&quot;);
+            std::osyncstream(std::cerr) &lt;&lt; &quot;{\&quot;event\&quot;:\&quot;unhandled_exception\&quot;}\n&quot;;
+        } catch (...) {
+            fail(response, 500, &quot;internal_error&quot;, &quot;an internal error occurred&quot;);
+        }
+    });
+    server.set_error_handler([](const auto&amp;, auto&amp; response) {
+        if (response.body.empty()) fail(response, response.status, &quot;http_error&quot;, &quot;request could not be handled&quot;);
+    });
+    server.set_logger([](const auto&amp; request, const auto&amp; response) {
+        // JSON escaping prevents log injection. Never log token or request body.
+        std::osyncstream(std::cout) &lt;&lt; Json{{&quot;method&quot;, request.method}, {&quot;path&quot;, request.path},
+            {&quot;status&quot;, response.status}, {&quot;request_id&quot;, response.get_header_value(&quot;X-Request-Id&quot;)}}.dump() &lt;&lt; &#39;\n&#39;;
+    });
+    server.Get(&quot;/healthz&quot;, [](const auto&amp;, auto&amp; response) { respond(response, 200, {{&quot;status&quot;, &quot;ok&quot;}}); });
+    server.Get(&quot;/api/tasks&quot;, [&amp;repository](const auto&amp; request, auto&amp; response) {
+        const int limit = query_int(request, &quot;limit&quot;, 20, 1, 100);
+        const int offset = query_int(request, &quot;offset&quot;, 0, 0, 1000000);
+        auto items = Json::array();
+        for (const auto&amp; value : repository.list(limit, offset)) items.push_back(as_json(value));
+        respond(response, 200, {{&quot;items&quot;, items}, {&quot;limit&quot;, limit}, {&quot;offset&quot;, offset}});
+    });
+    server.Post(&quot;/api/tasks&quot;, [&amp;repository](const auto&amp; request, auto&amp; response) {
+        const Json body = body_object(request);
+        if (body.size() != 1 || !body.contains(&quot;title&quot;))
+            throw HttpError(422, &quot;validation_error&quot;, &quot;creation accepts exactly one field: title&quot;);
+        const auto value = repository.create(read_title(body));
+        response.set_header(&quot;Location&quot;, &quot;/api/tasks/&quot; + std::to_string(value.id));
+        respond(response, 201, as_json(value));
+    });
+    server.Get(&quot;/api/tasks/:id&quot;, [&amp;repository](const auto&amp; request, auto&amp; response) {
+        auto value = repository.get(request_id(request));
+        if (!value) throw HttpError(404, &quot;not_found&quot;, &quot;task does not exist&quot;);
+        respond(response, 200, as_json(*value));
+    });
+    server.Patch(&quot;/api/tasks/:id&quot;, [&amp;repository](const auto&amp; request, auto&amp; response) {
+        const auto id = request_id(request);
+        const Json body = body_object(request);
+        TaskPatch patch;
+        if (body.empty()) throw HttpError(422, &quot;validation_error&quot;, &quot;patch must contain title or completed&quot;);
+        for (auto it = body.begin(); it != body.end(); ++it) {
+            if (it.key() != &quot;title&quot; &amp;&amp; it.key() != &quot;completed&quot;)
+                throw HttpError(422, &quot;validation_error&quot;, &quot;unknown patch field&quot;);
+        }
+        if (body.contains(&quot;title&quot;)) patch.title = read_title(body);
+        if (body.contains(&quot;completed&quot;)) {
+            if (!body.at(&quot;completed&quot;).is_boolean()) throw HttpError(422, &quot;validation_error&quot;, &quot;completed must be boolean&quot;);
+            patch.completed = body.at(&quot;completed&quot;).get&lt;bool&gt;();
+        }
+        auto value = repository.update(id, patch);
+        if (!value) throw HttpError(404, &quot;not_found&quot;, &quot;task does not exist&quot;);
+        respond(response, 200, as_json(*value));
+    });
+    server.Delete(&quot;/api/tasks/:id&quot;, [&amp;repository](const auto&amp; request, auto&amp; response) {
+        if (!repository.erase(request_id(request))) throw HttpError(404, &quot;not_found&quot;, &quot;task does not exist&quot;);
+        response.status = 204;
+    });
+}
+} // namespace task
+</code></pre>
+<h2 id="section-11">src/main.cpp</h2>
+<p>配置解析 → 对象构造 → 资源上限 → 路由注册 → 信号与退出 → 监听。注意局部对象的反向析构顺序。</p>
+<pre><span class="language-label">cpp</span><code class="language-cpp">#include &quot;task/http_api.hpp&quot;
+#include &quot;task/repository.hpp&quot;
+#include &lt;httplib.h&gt;
+#include &lt;atomic&gt;
+#include &lt;chrono&gt;
+#include &lt;csignal&gt;
+#include &lt;cstdlib&gt;
+#include &lt;iostream&gt;
+#include &lt;stdexcept&gt;
+#include &lt;string&gt;
+#include &lt;thread&gt;
+
+namespace {
+std::atomic&lt;bool&gt; stopping{false};
+static_assert(std::atomic&lt;bool&gt;::is_always_lock_free);
+extern &quot;C&quot; void handle_signal(int) { stopping.store(true, std::memory_order_relaxed); }
+std::string environment(const char* name, const char* fallback) {
+    const char* value = std::getenv(name);
+    return value &amp;&amp; *value ? value : fallback;
+}
+}
+int main() {
+    try {
+        const auto host = environment(&quot;APP_HOST&quot;, &quot;127.0.0.1&quot;);
+        const auto port_value = task::parse_id(environment(&quot;APP_PORT&quot;, &quot;8080&quot;));
+        if (!port_value || *port_value &gt; 65535) throw std::invalid_argument(&quot;APP_PORT must be 1..65535&quot;);
+        const auto path = environment(&quot;APP_DB&quot;, &quot;tasks.db&quot;);
+        const auto token = environment(&quot;APP_TOKEN&quot;, &quot;&quot;);
+        if (host != &quot;127.0.0.1&quot; &amp;&amp; host != &quot;localhost&quot; &amp;&amp; host != &quot;::1&quot; &amp;&amp; token.size() &lt; 32)
+            throw std::invalid_argument(&quot;non-loopback APP_HOST requires APP_TOKEN of at least 32 bytes&quot;);
+        task::TaskRepository repository(path);
+        httplib::Server server;
+        server.new_task_queue = [] { return new httplib::ThreadPool(4, 4, 64); };
+        server.set_payload_max_length(16 * 1024);
+        server.set_read_timeout(std::chrono::seconds(5));
+        server.set_write_timeout(std::chrono::seconds(5));
+        server.set_keep_alive_max_count(20);
+        task::register_routes(server, repository, token);
+        std::signal(SIGINT, handle_signal);
+        std::signal(SIGTERM, handle_signal);
+        if (!server.bind_to_port(host, static_cast&lt;int&gt;(*port_value))) {
+            std::cerr &lt;&lt; &quot;Cannot bind server address; check APP_HOST and APP_PORT\n&quot;;
+            return 1;
+        }
+        std::jthread shutdown_watcher([&amp;server](std::stop_token stop) {
+            while (!stop.stop_requested()) {
+                if (stopping.load(std::memory_order_relaxed) &amp;&amp; server.is_running()) { server.stop(); return; }
+                std::this_thread::sleep_for(std::chrono::milliseconds(100));
+            }
+        });
+        std::cout &lt;&lt; &quot;Task server: http://&quot; &lt;&lt; host &lt;&lt; &#39;:&#39; &lt;&lt; *port_value
+                  &lt;&lt; &quot;  (Ctrl+C to stop)\n&quot; &lt;&lt; std::flush;
+        const bool ok = server.listen_after_bind();
+        return ok ? 0 : 1;
+    } catch (const std::exception&amp; error) {
+        std::cerr &lt;&lt; &quot;Startup failed: &quot; &lt;&lt; error.what() &lt;&lt; &#39;\n&#39;;
+        return 1;
+    }
+}
+</code></pre>
+<h2 id="section-12">CMakeLists.txt</h2>
+<p>先找 add_library/add_executable 建立 target 图，再看每个 target 的使用要求，不要从 flags 开始死记。</p>
+<pre><span class="language-label">cmake</span><code class="language-cmake">cmake_minimum_required(VERSION 3.24)
+project(task_server VERSION 1.0.0 LANGUAGES C CXX)
+
+set(CMAKE_CXX_EXTENSIONS OFF)
+set(CMAKE_EXPORT_COMPILE_COMMANDS ON)
+option(TASK_ENABLE_SANITIZERS &quot;Enable ASan and UBSan (Linux GCC/Clang)&quot; OFF)
+include(CTest)
+find_package(Threads REQUIRED)
+
+add_library(project_options INTERFACE)
+target_compile_features(project_options INTERFACE cxx_std_20)
+if(MSVC)
+  target_compile_options(project_options INTERFACE /W4 /permissive- /utf-8 /EHsc)
+else()
+  target_compile_options(project_options INTERFACE -Wall -Wextra -Wpedantic -Wconversion -Wshadow)
+endif()
+if(TASK_ENABLE_SANITIZERS)
+  if(CMAKE_SYSTEM_NAME STREQUAL &quot;Linux&quot; AND CMAKE_CXX_COMPILER_ID MATCHES &quot;GNU|Clang&quot;)
+    target_compile_options(project_options INTERFACE -fsanitize=address,undefined -fno-omit-frame-pointer)
+    target_link_options(project_options INTERFACE -fsanitize=address,undefined)
+  else()
+    message(FATAL_ERROR &quot;This sanitizer preset is configured for Linux GCC/Clang only&quot;)
+  endif()
+endif()
+
+add_library(sqlite3_vendor STATIC third_party/sqlite/sqlite3.c)
+target_include_directories(sqlite3_vendor SYSTEM PUBLIC third_party/sqlite)
+target_compile_definitions(sqlite3_vendor PRIVATE SQLITE_THREADSAFE=1 SQLITE_OMIT_LOAD_EXTENSION)
+target_link_libraries(sqlite3_vendor PUBLIC Threads::Threads ${CMAKE_DL_LIBS})
+if(UNIX)
+  target_link_libraries(sqlite3_vendor PUBLIC m)
+endif()
+
+add_library(json_vendor INTERFACE)
+target_include_directories(json_vendor SYSTEM INTERFACE third_party/json)
+add_library(httplib_vendor INTERFACE)
+target_include_directories(httplib_vendor SYSTEM INTERFACE third_party/httplib)
+target_link_libraries(httplib_vendor INTERFACE Threads::Threads)
+if(WIN32)
+  target_link_libraries(httplib_vendor INTERFACE ws2_32 crypt32)
+endif()
+
+add_library(task_core STATIC src/domain.cpp src/repository.cpp)
+target_include_directories(task_core PUBLIC include)
+target_compile_features(task_core PUBLIC cxx_std_20)
+target_link_libraries(task_core PRIVATE sqlite3_vendor project_options)
+
+add_executable(task_server src/main.cpp src/http_api.cpp)
+target_link_libraries(task_server PRIVATE task_core httplib_vendor json_vendor project_options)
+
+add_executable(lab01_hello examples/01_hello.cpp)
+add_executable(lab02_modern examples/02_modern.cpp)
+add_executable(lab03_cli examples/03_cli.cpp)
+add_executable(lab04_http examples/04_http.cpp)
+target_link_libraries(lab01_hello PRIVATE project_options)
+target_link_libraries(lab02_modern PRIVATE project_options Threads::Threads)
+target_link_libraries(lab03_cli PRIVATE task_core project_options)
+target_link_libraries(lab04_http PRIVATE httplib_vendor json_vendor project_options)
+
+if(BUILD_TESTING)
+  add_executable(core_tests tests/core_tests.cpp)
+  target_link_libraries(core_tests PRIVATE task_core project_options Threads::Threads)
+  add_test(NAME core COMMAND core_tests)
+  add_test(NAME modern_examples COMMAND lab02_modern)
+  find_package(Python3 COMPONENTS Interpreter)
+  if(Python3_Interpreter_FOUND)
+    add_test(NAME http_integration
+      COMMAND ${Python3_EXECUTABLE} ${CMAKE_CURRENT_SOURCE_DIR}/tests/http_test.py $&lt;TARGET_FILE:task_server&gt;)
+    set_tests_properties(http_integration PROPERTIES TIMEOUT 60)
+  else()
+    message(WARNING &quot;Python3 missing: HTTP integration test not registered&quot;)
+  endif()
+endif()
+
+install(TARGETS task_server RUNTIME DESTINATION bin)
+</code></pre>
+<h2 id="section-13">CMakePresets.json</h2>
+<p>对应文件可直接在编辑器中打开；修改后按 README 重新构建并运行相关测试。</p>
+<pre><span class="language-label">json</span><code class="language-json">{
+  &quot;version&quot;: 5,
+  &quot;cmakeMinimumRequired&quot;: {&quot;major&quot;: 3, &quot;minor&quot;: 24, &quot;patch&quot;: 0},
+  &quot;configurePresets&quot;: [
+    {&quot;name&quot;: &quot;debug&quot;, &quot;generator&quot;: &quot;Ninja&quot;, &quot;binaryDir&quot;: &quot;${sourceDir}/build/debug&quot;, &quot;cacheVariables&quot;: {&quot;CMAKE_BUILD_TYPE&quot;: &quot;Debug&quot;, &quot;BUILD_TESTING&quot;: &quot;ON&quot;}},
+    {&quot;name&quot;: &quot;release&quot;, &quot;inherits&quot;: &quot;debug&quot;, &quot;binaryDir&quot;: &quot;${sourceDir}/build/release&quot;, &quot;cacheVariables&quot;: {&quot;CMAKE_BUILD_TYPE&quot;: &quot;Release&quot;}},
+    {&quot;name&quot;: &quot;asan&quot;, &quot;inherits&quot;: &quot;debug&quot;, &quot;binaryDir&quot;: &quot;${sourceDir}/build/asan&quot;, &quot;cacheVariables&quot;: {&quot;TASK_ENABLE_SANITIZERS&quot;: &quot;ON&quot;}, &quot;condition&quot;: {&quot;type&quot;: &quot;equals&quot;, &quot;lhs&quot;: &quot;${hostSystemName}&quot;, &quot;rhs&quot;: &quot;Linux&quot;}}
+  ],
+  &quot;buildPresets&quot;: [
+    {&quot;name&quot;: &quot;debug&quot;, &quot;configurePreset&quot;: &quot;debug&quot;, &quot;jobs&quot;: 2},
+    {&quot;name&quot;: &quot;release&quot;, &quot;configurePreset&quot;: &quot;release&quot;, &quot;jobs&quot;: 2},
+    {&quot;name&quot;: &quot;asan&quot;, &quot;configurePreset&quot;: &quot;asan&quot;, &quot;jobs&quot;: 2}
+  ],
+  &quot;testPresets&quot;: [
+    {&quot;name&quot;: &quot;debug&quot;, &quot;configurePreset&quot;: &quot;debug&quot;, &quot;output&quot;: {&quot;outputOnFailure&quot;: true}, &quot;execution&quot;: {&quot;noTestsAction&quot;: &quot;error&quot;}},
+    {&quot;name&quot;: &quot;release&quot;, &quot;configurePreset&quot;: &quot;release&quot;, &quot;output&quot;: {&quot;outputOnFailure&quot;: true}, &quot;execution&quot;: {&quot;noTestsAction&quot;: &quot;error&quot;}},
+    {&quot;name&quot;: &quot;asan&quot;, &quot;configurePreset&quot;: &quot;asan&quot;, &quot;output&quot;: {&quot;outputOnFailure&quot;: true}, &quot;execution&quot;: {&quot;noTestsAction&quot;: &quot;error&quot;}}
+  ]
+}
+</code></pre>
+<h2 id="section-14">tests/core_tests.cpp</h2>
+<p>对应文件可直接在编辑器中打开；修改后按 README 重新构建并运行相关测试。</p>
+<pre><span class="language-label">cpp</span><code class="language-cpp">#include &quot;task/repository.hpp&quot;
+#include &lt;iostream&gt;
+#include &lt;stdexcept&gt;
+#include &lt;thread&gt;
+#include &lt;vector&gt;
+
+namespace {
+int checks = 0;
+void require(bool condition, const char* message) {
+    ++checks;
+    if (!condition) throw std::runtime_error(message);
+}
+}
+int main() {
+    try {
+        require(task::parse_id(&quot;42&quot;) == 42, &quot;valid id&quot;);
+        for (const auto* value : {&quot;&quot;, &quot;0&quot;, &quot;-1&quot;, &quot;+1&quot;, &quot; 1&quot;, &quot;1x&quot;, &quot;99999999999999999999999&quot;})
+            require(!task::parse_id(value), &quot;reject invalid id&quot;);
+        require(!task::title_error(&quot;Learn C++&quot;), &quot;valid title&quot;);
+        require(!task::title_error(std::string(200, &#39;a&#39;)), &quot;200-byte boundary&quot;);
+        for (const auto&amp; value : {std::string{}, std::string(&quot;   &quot;), std::string(&quot;a\nb&quot;), std::string(201, &#39;x&#39;)})
+            require(task::title_error(value).has_value(), &quot;reject invalid title&quot;);
+        task::TaskRepository repo(&quot;:memory:&quot;);
+        const auto a = repo.create(&quot;first&quot;);
+        require(a.id &gt; 0 &amp;&amp; !a.completed, &quot;create task&quot;);
+        require(repo.get(a.id)-&gt;title == &quot;first&quot;, &quot;get task&quot;);
+        require(!repo.get(99999), &quot;missing task&quot;);
+        require(repo.list().size() == 1, &quot;list task&quot;);
+        task::TaskPatch patch;
+        patch.completed = true;
+        require(repo.update(a.id, patch)-&gt;completed, &quot;mark completed&quot;);
+        patch.completed = false;
+        require(!repo.update(a.id, patch)-&gt;completed, &quot;optional false is present&quot;);
+        patch.title = &quot;new title&quot;;
+        require(repo.update(a.id, patch)-&gt;title == &quot;new title&quot;, &quot;rename task&quot;);
+        require(!repo.update(99999, patch), &quot;update missing task&quot;);
+        bool rejected = false;
+        try { (void)repo.update(a.id, {}); } catch (const std::invalid_argument&amp;) { rejected = true; }
+        require(rejected, &quot;empty patch rejected&quot;);
+        rejected = false;
+        try { (void)repo.list(101); } catch (const std::invalid_argument&amp;) { rejected = true; }
+        require(rejected, &quot;pagination bounded&quot;);
+        const auto injected = repo.create(&quot;x&#39;); DROP TABLE tasks; --&quot;);
+        require(repo.get(injected.id)-&gt;title == injected.title, &quot;SQL text treated as data&quot;);
+        require(repo.erase(a.id), &quot;delete existing&quot;);
+        require(!repo.erase(a.id), &quot;delete missing&quot;);
+        {
+            std::vector&lt;std::jthread&gt; threads;
+            for (int i = 0; i &lt; 4; ++i) {
+                threads.emplace_back([&amp;repo] {
+                    for (int n = 0; n &lt; 10; ++n) (void)repo.create(&quot;parallel&quot;);
+                });
+            }
+        }
+        require(repo.list(100).size() == 41, &quot;concurrent writes serialized&quot;);
+        require(repo.list(1, 1).size() == 1, &quot;pagination works&quot;);
+        std::cout &lt;&lt; &quot;PASS: &quot; &lt;&lt; checks &lt;&lt; &quot; core checks\n&quot;;
+        return 0;
+    } catch (const std::exception&amp; error) {
+        std::cerr &lt;&lt; &quot;FAIL after check &quot; &lt;&lt; checks &lt;&lt; &quot;: &quot; &lt;&lt; error.what() &lt;&lt; &#39;\n&#39;;
+        return 1;
+    }
+}
+</code></pre>
+<h2 id="section-15">tests/http_test.py</h2>
+<p>这份 Python 是客户端测试工具，服务器实现仍是 C++。它使用临时目录和独立进程，覆盖接口、错误、并发及重启。</p>
+<pre><span class="language-label">python</span><code class="language-python">&quot;&quot;&quot;Black-box integration tests. Standard library only; never touch a user&#39;s DB.&quot;&quot;&quot;
+import concurrent.futures
+import json
+import os
+from pathlib import Path
+import socket
+import sqlite3
+import subprocess
+import sys
+import tempfile
+import time
+import urllib.error
+import urllib.request
+
+TOKEN = &quot;integration-test-token-012345678901234567890123456789&quot;
+checks = 0
+
+
+def require(condition, message):
+    global checks
+    checks += 1
+    if not condition:
+        raise RuntimeError(message)
+
+
+def request(port, method, path, body=None, token=TOKEN, content_type=&quot;application/json&quot;, raw=None):
+    headers = {&quot;Content-Type&quot;: content_type}
+    if token:
+        headers[&quot;Authorization&quot;] = &quot;Bearer &quot; + token
+    data = raw if raw is not None else (json.dumps(body, ensure_ascii=False).encode(&quot;utf-8&quot;) if body is not None else None)
+    req = urllib.request.Request(f&quot;http://127.0.0.1:{port}{path}&quot;, data=data, headers=headers, method=method)
+    opener = urllib.request.build_opener(urllib.request.ProxyHandler({}))
+    try:
+        response = opener.open(req, timeout=10)
+    except urllib.error.HTTPError as error:
+        response = error
+    with response:
+        text = response.read().decode(&quot;utf-8&quot;)
+        return response.status, (json.loads(text) if text else None), dict(response.headers)
+
+
+def launch(binary, directory, port):
+    env = os.environ.copy()
+    env.update(APP_HOST=&quot;127.0.0.1&quot;, APP_PORT=str(port), APP_DB=str(directory / &quot;test.db&quot;), APP_TOKEN=TOKEN)
+    log = open(directory / &quot;server.log&quot;, &quot;ab&quot;, buffering=0)
+    process = subprocess.Popen([binary], env=env, cwd=directory, stdout=log, stderr=log)
+    try:
+        deadline = time.monotonic() + 15
+        while time.monotonic() &lt; deadline:
+            if process.poll() is not None:
+                raise RuntimeError(&quot;server exited during startup: &quot; + (directory / &quot;server.log&quot;).read_text(errors=&quot;replace&quot;))
+            try:
+                if request(port, &quot;GET&quot;, &quot;/healthz&quot;)[0] == 200:
+                    return process, log
+            except (OSError, urllib.error.URLError):
+                pass
+            time.sleep(0.05)
+        raise RuntimeError(&quot;server readiness timeout&quot;)
+    except BaseException:
+        stop(process, log)
+        raise
+
+
+def stop(process, log):
+    if process.poll() is None:
+        process.terminate()  # Windows: abrupt termination; POSIX: SIGTERM.
+        try:
+            process.wait(timeout=10)
+        except subprocess.TimeoutExpired:
+            process.kill()
+            process.wait(timeout=5)
+    log.close()
+
+
+def run(binary):
+    with tempfile.TemporaryDirectory(prefix=&quot;cpp-tasks-test-&quot;) as tmp:
+        directory = Path(tmp)
+        with socket.socket() as probe:
+            probe.bind((&quot;127.0.0.1&quot;, 0))
+            port = probe.getsockname()[1]
+        process, log = launch(binary, directory, port)
+        try:
+            require(request(port, &quot;GET&quot;, &quot;/healthz&quot;, token=None)[0] == 200, &quot;health is public&quot;)
+            require(request(port, &quot;GET&quot;, &quot;/api/tasks&quot;, token=None)[0] == 401, &quot;API requires token&quot;)
+            require(request(port, &quot;GET&quot;, &quot;/api/tasks&quot;, token=&quot;wrong&quot;)[0] == 401, &quot;wrong token rejected&quot;)
+            status, first, headers = request(port, &quot;POST&quot;, &quot;/api/tasks&quot;, {&quot;title&quot;: &quot;学习 C++&quot;})
+            require(status == 201 and first[&quot;title&quot;] == &quot;学习 C++&quot;, &quot;create UTF-8 task&quot;)
+            task_id = first[&quot;id&quot;]
+            require(headers.get(&quot;Location&quot;) == f&quot;/api/tasks/{task_id}&quot;, &quot;Location header&quot;)
+            require(bool(headers.get(&quot;X-Request-Id&quot;)), &quot;request ID header&quot;)
+            route = f&quot;/api/tasks/{task_id}&quot;
+            require(request(port, &quot;GET&quot;, route)[1] == first, &quot;read task&quot;)
+            require(request(port, &quot;PATCH&quot;, route, {&quot;completed&quot;: True})[1][&quot;completed&quot;] is True, &quot;complete task&quot;)
+            require(request(port, &quot;PATCH&quot;, route, {&quot;completed&quot;: False})[1][&quot;completed&quot;] is False, &quot;uncomplete task&quot;)
+            require(request(port, &quot;PATCH&quot;, route, {&quot;title&quot;: &quot;renamed&quot;})[1][&quot;title&quot;] == &quot;renamed&quot;, &quot;rename task&quot;)
+            for data in ({}, {&quot;title&quot;: &quot;&quot;}, {&quot;title&quot;: &quot; &quot;}, {&quot;title&quot;: 7}, {&quot;title&quot;: &quot;a&quot; * 201}, {&quot;title&quot;: &quot;a\nb&quot;}, {&quot;title&quot;: &quot;ok&quot;, &quot;admin&quot;: True}, []):
+                require(request(port, &quot;POST&quot;, &quot;/api/tasks&quot;, data)[0] == 422, f&quot;reject invalid creation {data!r}&quot;)
+            for data in ({}, {&quot;completed&quot;: &quot;false&quot;}, {&quot;completed&quot;: None}, {&quot;extra&quot;: True}):
+                require(request(port, &quot;PATCH&quot;, route, data)[0] == 422, f&quot;reject invalid patch {data!r}&quot;)
+            require(request(port, &quot;POST&quot;, &quot;/api/tasks&quot;, raw=b&quot;{&quot;)[0] == 400, &quot;malformed JSON&quot;)
+            require(request(port, &quot;POST&quot;, &quot;/api/tasks&quot;, {&quot;title&quot;: &quot;ok&quot;}, content_type=&quot;text/plain&quot;)[0] == 415, &quot;media type&quot;)
+            require(request(port, &quot;POST&quot;, &quot;/api/tasks&quot;, {&quot;title&quot;: &quot;x&quot; * 17000})[0] == 413, &quot;body size bound&quot;)
+            for suffix in (&quot;0&quot;, &quot;-1&quot;, &quot;abc&quot;, &quot;99999999999999999999999999&quot;):
+                require(request(port, &quot;GET&quot;, &quot;/api/tasks/&quot; + suffix)[0] == 400, &quot;invalid path ID&quot;)
+            for query in (&quot;limit=0&quot;, &quot;limit=101&quot;, &quot;offset=-1&quot;, &quot;offset=1000001&quot;, &quot;limit=1x&quot;, &quot;limit=1&amp;limit=2&quot;):
+                require(request(port, &quot;GET&quot;, &quot;/api/tasks?&quot; + query)[0] == 400, &quot;invalid query&quot;)
+            require(request(port, &quot;GET&quot;, &quot;/missing&quot;)[0] == 404, &quot;unknown route&quot;)
+            require(request(port, &quot;GET&quot;, &quot;/api/tasks/999999&quot;)[0] == 404, &quot;missing resource&quot;)
+            require(request(port, &quot;PATCH&quot;, &quot;/api/tasks/999999&quot;, {&quot;completed&quot;: True})[0] == 404, &quot;update missing resource&quot;)
+            require(request(port, &quot;POST&quot;, &quot;/api/tasks&quot;, {&quot;title&quot;: &quot;a&quot; * 200})[0] == 201, &quot;200-byte title accepted&quot;)
+            require(request(port, &quot;POST&quot;, &quot;/api/tasks&quot;, {&quot;title&quot;: &quot;学&quot; * 67})[0] == 422, &quot;UTF-8 length uses bytes&quot;)
+            require(request(port, &quot;POST&quot;, &quot;/api/tasks&quot;, raw=b&#39;{&quot;title&quot;:&quot;\xff&quot;}&#39;)[0] == 400, &quot;invalid UTF-8 rejected&quot;)
+            injection = &quot;x&#39;); DROP TABLE tasks; --&quot;
+            require(request(port, &quot;POST&quot;, &quot;/api/tasks&quot;, {&quot;title&quot;: injection})[1][&quot;title&quot;] == injection, &quot;SQL injection stored as text&quot;)
+            def create(n):
+                return request(port, &quot;POST&quot;, &quot;/api/tasks&quot;, {&quot;title&quot;: f&quot;parallel-{n}&quot;})
+            with concurrent.futures.ThreadPoolExecutor(max_workers=8) as pool:
+                responses = list(pool.map(create, range(24)))
+            require(all(result[0] == 201 for result in responses), &quot;concurrent HTTP create&quot;)
+            require(len({result[1][&quot;id&quot;] for result in responses}) == 24, &quot;unique concurrent IDs&quot;)
+            page = request(port, &quot;GET&quot;, &quot;/api/tasks?limit=2&amp;offset=1&quot;)[1]
+            require(len(page[&quot;items&quot;]) == 2 and page[&quot;offset&quot;] == 1, &quot;pagination&quot;)
+            lock = sqlite3.connect(directory / &quot;test.db&quot;)
+            try:
+                lock.execute(&quot;BEGIN IMMEDIATE&quot;)
+                require(request(port, &quot;POST&quot;, &quot;/api/tasks&quot;, {&quot;title&quot;: &quot;blocked&quot;})[0] == 503, &quot;database contention becomes 503&quot;)
+            finally:
+                lock.rollback()
+                lock.close()
+            require(request(port, &quot;POST&quot;, &quot;/api/tasks&quot;, {&quot;title&quot;: &quot;after unlock&quot;})[0] == 201, &quot;database recovers after lock release&quot;)
+        finally:
+            stop(process, log)
+        process, log = launch(binary, directory, port)
+        try:
+            require(request(port, &quot;GET&quot;, route)[1][&quot;title&quot;] == &quot;renamed&quot;, &quot;data survives restart&quot;)
+            result = request(port, &quot;DELETE&quot;, route)
+            require(result[0] == 204 and result[1] is None, &quot;delete has empty body&quot;)
+            require(request(port, &quot;GET&quot;, route)[0] == 404, &quot;deleted task gone&quot;)
+            require(request(port, &quot;DELETE&quot;, route)[0] == 404, &quot;repeated delete&quot;)
+        finally:
+            stop(process, log)
+        print(f&quot;PASS: {checks} HTTP integration checks (including persistence and concurrency)&quot;)
+
+
+if __name__ == &quot;__main__&quot;:
+    run(str(Path(sys.argv[1]).resolve()))
+</code></pre>
+<h2 id="section-16">scripts/backup_db.py</h2>
+<p>对应文件可直接在编辑器中打开；修改后按 README 重新构建并运行相关测试。</p>
+<pre><span class="language-label">python</span><code class="language-python">&quot;&quot;&quot;Use SQLite&#39;s online backup API; never silently overwrite an existing backup.&quot;&quot;&quot;
+import argparse
+from pathlib import Path
+import sqlite3
+
+parser = argparse.ArgumentParser(description=__doc__)
+parser.add_argument(&quot;source&quot;, type=Path)
+parser.add_argument(&quot;destination&quot;, type=Path)
+args = parser.parse_args()
+source = args.source.resolve()
+destination = args.destination.resolve()
+if not source.is_file():
+    parser.error(&quot;source database does not exist&quot;)
+if destination.exists():
+    parser.error(&quot;destination already exists; choose a new filename&quot;)
+destination.parent.mkdir(parents=True, exist_ok=True)
+src = sqlite3.connect(source.as_uri() + &quot;?mode=ro&quot;, uri=True, timeout=5)
+try:
+    dst = sqlite3.connect(destination)
+    try:
+        src.backup(dst, pages=128, sleep=0.05)
+        result = dst.execute(&quot;PRAGMA integrity_check&quot;).fetchone()[0]
+        if result != &quot;ok&quot;:
+            raise RuntimeError(&quot;backup integrity check failed: &quot; + result)
+    finally:
+        dst.close()
+finally:
+    src.close()
+print(&quot;Backup verified:&quot;, destination)
+</code></pre>
+<h2 id="section-17">scripts/load_test.py</h2>
+<p>对应文件可直接在编辑器中打开；修改后按 README 重新构建并运行相关测试。</p>
+<pre><span class="language-label">python</span><code class="language-python">&quot;&quot;&quot;Small learning load generator; not a production benchmark framework.&quot;&quot;&quot;
+import argparse
+import concurrent.futures
+import math
+import os
+import time
+import urllib.request
+
+parser = argparse.ArgumentParser(description=__doc__)
+parser.add_argument(&quot;--url&quot;, default=&quot;http://127.0.0.1:8080/healthz&quot;)
+parser.add_argument(&quot;--requests&quot;, type=int, default=200)
+parser.add_argument(&quot;--workers&quot;, type=int, default=8)
+args = parser.parse_args()
+if not 1 &lt;= args.requests &lt;= 10000 or not 1 &lt;= args.workers &lt;= 64:
+    parser.error(&quot;requests must be 1..10000; workers must be 1..64&quot;)
+token = os.environ.get(&quot;APP_TOKEN&quot;, &quot;&quot;)
+
+
+def run_one(_):
+    headers = {&quot;Authorization&quot;: &quot;Bearer &quot; + token} if token else {}
+    req = urllib.request.Request(args.url, headers=headers)
+    opener = urllib.request.build_opener(urllib.request.ProxyHandler({}))
+    start = time.perf_counter()
+    try:
+        with opener.open(req, timeout=5) as response:
+            response.read()
+            ok = response.status == 200
+    except Exception:
+        ok = False
+    return ok, (time.perf_counter() - start) * 1000
+
+
+start = time.perf_counter()
+with concurrent.futures.ThreadPoolExecutor(max_workers=args.workers) as pool:
+    results = list(pool.map(run_one, range(args.requests)))
+elapsed = time.perf_counter() - start
+latencies = sorted(ms for ok, ms in results if ok)
+print(f&quot;requests={len(results)} errors={len(results)-len(latencies)} elapsed={elapsed:.3f}s&quot;)
+print(f&quot;successful_requests_per_second={len(latencies)/elapsed:.1f}&quot;)
+if latencies:
+    for p in (0.50, 0.95, 0.99):
+        print(f&quot;p{int(p*100)}={latencies[math.ceil(p*len(latencies))-1]:.2f}ms (successful requests)&quot;)
+</code></pre>
+<h2 id="section-18">scripts/migrate_priority_example.py</h2>
+<p>毕业任务的 schema 迁移示例；需要读者继续实现 C++ 模型、仓库、API 和测试，不是最终 API 已实现的字段。</p>
+<pre><span class="language-label">python</span><code class="language-python">&quot;&quot;&quot;Chapter 26 exercise: add priority to an existing tutorial DB. Stop the app and back up first.
+This changes the schema only; implementing priority in the C++ API remains the exercise.
+&quot;&quot;&quot;
+import argparse
+from pathlib import Path
+import sqlite3
+
+parser = argparse.ArgumentParser(description=__doc__)
+parser.add_argument(&quot;database&quot;, type=Path)
+args = parser.parse_args()
+path = args.database.resolve()
+if not path.is_file():
+    parser.error(&quot;database must already exist&quot;)
+db = sqlite3.connect(path.as_uri() + &quot;?mode=rw&quot;, uri=True, isolation_level=None, timeout=5)
+try:
+    db.execute(&quot;BEGIN IMMEDIATE&quot;)
+    version = db.execute(&quot;PRAGMA user_version&quot;).fetchone()[0]
+    columns = {row[1] for row in db.execute(&quot;PRAGMA table_info(tasks)&quot;)}
+    if version == 0 and &quot;priority&quot; not in columns and {&quot;id&quot;, &quot;title&quot;, &quot;completed&quot;} &lt;= columns:
+        db.execute(&quot;ALTER TABLE tasks ADD COLUMN priority INTEGER NOT NULL DEFAULT 1 CHECK(priority BETWEEN 0 AND 2)&quot;)
+        db.execute(&quot;PRAGMA user_version=1&quot;)
+        print(&quot;Schema migrated: 0 -&gt; 1&quot;)
+    elif version == 1 and &quot;priority&quot; in columns:
+        print(&quot;Schema already at version 1&quot;)
+    else:
+        raise RuntimeError(&quot;unexpected schema/version; review manually before migrating&quot;)
+    db.execute(&quot;COMMIT&quot;)
+except BaseException:
+    if db.in_transaction:
+        db.execute(&quot;ROLLBACK&quot;)
+    raise
+finally:
+    db.close()
+</code></pre>
+<h2 id="section-19">Dockerfile</h2>
+<p>对应文件可直接在编辑器中打开；修改后按 README 重新构建并运行相关测试。</p>
+<pre><span class="language-label">dockerfile</span><code class="language-dockerfile">FROM ubuntu:24.04 AS build
+RUN apt-get update &amp;&amp; apt-get install -y --no-install-recommends g++ cmake ninja-build python3 ca-certificates &amp;&amp; rm -rf /var/lib/apt/lists/*
+WORKDIR /source
+COPY . .
+RUN cmake --preset release &amp;&amp; cmake --build --preset release &amp;&amp; ctest --preset release
+
+FROM ubuntu:24.04 AS runtime
+RUN apt-get update &amp;&amp; apt-get install -y --no-install-recommends libstdc++6 libgcc-s1 ca-certificates &amp;&amp; rm -rf /var/lib/apt/lists/* \
+    &amp;&amp; groupadd --gid 10001 app &amp;&amp; useradd --uid 10001 --gid app --no-create-home app \
+    &amp;&amp; mkdir /data &amp;&amp; chown app:app /data
+COPY --from=build /source/build/release/task_server /usr/local/bin/task_server
+USER app
+WORKDIR /data
+ENV APP_HOST=0.0.0.0 APP_PORT=8080 APP_DB=/data/tasks.db
+EXPOSE 8080
+ENTRYPOINT [&quot;/usr/local/bin/task_server&quot;]
+</code></pre>
+<h2 id="section-20">compose.yaml</h2>
+<p>对应文件可直接在编辑器中打开；修改后按 README 重新构建并运行相关测试。</p>
+<pre><span class="language-label">yaml</span><code class="language-yaml">services:
+  api:
+    build: .
+    ports:
+      - &quot;127.0.0.1:8080:8080&quot;
+    environment:
+      APP_HOST: 0.0.0.0
+      APP_PORT: &quot;8080&quot;
+      APP_DB: /data/tasks.db
+      APP_TOKEN: ${APP_TOKEN:?Set APP_TOKEN to a random token of at least 32 bytes}
+    volumes:
+      - task_data:/data
+    restart: unless-stopped
+    stop_grace_period: 15s
+volumes:
+  task_data:
+</code></pre>
+<h2 id="section-21">deploy/task-server.service</h2>
+<p>对应文件可直接在编辑器中打开；修改后按 README 重新构建并运行相关测试。</p>
+<pre><span class="language-label">text</span><code class="language-text">[Unit]
+Description=Modern C++ tutorial task server
+After=network.target
+
+[Service]
+Type=simple
+User=taskapi
+Group=taskapi
+WorkingDirectory=/var/lib/task-server
+StateDirectory=task-server
+Environment=APP_HOST=127.0.0.1
+Environment=APP_PORT=8080
+Environment=APP_DB=/var/lib/task-server/tasks.db
+EnvironmentFile=/etc/task-server.env
+ExecStart=/usr/local/bin/task_server
+Restart=on-failure
+RestartSec=3
+TimeoutStopSec=15
+NoNewPrivileges=true
+PrivateTmp=true
+ProtectSystem=strict
+ProtectHome=true
+
+[Install]
+WantedBy=multi-user.target
+</code></pre>
+<h2 id="section-22">deploy/Caddyfile</h2>
+<p>对应文件可直接在编辑器中打开；修改后按 README 重新构建并运行相关测试。</p>
+<pre><span class="language-label">text</span><code class="language-text"># Replace this name with a domain whose DNS points to your server.
+api.example.com {
+    reverse_proxy 127.0.0.1:8080
+}
+</code></pre>
+<h2 id="section-23">.github/workflows/ci.yml</h2>
+<p>对应文件可直接在编辑器中打开；修改后按 README 重新构建并运行相关测试。</p>
+<pre><span class="language-label">yaml</span><code class="language-yaml">name: build-and-test
+on: [push, pull_request]
+permissions:
+  contents: read
+jobs:
+  linux:
+    runs-on: ubuntu-24.04
+    steps:
+      - uses: actions/checkout@v4
+      - run: sudo apt-get update &amp;&amp; sudo apt-get install -y ninja-build
+      - run: cmake --preset debug
+      - run: cmake --build --preset debug
+      - run: ctest --preset debug
+      - run: cmake --preset asan
+      - run: cmake --build --preset asan
+      - run: ctest --preset asan
+</code></pre>
+<h2 id="section-24">.clang-format</h2>
+<p>对应文件可直接在编辑器中打开；修改后按 README 重新构建并运行相关测试。</p>
+<pre><span class="language-label">text</span><code class="language-text">BasedOnStyle: LLVM
+IndentWidth: 4
+ColumnLimit: 100
+AllowShortFunctionsOnASingleLine: Empty
+</code></pre>
+<h2 id="section-25">.gitignore</h2>
+<p>对应文件可直接在编辑器中打开；修改后按 README 重新构建并运行相关测试。</p>
+<pre><span class="language-label">text</span><code class="language-text">/build/
+/install/
+/scratch/
+*.db
+*.db-shm
+*.db-wal
+*.log
+.env
+CMakeUserPresets.json
+__pycache__/
+</code></pre>
+<h2 id="section-26">.dockerignore</h2>
+<p>对应文件可直接在编辑器中打开；修改后按 README 重新构建并运行相关测试。</p>
+<pre><span class="language-label">text</span><code class="language-text">build
+install
+.git
+.env
+*.db*
+*.log
+index.html
+教程.md
+</code></pre>
+<footer>现代 C++ 后端实战教程 · 配套源码、测试与部署示例<br>先运行，再解释，再独立重写。</footer></article></main><script>
+const key='cpp-book-'+location.pathname;let saved={};try{saved=JSON.parse(localStorage.getItem(key)||'{}');if(localStorage.getItem('cpp-theme')==='dark')document.body.dataset.theme='dark'}catch{}
+const save=()=>{try{localStorage.setItem(key,JSON.stringify(saved))}catch{}};
+document.getElementById('theme').onclick=()=>{const dark=document.body.dataset.theme!=='dark';document.body.dataset.theme=dark?'dark':'';try{localStorage.setItem('cpp-theme',dark?'dark':'light')}catch{}};
+document.getElementById('print').onclick=()=>window.print();
+document.getElementById('filter').oninput=e=>{const value=e.target.value.toLowerCase();document.querySelectorAll('#toc a').forEach(a=>a.hidden=!a.textContent.toLowerCase().includes(value))};
+document.querySelectorAll('.complete-button').forEach(b=>{const id=b.dataset.for;const sync=()=>{b.classList.toggle('checked',!!saved[id]);b.textContent=saved[id]?'✓ 已学完':'标记本章已学完';document.querySelector('#toc a[href="#'+id+'"]').classList.toggle('done',!!saved[id])};sync();b.onclick=()=>{saved[id]=!saved[id];save();sync()}});
+if(saved.last&&document.getElementById(saved.last)){const r=document.getElementById('resume');r.href='#'+saved.last;r.style.display='block'}
+let locked=false;const update=()=>{const total=document.documentElement.scrollHeight-innerHeight;document.getElementById('progress').style.width=(total>0?scrollY/total*100:0)+'%';let active=null;document.querySelectorAll('.document h2').forEach(h=>{if(h.getBoundingClientRect().top<160)active=h});if(active){document.querySelectorAll('#toc a').forEach(a=>a.classList.toggle('current',a.hash==='#'+active.id));saved.last=active.id;save()}locked=false};addEventListener('scroll',()=>{if(!locked){locked=true;requestAnimationFrame(update)}},{passive:true});update();
+</script></body></html>

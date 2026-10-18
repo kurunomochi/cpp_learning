@@ -1,0 +1,84 @@
+<!doctype html><html lang="zh-CN"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>让每一次修改 · 都有验证依据</title><style>
+[hidden]{display:none!important}
+:root{--bg:#f5f3ee;--paper:#fffefb;--ink:#25352f;--muted:#67746d;--line:#dedfd5;--accent:#137768;--code:#142d29;--codeink:#e1ede5;--aside:280px}
+*{box-sizing:border-box}html{scroll-behavior:smooth;scroll-padding-top:95px}body{margin:0;background:var(--bg);color:var(--ink);font-family:Segoe UI,Microsoft YaHei,Noto Sans SC,sans-serif;font-size:16px;line-height:1.85}a{color:var(--accent);text-decoration:none}a:hover{text-decoration:underline}button,input{font:inherit}button{cursor:pointer}header{height:68px;position:fixed;inset:0 0 auto;z-index:20;background:var(--paper);border-bottom:1px solid var(--line);display:flex;align-items:center;justify-content:space-between;padding:0 28px;gap:24px}.brand{font-size:16px;font-weight:750;letter-spacing:.4px;color:var(--ink)}.brand span{background:var(--accent);color:white;padding:4px 7px;border-radius:4px;margin-right:10px;font:700 15px Consolas,monospace}header nav{display:flex;gap:20px;font-size:14px}header nav a.active{font-weight:700;border-bottom:2px solid var(--accent)}.tools{display:flex;gap:8px}.tools button{border:1px solid var(--line);border-radius:6px;background:transparent;padding:4px 10px;font-size:13px;color:var(--ink)}#progress{position:fixed;top:66px;left:0;height:3px;background:var(--accent);z-index:30;width:0}
+aside{position:fixed;top:68px;bottom:0;left:0;width:var(--aside);padding:25px 18px 22px 24px;border-right:1px solid var(--line);overflow-y:auto;background:var(--paper)}.nav-caption{font-size:11px;letter-spacing:2px;color:var(--muted);font-weight:700;margin:0 0 10px}#filter{width:100%;border:1px solid var(--line);padding:8px 10px;border-radius:6px;margin-bottom:15px;background:var(--bg);color:var(--ink);font-size:13px}aside a{display:block;padding:7px 10px;margin:2px 0;border-radius:5px;color:var(--muted);line-height:1.55;font-size:13px}aside a:hover,aside a.current{background:#e7f1e9;color:var(--accent);text-decoration:none}aside a.done:before{content:'✓ ';font-weight:700;color:var(--accent)}.nav-note{font-size:12px;color:var(--muted);padding:15px 10px;border-top:1px solid var(--line);margin-top:16px}#resume{font-size:12px;display:none;margin-bottom:10px}
+main{margin:68px 0 0 var(--aside);padding:42px 48px 80px;max-width:1290px}.hero{background:#123f35;color:#fbfff7;padding:46px 44px 36px;border-radius:12px;margin-bottom:34px;position:relative;overflow:hidden}.hero:after{content:'{ }';font:130px Consolas,monospace;position:absolute;right:28px;top:23px;color:#ffffff0c;pointer-events:none}.eyebrow{font:12px Consolas,monospace;letter-spacing:2px;color:#b2d1b7}.hero h1{font-size:36px;line-height:1.45;letter-spacing:-.5px;font-weight:700;margin:17px 0}.hero p{margin:0;color:#d4e3d7;max-width:600px;font-size:15px}.stats{display:flex;gap:27px;margin-top:27px;padding-top:22px;border-top:1px solid #ffffff2e;font-size:13px;color:#b9d0c0}.stats b{display:block;font-size:23px;color:#fff;font-weight:650}.document{max-width:880px;margin:auto}.document>p:first-child{font-size:18px}.document h2{font-size:26px;line-height:1.55;margin:62px 0 24px;padding:22px 0 14px;border-top:2px solid var(--accent);letter-spacing:-.4px}.document h3{font-size:20px;line-height:1.6;margin:32px 0 13px}.document h4{font-size:18px}.document p{margin:13px 0 19px}.document ul,.document ol{padding-left:27px}.document li{padding-left:3px;margin:7px 0}.document strong{font-weight:700}.document :not(pre)>code{background:#e9ede4;border:1px solid #e0e6da;border-radius:4px;padding:1px 5px;font-size:.88em;color:#285b45;overflow-wrap:anywhere}pre{margin:20px 0 24px;background:var(--code);color:var(--codeink);border-radius:8px;padding:24px 22px 20px;overflow-x:auto;position:relative;line-height:1.65;font-size:13px;tab-size:4}pre code{font-family:Cascadia Code,Consolas,monospace;white-space:pre}pre .language-label{display:block;font:10px Segoe UI,sans-serif;letter-spacing:1.5px;color:#8eafa2;text-transform:uppercase;margin-bottom:10px;user-select:none}.table-scroll{overflow-x:auto;margin:20px 0 27px;border:1px solid var(--line);border-radius:8px}table{border-collapse:collapse;width:100%;font-size:14px}th{text-align:left;background:#e9eee5;font-weight:650}th,td{padding:12px 14px;border-bottom:1px solid var(--line);vertical-align:top}tr:last-child td{border-bottom:0}tbody tr:nth-child(even){background:#ffffff55}blockquote{margin:20px 0;border-left:3px solid var(--accent);padding:8px 20px;background:#e9f1e7;color:var(--muted)}.chapter-tools{display:flex;justify-content:flex-end;margin:-12px 0 18px}.complete-button{font-size:12px;border:1px solid var(--line);color:var(--muted);border-radius:16px;padding:3px 12px;background:var(--paper)}.complete-button.checked{background:#d9ecde;color:#206d48;border-color:#a8c9af}footer{margin-top:55px;padding-top:20px;border-top:1px solid var(--line);color:var(--muted);font-size:13px}
+body[data-theme=dark]{--bg:#14221e;--paper:#1a2b24;--ink:#e1e7df;--muted:#afbeb1;--line:#3b4d41;--accent:#91c8a0;--code:#0b1b15;--codeink:#dce9dc}body[data-theme=dark] :not(pre)>code{background:#263e2e;border-color:#3b513f;color:#c4e6c6}body[data-theme=dark] th{background:#2d4131}body[data-theme=dark] tbody tr:nth-child(even){background:#ffffff05}body[data-theme=dark] aside a.current,body[data-theme=dark] aside a:hover{background:#2a4030}body[data-theme=dark] blockquote{background:#253b2b}body[data-theme=dark] .complete-button.checked{background:#2e4936;color:#c1e3ca}
+@media(min-width:1500px){main{margin-left:calc(var(--aside) + (100vw - 1500px)/3)}}@media(max-width:1050px){:root{--aside:238px}main{padding:32px 28px}.hero{padding:32px 28px}.hero h1{font-size:30px}header{padding:0 18px}header nav{gap:13px}.brand{font-size:14px}.tools button{padding:4px 7px}}@media(max-width:760px){header{position:static;height:auto;min-height:68px;flex-wrap:wrap;padding:15px 20px;gap:10px}header nav{order:3;width:100%;justify-content:space-between}aside{position:static;width:auto;padding:20px;border-right:0;border-bottom:1px solid var(--line);max-height:260px}main{margin:0;padding:24px 19px 50px}.hero{padding:30px 24px}.hero h1{font-size:28px}.stats{gap:21px}.document h2{font-size:23px}.document h3{font-size:19px}pre{font-size:12px;padding:18px}#progress{top:0}body{font-size:15px}.tools{margin-left:auto}}
+@media print{header,aside,.tools,#progress,.chapter-tools{display:none!important}main{margin:0;padding:0;max-width:none}.hero{background:white;color:#111;padding:15px 0}.hero p,.eyebrow,.stats,.stats b{color:#333}.hero:after{display:none}.document{max-width:none}body{font-size:10.5pt;line-height:1.7;background:white;color:#111}pre{white-space:pre-wrap;overflow:visible;background:#f2f4f1;color:#111;border:1px solid #ccc;font-size:8.5pt}pre code{white-space:pre-wrap;overflow-wrap:anywhere}.document h2{break-before:page;margin-top:10px}.document h3{break-after:avoid}table{font-size:9pt}.table-scroll{overflow:visible}a{color:#222}}
+</style></head><body><header><a class="brand" href="index.html"><span>C++</span>后端实战手册</a><nav><a href="index.html">教材</a><a href="code.html">源码</a><a class="active" href="verification.html">验证</a><a href="start.html">开始运行</a></nav><div class="tools"><button id="theme" aria-label="切换明暗主题">明暗</button><button id="print">打印</button></div></header><div id="progress"></div><aside><p class="nav-caption">LEARNING PATH / 阅读导航</p><input id="filter" type="search" aria-label="筛选章节" placeholder="筛选章节 · 全文搜索 Ctrl+F"><a id="resume">继续上次阅读 →</a><div id="toc"><a href="#section-1">本机环境</a><a href="#section-2">实际通过的检查</a><a href="#section-3">未实机验证的范围</a><a href="#section-4">工程边界</a></div><div class="nav-note">离线可读 · 无外部字体或脚本<br>学习标记仅保存在当前浏览器<br>整理日期 2026.10.18</div></aside><main><section class="hero"><div class="eyebrow">MODERN C++ / BUILD A BACKEND</div><h1>让每一次修改<br>都有验证依据</h1><p>记录真实执行结果，清楚区分已通过的检查和仍需目标环境验证的步骤。</p><div class="stats"><div><b>80</b>核心及 HTTP 检查</div><div><b>2</b>构建配置</div><div><b>3</b>CTest 目标</div></div></section><article class="document">
+<p>日期：2026-10-18。以下区分实际执行与仍需目标环境验证的内容。</p>
+<h2 id="section-1">本机环境</h2>
+<ul>
+<li>Windows 64 位；MSYS2 UCRT64 GCC 16.1.0。</li>
+<li>CMake 4.4.3；Ninja 1.13.2。</li>
+<li>CMake 找到的测试解释器为 Python 3.9.13；辅助脚本另用本机 Python 3.14.5 验证。</li>
+<li>固定依赖：cpp-httplib 0.61.0、nlohmann/json 3.12.0、SQLite 3.54.1。</li>
+<li>SQLite 官方下载归档的 SHA3-256 与下载页公布值一致。</li>
+</ul>
+<h2 id="section-2">实际通过的检查</h2>
+<div class="table-scroll"><table>
+<thead>
+<tr>
+<th>检查</th>
+<th>Debug</th>
+<th>Release</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>全部 C/C++ 目标编译、链接</td>
+<td>通过</td>
+<td>通过</td>
+</tr>
+<tr>
+<td>core_tests：29 项检查</td>
+<td>通过</td>
+<td>通过</td>
+</tr>
+<tr>
+<td>modern_examples：移动、span/concepts、并发计数</td>
+<td>通过</td>
+<td>通过</td>
+</tr>
+<tr>
+<td>HTTP 黑盒测试：51 项检查</td>
+<td>通过</td>
+<td>通过</td>
+</tr>
+</tbody></table></div>
+<p>共 3 个 CTest 测试目标。80 项指 core_tests 与 HTTP 脚本内检查数量之和，不包含现代语言示例程序的额外检查；不是 80 个独立 CTest 目标。</p>
+<p>HTTP 检查涵盖：CRUD、分页、UTF-8 标题、200/201 字节边界、非法 UTF-8、token 缺失/错误、错误 JSON/Content-Type/字段类型、超大请求体、非法和溢出 ID、缺失资源、SQL 注入样式文本、24 次并发创建、数据库锁冲突 503 与释放锁后恢复、服务重启后的数据保留。</p>
+<p>另外执行：</p>
+<ul>
+<li>CLI 的创建、列表、完成、删除流程。</li>
+<li>无效端口和非回环地址弱 token 配置被拒绝。</li>
+<li>在线备份 API、备份数据库读回核对、integrity_check。</li>
+<li>priority 示例迁移执行两次，首次成功、再次不重复建列，旧数据默认值正确。</li>
+<li>小型负载脚本对 40 个 healthz 请求运行成功、无错误。数字只作为脚本功能验证，不作服务容量承诺。</li>
+<li>configure/build/test presets 能被 CMake/CTest 正常识别。</li>
+<li>HTML 阅读版已在本机无头 Chrome 中检查 1440×1080 和 390×844 布局，验证章节筛选、学习标记、明暗切换、页面脚本和本地文档链接。</li>
+</ul>
+<p>构建目录位于交付包之外；交付包不包含本机生成的 EXE、DLL、任务数据库和测试日志。</p>
+<h2 id="section-3">未实机验证的范围</h2>
+<ul>
+<li>Linux GCC/Clang、MSVC、macOS 编译。</li>
+<li>Linux ASan/UBSan、远程 GitHub Actions 工作流。</li>
+<li>Docker 镜像、Compose、systemd 服务、Caddy 与真实域名 HTTPS。</li>
+<li>Linux SIGTERM 优雅停机路径，以及真实公网网络故障/长连接/持续压力行为。</li>
+</ul>
+<p>当前环境没有可用的 Docker/Linux 运行环境。上述内容已给出配置与目标机验收步骤，但没有标记为已部署或已通过。</p>
+<p>Windows HTTP 测试使用进程 terminate 后重启，验证了数据持久化；它不等同于验证 Ctrl+C 或 Linux SIGTERM 的优雅停机。</p>
+<h2 id="section-4">工程边界</h2>
+<p>当前为单用户教学服务：同步 HTTP/1.1、固定线程池、一个由 mutex 保护的 SQLite 连接、共享 Bearer token。没有用户账号体系、对象级权限、完整限流、严格请求总截止时间、自动迁移、跨进程全局追踪 ID 和高可用能力。</p>
+<p>priority 迁移脚本是毕业练习配套，仅改 schema；当前 C++ API 没有自动开启 priority 字段。教程中的概念片段和留给读者的练习不属于全部已编译的工程目标。</p>
+<footer>现代 C++ 后端实战教程 · 配套源码、测试与部署示例<br>先运行，再解释，再独立重写。</footer></article></main><script>
+const key='cpp-book-'+location.pathname;let saved={};try{saved=JSON.parse(localStorage.getItem(key)||'{}');if(localStorage.getItem('cpp-theme')==='dark')document.body.dataset.theme='dark'}catch{}
+const save=()=>{try{localStorage.setItem(key,JSON.stringify(saved))}catch{}};
+document.getElementById('theme').onclick=()=>{const dark=document.body.dataset.theme!=='dark';document.body.dataset.theme=dark?'dark':'';try{localStorage.setItem('cpp-theme',dark?'dark':'light')}catch{}};
+document.getElementById('print').onclick=()=>window.print();
+document.getElementById('filter').oninput=e=>{const value=e.target.value.toLowerCase();document.querySelectorAll('#toc a').forEach(a=>a.hidden=!a.textContent.toLowerCase().includes(value))};
+document.querySelectorAll('.complete-button').forEach(b=>{const id=b.dataset.for;const sync=()=>{b.classList.toggle('checked',!!saved[id]);b.textContent=saved[id]?'✓ 已学完':'标记本章已学完';document.querySelector('#toc a[href="#'+id+'"]').classList.toggle('done',!!saved[id])};sync();b.onclick=()=>{saved[id]=!saved[id];save();sync()}});
+if(saved.last&&document.getElementById(saved.last)){const r=document.getElementById('resume');r.href='#'+saved.last;r.style.display='block'}
+let locked=false;const update=()=>{const total=document.documentElement.scrollHeight-innerHeight;document.getElementById('progress').style.width=(total>0?scrollY/total*100:0)+'%';let active=null;document.querySelectorAll('.document h2').forEach(h=>{if(h.getBoundingClientRect().top<160)active=h});if(active){document.querySelectorAll('#toc a').forEach(a=>a.classList.toggle('current',a.hash==='#'+active.id));saved.last=active.id;save()}locked=false};addEventListener('scroll',()=>{if(!locked){locked=true;requestAnimationFrame(update)}},{passive:true});update();
+</script></body></html>

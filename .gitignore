@@ -1,0 +1,10 @@
+/build/
+/install/
+/scratch/
+*.db
+*.db-shm
+*.db-wal
+*.log
+.env
+CMakeUserPresets.json
+__pycache__/

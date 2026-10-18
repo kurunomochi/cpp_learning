@@ -1,0 +1,110 @@
+<!doctype html><html lang="zh-CN"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>先跑起来 · 再逐层弄懂</title><style>
+[hidden]{display:none!important}
+:root{--bg:#f5f3ee;--paper:#fffefb;--ink:#25352f;--muted:#67746d;--line:#dedfd5;--accent:#137768;--code:#142d29;--codeink:#e1ede5;--aside:280px}
+*{box-sizing:border-box}html{scroll-behavior:smooth;scroll-padding-top:95px}body{margin:0;background:var(--bg);color:var(--ink);font-family:Segoe UI,Microsoft YaHei,Noto Sans SC,sans-serif;font-size:16px;line-height:1.85}a{color:var(--accent);text-decoration:none}a:hover{text-decoration:underline}button,input{font:inherit}button{cursor:pointer}header{height:68px;position:fixed;inset:0 0 auto;z-index:20;background:var(--paper);border-bottom:1px solid var(--line);display:flex;align-items:center;justify-content:space-between;padding:0 28px;gap:24px}.brand{font-size:16px;font-weight:750;letter-spacing:.4px;color:var(--ink)}.brand span{background:var(--accent);color:white;padding:4px 7px;border-radius:4px;margin-right:10px;font:700 15px Consolas,monospace}header nav{display:flex;gap:20px;font-size:14px}header nav a.active{font-weight:700;border-bottom:2px solid var(--accent)}.tools{display:flex;gap:8px}.tools button{border:1px solid var(--line);border-radius:6px;background:transparent;padding:4px 10px;font-size:13px;color:var(--ink)}#progress{position:fixed;top:66px;left:0;height:3px;background:var(--accent);z-index:30;width:0}
+aside{position:fixed;top:68px;bottom:0;left:0;width:var(--aside);padding:25px 18px 22px 24px;border-right:1px solid var(--line);overflow-y:auto;background:var(--paper)}.nav-caption{font-size:11px;letter-spacing:2px;color:var(--muted);font-weight:700;margin:0 0 10px}#filter{width:100%;border:1px solid var(--line);padding:8px 10px;border-radius:6px;margin-bottom:15px;background:var(--bg);color:var(--ink);font-size:13px}aside a{display:block;padding:7px 10px;margin:2px 0;border-radius:5px;color:var(--muted);line-height:1.55;font-size:13px}aside a:hover,aside a.current{background:#e7f1e9;color:var(--accent);text-decoration:none}aside a.done:before{content:'✓ ';font-weight:700;color:var(--accent)}.nav-note{font-size:12px;color:var(--muted);padding:15px 10px;border-top:1px solid var(--line);margin-top:16px}#resume{font-size:12px;display:none;margin-bottom:10px}
+main{margin:68px 0 0 var(--aside);padding:42px 48px 80px;max-width:1290px}.hero{background:#123f35;color:#fbfff7;padding:46px 44px 36px;border-radius:12px;margin-bottom:34px;position:relative;overflow:hidden}.hero:after{content:'{ }';font:130px Consolas,monospace;position:absolute;right:28px;top:23px;color:#ffffff0c;pointer-events:none}.eyebrow{font:12px Consolas,monospace;letter-spacing:2px;color:#b2d1b7}.hero h1{font-size:36px;line-height:1.45;letter-spacing:-.5px;font-weight:700;margin:17px 0}.hero p{margin:0;color:#d4e3d7;max-width:600px;font-size:15px}.stats{display:flex;gap:27px;margin-top:27px;padding-top:22px;border-top:1px solid #ffffff2e;font-size:13px;color:#b9d0c0}.stats b{display:block;font-size:23px;color:#fff;font-weight:650}.document{max-width:880px;margin:auto}.document>p:first-child{font-size:18px}.document h2{font-size:26px;line-height:1.55;margin:62px 0 24px;padding:22px 0 14px;border-top:2px solid var(--accent);letter-spacing:-.4px}.document h3{font-size:20px;line-height:1.6;margin:32px 0 13px}.document h4{font-size:18px}.document p{margin:13px 0 19px}.document ul,.document ol{padding-left:27px}.document li{padding-left:3px;margin:7px 0}.document strong{font-weight:700}.document :not(pre)>code{background:#e9ede4;border:1px solid #e0e6da;border-radius:4px;padding:1px 5px;font-size:.88em;color:#285b45;overflow-wrap:anywhere}pre{margin:20px 0 24px;background:var(--code);color:var(--codeink);border-radius:8px;padding:24px 22px 20px;overflow-x:auto;position:relative;line-height:1.65;font-size:13px;tab-size:4}pre code{font-family:Cascadia Code,Consolas,monospace;white-space:pre}pre .language-label{display:block;font:10px Segoe UI,sans-serif;letter-spacing:1.5px;color:#8eafa2;text-transform:uppercase;margin-bottom:10px;user-select:none}.table-scroll{overflow-x:auto;margin:20px 0 27px;border:1px solid var(--line);border-radius:8px}table{border-collapse:collapse;width:100%;font-size:14px}th{text-align:left;background:#e9eee5;font-weight:650}th,td{padding:12px 14px;border-bottom:1px solid var(--line);vertical-align:top}tr:last-child td{border-bottom:0}tbody tr:nth-child(even){background:#ffffff55}blockquote{margin:20px 0;border-left:3px solid var(--accent);padding:8px 20px;background:#e9f1e7;color:var(--muted)}.chapter-tools{display:flex;justify-content:flex-end;margin:-12px 0 18px}.complete-button{font-size:12px;border:1px solid var(--line);color:var(--muted);border-radius:16px;padding:3px 12px;background:var(--paper)}.complete-button.checked{background:#d9ecde;color:#206d48;border-color:#a8c9af}footer{margin-top:55px;padding-top:20px;border-top:1px solid var(--line);color:var(--muted);font-size:13px}
+body[data-theme=dark]{--bg:#14221e;--paper:#1a2b24;--ink:#e1e7df;--muted:#afbeb1;--line:#3b4d41;--accent:#91c8a0;--code:#0b1b15;--codeink:#dce9dc}body[data-theme=dark] :not(pre)>code{background:#263e2e;border-color:#3b513f;color:#c4e6c6}body[data-theme=dark] th{background:#2d4131}body[data-theme=dark] tbody tr:nth-child(even){background:#ffffff05}body[data-theme=dark] aside a.current,body[data-theme=dark] aside a:hover{background:#2a4030}body[data-theme=dark] blockquote{background:#253b2b}body[data-theme=dark] .complete-button.checked{background:#2e4936;color:#c1e3ca}
+@media(min-width:1500px){main{margin-left:calc(var(--aside) + (100vw - 1500px)/3)}}@media(max-width:1050px){:root{--aside:238px}main{padding:32px 28px}.hero{padding:32px 28px}.hero h1{font-size:30px}header{padding:0 18px}header nav{gap:13px}.brand{font-size:14px}.tools button{padding:4px 7px}}@media(max-width:760px){header{position:static;height:auto;min-height:68px;flex-wrap:wrap;padding:15px 20px;gap:10px}header nav{order:3;width:100%;justify-content:space-between}aside{position:static;width:auto;padding:20px;border-right:0;border-bottom:1px solid var(--line);max-height:260px}main{margin:0;padding:24px 19px 50px}.hero{padding:30px 24px}.hero h1{font-size:28px}.stats{gap:21px}.document h2{font-size:23px}.document h3{font-size:19px}pre{font-size:12px;padding:18px}#progress{top:0}body{font-size:15px}.tools{margin-left:auto}}
+@media print{header,aside,.tools,#progress,.chapter-tools{display:none!important}main{margin:0;padding:0;max-width:none}.hero{background:white;color:#111;padding:15px 0}.hero p,.eyebrow,.stats,.stats b{color:#333}.hero:after{display:none}.document{max-width:none}body{font-size:10.5pt;line-height:1.7;background:white;color:#111}pre{white-space:pre-wrap;overflow:visible;background:#f2f4f1;color:#111;border:1px solid #ccc;font-size:8.5pt}pre code{white-space:pre-wrap;overflow-wrap:anywhere}.document h2{break-before:page;margin-top:10px}.document h3{break-after:avoid}table{font-size:9pt}.table-scroll{overflow:visible}a{color:#222}}
+</style></head><body><header><a class="brand" href="index.html"><span>C++</span>后端实战手册</a><nav><a href="index.html">教材</a><a href="code.html">源码</a><a href="verification.html">验证</a><a class="active" href="start.html">开始运行</a></nav><div class="tools"><button id="theme" aria-label="切换明暗主题">明暗</button><button id="print">打印</button></div></header><div id="progress"></div><aside><p class="nav-caption">LEARNING PATH / 阅读导航</p><input id="filter" type="search" aria-label="筛选章节" placeholder="筛选章节 · 全文搜索 Ctrl+F"><a id="resume">继续上次阅读 →</a><div id="toc"><a href="#section-1">第一次运行（Windows PowerShell）</a><a href="#section-2">Linux</a><a href="#section-3">可运行学习阶段</a><a href="#section-4">API 与配置</a><a href="#section-5">辅助脚本</a></div><div class="nav-note">离线可读 · 无外部字体或脚本<br>学习标记仅保存在当前浏览器<br>整理日期 2026.10.18</div></aside><main><section class="hero"><div class="eyebrow">MODERN C++ / BUILD A BACKEND</div><h1>先跑起来<br>再逐层弄懂</h1><p>从这里开始第一次构建。准备两个终端：一个运行服务器，一个发送请求。</p><div class="stats"><div><b>01</b>检查环境</div><div><b>02</b>构建测试</div><div><b>03</b>调用接口</div></div></section><article class="document">
+<p>适合：学过 C/C++ 基础，尚未独立做过完整项目。</p>
+<p><strong>先读 <a href="index.html">HTML 教材</a> 或 <a href="index.html">Markdown 教材</a>。</strong> 全书 30 章（0～29），从对象生命周期、RAII、标准库讲到 CMake、HTTP、SQLite、测试和部署。不要一次读完再开始动手，按每章练习推进。</p>
+<p>在 GitHub 中可以直接阅读 Markdown 教材。HTML 阅读版请克隆或下载仓库后，用浏览器打开 index.html；GitHub 的代码页面不会直接运行 HTML。</p>
+<pre><span class="language-label">powershell</span><code class="language-powershell">git clone https://github.com/kurunomochi/cpp-readme.git
+Set-Location cpp-readme
+</code></pre>
+<ul>
+<li><a href="code.html">完整源码导读</a>：按学习顺序收录自有源码。</li>
+<li><a href="verification.html">验证记录</a>：已运行的检查与未验证的环境。</li>
+<li><a href="third_party/NOTICE.md">第三方来源与版本</a>：版本、许可证与 SHA-256 文件摘要。</li>
+</ul>
+<h2 id="section-1">第一次运行（Windows PowerShell）</h2>
+<p>进入本 README 所在目录。要求 64 位 C++20 编译器、CMake 3.24+、Ninja；HTTP 测试另需 Python 3.9+。如果本机工具已可用，不必重复安装。依赖源码已经附带，不需要联网下载库。</p>
+<pre><span class="language-label">powershell</span><code class="language-powershell">g++ --version
+cmake --version
+ninja --version
+python --version
+cmake --preset debug
+cmake --build --preset debug
+ctest --preset debug
+.\build\debug\lab01_hello.exe
+.\build\debug\task_server.exe
+</code></pre>
+<p>最后一条保持运行。在另一个终端：</p>
+<pre><span class="language-label">powershell</span><code class="language-powershell">curl.exe -i http://127.0.0.1:8080/healthz
+$body = [System.Text.Encoding]::UTF8.GetBytes(&#39;{&quot;title&quot;:&quot;Learn CMake&quot;}&#39;)
+Invoke-RestMethod -Method Post -Uri &#39;http://127.0.0.1:8080/api/tasks&#39; -ContentType &#39;application/json&#39; -Body $body
+Invoke-RestMethod &#39;http://127.0.0.1:8080/api/tasks&#39;
+</code></pre>
+<p>healthz 应返回 200 和 <code>{&quot;status&quot;:&quot;ok&quot;}</code>。在服务器终端按 Ctrl+C 停止。数据库默认写到当前工作目录的 tasks.db，换目录启动可能打开另一份数据库。</p>
+<p>如果 GCC 在 PATH 中找不到，而你使用 MSYS2 UCRT64，可在当前终端添加自己的工具链目录：</p>
+<pre><span class="language-label">powershell</span><code class="language-powershell">$env:Path = &#39;C:\msys64\ucrt64\bin;&#39; + $env:Path
+</code></pre>
+<p>上面使用 MSYS2 的默认安装路径；如果安装在其他目录，请相应替换。切换编译器时新建 build 目录。</p>
+<h2 id="section-2">Linux</h2>
+<pre><span class="language-label">bash</span><code class="language-bash">sudo apt update
+sudo apt install build-essential cmake ninja-build python3 curl
+cmake --preset debug
+cmake --build --preset debug
+ctest --preset debug
+./build/debug/task_server
+</code></pre>
+<p>Linux、Docker、systemd 与 HTTPS 的部署步骤见教材 23～24 章，需在目标环境实际验收。</p>
+<h2 id="section-3">可运行学习阶段</h2>
+<div class="table-scroll"><table>
+<thead>
+<tr>
+<th>target</th>
+<th>源码</th>
+<th>内容</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>lab01_hello</td>
+<td>examples/01_hello.cpp</td>
+<td>编译与输出</td>
+</tr>
+<tr>
+<td>lab02_modern</td>
+<td>examples/02_modern.cpp</td>
+<td>RAII、移动、ranges、span、concepts、jthread</td>
+</tr>
+<tr>
+<td>lab03_cli</td>
+<td>examples/03_cli.cpp</td>
+<td>内存版命令行任务管理</td>
+</tr>
+<tr>
+<td>lab04_http</td>
+<td>examples/04_http.cpp</td>
+<td>8081 端口最小 HTTP 服务</td>
+</tr>
+<tr>
+<td>task_server</td>
+<td>src/</td>
+<td>8080 端口完整 API</td>
+</tr>
+</tbody></table></div>
+<p>例如：<code>cmake --build build/debug --target lab03_cli</code>，再运行对应程序。</p>
+<h2 id="section-4">API 与配置</h2>
+<p><code>GET /healthz</code>；<code>GET/POST /api/tasks</code>；<code>GET/PATCH/DELETE /api/tasks/:id</code>。</p>
+<p>创建 body：<code>{&quot;title&quot;:&quot;Learn C++&quot;}</code>；修改 body：<code>{&quot;title&quot;:&quot;New title&quot;,&quot;completed&quot;:true}</code>；list 可带 limit/offset。</p>
+<p>环境变量：APP_HOST 默认 127.0.0.1，APP_PORT 默认 8080，APP_DB 默认 tasks.db，APP_TOKEN 默认空。设置 token 后 API 需要 <code>Authorization: Bearer &lt;token&gt;</code>；healthz 保持公开。非回环监听要求至少 32 字节 token，建议由随机生成器产生。</p>
+<p>这是单用户教学基线，完整用户账号、用户间权限隔离与集群能力属于后续扩展。本项目未自动部署到任何外部服务器。</p>
+<h2 id="section-5">辅助脚本</h2>
+<pre><span class="language-label">powershell</span><code class="language-powershell">python scripts/backup_db.py tasks.db backups/tasks-copy.db
+python scripts/load_test.py --requests 200 --workers 8
+</code></pre>
+<p>priority 迁移脚本仅用于第 26 章扩展练习，先备份并停止使用该数据库的服务；当前 C++ API 仍需自己扩展 priority 字段。</p>
+<p>本包的自有示例代码允许你学习、修改和用于自己的项目；第三方代码遵循各自许可证。HTML 教材无需联网即可阅读，外部官方文档链接需要联网。</p>
+<footer>现代 C++ 后端实战教程 · 配套源码、测试与部署示例<br>先运行，再解释，再独立重写。</footer></article></main><script>
+const key='cpp-book-'+location.pathname;let saved={};try{saved=JSON.parse(localStorage.getItem(key)||'{}');if(localStorage.getItem('cpp-theme')==='dark')document.body.dataset.theme='dark'}catch{}
+const save=()=>{try{localStorage.setItem(key,JSON.stringify(saved))}catch{}};
+document.getElementById('theme').onclick=()=>{const dark=document.body.dataset.theme!=='dark';document.body.dataset.theme=dark?'dark':'';try{localStorage.setItem('cpp-theme',dark?'dark':'light')}catch{}};
+document.getElementById('print').onclick=()=>window.print();
+document.getElementById('filter').oninput=e=>{const value=e.target.value.toLowerCase();document.querySelectorAll('#toc a').forEach(a=>a.hidden=!a.textContent.toLowerCase().includes(value))};
+document.querySelectorAll('.complete-button').forEach(b=>{const id=b.dataset.for;const sync=()=>{b.classList.toggle('checked',!!saved[id]);b.textContent=saved[id]?'✓ 已学完':'标记本章已学完';document.querySelector('#toc a[href="#'+id+'"]').classList.toggle('done',!!saved[id])};sync();b.onclick=()=>{saved[id]=!saved[id];save();sync()}});
+if(saved.last&&document.getElementById(saved.last)){const r=document.getElementById('resume');r.href='#'+saved.last;r.style.display='block'}
+let locked=false;const update=()=>{const total=document.documentElement.scrollHeight-innerHeight;document.getElementById('progress').style.width=(total>0?scrollY/total*100:0)+'%';let active=null;document.querySelectorAll('.document h2').forEach(h=>{if(h.getBoundingClientRect().top<160)active=h});if(active){document.querySelectorAll('#toc a').forEach(a=>a.classList.toggle('current',a.hash==='#'+active.id));saved.last=active.id;save()}locked=false};addEventListener('scroll',()=>{if(!locked){locked=true;requestAnimationFrame(update)}},{passive:true});update();
+</script></body></html>

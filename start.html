@@ -7,19 +7,35 @@ main{margin:68px 0 0 var(--aside);padding:42px 48px 80px;max-width:1290px}.hero{
 body[data-theme=dark]{--bg:#14221e;--paper:#1a2b24;--ink:#e1e7df;--muted:#afbeb1;--line:#3b4d41;--accent:#91c8a0;--code:#0b1b15;--codeink:#dce9dc}body[data-theme=dark] :not(pre)>code{background:#263e2e;border-color:#3b513f;color:#c4e6c6}body[data-theme=dark] th{background:#2d4131}body[data-theme=dark] tbody tr:nth-child(even){background:#ffffff05}body[data-theme=dark] aside a.current,body[data-theme=dark] aside a:hover{background:#2a4030}body[data-theme=dark] blockquote{background:#253b2b}body[data-theme=dark] .complete-button.checked{background:#2e4936;color:#c1e3ca}
 @media(min-width:1500px){main{margin-left:calc(var(--aside) + (100vw - 1500px)/3)}}@media(max-width:1050px){:root{--aside:238px}main{padding:32px 28px}.hero{padding:32px 28px}.hero h1{font-size:30px}header{padding:0 18px}header nav{gap:13px}.brand{font-size:14px}.tools button{padding:4px 7px}}@media(max-width:760px){header{position:static;height:auto;min-height:68px;flex-wrap:wrap;padding:15px 20px;gap:10px}header nav{order:3;width:100%;justify-content:space-between}aside{position:static;width:auto;padding:20px;border-right:0;border-bottom:1px solid var(--line);max-height:260px}main{margin:0;padding:24px 19px 50px}.hero{padding:30px 24px}.hero h1{font-size:28px}.stats{gap:21px}.document h2{font-size:23px}.document h3{font-size:19px}pre{font-size:12px;padding:18px}#progress{top:0}body{font-size:15px}.tools{margin-left:auto}}
 @media print{header,aside,.tools,#progress,.chapter-tools{display:none!important}main{margin:0;padding:0;max-width:none}.hero{background:white;color:#111;padding:15px 0}.hero p,.eyebrow,.stats,.stats b{color:#333}.hero:after{display:none}.document{max-width:none}body{font-size:10.5pt;line-height:1.7;background:white;color:#111}pre{white-space:pre-wrap;overflow:visible;background:#f2f4f1;color:#111;border:1px solid #ccc;font-size:8.5pt}pre code{white-space:pre-wrap;overflow-wrap:anywhere}.document h2{break-before:page;margin-top:10px}.document h3{break-after:avoid}table{font-size:9pt}.table-scroll{overflow:visible}a{color:#222}}
-</style></head><body><header><a class="brand" href="index.html"><span>C++</span>后端实战手册</a><nav><a href="index.html">教材</a><a href="code.html">源码</a><a href="verification.html">验证</a><a class="active" href="start.html">开始运行</a></nav><div class="tools"><button id="theme" aria-label="切换明暗主题">明暗</button><button id="print">打印</button></div></header><div id="progress"></div><aside><p class="nav-caption">LEARNING PATH / 阅读导航</p><input id="filter" type="search" aria-label="筛选章节" placeholder="筛选章节 · 全文搜索 Ctrl+F"><a id="resume">继续上次阅读 →</a><div id="toc"><a href="#section-1">第一次运行（Windows PowerShell）</a><a href="#section-2">Linux</a><a href="#section-3">可运行学习阶段</a><a href="#section-4">API 与配置</a><a href="#section-5">辅助脚本</a></div><div class="nav-note">离线可读 · 无外部字体或脚本<br>学习标记仅保存在当前浏览器<br>整理日期 2026.10.18</div></aside><main><section class="hero"><div class="eyebrow">MODERN C++ / BUILD A BACKEND</div><h1>先跑起来<br>再逐层弄懂</h1><p>从这里开始第一次构建。准备两个终端：一个运行服务器，一个发送请求。</p><div class="stats"><div><b>01</b>检查环境</div><div><b>02</b>构建测试</div><div><b>03</b>调用接口</div></div></section><article class="document">
-<p>适合：学过 C/C++ 基础，尚未独立做过完整项目。</p>
-<p><strong>先读 <a href="index.html">HTML 教材</a> 或 <a href="index.html">Markdown 教材</a>。</strong> 全书 30 章（0～29），从对象生命周期、RAII、标准库讲到 CMake、HTTP、SQLite、测试和部署。不要一次读完再开始动手，按每章练习推进。</p>
+</style></head><body><header><a class="brand" href="index.html"><span>C++</span>后端实战手册</a><nav><a href="index.html">教材</a><a href="code.html">源码</a><a href="verification.html">验证</a><a class="active" href="start.html">开始运行</a></nav><div class="tools"><button id="theme" aria-label="切换明暗主题">明暗</button><button id="print">打印</button></div></header><div id="progress"></div><aside><p class="nav-caption">LEARNING PATH / 阅读导航</p><input id="filter" type="search" aria-label="筛选章节" placeholder="筛选章节 · 全文搜索 Ctrl+F"><a id="resume">继续上次阅读 →</a><div id="toc"><a href="#section-1">基础不牢，从这里开始</a><a href="#section-2">获取与阅读</a><a href="#section-3">第一次运行完整后端（Windows PowerShell）</a><a href="#section-4">Linux</a><a href="#section-5">可运行学习阶段</a><a href="#section-6">API 与配置</a><a href="#section-7">辅助脚本</a><a href="#section-8">新增课程的自动验证</a></div><div class="nav-note">离线可读 · 无外部字体或脚本<br>学习标记仅保存在当前浏览器<br>更新日期 2026.10.24</div></aside><main><section class="hero"><div class="eyebrow">MODERN C++ / BUILD A BACKEND</div><h1>先跑起来<br>再逐层弄懂</h1><p>从这里开始第一次构建。准备两个终端：一个运行服务器，一个发送请求。</p><div class="stats"><div><b>01</b>检查环境</div><div><b>02</b>构建测试</div><div><b>03</b>调用接口</div></div></section><article class="document">
+<p>适合：刚学 C++、语法还不牢固，希望从小程序走到独立完成后端项目。</p>
+<p><strong>先读 <a href="index.html">HTML 教材</a> 或 <a href="index.html">Markdown 教材</a>。</strong> 2026-10-24 补充版共 <strong>54 个主章节</strong>：原有 30 章 + 12 章语法基础 + 12 章 CMake 实战。新增内容已插入主教材阅读顺序，配有逐行解释、完整代码、预期结果、常见错误、练习与参考思路。</p>
+<h2 id="section-1">基础不牢，从这里开始</h2>
+<ol>
+<li>主教材第 0～2 章：环境、终端、编译与链接。</li>
+<li><a href="foundations.html">C++ 基础补全</a> / <a href="foundations.html">网页阅读</a>：变量、类型、循环、函数、指针引用、容器、类、RAII、移动、lambda、模板、错误处理与线程，共 12 个完整程序。</li>
+<li>主教材第 3～7 章：把基础知识对应到后端代码。</li>
+<li><a href="cmake.html">CMake 手把手实战</a> / <a href="cmake.html">网页阅读</a>：4 个独立工程，从单文件走到静态库、多目录、测试、安装和外部消费。</li>
+<li>主教材第 8～29 章：复习构建，再逐步实现 CLI、HTTP、SQLite、测试与部署。</li>
+</ol>
+<p>先构建基础示例，不需要先跑完整服务器：</p>
+<pre><span class="language-label">powershell</span><code class="language-powershell">cmake -S lessons/foundations -B build/foundations -G Ninja -DCMAKE_BUILD_TYPE=Debug
+cmake --build build/foundations --parallel 2
+ctest --test-dir build/foundations --output-on-failure --no-tests=error
+.\build\foundations\basic_01_values.exe
+</code></pre>
+<p>所有示例路径和执行命令在两个补全篇中逐步说明。Linux 运行文件去掉 <code>.exe</code> 并使用 <code>./</code>。第一次运行需先按主教材第 1 章准备编译器、CMake 与 Ninja。</p>
+<h2 id="section-2">获取与阅读</h2>
 <p>在 GitHub 中可以直接阅读 Markdown 教材。HTML 阅读版请克隆或下载仓库后，用浏览器打开 index.html；GitHub 的代码页面不会直接运行 HTML。</p>
-<pre><span class="language-label">powershell</span><code class="language-powershell">git clone https://github.com/kurunomochi/cpp-readme.git
-Set-Location cpp-readme
+<pre><span class="language-label">powershell</span><code class="language-powershell">git clone https://github.com/kurunomochi/cpp_learning.git
+Set-Location cpp_learning
 </code></pre>
 <ul>
 <li><a href="code.html">完整源码导读</a>：按学习顺序收录自有源码。</li>
 <li><a href="verification.html">验证记录</a>：已运行的检查与未验证的环境。</li>
 <li><a href="third_party/NOTICE.md">第三方来源与版本</a>：版本、许可证与 SHA-256 文件摘要。</li>
 </ul>
-<h2 id="section-1">第一次运行（Windows PowerShell）</h2>
+<h2 id="section-3">第一次运行完整后端（Windows PowerShell）</h2>
 <p>进入本 README 所在目录。要求 64 位 C++20 编译器、CMake 3.24+、Ninja；HTTP 测试另需 Python 3.9+。如果本机工具已可用，不必重复安装。依赖源码已经附带，不需要联网下载库。</p>
 <pre><span class="language-label">powershell</span><code class="language-powershell">g++ --version
 cmake --version
@@ -42,7 +58,7 @@ Invoke-RestMethod &#39;http://127.0.0.1:8080/api/tasks&#39;
 <pre><span class="language-label">powershell</span><code class="language-powershell">$env:Path = &#39;C:\msys64\ucrt64\bin;&#39; + $env:Path
 </code></pre>
 <p>上面使用 MSYS2 的默认安装路径；如果安装在其他目录，请相应替换。切换编译器时新建 build 目录。</p>
-<h2 id="section-2">Linux</h2>
+<h2 id="section-4">Linux</h2>
 <pre><span class="language-label">bash</span><code class="language-bash">sudo apt update
 sudo apt install build-essential cmake ninja-build python3 curl
 cmake --preset debug
@@ -51,7 +67,7 @@ ctest --preset debug
 ./build/debug/task_server
 </code></pre>
 <p>Linux、Docker、systemd 与 HTTPS 的部署步骤见教材 23～24 章，需在目标环境实际验收。</p>
-<h2 id="section-3">可运行学习阶段</h2>
+<h2 id="section-5">可运行学习阶段</h2>
 <div class="table-scroll"><table>
 <thead>
 <tr>
@@ -87,19 +103,23 @@ ctest --preset debug
 </tr>
 </tbody></table></div>
 <p>例如：<code>cmake --build build/debug --target lab03_cli</code>，再运行对应程序。</p>
-<h2 id="section-4">API 与配置</h2>
+<h2 id="section-6">API 与配置</h2>
 <p><code>GET /healthz</code>；<code>GET/POST /api/tasks</code>；<code>GET/PATCH/DELETE /api/tasks/:id</code>。</p>
 <p>创建 body：<code>{&quot;title&quot;:&quot;Learn C++&quot;}</code>；修改 body：<code>{&quot;title&quot;:&quot;New title&quot;,&quot;completed&quot;:true}</code>；list 可带 limit/offset。</p>
 <p>环境变量：APP_HOST 默认 127.0.0.1，APP_PORT 默认 8080，APP_DB 默认 tasks.db，APP_TOKEN 默认空。设置 token 后 API 需要 <code>Authorization: Bearer &lt;token&gt;</code>；healthz 保持公开。非回环监听要求至少 32 字节 token，建议由随机生成器产生。</p>
 <p>这是单用户教学基线，完整用户账号、用户间权限隔离与集群能力属于后续扩展。本项目未自动部署到任何外部服务器。</p>
-<h2 id="section-5">辅助脚本</h2>
+<h2 id="section-7">辅助脚本</h2>
 <pre><span class="language-label">powershell</span><code class="language-powershell">python scripts/backup_db.py tasks.db backups/tasks-copy.db
 python scripts/load_test.py --requests 200 --workers 8
 </code></pre>
 <p>priority 迁移脚本仅用于第 26 章扩展练习，先备份并停止使用该数据库的服务；当前 C++ API 仍需自己扩展 priority 字段。</p>
+<h2 id="section-8">新增课程的自动验证</h2>
+<pre><span class="language-label">powershell</span><code class="language-powershell">python scripts/verify_lessons.py
+</code></pre>
+<p>脚本使用当前 PATH 的 CMake/Ninja/编译器，构建基础示例和四个 CMake 工程，运行 Debug/Release 检查，验证安装包及换目录后的消费，并制造一次边界错误确认测试能发现它。结果写入 <code>build/lesson-verification/results.json</code>；需要 Python 3.9+。这与主后端的三个 CTest 目标分开运行，避免第一次构建服务器时同时编译所有学习实验。</p>
 <p>本包的自有示例代码允许你学习、修改和用于自己的项目；第三方代码遵循各自许可证。HTML 教材无需联网即可阅读，外部官方文档链接需要联网。</p>
 <footer>现代 C++ 后端实战教程 · 配套源码、测试与部署示例<br>先运行，再解释，再独立重写。</footer></article></main><script>
-const key='cpp-book-'+location.pathname;let saved={};try{saved=JSON.parse(localStorage.getItem(key)||'{}');if(localStorage.getItem('cpp-theme')==='dark')document.body.dataset.theme='dark'}catch{}
+const key='cpp-book-expanded-v2-'+location.pathname;let saved={};try{saved=JSON.parse(localStorage.getItem(key)||'{}');if(localStorage.getItem('cpp-theme')==='dark')document.body.dataset.theme='dark'}catch{}
 const save=()=>{try{localStorage.setItem(key,JSON.stringify(saved))}catch{}};
 document.getElementById('theme').onclick=()=>{const dark=document.body.dataset.theme!=='dark';document.body.dataset.theme=dark?'dark':'';try{localStorage.setItem('cpp-theme',dark?'dark':'light')}catch{}};
 document.getElementById('print').onclick=()=>window.print();

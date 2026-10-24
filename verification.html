@@ -7,9 +7,66 @@ main{margin:68px 0 0 var(--aside);padding:42px 48px 80px;max-width:1290px}.hero{
 body[data-theme=dark]{--bg:#14221e;--paper:#1a2b24;--ink:#e1e7df;--muted:#afbeb1;--line:#3b4d41;--accent:#91c8a0;--code:#0b1b15;--codeink:#dce9dc}body[data-theme=dark] :not(pre)>code{background:#263e2e;border-color:#3b513f;color:#c4e6c6}body[data-theme=dark] th{background:#2d4131}body[data-theme=dark] tbody tr:nth-child(even){background:#ffffff05}body[data-theme=dark] aside a.current,body[data-theme=dark] aside a:hover{background:#2a4030}body[data-theme=dark] blockquote{background:#253b2b}body[data-theme=dark] .complete-button.checked{background:#2e4936;color:#c1e3ca}
 @media(min-width:1500px){main{margin-left:calc(var(--aside) + (100vw - 1500px)/3)}}@media(max-width:1050px){:root{--aside:238px}main{padding:32px 28px}.hero{padding:32px 28px}.hero h1{font-size:30px}header{padding:0 18px}header nav{gap:13px}.brand{font-size:14px}.tools button{padding:4px 7px}}@media(max-width:760px){header{position:static;height:auto;min-height:68px;flex-wrap:wrap;padding:15px 20px;gap:10px}header nav{order:3;width:100%;justify-content:space-between}aside{position:static;width:auto;padding:20px;border-right:0;border-bottom:1px solid var(--line);max-height:260px}main{margin:0;padding:24px 19px 50px}.hero{padding:30px 24px}.hero h1{font-size:28px}.stats{gap:21px}.document h2{font-size:23px}.document h3{font-size:19px}pre{font-size:12px;padding:18px}#progress{top:0}body{font-size:15px}.tools{margin-left:auto}}
 @media print{header,aside,.tools,#progress,.chapter-tools{display:none!important}main{margin:0;padding:0;max-width:none}.hero{background:white;color:#111;padding:15px 0}.hero p,.eyebrow,.stats,.stats b{color:#333}.hero:after{display:none}.document{max-width:none}body{font-size:10.5pt;line-height:1.7;background:white;color:#111}pre{white-space:pre-wrap;overflow:visible;background:#f2f4f1;color:#111;border:1px solid #ccc;font-size:8.5pt}pre code{white-space:pre-wrap;overflow-wrap:anywhere}.document h2{break-before:page;margin-top:10px}.document h3{break-after:avoid}table{font-size:9pt}.table-scroll{overflow:visible}a{color:#222}}
-</style></head><body><header><a class="brand" href="index.html"><span>C++</span>后端实战手册</a><nav><a href="index.html">教材</a><a href="code.html">源码</a><a class="active" href="verification.html">验证</a><a href="start.html">开始运行</a></nav><div class="tools"><button id="theme" aria-label="切换明暗主题">明暗</button><button id="print">打印</button></div></header><div id="progress"></div><aside><p class="nav-caption">LEARNING PATH / 阅读导航</p><input id="filter" type="search" aria-label="筛选章节" placeholder="筛选章节 · 全文搜索 Ctrl+F"><a id="resume">继续上次阅读 →</a><div id="toc"><a href="#section-1">本机环境</a><a href="#section-2">实际通过的检查</a><a href="#section-3">未实机验证的范围</a><a href="#section-4">工程边界</a></div><div class="nav-note">离线可读 · 无外部字体或脚本<br>学习标记仅保存在当前浏览器<br>整理日期 2026.10.18</div></aside><main><section class="hero"><div class="eyebrow">MODERN C++ / BUILD A BACKEND</div><h1>让每一次修改<br>都有验证依据</h1><p>记录真实执行结果，清楚区分已通过的检查和仍需目标环境验证的步骤。</p><div class="stats"><div><b>80</b>核心及 HTTP 检查</div><div><b>2</b>构建配置</div><div><b>3</b>CTest 目标</div></div></section><article class="document">
-<p>日期：2026-10-18。以下区分实际执行与仍需目标环境验证的内容。</p>
-<h2 id="section-1">本机环境</h2>
+</style></head><body><header><a class="brand" href="index.html"><span>C++</span>后端实战手册</a><nav><a href="index.html">教材</a><a href="code.html">源码</a><a class="active" href="verification.html">验证</a><a href="start.html">开始运行</a></nav><div class="tools"><button id="theme" aria-label="切换明暗主题">明暗</button><button id="print">打印</button></div></header><div id="progress"></div><aside><p class="nav-caption">LEARNING PATH / 阅读导航</p><input id="filter" type="search" aria-label="筛选章节" placeholder="筛选章节 · 全文搜索 Ctrl+F"><a id="resume">继续上次阅读 →</a><div id="toc"><a href="#section-1">2026-10-24：新增基础课与 CMake 实验</a><a href="#section-2">本机环境</a><a href="#section-3">2026-10-18：后端项目实际通过的检查</a><a href="#section-4">未实机验证的范围</a><a href="#section-5">工程边界</a></div><div class="nav-note">离线可读 · 无外部字体或脚本<br>学习标记仅保存在当前浏览器<br>更新日期 2026.10.24</div></aside><main><section class="hero"><div class="eyebrow">MODERN C++ / BUILD A BACKEND</div><h1>让每一次修改<br>都有验证依据</h1><p>分别记录后端原有验证和新增课程的实际检查，包含故障实验与安装包验证。</p><div class="stats"><div><b>Debug</b>构建验证</div><div><b>Release</b>构建验证</div><div><b>独立</b>消费安装包</div></div></section><article class="document">
+<p>初版验证日期：2026-10-18；基础与 CMake 补充版验证日期：2026-10-24。两次执行范围分别记录，不把旧结果当作本次重新执行。</p>
+<h2 id="section-1">2026-10-24：新增基础课与 CMake 实验</h2>
+<p>本次运行 <code>python scripts/verify_lessons.py --build-root &lt;独立工作目录&gt;</code>，共 54 个验证步骤成功。这里的步骤包括配置、构建、运行、测试和安装，不表示 54 个独立业务测试。工具为 Windows 64 位、GCC 16.1.0、CMake 4.4.3、Ninja 1.13.2；新增构建日志没有编译警告。</p>
+<div class="table-scroll"><table>
+<thead>
+<tr>
+<th>新增内容</th>
+<th>实际结果</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>F01～F12 十二个语言程序</td>
+<td>Debug / Release 全部构建并通过 12 个 CTest 条目</td>
+</tr>
+<tr>
+<td>RAII 生命周期例子</td>
+<td>两种配置的六行输出与教材中的析构顺序一致</td>
+</tr>
+<tr>
+<td>CMake 变量/作用域脚本</td>
+<td>函数内变量未意外修改外部变量</td>
+</tr>
+<tr>
+<td>第一阶段 Hello World</td>
+<td>两种配置构建、运行、核对输出</td>
+</tr>
+<tr>
+<td>第二阶段静态库与应用</td>
+<td>两种配置构建并通过行为检查</td>
+</tr>
+<tr>
+<td>第三阶段 TaskKit</td>
+<td>两种配置通过六项内部检查；小应用输出符合教材</td>
+</tr>
+<tr>
+<td>第四阶段独立消费者</td>
+<td>两种配置安装后 find_package、构建、测试通过</td>
+</tr>
+<tr>
+<td>安装目录迁移</td>
+<td>复制安装树到新位置，新构建树实际从新前缀找到并消费包</td>
+</tr>
+<tr>
+<td>Ninja Multi-Config</td>
+<td>Debug 配置构建与测试通过</td>
+</tr>
+<tr>
+<td>关闭应用和测试</td>
+<td>库构建通过；CTest 的 no-tests=error 如预期返回失败</td>
+</tr>
+<tr>
+<td>故意破坏边界条件</td>
+<td>只在临时副本中把 200 改为 199；Release 测试报告 200-byte boundary 失败，证明检查未被优化配置禁用</td>
+</tr>
+</tbody></table></div>
+<p>本次没有改变后端业务源码，下面的 HTTP/数据库结果保留为初版验证记录，没有宣称重新执行了同一套 HTTP 验证。新增实验没有联网下载依赖。</p>
+<p>新增完整例子在 <code>lessons/</code>；进阶说明中明确标为“片段”“练习”“联网方案”的内容不属于全部已编译目标。FetchContent/vcpkg/Conan 集成、MSVC/Linux 与公网部署仍需对应环境验收。</p>
+<p>网页重新生成了主教材、两份分册、源码导读、运行入口和验证页。对章节数量、链接目标和内嵌 JavaScript 语法进行静态检查；本次浏览器工具不允许读取 file://，因此未完成新页面的浏览器视觉/交互验收。初版的视觉检查结果仅代表初版。</p>
+<h2 id="section-2">本机环境</h2>
 <ul>
 <li>Windows 64 位；MSYS2 UCRT64 GCC 16.1.0。</li>
 <li>CMake 4.4.3；Ninja 1.13.2。</li>
@@ -17,7 +74,7 @@ body[data-theme=dark]{--bg:#14221e;--paper:#1a2b24;--ink:#e1e7df;--muted:#afbeb1
 <li>固定依赖：cpp-httplib 0.61.0、nlohmann/json 3.12.0、SQLite 3.54.1。</li>
 <li>SQLite 官方下载归档的 SHA3-256 与下载页公布值一致。</li>
 </ul>
-<h2 id="section-2">实际通过的检查</h2>
+<h2 id="section-3">2026-10-18：后端项目实际通过的检查</h2>
 <div class="table-scroll"><table>
 <thead>
 <tr>
@@ -60,7 +117,7 @@ body[data-theme=dark]{--bg:#14221e;--paper:#1a2b24;--ink:#e1e7df;--muted:#afbeb1
 <li>HTML 阅读版已在本机无头 Chrome 中检查 1440×1080 和 390×844 布局，验证章节筛选、学习标记、明暗切换、页面脚本和本地文档链接。</li>
 </ul>
 <p>构建目录位于交付包之外；交付包不包含本机生成的 EXE、DLL、任务数据库和测试日志。</p>
-<h2 id="section-3">未实机验证的范围</h2>
+<h2 id="section-4">未实机验证的范围</h2>
 <ul>
 <li>Linux GCC/Clang、MSVC、macOS 编译。</li>
 <li>Linux ASan/UBSan、远程 GitHub Actions 工作流。</li>
@@ -69,11 +126,11 @@ body[data-theme=dark]{--bg:#14221e;--paper:#1a2b24;--ink:#e1e7df;--muted:#afbeb1
 </ul>
 <p>当前环境没有可用的 Docker/Linux 运行环境。上述内容已给出配置与目标机验收步骤，但没有标记为已部署或已通过。</p>
 <p>Windows HTTP 测试使用进程 terminate 后重启，验证了数据持久化；它不等同于验证 Ctrl+C 或 Linux SIGTERM 的优雅停机。</p>
-<h2 id="section-4">工程边界</h2>
+<h2 id="section-5">工程边界</h2>
 <p>当前为单用户教学服务：同步 HTTP/1.1、固定线程池、一个由 mutex 保护的 SQLite 连接、共享 Bearer token。没有用户账号体系、对象级权限、完整限流、严格请求总截止时间、自动迁移、跨进程全局追踪 ID 和高可用能力。</p>
 <p>priority 迁移脚本是毕业练习配套，仅改 schema；当前 C++ API 没有自动开启 priority 字段。教程中的概念片段和留给读者的练习不属于全部已编译的工程目标。</p>
 <footer>现代 C++ 后端实战教程 · 配套源码、测试与部署示例<br>先运行，再解释，再独立重写。</footer></article></main><script>
-const key='cpp-book-'+location.pathname;let saved={};try{saved=JSON.parse(localStorage.getItem(key)||'{}');if(localStorage.getItem('cpp-theme')==='dark')document.body.dataset.theme='dark'}catch{}
+const key='cpp-book-expanded-v2-'+location.pathname;let saved={};try{saved=JSON.parse(localStorage.getItem(key)||'{}');if(localStorage.getItem('cpp-theme')==='dark')document.body.dataset.theme='dark'}catch{}
 const save=()=>{try{localStorage.setItem(key,JSON.stringify(saved))}catch{}};
 document.getElementById('theme').onclick=()=>{const dark=document.body.dataset.theme!=='dark';document.body.dataset.theme=dark?'dark':'';try{localStorage.setItem('cpp-theme',dark?'dark':'light')}catch{}};
 document.getElementById('print').onclick=()=>window.print();

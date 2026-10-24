@@ -7,7 +7,7 @@ main{margin:68px 0 0 var(--aside);padding:42px 48px 80px;max-width:1290px}.hero{
 body[data-theme=dark]{--bg:#14221e;--paper:#1a2b24;--ink:#e1e7df;--muted:#afbeb1;--line:#3b4d41;--accent:#91c8a0;--code:#0b1b15;--codeink:#dce9dc}body[data-theme=dark] :not(pre)>code{background:#263e2e;border-color:#3b513f;color:#c4e6c6}body[data-theme=dark] th{background:#2d4131}body[data-theme=dark] tbody tr:nth-child(even){background:#ffffff05}body[data-theme=dark] aside a.current,body[data-theme=dark] aside a:hover{background:#2a4030}body[data-theme=dark] blockquote{background:#253b2b}body[data-theme=dark] .complete-button.checked{background:#2e4936;color:#c1e3ca}
 @media(min-width:1500px){main{margin-left:calc(var(--aside) + (100vw - 1500px)/3)}}@media(max-width:1050px){:root{--aside:238px}main{padding:32px 28px}.hero{padding:32px 28px}.hero h1{font-size:30px}header{padding:0 18px}header nav{gap:13px}.brand{font-size:14px}.tools button{padding:4px 7px}}@media(max-width:760px){header{position:static;height:auto;min-height:68px;flex-wrap:wrap;padding:15px 20px;gap:10px}header nav{order:3;width:100%;justify-content:space-between}aside{position:static;width:auto;padding:20px;border-right:0;border-bottom:1px solid var(--line);max-height:260px}main{margin:0;padding:24px 19px 50px}.hero{padding:30px 24px}.hero h1{font-size:28px}.stats{gap:21px}.document h2{font-size:23px}.document h3{font-size:19px}pre{font-size:12px;padding:18px}#progress{top:0}body{font-size:15px}.tools{margin-left:auto}}
 @media print{header,aside,.tools,#progress,.chapter-tools{display:none!important}main{margin:0;padding:0;max-width:none}.hero{background:white;color:#111;padding:15px 0}.hero p,.eyebrow,.stats,.stats b{color:#333}.hero:after{display:none}.document{max-width:none}body{font-size:10.5pt;line-height:1.7;background:white;color:#111}pre{white-space:pre-wrap;overflow:visible;background:#f2f4f1;color:#111;border:1px solid #ccc;font-size:8.5pt}pre code{white-space:pre-wrap;overflow-wrap:anywhere}.document h2{break-before:page;margin-top:10px}.document h3{break-after:avoid}table{font-size:9pt}.table-scroll{overflow:visible}a{color:#222}}
-</style></head><body><header><a class="brand" href="index.html"><span>C++</span>后端实战手册</a><nav><a href="index.html">教材</a><a class="active" href="code.html">源码</a><a href="verification.html">验证</a><a href="start.html">开始运行</a></nav><div class="tools"><button id="theme" aria-label="切换明暗主题">明暗</button><button id="print">打印</button></div></header><div id="progress"></div><aside><p class="nav-caption">LEARNING PATH / 阅读导航</p><input id="filter" type="search" aria-label="筛选章节" placeholder="筛选章节 · 全文搜索 Ctrl+F"><a id="resume">继续上次阅读 →</a><div id="toc"><a href="#section-1">examples/01_hello.cpp</a><a href="#section-2">examples/02_modern.cpp</a><a href="#section-3">include/task/domain.hpp</a><a href="#section-4">src/domain.cpp</a><a href="#section-5">examples/03_cli.cpp</a><a href="#section-6">examples/04_http.cpp</a><a href="#section-7">include/task/repository.hpp</a><a href="#section-8">src/repository.cpp</a><a href="#section-9">include/task/http_api.hpp</a><a href="#section-10">src/http_api.cpp</a><a href="#section-11">src/main.cpp</a><a href="#section-12">CMakeLists.txt</a><a href="#section-13">CMakePresets.json</a><a href="#section-14">tests/core_tests.cpp</a><a href="#section-15">tests/http_test.py</a><a href="#section-16">scripts/backup_db.py</a><a href="#section-17">scripts/load_test.py</a><a href="#section-18">scripts/migrate_priority_example.py</a><a href="#section-19">Dockerfile</a><a href="#section-20">compose.yaml</a><a href="#section-21">deploy/task-server.service</a><a href="#section-22">deploy/Caddyfile</a><a href="#section-23">.github/workflows/ci.yml</a><a href="#section-24">.clang-format</a><a href="#section-25">.gitignore</a><a href="#section-26">.dockerignore</a></div><div class="nav-note">离线可读 · 无外部字体或脚本<br>学习标记仅保存在当前浏览器<br>整理日期 2026.10.18</div></aside><main><section class="hero"><div class="eyebrow">MODERN C++ / BUILD A BACKEND</div><h1>从调用关系<br>读懂完整源码</h1><p>全部自有实现与主要配置，按学习顺序排列。先自己实现，再来核对。</p><div class="stats"><div><b>26</b>源码与配置</div><div><b>C++20</b>主语言</div><div><b>离线</b>依赖已附带</div></div></section><article class="document">
+</style></head><body><header><a class="brand" href="index.html"><span>C++</span>后端实战手册</a><nav><a href="index.html">教材</a><a class="active" href="code.html">源码</a><a href="verification.html">验证</a><a href="start.html">开始运行</a></nav><div class="tools"><button id="theme" aria-label="切换明暗主题">明暗</button><button id="print">打印</button></div></header><div id="progress"></div><aside><p class="nav-caption">LEARNING PATH / 阅读导航</p><input id="filter" type="search" aria-label="筛选章节" placeholder="筛选章节 · 全文搜索 Ctrl+F"><a id="resume">继续上次阅读 →</a><div id="toc"><a href="#section-1">examples/01_hello.cpp</a><a href="#section-2">examples/02_modern.cpp</a><a href="#section-3">include/task/domain.hpp</a><a href="#section-4">src/domain.cpp</a><a href="#section-5">examples/03_cli.cpp</a><a href="#section-6">examples/04_http.cpp</a><a href="#section-7">include/task/repository.hpp</a><a href="#section-8">src/repository.cpp</a><a href="#section-9">include/task/http_api.hpp</a><a href="#section-10">src/http_api.cpp</a><a href="#section-11">src/main.cpp</a><a href="#section-12">CMakeLists.txt</a><a href="#section-13">CMakePresets.json</a><a href="#section-14">tests/core_tests.cpp</a><a href="#section-15">tests/http_test.py</a><a href="#section-16">scripts/backup_db.py</a><a href="#section-17">scripts/load_test.py</a><a href="#section-18">scripts/migrate_priority_example.py</a><a href="#section-19">Dockerfile</a><a href="#section-20">compose.yaml</a><a href="#section-21">deploy/task-server.service</a><a href="#section-22">deploy/Caddyfile</a><a href="#section-23">.github/workflows/ci.yml</a><a href="#section-24">.clang-format</a><a href="#section-25">.gitignore</a><a href="#section-26">.dockerignore</a><a href="#section-27">lessons/cmake/01_hello/CMakeLists.txt</a><a href="#section-28">lessons/cmake/01_hello/main.cpp</a><a href="#section-29">lessons/cmake/02_library/app/main.cpp</a><a href="#section-30">lessons/cmake/02_library/CMakeLists.txt</a><a href="#section-31">lessons/cmake/02_library/include/greeting/greeting.hpp</a><a href="#section-32">lessons/cmake/02_library/src/greeting.cpp</a><a href="#section-33">lessons/cmake/03_project/app/CMakeLists.txt</a><a href="#section-34">lessons/cmake/03_project/app/main.cpp</a><a href="#section-35">lessons/cmake/03_project/cmake/config.hpp.in</a><a href="#section-36">lessons/cmake/03_project/cmake/TaskKitConfig.cmake.in</a><a href="#section-37">lessons/cmake/03_project/cmake/Warnings.cmake</a><a href="#section-38">lessons/cmake/03_project/CMakeLists.txt</a><a href="#section-39">lessons/cmake/03_project/CMakePresets.json</a><a href="#section-40">lessons/cmake/03_project/include/taskkit/title.hpp</a><a href="#section-41">lessons/cmake/03_project/src/CMakeLists.txt</a><a href="#section-42">lessons/cmake/03_project/src/title.cpp</a><a href="#section-43">lessons/cmake/03_project/tests/CMakeLists.txt</a><a href="#section-44">lessons/cmake/03_project/tests/title_test.cpp</a><a href="#section-45">lessons/cmake/04_consumer/CMakeLists.txt</a><a href="#section-46">lessons/cmake/04_consumer/main.cpp</a><a href="#section-47">lessons/cmake/variables.cmake</a><a href="#section-48">lessons/foundations/01_values.cpp</a><a href="#section-49">lessons/foundations/02_numbers.cpp</a><a href="#section-50">lessons/foundations/03_control.cpp</a><a href="#section-51">lessons/foundations/04_functions.cpp</a><a href="#section-52">lessons/foundations/05_references.cpp</a><a href="#section-53">lessons/foundations/06_containers.cpp</a><a href="#section-54">lessons/foundations/07_classes.cpp</a><a href="#section-55">lessons/foundations/08_lifetime.cpp</a><a href="#section-56">lessons/foundations/09_algorithms.cpp</a><a href="#section-57">lessons/foundations/10_templates.cpp</a><a href="#section-58">lessons/foundations/11_errors.cpp</a><a href="#section-59">lessons/foundations/12_threads.cpp</a><a href="#section-60">lessons/foundations/CMakeLists.txt</a><a href="#section-61">scripts/verify_lessons.py</a></div><div class="nav-note">离线可读 · 无外部字体或脚本<br>学习标记仅保存在当前浏览器<br>更新日期 2026.10.24</div></aside><main><section class="hero"><div class="eyebrow">MODERN C++ / BUILD A BACKEND</div><h1>从调用关系<br>读懂完整源码</h1><p>全部自有实现与主要配置，含新增基础课和 CMake 实验。先自己实现，再来核对。</p><div class="stats"><div><b>61</b>源码与配置</div><div><b>C++20</b>主语言</div><div><b>离线</b>依赖已附带</div></div></section><article class="document">
 <p>下面收录全部自有实现与主要配置，和磁盘源码逐字一致。建议先按《教程》第 11、13、16、17 章自己实现，再到这里核对。第三方库源码另见 third_party，不在此重复展示。</p>
 <h2 id="section-1">examples/01_hello.cpp</h2>
 <p>对应文件可直接在编辑器中打开；修改后按 README 重新构建并运行相关测试。</p>
@@ -1078,9 +1078,9 @@ AllowShortFunctionsOnASingleLine: Empty
 </code></pre>
 <h2 id="section-25">.gitignore</h2>
 <p>对应文件可直接在编辑器中打开；修改后按 README 重新构建并运行相关测试。</p>
-<pre><span class="language-label">text</span><code class="language-text">/build/
-/install/
-/scratch/
+<pre><span class="language-label">text</span><code class="language-text">build/
+install/
+scratch/
 *.db
 *.db-shm
 *.db-wal
@@ -1100,8 +1100,696 @@ install
 index.html
 教程.md
 </code></pre>
+<h2 id="section-27">lessons/cmake/01_hello/CMakeLists.txt</h2>
+<p>对应文件可直接在编辑器中打开；修改后按 README 重新构建并运行相关测试。</p>
+<pre><span class="language-label">cmake</span><code class="language-cmake">cmake_minimum_required(VERSION 3.24)
+project(hello_cmake VERSION 1.0.0 LANGUAGES CXX)
+add_executable(hello main.cpp)
+target_compile_features(hello PRIVATE cxx_std_20)
+set_target_properties(hello PROPERTIES CXX_EXTENSIONS OFF)
+</code></pre>
+<h2 id="section-28">lessons/cmake/01_hello/main.cpp</h2>
+<p>对应文件可直接在编辑器中打开；修改后按 README 重新构建并运行相关测试。</p>
+<pre><span class="language-label">cpp</span><code class="language-cpp">#include &lt;iostream&gt;
+int main() { std::cout &lt;&lt; &quot;Hello, CMake!\n&quot;; }
+</code></pre>
+<h2 id="section-29">lessons/cmake/02_library/app/main.cpp</h2>
+<p>对应文件可直接在编辑器中打开；修改后按 README 重新构建并运行相关测试。</p>
+<pre><span class="language-label">cpp</span><code class="language-cpp">#include &quot;greeting/greeting.hpp&quot;
+#include &lt;iostream&gt;
+int main() {
+    const auto message = greeting::greet(&quot;CMake&quot;);
+    std::cout &lt;&lt; message &lt;&lt; &#39;\n&#39;;
+    return message == &quot;Hello, CMake!&quot; ? 0 : 1;
+}
+</code></pre>
+<h2 id="section-30">lessons/cmake/02_library/CMakeLists.txt</h2>
+<p>对应文件可直接在编辑器中打开；修改后按 README 重新构建并运行相关测试。</p>
+<pre><span class="language-label">cmake</span><code class="language-cmake">cmake_minimum_required(VERSION 3.24)
+project(greeting_demo LANGUAGES CXX)
+set(CMAKE_CXX_EXTENSIONS OFF)
+add_library(greeting STATIC src/greeting.cpp)
+target_include_directories(greeting PUBLIC &quot;${CMAKE_CURRENT_SOURCE_DIR}/include&quot;)
+target_compile_features(greeting PUBLIC cxx_std_20)
+add_executable(greeting_app app/main.cpp)
+target_link_libraries(greeting_app PRIVATE greeting)
+include(CTest)
+if(BUILD_TESTING)
+  add_test(NAME greeting_output COMMAND greeting_app)
+endif()
+</code></pre>
+<h2 id="section-31">lessons/cmake/02_library/include/greeting/greeting.hpp</h2>
+<p>对应文件可直接在编辑器中打开；修改后按 README 重新构建并运行相关测试。</p>
+<pre><span class="language-label">cpp</span><code class="language-cpp">#pragma once
+#include &lt;string&gt;
+#include &lt;string_view&gt;
+namespace greeting {
+std::string greet(std::string_view name);
+}
+</code></pre>
+<h2 id="section-32">lessons/cmake/02_library/src/greeting.cpp</h2>
+<p>对应文件可直接在编辑器中打开；修改后按 README 重新构建并运行相关测试。</p>
+<pre><span class="language-label">cpp</span><code class="language-cpp">#include &quot;greeting/greeting.hpp&quot;
+namespace greeting {
+std::string greet(std::string_view name) { return &quot;Hello, &quot; + std::string{name} + &quot;!&quot;; }
+}
+</code></pre>
+<h2 id="section-33">lessons/cmake/03_project/app/CMakeLists.txt</h2>
+<p>对应文件可直接在编辑器中打开；修改后按 README 重新构建并运行相关测试。</p>
+<pre><span class="language-label">cmake</span><code class="language-cmake">add_executable(taskkit_app main.cpp)
+target_link_libraries(taskkit_app PRIVATE TaskKit::taskkit)
+taskkit_warnings(taskkit_app)
+</code></pre>
+<h2 id="section-34">lessons/cmake/03_project/app/main.cpp</h2>
+<p>对应文件可直接在编辑器中打开；修改后按 README 重新构建并运行相关测试。</p>
+<pre><span class="language-label">cpp</span><code class="language-cpp">#include &quot;taskkit/title.hpp&quot;
+#include &lt;iostream&gt;
+int main() {
+    std::cout &lt;&lt; &quot;TaskKit &quot; &lt;&lt; taskkit::version() &lt;&lt; &#39;\n&#39;
+              &lt;&lt; std::boolalpha &lt;&lt; taskkit::valid_title(&quot;learn&quot;) &lt;&lt; &#39;\n&#39;;
+}
+</code></pre>
+<h2 id="section-35">lessons/cmake/03_project/cmake/config.hpp.in</h2>
+<p>对应文件可直接在编辑器中打开；修改后按 README 重新构建并运行相关测试。</p>
+<pre><span class="language-label">cpp</span><code class="language-cpp">#pragma once
+#define TASKKIT_VERSION &quot;@PROJECT_VERSION@&quot;
+</code></pre>
+<h2 id="section-36">lessons/cmake/03_project/cmake/TaskKitConfig.cmake.in</h2>
+<p>对应文件可直接在编辑器中打开；修改后按 README 重新构建并运行相关测试。</p>
+<pre><span class="language-label">cmake</span><code class="language-cmake">@PACKAGE_INIT@
+include(&quot;${CMAKE_CURRENT_LIST_DIR}/TaskKitTargets.cmake&quot;)
+check_required_components(TaskKit)
+</code></pre>
+<h2 id="section-37">lessons/cmake/03_project/cmake/Warnings.cmake</h2>
+<p>对应文件可直接在编辑器中打开；修改后按 README 重新构建并运行相关测试。</p>
+<pre><span class="language-label">cmake</span><code class="language-cmake">function(taskkit_warnings target_name)
+  if(MSVC)
+    target_compile_options(${target_name} PRIVATE /W4 /permissive- /utf-8)
+  else()
+    target_compile_options(${target_name} PRIVATE -Wall -Wextra -Wpedantic -Wconversion -Wshadow)
+  endif()
+endfunction()
+</code></pre>
+<h2 id="section-38">lessons/cmake/03_project/CMakeLists.txt</h2>
+<p>对应文件可直接在编辑器中打开；修改后按 README 重新构建并运行相关测试。</p>
+<pre><span class="language-label">cmake</span><code class="language-cmake">cmake_minimum_required(VERSION 3.24)
+project(TaskKit VERSION 1.0.0 LANGUAGES CXX)
+set(CMAKE_CXX_EXTENSIONS OFF)
+set(CMAKE_EXPORT_COMPILE_COMMANDS ON)
+option(TASKKIT_BUILD_APP &quot;Build the demo executable&quot; ON)
+include(CTest)
+include(GNUInstallDirs)
+include(CMakePackageConfigHelpers)
+include(cmake/Warnings.cmake)
+
+configure_file(cmake/config.hpp.in generated/taskkit/config.hpp @ONLY)
+add_subdirectory(src)
+if(TASKKIT_BUILD_APP)
+  add_subdirectory(app)
+endif()
+if(BUILD_TESTING)
+  add_subdirectory(tests)
+endif()
+
+install(TARGETS taskkit EXPORT TaskKitTargets
+  ARCHIVE DESTINATION ${CMAKE_INSTALL_LIBDIR})
+if(TASKKIT_BUILD_APP)
+  install(TARGETS taskkit_app RUNTIME DESTINATION ${CMAKE_INSTALL_BINDIR})
+endif()
+install(DIRECTORY include/ DESTINATION ${CMAKE_INSTALL_INCLUDEDIR})
+install(EXPORT TaskKitTargets NAMESPACE TaskKit::
+  DESTINATION ${CMAKE_INSTALL_LIBDIR}/cmake/TaskKit)
+configure_package_config_file(cmake/TaskKitConfig.cmake.in
+  &quot;${CMAKE_CURRENT_BINARY_DIR}/TaskKitConfig.cmake&quot;
+  INSTALL_DESTINATION ${CMAKE_INSTALL_LIBDIR}/cmake/TaskKit)
+write_basic_package_version_file(&quot;${CMAKE_CURRENT_BINARY_DIR}/TaskKitConfigVersion.cmake&quot;
+  VERSION ${PROJECT_VERSION} COMPATIBILITY SameMajorVersion)
+install(FILES &quot;${CMAKE_CURRENT_BINARY_DIR}/TaskKitConfig.cmake&quot;
+  &quot;${CMAKE_CURRENT_BINARY_DIR}/TaskKitConfigVersion.cmake&quot;
+  DESTINATION ${CMAKE_INSTALL_LIBDIR}/cmake/TaskKit)
+</code></pre>
+<h2 id="section-39">lessons/cmake/03_project/CMakePresets.json</h2>
+<p>对应文件可直接在编辑器中打开；修改后按 README 重新构建并运行相关测试。</p>
+<pre><span class="language-label">json</span><code class="language-json">{
+  &quot;version&quot;: 5,
+  &quot;cmakeMinimumRequired&quot;: {&quot;major&quot;: 3, &quot;minor&quot;: 24, &quot;patch&quot;: 0},
+  &quot;configurePresets&quot;: [
+    {&quot;name&quot;: &quot;debug&quot;, &quot;generator&quot;: &quot;Ninja&quot;, &quot;binaryDir&quot;: &quot;${sourceDir}/build/debug&quot;,
+     &quot;cacheVariables&quot;: {&quot;CMAKE_BUILD_TYPE&quot;: &quot;Debug&quot;, &quot;BUILD_TESTING&quot;: &quot;ON&quot;}},
+    {&quot;name&quot;: &quot;release&quot;, &quot;inherits&quot;: &quot;debug&quot;, &quot;binaryDir&quot;: &quot;${sourceDir}/build/release&quot;,
+     &quot;cacheVariables&quot;: {&quot;CMAKE_BUILD_TYPE&quot;: &quot;Release&quot;}}
+  ],
+  &quot;buildPresets&quot;: [
+    {&quot;name&quot;: &quot;debug&quot;, &quot;configurePreset&quot;: &quot;debug&quot;, &quot;jobs&quot;: 2},
+    {&quot;name&quot;: &quot;release&quot;, &quot;configurePreset&quot;: &quot;release&quot;, &quot;jobs&quot;: 2}
+  ],
+  &quot;testPresets&quot;: [
+    {&quot;name&quot;: &quot;debug&quot;, &quot;configurePreset&quot;: &quot;debug&quot;, &quot;output&quot;: {&quot;outputOnFailure&quot;: true},
+     &quot;execution&quot;: {&quot;noTestsAction&quot;: &quot;error&quot;}},
+    {&quot;name&quot;: &quot;release&quot;, &quot;configurePreset&quot;: &quot;release&quot;, &quot;output&quot;: {&quot;outputOnFailure&quot;: true},
+     &quot;execution&quot;: {&quot;noTestsAction&quot;: &quot;error&quot;}}
+  ]
+}
+</code></pre>
+<h2 id="section-40">lessons/cmake/03_project/include/taskkit/title.hpp</h2>
+<p>对应文件可直接在编辑器中打开；修改后按 README 重新构建并运行相关测试。</p>
+<pre><span class="language-label">cpp</span><code class="language-cpp">#pragma once
+#include &lt;string&gt;
+#include &lt;string_view&gt;
+namespace taskkit {
+bool valid_title(std::string_view text);
+std::string version();
+}
+</code></pre>
+<h2 id="section-41">lessons/cmake/03_project/src/CMakeLists.txt</h2>
+<p>对应文件可直接在编辑器中打开；修改后按 README 重新构建并运行相关测试。</p>
+<pre><span class="language-label">cmake</span><code class="language-cmake">add_library(taskkit STATIC title.cpp)
+add_library(TaskKit::taskkit ALIAS taskkit)
+target_compile_features(taskkit PUBLIC cxx_std_20)
+target_include_directories(taskkit
+  PUBLIC
+    &quot;$&lt;BUILD_INTERFACE:${PROJECT_SOURCE_DIR}/include&gt;&quot;
+    &quot;$&lt;INSTALL_INTERFACE:${CMAKE_INSTALL_INCLUDEDIR}&gt;&quot;
+  PRIVATE &quot;${PROJECT_BINARY_DIR}/generated&quot;)
+taskkit_warnings(taskkit)
+</code></pre>
+<h2 id="section-42">lessons/cmake/03_project/src/title.cpp</h2>
+<p>对应文件可直接在编辑器中打开；修改后按 README 重新构建并运行相关测试。</p>
+<pre><span class="language-label">cpp</span><code class="language-cpp">#include &quot;taskkit/title.hpp&quot;
+#include &quot;taskkit/config.hpp&quot;
+namespace taskkit {
+bool valid_title(std::string_view text) {
+    if (text.empty() || text.size() &gt; 200) return false;
+    // 本实验只识别 ASCII 的六种空白，不是完整 Unicode 空白规则。
+    return text.find_first_not_of(&quot; \t\n\r\f\v&quot;) != std::string_view::npos;
+}
+std::string version() { return TASKKIT_VERSION; }
+}
+</code></pre>
+<h2 id="section-43">lessons/cmake/03_project/tests/CMakeLists.txt</h2>
+<p>对应文件可直接在编辑器中打开；修改后按 README 重新构建并运行相关测试。</p>
+<pre><span class="language-label">cmake</span><code class="language-cmake">add_executable(title_test title_test.cpp)
+target_link_libraries(title_test PRIVATE TaskKit::taskkit)
+taskkit_warnings(title_test)
+add_test(NAME title_rules COMMAND title_test)
+</code></pre>
+<h2 id="section-44">lessons/cmake/03_project/tests/title_test.cpp</h2>
+<p>对应文件可直接在编辑器中打开；修改后按 README 重新构建并运行相关测试。</p>
+<pre><span class="language-label">cpp</span><code class="language-cpp">#include &quot;taskkit/title.hpp&quot;
+#include &lt;iostream&gt;
+#include &lt;string&gt;
+int main() {
+    int failures{};
+    const auto check = [&amp;failures](bool ok, const char* name) {
+        if (!ok) { ++failures; std::cerr &lt;&lt; &quot;FAIL: &quot; &lt;&lt; name &lt;&lt; &#39;\n&#39;; }
+    };
+    check(taskkit::valid_title(&quot;learn&quot;), &quot;ordinary title&quot;);
+    check(!taskkit::valid_title(&quot;&quot;), &quot;empty title&quot;);
+    check(!taskkit::valid_title(&quot; \t&quot;), &quot;whitespace title&quot;);
+    check(taskkit::valid_title(std::string(200, &#39;a&#39;)), &quot;200-byte boundary&quot;);
+    check(!taskkit::valid_title(std::string(201, &#39;a&#39;)), &quot;201-byte boundary&quot;);
+    check(taskkit::version() == &quot;1.0.0&quot;, &quot;configured version&quot;);
+    return failures == 0 ? 0 : 1;
+}
+</code></pre>
+<h2 id="section-45">lessons/cmake/04_consumer/CMakeLists.txt</h2>
+<p>对应文件可直接在编辑器中打开；修改后按 README 重新构建并运行相关测试。</p>
+<pre><span class="language-label">cmake</span><code class="language-cmake">cmake_minimum_required(VERSION 3.24)
+project(taskkit_consumer LANGUAGES CXX)
+set(CMAKE_CXX_EXTENSIONS OFF)
+find_package(TaskKit 1 CONFIG REQUIRED)
+add_executable(consumer main.cpp)
+target_link_libraries(consumer PRIVATE TaskKit::taskkit)
+include(CTest)
+if(BUILD_TESTING)
+  add_test(NAME installed_package COMMAND consumer)
+endif()
+</code></pre>
+<h2 id="section-46">lessons/cmake/04_consumer/main.cpp</h2>
+<p>对应文件可直接在编辑器中打开；修改后按 README 重新构建并运行相关测试。</p>
+<pre><span class="language-label">cpp</span><code class="language-cpp">#include &lt;taskkit/title.hpp&gt;
+#include &lt;iostream&gt;
+int main() {
+    std::cout &lt;&lt; &quot;Imported TaskKit &quot; &lt;&lt; taskkit::version() &lt;&lt; &#39;\n&#39;;
+    return taskkit::valid_title(&quot;external app&quot;) &amp;&amp; !taskkit::valid_title(&quot;&quot;) ? 0 : 1;
+}
+</code></pre>
+<h2 id="section-47">lessons/cmake/variables.cmake</h2>
+<p>对应文件可直接在编辑器中打开；修改后按 README 重新构建并运行相关测试。</p>
+<pre><span class="language-label">cmake</span><code class="language-cmake">set(label &quot;outer&quot;)
+set(parts alpha beta gamma)
+function(show_scope)
+  set(label &quot;inner&quot;)
+  message(STATUS &quot;function label=${label}&quot;)
+endfunction()
+show_scope()
+message(STATUS &quot;outside label=${label}&quot;)
+foreach(part IN LISTS parts)
+  message(STATUS &quot;part=${part}&quot;)
+endforeach()
+</code></pre>
+<h2 id="section-48">lessons/foundations/01_values.cpp</h2>
+<p>对应文件可直接在编辑器中打开；修改后按 README 重新构建并运行相关测试。</p>
+<pre><span class="language-label">cpp</span><code class="language-cpp">#include &lt;iostream&gt;
+#include &lt;string&gt;
+int main() {
+    int count{};                         // 初始化为 0
+    const int limit{3};                  // 初始化后不再修改
+    std::string title{&quot;Learn C++&quot;};      // 字符串对象拥有内容
+    count = count + 1;                   // 给现有对象赋新值
+    std::cout &lt;&lt; title &lt;&lt; &#39;\n&#39;;
+    std::cout &lt;&lt; &quot;count=&quot; &lt;&lt; count &lt;&lt; &quot;, limit=&quot; &lt;&lt; limit &lt;&lt; &#39;\n&#39;;
+    return count == 1 ? 0 : 1;
+}
+</code></pre>
+<h2 id="section-49">lessons/foundations/02_numbers.cpp</h2>
+<p>对应文件可直接在编辑器中打开；修改后按 README 重新构建并运行相关测试。</p>
+<pre><span class="language-label">cpp</span><code class="language-cpp">#include &lt;cmath&gt;
+#include &lt;iostream&gt;
+#include &lt;limits&gt;
+#include &lt;optional&gt;
+std::optional&lt;int&gt; checked_add(int a, int b) {
+    const int high = std::numeric_limits&lt;int&gt;::max();
+    const int low = std::numeric_limits&lt;int&gt;::min();
+    if ((b &gt; 0 &amp;&amp; a &gt; high - b) || (b &lt; 0 &amp;&amp; a &lt; low - b))
+        return std::nullopt;
+    return a + b;                        // 检查通过后才执行加法
+}
+int main() {
+    const int done{2};
+    const int total{3};
+    const double ratio = static_cast&lt;double&gt;(done) / total;
+    const auto sum = checked_add(7, 5);
+    const auto overflow = checked_add(std::numeric_limits&lt;int&gt;::max(), 1);
+    std::cout &lt;&lt; &quot;integer=&quot; &lt;&lt; done / total &lt;&lt; &#39;\n&#39;;
+    std::cout &lt;&lt; &quot;ratio=&quot; &lt;&lt; ratio &lt;&lt; &#39;\n&#39;;
+    std::cout &lt;&lt; &quot;sum=&quot; &lt;&lt; sum.value_or(-1) &lt;&lt; &#39;\n&#39;;
+    std::cout &lt;&lt; &quot;overflow=&quot; &lt;&lt; std::boolalpha &lt;&lt; !overflow.has_value() &lt;&lt; &#39;\n&#39;;
+    return sum == 12 &amp;&amp; !overflow &amp;&amp; std::abs(ratio - 2.0 / 3.0) &lt; 1e-9 ? 0 : 1;
+}
+</code></pre>
+<h2 id="section-50">lessons/foundations/03_control.cpp</h2>
+<p>对应文件可直接在编辑器中打开；修改后按 README 重新构建并运行相关测试。</p>
+<pre><span class="language-label">cpp</span><code class="language-cpp">#include &lt;iostream&gt;
+#include &lt;vector&gt;
+int main() {
+    const std::vector&lt;int&gt; ids{1, 2, 3, 4, 5};
+    int sum{};
+    for (const int id : ids) {
+        if (id == 2) continue;           // 跳过当前这轮
+        if (id &gt; 4) break;               // 结束整个循环
+        sum += id;
+    }
+    int retries{3};
+    while (retries &gt; 0) {
+        --retries;                       // 循环状态必须能够前进
+    }
+    const bool accepted = sum == 8 &amp;&amp; retries == 0;
+    std::cout &lt;&lt; &quot;sum=&quot; &lt;&lt; sum &lt;&lt; &quot;, retries=&quot; &lt;&lt; retries &lt;&lt; &#39;\n&#39;;
+    if (accepted) std::cout &lt;&lt; &quot;accepted\n&quot;;
+    return accepted ? 0 : 1;
+}
+</code></pre>
+<h2 id="section-51">lessons/foundations/04_functions.cpp</h2>
+<p>对应文件可直接在编辑器中打开；修改后按 README 重新构建并运行相关测试。</p>
+<pre><span class="language-label">cpp</span><code class="language-cpp">#include &lt;iostream&gt;
+#include &lt;string&gt;
+#include &lt;string_view&gt;
+int increment_copy(int value) { return ++value; }
+void increment(int&amp; value) { ++value; }
+bool valid_title(std::string_view title) {
+    return !title.empty() &amp;&amp; title.size() &lt;= 200;
+}
+std::string make_label(int id) {
+    return &quot;task-&quot; + std::to_string(id);   // 按值返回，结果有自己的生命周期
+}
+int main() {
+    int count{3};
+    const int changed_copy = increment_copy(count);
+    const bool copy_unchanged = count == 3;
+    increment(count);
+    const auto label = make_label(count);
+    std::cout &lt;&lt; label &lt;&lt; &#39;\n&#39;;
+    return changed_copy == 4 &amp;&amp; copy_unchanged &amp;&amp; count == 4 &amp;&amp; valid_title(label) &amp;&amp; !valid_title(&quot;&quot;) ? 0 : 1;
+}
+</code></pre>
+<h2 id="section-52">lessons/foundations/05_references.cpp</h2>
+<p>对应文件可直接在编辑器中打开；修改后按 README 重新构建并运行相关测试。</p>
+<pre><span class="language-label">cpp</span><code class="language-cpp">#include &lt;iostream&gt;
+#include &lt;string&gt;
+int main() {
+    std::string title{&quot;draft&quot;};
+    auto copy = title;                   // 一个新的 string
+    auto&amp; alias = title;                 // title 的别名
+    const auto&amp; view = title;            // 不允许通过 view 修改 title
+    copy += &quot; copy&quot;;
+    alias += &quot; ready&quot;;
+    std::string* pointer = &amp;title;       // 保存地址，不拥有对象
+    if (pointer != nullptr) pointer-&gt;append(&quot;!&quot;);
+    pointer = nullptr;                  // 不会销毁 title
+    std::cout &lt;&lt; &quot;copy=&quot; &lt;&lt; copy &lt;&lt; &#39;\n&#39;;
+    std::cout &lt;&lt; &quot;original=&quot; &lt;&lt; view &lt;&lt; &#39;\n&#39;;
+    return copy == &quot;draft copy&quot; &amp;&amp; title == &quot;draft ready!&quot; &amp;&amp; pointer == nullptr ? 0 : 1;
+}
+</code></pre>
+<h2 id="section-53">lessons/foundations/06_containers.cpp</h2>
+<p>对应文件可直接在编辑器中打开；修改后按 README 重新构建并运行相关测试。</p>
+<pre><span class="language-label">cpp</span><code class="language-cpp">#include &lt;array&gt;
+#include &lt;iostream&gt;
+#include &lt;string&gt;
+#include &lt;vector&gt;
+int main() {
+    const std::array&lt;int, 3&gt; ports{8080, 8081, 8082};
+    std::vector&lt;std::string&gt; tasks{&quot;read&quot;, &quot;code&quot;};
+    tasks.push_back(&quot;test&quot;);
+    for (auto&amp; title : tasks) title += &quot;!&quot;;
+    for (const auto&amp; title : tasks) std::cout &lt;&lt; title &lt;&lt; &#39;\n&#39;;
+    std::cout &lt;&lt; &quot;port=&quot; &lt;&lt; ports.at(0) &lt;&lt; &quot;, size=&quot; &lt;&lt; tasks.size() &lt;&lt; &#39;\n&#39;;
+    return tasks.size() == 3 &amp;&amp; tasks.at(1) == &quot;code!&quot; ? 0 : 1;
+}
+</code></pre>
+<h2 id="section-54">lessons/foundations/07_classes.cpp</h2>
+<p>对应文件可直接在编辑器中打开；修改后按 README 重新构建并运行相关测试。</p>
+<pre><span class="language-label">cpp</span><code class="language-cpp">#include &lt;iostream&gt;
+#include &lt;stdexcept&gt;
+#include &lt;string&gt;
+#include &lt;utility&gt;
+class Task {
+public:
+    explicit Task(std::string title) : title_(checked(std::move(title))) {}
+    const std::string&amp; title() const noexcept { return title_; }
+    bool completed() const noexcept { return completed_; }
+    void complete() noexcept { completed_ = true; }
+    void rename(std::string title) { title_ = checked(std::move(title)); }
+private:
+    static std::string checked(std::string title) {
+        if (title.empty()) throw std::invalid_argument(&quot;empty title&quot;);
+        return title;
+    }
+    std::string title_;
+    bool completed_{false};
+};
+int main() {
+    Task task{&quot;learn&quot;};
+    task.complete();
+    bool rejected{false};
+    try { task.rename(&quot;&quot;); }
+    catch (const std::invalid_argument&amp;) { rejected = true; }
+    std::cout &lt;&lt; task.title() &lt;&lt; &quot;: &quot; &lt;&lt; std::boolalpha &lt;&lt; task.completed() &lt;&lt; &#39;\n&#39;;
+    return rejected &amp;&amp; task.title() == &quot;learn&quot; &amp;&amp; task.completed() ? 0 : 1;
+}
+</code></pre>
+<h2 id="section-55">lessons/foundations/08_lifetime.cpp</h2>
+<p>对应文件可直接在编辑器中打开；修改后按 README 重新构建并运行相关测试。</p>
+<pre><span class="language-label">cpp</span><code class="language-cpp">#include &lt;iostream&gt;
+#include &lt;memory&gt;
+#include &lt;string&gt;
+#include &lt;utility&gt;
+struct Trace {
+    explicit Trace(std::string label) : label(std::move(label)) {
+        std::cout &lt;&lt; &quot;open &quot; &lt;&lt; this-&gt;label &lt;&lt; &#39;\n&#39;;
+    }
+    ~Trace() { std::cout &lt;&lt; &quot;close &quot; &lt;&lt; label &lt;&lt; &#39;\n&#39;; }
+    Trace(const Trace&amp;) = delete;
+    Trace&amp; operator=(const Trace&amp;) = delete;
+    std::string label;
+};
+int main() {
+    Trace outer{&quot;outer&quot;};
+    {
+        auto first = std::make_unique&lt;Trace&gt;(&quot;resource&quot;);
+        auto second = std::move(first);  // 转移指针的所有权，不移动 Trace 对象
+        if (first || !second) return 1;
+        std::cout &lt;&lt; &quot;owner moved\n&quot;;
+    }                                   // second 析构，释放 Trace
+    std::cout &lt;&lt; &quot;leaving main\n&quot;;
+}                                       // outer 析构
+</code></pre>
+<h2 id="section-56">lessons/foundations/09_algorithms.cpp</h2>
+<p>对应文件可直接在编辑器中打开；修改后按 README 重新构建并运行相关测试。</p>
+<pre><span class="language-label">cpp</span><code class="language-cpp">#include &lt;algorithm&gt;
+#include &lt;iostream&gt;
+#include &lt;string&gt;
+#include &lt;vector&gt;
+struct Task { int id; std::string title; bool done; };
+int main() {
+    std::vector&lt;Task&gt; tasks{{3, &quot;test&quot;, false}, {1, &quot;read&quot;, true}, {2, &quot;code&quot;, false}};
+    std::ranges::sort(tasks, {}, &amp;Task::id);
+    const int wanted{2};
+    const auto it = std::ranges::find_if(tasks, [wanted](const Task&amp; task) {
+        return task.id == wanted;
+    });
+    if (it == tasks.end()) return 1;
+    it-&gt;done = true;
+    const auto removed = std::erase_if(tasks, [](const Task&amp; task) { return task.done; });
+    // erase 后不再使用 it，它可能已经失效。
+    std::cout &lt;&lt; &quot;removed=&quot; &lt;&lt; removed &lt;&lt; &quot;, left=&quot; &lt;&lt; tasks.size() &lt;&lt; &#39;\n&#39;;
+    return removed == 2 &amp;&amp; tasks.front().id == 3 ? 0 : 1;
+}
+</code></pre>
+<h2 id="section-57">lessons/foundations/10_templates.cpp</h2>
+<p>对应文件可直接在编辑器中打开；修改后按 README 重新构建并运行相关测试。</p>
+<pre><span class="language-label">cpp</span><code class="language-cpp">#include &lt;concepts&gt;
+#include &lt;iostream&gt;
+#include &lt;string&gt;
+#include &lt;utility&gt;
+template&lt;class T&gt; class Box {
+public:
+    explicit Box(T value) : value_(std::move(value)) {}
+    const T&amp; get() const noexcept { return value_; }
+private:
+    T value_;
+};
+template&lt;std::integral T&gt; constexpr bool positive(T value) {
+    return value &gt; T{0};
+}
+static_assert(positive(3));
+static_assert(!positive(-1));
+int main() {
+    const Box&lt;std::string&gt; title{&quot;templates&quot;};
+    const Box&lt;int&gt; id{7};
+    std::cout &lt;&lt; title.get() &lt;&lt; &quot;: &quot; &lt;&lt; id.get() &lt;&lt; &#39;\n&#39;;
+    return positive(id.get()) ? 0 : 1;
+}
+</code></pre>
+<h2 id="section-58">lessons/foundations/11_errors.cpp</h2>
+<p>对应文件可直接在编辑器中打开；修改后按 README 重新构建并运行相关测试。</p>
+<pre><span class="language-label">cpp</span><code class="language-cpp">#include &lt;charconv&gt;
+#include &lt;iostream&gt;
+#include &lt;optional&gt;
+#include &lt;string_view&gt;
+#include &lt;system_error&gt;
+std::optional&lt;int&gt; parse_port(std::string_view text) {
+    if (text.empty()) return std::nullopt;
+    int value{};
+    const auto [end, error] = std::from_chars(text.data(), text.data() + text.size(), value);
+    if (error != std::errc{} || end != text.data() + text.size()) return std::nullopt;
+    if (value &lt; 1 || value &gt; 65535) return std::nullopt;
+    return value;
+}
+int main() {
+    for (const auto input : {&quot;8080&quot;, &quot;80x&quot;, &quot;0&quot;, &quot;65536&quot;, &quot;&quot;, &quot;99999999999999999999&quot;}) {
+        const auto value = parse_port(input);
+        std::cout &lt;&lt; &#39;[&#39; &lt;&lt; input &lt;&lt; &quot;] -&gt; &quot;;
+        if (value) std::cout &lt;&lt; *value &lt;&lt; &#39;\n&#39;;
+        else std::cout &lt;&lt; &quot;invalid\n&quot;;
+    }
+    return parse_port(&quot;8080&quot;) == 8080 &amp;&amp; parse_port(&quot;65535&quot;) == 65535 &amp;&amp;
+        !parse_port(&quot;80x&quot;) &amp;&amp; !parse_port(&quot;0&quot;) &amp;&amp; !parse_port(&quot;65536&quot;) &amp;&amp;
+        !parse_port(&quot;&quot;) &amp;&amp; !parse_port(&quot;99999999999999999999&quot;) ? 0 : 1;
+}
+</code></pre>
+<h2 id="section-59">lessons/foundations/12_threads.cpp</h2>
+<p>对应文件可直接在编辑器中打开；修改后按 README 重新构建并运行相关测试。</p>
+<pre><span class="language-label">cpp</span><code class="language-cpp">#include &lt;iostream&gt;
+#include &lt;mutex&gt;
+#include &lt;thread&gt;
+#include &lt;vector&gt;
+int main() {
+    int count{};
+    std::mutex mutex;
+    {
+        std::vector&lt;std::jthread&gt; workers;
+        for (int n = 0; n &lt; 4; ++n) {
+            workers.emplace_back([&amp;count, &amp;mutex] {
+                for (int i = 0; i &lt; 1000; ++i) {
+                    std::lock_guard lock{mutex};
+                    ++count;
+                }
+            });
+        }
+    }                                   // jthread 析构并 join，之后才能读取 count
+    std::cout &lt;&lt; &quot;count=&quot; &lt;&lt; count &lt;&lt; &#39;\n&#39;;
+    return count == 4000 ? 0 : 1;
+}
+</code></pre>
+<h2 id="section-60">lessons/foundations/CMakeLists.txt</h2>
+<p>对应文件可直接在编辑器中打开；修改后按 README 重新构建并运行相关测试。</p>
+<pre><span class="language-label">cmake</span><code class="language-cmake">cmake_minimum_required(VERSION 3.24)
+project(cpp_foundations LANGUAGES CXX)
+set(CMAKE_CXX_EXTENSIONS OFF)
+include(CTest)
+find_package(Threads REQUIRED)
+set(lesson_names
+  01_values 02_numbers 03_control 04_functions 05_references 06_containers
+  07_classes 08_lifetime 09_algorithms 10_templates 11_errors 12_threads)
+foreach(name IN LISTS lesson_names)
+  add_executable(basic_${name} ${name}.cpp)
+  target_compile_features(basic_${name} PRIVATE cxx_std_20)
+  if(MSVC)
+    target_compile_options(basic_${name} PRIVATE /W4 /utf-8 /permissive-)
+  else()
+    target_compile_options(basic_${name} PRIVATE -Wall -Wextra -Wpedantic)
+  endif()
+  if(BUILD_TESTING)
+    add_test(NAME basic_${name} COMMAND basic_${name})
+  endif()
+endforeach()
+target_link_libraries(basic_12_threads PRIVATE Threads::Threads)
+</code></pre>
+<h2 id="section-61">scripts/verify_lessons.py</h2>
+<p>对应文件可直接在编辑器中打开；修改后按 README 重新构建并运行相关测试。</p>
+<pre><span class="language-label">python</span><code class="language-python">&quot;&quot;&quot;Build the teaching projects and check their documented behaviors (Python 3.9+).&quot;&quot;&quot;
+import argparse
+import json
+import os
+from pathlib import Path
+import shutil
+import subprocess
+import sys
+
+
+def main():
+    parser = argparse.ArgumentParser(description=__doc__)
+    parser.add_argument(&#39;--build-root&#39;, type=Path, help=&#39;Scratch directory for builds and logs&#39;)
+    args = parser.parse_args()
+    source = Path(__file__).resolve().parents[1]
+    output = (args.build_root or source / &#39;build/lesson-verification&#39;).resolve()
+    output.mkdir(parents=True, exist_ok=True)
+    results = []
+
+    def run(label, command, expected=0, contains=None):
+        print(label, flush=True)
+        process = subprocess.run([str(x) for x in command], stdout=subprocess.PIPE,
+                                 stderr=subprocess.STDOUT, encoding=&#39;utf-8&#39;, errors=&#39;replace&#39;,
+                                 timeout=240, check=False)
+        (output / (label + &#39;.txt&#39;)).write_text(process.stdout, encoding=&#39;utf-8&#39;)
+        ok = process.returncode == expected if expected == 0 else process.returncode != 0
+        if contains is not None:
+            ok = ok and contains in process.stdout
+        results.append({&#39;name&#39;: label, &#39;passed&#39;: ok, &#39;exit_code&#39;: process.returncode,
+                        &#39;expected_failure&#39;: expected != 0})
+        (output / &#39;results.json&#39;).write_text(json.dumps(results, ensure_ascii=False, indent=2), encoding=&#39;utf-8&#39;)
+        if not ok:
+            raise RuntimeError(f&#39;{label} failed:\n{process.stdout}&#39;)
+        return process.stdout
+
+    def configure(name, directory, config, *options, generator=&#39;Ninja&#39;):
+        destination = output / name
+        command = [&#39;cmake&#39;, &#39;-S&#39;, source / directory, &#39;-B&#39;, destination, &#39;-G&#39;, generator]
+        if generator == &#39;Ninja&#39;:
+            command.append(&#39;-DCMAKE_BUILD_TYPE=&#39; + config)
+        command.extend(options)
+        run(name + &#39;-configure&#39;, command)
+        return destination
+
+    def build(name, directory, config):
+        run(name + &#39;-build&#39;, [&#39;cmake&#39;, &#39;--build&#39;, directory, &#39;--config&#39;, config, &#39;--parallel&#39;, &#39;2&#39;])
+
+    def test(name, directory, config, expected=0, contains=None):
+        return run(name + &#39;-test&#39;, [&#39;ctest&#39;, &#39;--test-dir&#39;, directory, &#39;-C&#39;, config,
+                                    &#39;--output-on-failure&#39;, &#39;--no-tests=error&#39;], expected, contains)
+
+    def executable(directory, name):
+        return directory / (name + (&#39;.exe&#39; if os.name == &#39;nt&#39; else &#39;&#39;))
+
+    run(&#39;cmake-version&#39;, [&#39;cmake&#39;, &#39;--version&#39;])
+    run(&#39;ninja-version&#39;, [&#39;ninja&#39;, &#39;--version&#39;])
+    run(&#39;variable-scope&#39;, [&#39;cmake&#39;, &#39;-P&#39;, source / &#39;lessons/cmake/variables.cmake&#39;],
+        contains=&#39;outside label=outer&#39;)
+    for config in (&#39;Debug&#39;, &#39;Release&#39;):
+        suffix = config.lower()
+        name = &#39;foundations-&#39; + suffix
+        directory = configure(name, &#39;lessons/foundations&#39;, config)
+        build(name, directory, config)
+        test(name, directory, config, contains=&#39;12/12&#39;)
+        trace = run(name + &#39;-lifetime&#39;, [executable(directory, &#39;basic_08_lifetime&#39;)])
+        expected_trace = [&#39;open outer&#39;, &#39;open resource&#39;, &#39;owner moved&#39;, &#39;close resource&#39;,
+                          &#39;leaving main&#39;, &#39;close outer&#39;]
+        if trace.splitlines() != expected_trace:
+            raise RuntimeError(&#39;RAII destruction order differs from the lesson&#39;)
+
+        name = &#39;hello-&#39; + suffix
+        directory = configure(name, &#39;lessons/cmake/01_hello&#39;, config)
+        build(name, directory, config)
+        run(name + &#39;-run&#39;, [executable(directory, &#39;hello&#39;)], contains=&#39;Hello, CMake!&#39;)
+
+        name = &#39;library-&#39; + suffix
+        directory = configure(name, &#39;lessons/cmake/02_library&#39;, config)
+        build(name, directory, config)
+        test(name, directory, config)
+
+        name = &#39;taskkit-&#39; + suffix
+        directory = configure(name, &#39;lessons/cmake/03_project&#39;, config)
+        build(name, directory, config)
+        test(name, directory, config)
+        run(name + &#39;-run&#39;, [executable(directory / &#39;app&#39;, &#39;taskkit_app&#39;)], contains=&#39;TaskKit 1.0.0\ntrue&#39;)
+        prefix = output / (&#39;install-&#39; + suffix)
+        run(name + &#39;-install&#39;, [&#39;cmake&#39;, &#39;--install&#39;, directory, &#39;--config&#39;, config, &#39;--prefix&#39;, prefix])
+
+        # Two independent consumer builds: original install tree and copied install tree.
+        for mode in (&#39;original&#39;, &#39;relocated&#39;):
+            consumer_prefix = prefix
+            if mode == &#39;relocated&#39;:
+                consumer_prefix = output / (&#39;relocated-&#39; + suffix)
+                shutil.copytree(prefix, consumer_prefix, dirs_exist_ok=True)
+            name = &#39;consumer-&#39; + mode + &#39;-&#39; + suffix
+            directory = configure(name, &#39;lessons/cmake/04_consumer&#39;, config,
+                                  &#39;-DCMAKE_PREFIX_PATH=&#39; + str(consumer_prefix))
+            build(name, directory, config)
+            test(name, directory, config)
+            cache = (directory / &#39;CMakeCache.txt&#39;).read_text(encoding=&#39;utf-8&#39;)
+            package_dir = next(line.split(&#39;=&#39;, 1)[1] for line in cache.splitlines()
+                               if line.startswith(&#39;TaskKit_DIR:&#39;))
+            Path(package_dir).resolve().relative_to(consumer_prefix.resolve())
+
+    name = &#39;taskkit-multiconfig&#39;
+    directory = configure(name, &#39;lessons/cmake/03_project&#39;, &#39;Debug&#39;, generator=&#39;Ninja Multi-Config&#39;)
+    build(name, directory, &#39;Debug&#39;)
+    test(name, directory, &#39;Debug&#39;)
+
+    name = &#39;taskkit-library-only&#39;
+    directory = configure(name, &#39;lessons/cmake/03_project&#39;, &#39;Release&#39;,
+                          &#39;-DTASKKIT_BUILD_APP=OFF&#39;, &#39;-DBUILD_TESTING=OFF&#39;)
+    build(name, directory, &#39;Release&#39;)
+    test(name, directory, &#39;Release&#39;, expected=1, contains=&#39;No tests were found&#39;)
+
+    # Mutate ONLY an isolated copy to prove the boundary test really detects a bug.
+    fault_source = output / &#39;fault-source&#39;
+    shutil.copytree(source / &#39;lessons/cmake/03_project&#39;, fault_source, dirs_exist_ok=True,
+                    ignore=shutil.ignore_patterns(&#39;build&#39;, &#39;.git&#39;, &#39;CMakeUserPresets.json&#39;))
+    cpp = fault_source / &#39;src/title.cpp&#39;
+    original = cpp.read_text(encoding=&#39;utf-8&#39;)
+    if &#39;text.size() &gt; 200&#39; not in original:
+        raise RuntimeError(&#39;Boundary mutation no longer matches the example&#39;)
+    cpp.write_text(original.replace(&#39;text.size() &gt; 200&#39;, &#39;text.size() &gt; 199&#39;), encoding=&#39;utf-8&#39;)
+    fault_build = output / &#39;fault-build&#39;
+    run(&#39;negative-boundary-configure&#39;, [&#39;cmake&#39;, &#39;-S&#39;, fault_source, &#39;-B&#39;, fault_build,
+                                      &#39;-G&#39;, &#39;Ninja&#39;, &#39;-DCMAKE_BUILD_TYPE=Release&#39;])
+    build(&#39;negative-boundary&#39;, fault_build, &#39;Release&#39;)
+    test(&#39;negative-boundary&#39;, fault_build, &#39;Release&#39;, expected=1, contains=&#39;FAIL: 200-byte boundary&#39;)
+    print(f&#39;PASS: {len(results)} verification steps; logs: {output}&#39;)
+
+
+if __name__ == &#39;__main__&#39;:
+    try:
+        main()
+    except (RuntimeError, OSError, ValueError, StopIteration, subprocess.TimeoutExpired) as error:
+        print(error, file=sys.stderr)
+        sys.exit(1)
+</code></pre>
 <footer>现代 C++ 后端实战教程 · 配套源码、测试与部署示例<br>先运行，再解释，再独立重写。</footer></article></main><script>
-const key='cpp-book-'+location.pathname;let saved={};try{saved=JSON.parse(localStorage.getItem(key)||'{}');if(localStorage.getItem('cpp-theme')==='dark')document.body.dataset.theme='dark'}catch{}
+const key='cpp-book-expanded-v2-'+location.pathname;let saved={};try{saved=JSON.parse(localStorage.getItem(key)||'{}');if(localStorage.getItem('cpp-theme')==='dark')document.body.dataset.theme='dark'}catch{}
 const save=()=>{try{localStorage.setItem(key,JSON.stringify(saved))}catch{}};
 document.getElementById('theme').onclick=()=>{const dark=document.body.dataset.theme!=='dark';document.body.dataset.theme=dark?'dark':'';try{localStorage.setItem('cpp-theme',dark?'dark':'light')}catch{}};
 document.getElementById('print').onclick=()=>window.print();

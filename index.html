@@ -1,4 +1,4 @@
-<!doctype html><html lang="zh-CN"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>现代 C++ · 从语法到后端服务器</title><style>
+<!doctype html><html lang="zh-CN"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>现代 C++ · 从基础语法到后端服务器</title><style>
 [hidden]{display:none!important}
 :root{--bg:#f5f3ee;--paper:#fffefb;--ink:#25352f;--muted:#67746d;--line:#dedfd5;--accent:#137768;--code:#142d29;--codeink:#e1ede5;--aside:280px}
 *{box-sizing:border-box}html{scroll-behavior:smooth;scroll-padding-top:95px}body{margin:0;background:var(--bg);color:var(--ink);font-family:Segoe UI,Microsoft YaHei,Noto Sans SC,sans-serif;font-size:16px;line-height:1.85}a{color:var(--accent);text-decoration:none}a:hover{text-decoration:underline}button,input{font:inherit}button{cursor:pointer}header{height:68px;position:fixed;inset:0 0 auto;z-index:20;background:var(--paper);border-bottom:1px solid var(--line);display:flex;align-items:center;justify-content:space-between;padding:0 28px;gap:24px}.brand{font-size:16px;font-weight:750;letter-spacing:.4px;color:var(--ink)}.brand span{background:var(--accent);color:white;padding:4px 7px;border-radius:4px;margin-right:10px;font:700 15px Consolas,monospace}header nav{display:flex;gap:20px;font-size:14px}header nav a.active{font-weight:700;border-bottom:2px solid var(--accent)}.tools{display:flex;gap:8px}.tools button{border:1px solid var(--line);border-radius:6px;background:transparent;padding:4px 10px;font-size:13px;color:var(--ink)}#progress{position:fixed;top:66px;left:0;height:3px;background:var(--accent);z-index:30;width:0}
@@ -7,11 +7,13 @@ main{margin:68px 0 0 var(--aside);padding:42px 48px 80px;max-width:1290px}.hero{
 body[data-theme=dark]{--bg:#14221e;--paper:#1a2b24;--ink:#e1e7df;--muted:#afbeb1;--line:#3b4d41;--accent:#91c8a0;--code:#0b1b15;--codeink:#dce9dc}body[data-theme=dark] :not(pre)>code{background:#263e2e;border-color:#3b513f;color:#c4e6c6}body[data-theme=dark] th{background:#2d4131}body[data-theme=dark] tbody tr:nth-child(even){background:#ffffff05}body[data-theme=dark] aside a.current,body[data-theme=dark] aside a:hover{background:#2a4030}body[data-theme=dark] blockquote{background:#253b2b}body[data-theme=dark] .complete-button.checked{background:#2e4936;color:#c1e3ca}
 @media(min-width:1500px){main{margin-left:calc(var(--aside) + (100vw - 1500px)/3)}}@media(max-width:1050px){:root{--aside:238px}main{padding:32px 28px}.hero{padding:32px 28px}.hero h1{font-size:30px}header{padding:0 18px}header nav{gap:13px}.brand{font-size:14px}.tools button{padding:4px 7px}}@media(max-width:760px){header{position:static;height:auto;min-height:68px;flex-wrap:wrap;padding:15px 20px;gap:10px}header nav{order:3;width:100%;justify-content:space-between}aside{position:static;width:auto;padding:20px;border-right:0;border-bottom:1px solid var(--line);max-height:260px}main{margin:0;padding:24px 19px 50px}.hero{padding:30px 24px}.hero h1{font-size:28px}.stats{gap:21px}.document h2{font-size:23px}.document h3{font-size:19px}pre{font-size:12px;padding:18px}#progress{top:0}body{font-size:15px}.tools{margin-left:auto}}
 @media print{header,aside,.tools,#progress,.chapter-tools{display:none!important}main{margin:0;padding:0;max-width:none}.hero{background:white;color:#111;padding:15px 0}.hero p,.eyebrow,.stats,.stats b{color:#333}.hero:after{display:none}.document{max-width:none}body{font-size:10.5pt;line-height:1.7;background:white;color:#111}pre{white-space:pre-wrap;overflow:visible;background:#f2f4f1;color:#111;border:1px solid #ccc;font-size:8.5pt}pre code{white-space:pre-wrap;overflow-wrap:anywhere}.document h2{break-before:page;margin-top:10px}.document h3{break-after:avoid}table{font-size:9pt}.table-scroll{overflow:visible}a{color:#222}}
-</style></head><body><header><a class="brand" href="index.html"><span>C++</span>后端实战手册</a><nav><a class="active" href="index.html">教材</a><a href="code.html">源码</a><a href="verification.html">验证</a><a href="start.html">开始运行</a></nav><div class="tools"><button id="theme" aria-label="切换明暗主题">明暗</button><button id="print">打印</button></div></header><div id="progress"></div><aside><p class="nav-caption">LEARNING PATH / 阅读导航</p><input id="filter" type="search" aria-label="筛选章节" placeholder="筛选章节 · 全文搜索 Ctrl+F"><a id="resume">继续上次阅读 →</a><div id="toc"><a href="#section-1">0. 先知道自己最终要做成什么</a><a href="#section-5">1. 配好一套能解释清楚的开发环境</a><a href="#section-11">2. 一个 C++ 程序怎样变成可执行文件</a><a href="#section-16">3. 重新整理你已经学过的变量、引用和函数</a><a href="#section-21">4. 类与对象：先维护数据的规则，再考虑继承</a><a href="#section-26">5. RAII、智能指针与移动语义</a><a href="#section-32">6. 字符串、容器、optional 与算法</a><a href="#section-38">7. 模板与现代标准：学到能读懂库即可</a><a href="#section-42">8. CMake 从五行开始：亲手创建一个小工程</a><a href="#section-47">9. CMake 进阶：读懂真实项目的构建</a><a href="#section-55">10. Git、编辑器和调试：让工程可持续修改</a><a href="#section-60">11. 里程碑一：命令行任务管理器</a><a href="#section-66">12. 网络基础：理解一次请求穿过哪些层</a><a href="#section-72">13. 里程碑二：你的第一个 HTTP 服务</a><a href="#section-77">14. 在编码前写清 API 契约</a><a href="#section-81">15. SQL 与 SQLite：让数据跨越进程生命周期</a><a href="#section-88">16. 手把手实现数据库仓库</a><a href="#section-96">17. 手把手把数据库接到 HTTP</a><a href="#section-104">18. 里程碑三：完整运行一次 CRUD</a><a href="#section-111">19. 并发：先证明正确，再追求吞吐量</a><a href="#section-118">20. 测试：让修改后的正确性有证据</a><a href="#section-124">21. 日志、配置、鉴权与后端的边界</a><a href="#section-130">22. 性能与排错：先测量，再决定改哪里</a><a href="#section-135">23. Linux 部署：从终端程序变成后台服务</a><a href="#section-141">24. Docker：把构建与运行环境写成文件</a><a href="#section-146">25. 备份、迁移和发布：数据比进程更长寿</a><a href="#section-151">26. 毕业任务：独立添加 priority，而不是再抄一遍 CRUD</a><a href="#section-156">27. 后续扩展路线：按真实需求继续学习</a><a href="#section-163">28. 常见错误速查</a><a href="#section-164">29. 学习安排、回顾与自检答案</a></div><div class="nav-note">离线可读 · 无外部字体或脚本<br>学习标记仅保存在当前浏览器<br>整理日期 2026.10.18</div></aside><main><section class="hero"><div class="eyebrow">MODERN C++ / BUILD A BACKEND</div><h1>现代 C++<br>从语法到后端服务器</h1><p>为学过语法、尚未做过完整项目的你准备。一条主线贯穿语言、工具、接口、存储与部署。</p><div class="stats"><div><b>30</b>章节</div><div><b>4</b>阶段示例</div><div><b>1</b>完整项目</div></div></section><article class="document">
-<p><strong>面向读者：学过 C 或 C++ 基础，但没有完成过完整工程。</strong></p>
+</style></head><body><header><a class="brand" href="index.html"><span>C++</span>后端实战手册</a><nav><a class="active" href="index.html">教材</a><a href="code.html">源码</a><a href="verification.html">验证</a><a href="start.html">开始运行</a></nav><div class="tools"><button id="theme" aria-label="切换明暗主题">明暗</button><button id="print">打印</button></div></header><div id="progress"></div><aside><p class="nav-caption">LEARNING PATH / 阅读导航</p><input id="filter" type="search" aria-label="筛选章节" placeholder="筛选章节 · 全文搜索 Ctrl+F"><a id="resume">继续上次阅读 →</a><div id="toc"><a href="#section-1">0. 先知道自己最终要做成什么</a><a href="#section-5">1. 配好一套能解释清楚的开发环境</a><a href="#section-11">2. 一个 C++ 程序怎样变成可执行文件</a><a href="#section-16">F01. 从 main 的每个符号开始：声明、初始化与输出</a><a href="#section-19">F02. 数字与表达式：类型决定计算结果</a><a href="#section-23">F03. 控制流：跟着状态一步一步执行</a><a href="#section-26">F04. 函数、作用域与契约：把问题拆成能验证的步骤</a><a href="#section-30">F05. 引用、指针、const、auto：先说明是否拥有和是否修改</a><a href="#section-34">F06. 数组、字符串与 vector：从长度和失效规则入手</a><a href="#section-38">F07. struct、class 与构造函数：让对象一直满足规则</a><a href="#section-43">F08. 生命周期、RAII、复制与移动：资源必须有明确的负责人</a><a href="#section-48">F09. 迭代器、算法与 lambda：读懂回调的关键准备</a><a href="#section-52">F10. 模板、头文件与命名空间：看懂库的声明</a><a href="#section-56">F11. optional、异常和严格输入：错误是接口的一部分</a><a href="#section-60">F12. 从语法读到服务器：对象关系、线程与学习验收</a><a href="#section-65">3. 重新整理你已经学过的变量、引用和函数</a><a href="#section-70">4. 类与对象：先维护数据的规则，再考虑继承</a><a href="#section-75">5. RAII、智能指针与移动语义</a><a href="#section-81">6. 字符串、容器、optional 与算法</a><a href="#section-87">7. 模板与现代标准：学到能读懂库即可</a><a href="#section-91">C01. CMake 工作流：配置、生成、构建、测试、运行</a><a href="#section-95">C02. 五行配置逐项解释，并观察一次增量构建</a><a href="#section-98">C03. CMake 也是一种语言：参数、变量、列表、作用域</a><a href="#section-102">C04. 拆成静态库：PUBLIC、PRIVATE、INTERFACE 的真实用法</a><a href="#section-105">C05. 多目录工程：配置文件如何协作，生成头文件放哪里</a><a href="#section-106">C06. Cache、Presets、Debug/Release 与工具链选择</a><a href="#section-111">C07. 第三方依赖：源码、find_package、FetchContent 与包管理器</a><a href="#section-116">C08. 测试与调试：让构建结果有可检查的行为</a><a href="#section-120">C09. install 与 export：让另一个项目只依赖安装结果</a><a href="#section-125">C10. 生成器表达式、生成文件与构建依赖：理解执行时间</a><a href="#section-129">C11. 回到真实后端：逐段读懂完整 CMakeLists</a><a href="#section-135">C12. 排错顺序、独立练习与完整验收</a><a href="#section-141">8. CMake 从五行开始：亲手创建一个小工程</a><a href="#section-146">9. CMake 进阶：读懂真实项目的构建</a><a href="#section-154">10. Git、编辑器和调试：让工程可持续修改</a><a href="#section-159">11. 里程碑一：命令行任务管理器</a><a href="#section-165">12. 网络基础：理解一次请求穿过哪些层</a><a href="#section-171">13. 里程碑二：你的第一个 HTTP 服务</a><a href="#section-176">14. 在编码前写清 API 契约</a><a href="#section-180">15. SQL 与 SQLite：让数据跨越进程生命周期</a><a href="#section-187">16. 手把手实现数据库仓库</a><a href="#section-195">17. 手把手把数据库接到 HTTP</a><a href="#section-203">18. 里程碑三：完整运行一次 CRUD</a><a href="#section-210">19. 并发：先证明正确，再追求吞吐量</a><a href="#section-217">20. 测试：让修改后的正确性有证据</a><a href="#section-223">21. 日志、配置、鉴权与后端的边界</a><a href="#section-229">22. 性能与排错：先测量，再决定改哪里</a><a href="#section-234">23. Linux 部署：从终端程序变成后台服务</a><a href="#section-240">24. Docker：把构建与运行环境写成文件</a><a href="#section-245">25. 备份、迁移和发布：数据比进程更长寿</a><a href="#section-250">26. 毕业任务：独立添加 priority，而不是再抄一遍 CRUD</a><a href="#section-255">27. 后续扩展路线：按真实需求继续学习</a><a href="#section-262">28. 常见错误速查</a><a href="#section-263">29. 学习安排、回顾与自检答案</a></div><div class="nav-note">离线可读 · 无外部字体或脚本<br>学习标记仅保存在当前浏览器<br>更新日期 2026.10.24</div></aside><main><section class="hero"><div class="eyebrow">MODERN C++ / BUILD A BACKEND</div><h1>现代 C++<br>从基础语法到后端服务器</h1><p>从变量、循环和函数慢慢走起。逐行讲代码，亲手配 CMake，再把小程序变成完整后端。</p><div class="stats"><div><b>54</b>主章节</div><div><b>12</b>基础程序</div><div><b>4</b>CMake 工程</div></div></section><article class="document">
+<p><strong>面向读者：刚学 C++，语法还不牢固，希望一步步独立完成后端工程。</strong></p>
+<p>2026-10-24 补充版：保留原有 30 章，加入 F01～F12 语法基础和 C01～C12 CMake 实验，共 54 个主章节。新增 12 个可独立运行的语言程序、4 个递进 CMake 工程。可以在同一网页按目录连续阅读，也可单独打开 <a href="foundations.html">基础补全</a> 或 <a href="cmake.html">CMake 实战</a>。</p>
+<p><strong>基础不牢时的顺序</strong>：第 0～2 章 → F01～F12（完整基础课）→ 第 3～7 章（工程复习）→ C01～C12（完整构建课）→ 第 8～9 章（真实项目复习）→ 第 10～29 章。先写通一个小程序再读下一节，不需要一次记住所有内容。</p>
 <p>学习主线：C++20 → CMake 工程 → 命令行任务管理器 → HTTP/JSON → SQLite → 测试、排错、部署。</p>
 <p>本教程与同目录的源码配套。你不需要先把 C++ 标准的所有内容学完。每遇到一个工程问题，我们才引入解决它所需的语言特性和工具；学完后，你应当能从一个空文件夹重新做出这个项目，而不仅是运行现成程序。</p>
-<p>教程整理日期：2026-10-18。依赖固定为 cpp-httplib 0.61.0、nlohmann/json 3.12.0、SQLite 3.54.1；这是本教程的复现版本，并非对今后“最新版”的承诺。依赖源码和许可证已附带，构建过程无需联网。实际验证范围见 <code>验证记录.md</code>。</p>
+<p>初版整理日期：2026-10-18；本次补充日期：2026-10-24。依赖固定为 cpp-httplib 0.61.0、nlohmann/json 3.12.0、SQLite 3.54.1；这是本教程的复现版本，并非对今后“最新版”的承诺。依赖源码和许可证已附带，构建过程无需联网。实际验证范围见 <code>验证记录.md</code>。</p>
 <h2 id="section-1">0. 先知道自己最终要做成什么</h2><div class="chapter-tools"><button class="complete-button" data-for="section-1">标记本章已学完</button></div>
 <h3 id="section-2">0.1 毕业作品：Task Server</h3>
 <p>你将实现一个任务管理 REST API。浏览器、命令行工具或未来的前端应用都可以通过 HTTP 调用它。</p>
@@ -66,12 +68,15 @@ body[data-theme=dark]{--bg:#14221e;--paper:#1a2b24;--ink:#e1e7df;--muted:#afbeb1
 <li><strong>接口能通</strong>：启动 <code>lab04_http</code>，用客户端得到 JSON，再完成最终项目的六条接口。</li>
 <li><strong>交付能复现</strong>：数据库重启不丢数据，正常及异常测试通过，另一台机器按 README 构建成功。</li>
 </ol>
-<p>建议以 8～12 周、每周 6～10 小时安排；这是学习节奏建议，不是完成时间保证。基础部分可以快读，RAII、CMake、数据库和测试必须亲手操作。</p>
+<p>建议每周安排 6～10 小时。语法还不牢时，先额外安排 4～6 周完成 F01～F12 和 C01～C12，再按后端主线推进；这只是节奏建议，不是完成时间保证。每个基础示例都亲手修改、预测结果、重新运行，不把“看得懂”当作“写得出”。</p>
 <p>每一轮学习采用同一个节奏：先运行 → 解释关键行 → 关闭答案自行重写 → 改一个需求 → 故意制造错误并定位。只看教程而不改代码，很难建立独立开发能力。</p>
 <h3 id="section-4">0.3 文件怎么找</h3>
 <pre><span class="language-label">text</span><code class="language-text">modern-cpp-backend/
 ├── 教程.md / index.html         同一份教材的两种阅读形式
-├── README.md                  最短启动步骤
+├── README.md                  分层阅读路线与启动步骤
+├── 基础补全.md                 F01～F12 独立阅读版
+├── CMake实战.md                C01～C12 独立阅读版
+├── lessons/                   12 个基础程序与 4 个独立 CMake 工程
 ├── 验证记录.md                 实际测试结果与未验证范围
 ├── 源码导读.md                 完整自有源码及阅读顺序
 ├── CMakeLists.txt              构建目标与依赖关系
@@ -254,15 +259,670 @@ int main() { std::cout &lt;&lt; task_count() &lt;&lt; &#39;\n&#39;; }
 </tr>
 </tbody></table></div>
 <p><strong>练习</strong>：故意不编译 <code>task_count.cpp</code>，读一次链接错误；再把 main 中的函数名改错，比较编译错误。<strong>验收</strong>：不能再用“编译失败”笼统描述所有问题。</p>
-<h2 id="section-16">3. 重新整理你已经学过的变量、引用和函数</h2><div class="chapter-tools"><button class="complete-button" data-for="section-16">标记本章已学完</button></div>
-<h3 id="section-17">3.1 优先初始化，让对象从第一刻就有效</h3>
+<!-- EXPANSION_FOUNDATIONS_START -->
+
+<blockquote>
+<p><strong>进入基础补全课程 F01～F12</strong>：以下为新增完整课程，完成后继续原有工程主线。</p>
+</blockquote>
+<p>适合刚学 C++、能认出部分语法但还不能独立组织程序的读者。先完成主教材第 1～2 章的环境与编译，再依次学习 F01～F12，接着回到第 3～7 章巩固工程用法。不要以“今天读了几章”评价进度，以“关掉示例后能否写出来”评价。</p>
+<p>本篇每章有一个磁盘上的完整程序。下文完整代码从配套文件生成，与文件内容一致。代码块若标注“片段”“故意错误”或“练习”，则不承诺能独立编译。英文输出避免终端编码干扰，讲解使用中文。</p>
+<p>所有命令默认在仓库根目录执行，Windows 使用 PowerShell。先只编译第一课，不需要先懂 CMake：</p>
+<pre><span class="language-label">powershell</span><code class="language-powershell">New-Item -ItemType Directory -Force scratch | Out-Null
+g++ -std=c++20 -Wall -Wextra -g lessons/foundations/01_values.cpp -o scratch/values.exe
+.\scratch\values.exe
+</code></pre>
+<p>学完 CMake 后，可以一次构建十二课：</p>
+<pre><span class="language-label">powershell</span><code class="language-powershell">cmake -S lessons/foundations -B build/foundations -G Ninja -DCMAKE_BUILD_TYPE=Debug
+cmake --build build/foundations --parallel 2
+ctest --test-dir build/foundations --output-on-failure --no-tests=error
+.\build\foundations\basic_01_values.exe
+</code></pre>
+<p>Linux 使用相同的 CMake 命令，运行 <code>./build/foundations/basic_01_values</code>。每个程序正常时返回 0，自检失败返回 1；这让 CTest 能自动判断结果。F01～F11 可独立编译，F12 线程例子建议用附带 CMake 处理平台线程依赖。</p>
+<h2 id="section-16">F01. 从 main 的每个符号开始：声明、初始化与输出</h2><div class="chapter-tools"><button class="complete-button" data-for="section-16">标记本章已学完</button></div>
+<h3 id="section-17">你需要先建立的三个概念</h3>
+<p>源代码是写给编译器看的文本；程序是编译链接后的产物；进程是程序正在运行的一次实例。修改 <code>.cpp</code> 不会自动改变正在运行的旧进程。每次实验都要重新构建、停止旧程序、运行新程序。</p>
+<p>对象是存放数据、具有类型和生命周期的实体。变量是我们命名对象的一种方式。<code>int count{0};</code> 可以从左往右读成“创建一个名为 count 的 int 对象，并用 0 初始化”。不是先随便放一个东西、以后再决定类型。</p>
+<p>文件：<code>lessons/foundations/01_values.cpp</code></p>
+<pre><span class="language-label">cpp</span><code class="language-cpp">#include &lt;iostream&gt;
+#include &lt;string&gt;
+int main() {
+    int count{};                         // 初始化为 0
+    const int limit{3};                  // 初始化后不再修改
+    std::string title{&quot;Learn C++&quot;};      // 字符串对象拥有内容
+    count = count + 1;                   // 给现有对象赋新值
+    std::cout &lt;&lt; title &lt;&lt; &#39;\n&#39;;
+    std::cout &lt;&lt; &quot;count=&quot; &lt;&lt; count &lt;&lt; &quot;, limit=&quot; &lt;&lt; limit &lt;&lt; &#39;\n&#39;;
+    return count == 1 ? 0 : 1;
+}
+</code></pre>
+<p>逐行读懂：<code>#include &lt;iostream&gt;</code> 让当前翻译单元看到输入输出设施的声明；它不是运行时“导入另一个程序”。<code>&lt;string&gt;</code> 提供字符串类型。<code>int main()</code> 是普通控制台程序入口；空括号表示此形式没有参数；花括号圈定函数体。<code>std::</code> 表示从标准库命名空间寻找名字。<code>std::cout &lt;&lt; ...</code> 使用输出流的插入运算符，<code>&#39;\n&#39;</code> 是换行字符。大多数语句以分号结尾，函数体末尾不需要额外分号。</p>
+<p><code>count{}</code> 是值初始化，int 得到 0；<code>count = count + 1</code> 是赋值，左侧是被修改的对象，右侧先计算新值。<code>const int limit{3}</code> 仍然占有一个带类型的值，只是不能再通过这个名字修改。<code>std::string</code> 会管理自己的内存，不需要手动为结尾的零字符留位置。</p>
+<p>预期输出：</p>
+<pre><span class="language-label">text</span><code class="language-text">Learn C++
+count=1, limit=3
+</code></pre>
+<p>最后的 <code>条件 ? 值1 : 值2</code> 是条件表达式。<code>return count == 1 ? 0 : 1;</code> 相当于“检查成功返回 0，否则返回 1”。注意 <code>==</code> 比较是否相等，<code>=</code> 执行赋值。<code>main</code> 的返回值交给操作系统；普通函数返回值交给调用者。</p>
+<h3 id="section-18">初始化不是一个无关紧要的风格问题</h3>
+<pre><span class="language-label">cpp</span><code class="language-cpp">// 片段
+int a{};         // a 是 0
+int b{10};       // b 是 10
+int c = 10;      // 也是初始化，不是先创建再赋值
+// int d;        // 自动存储期的内置整数没有被初始化，不要读取它
+// int e{3.8};   // 故意错误：列表初始化拒绝这里的窄化
+</code></pre>
+<p>先普遍使用 <code>{}</code> 帮助防止意外窄化，但不要把它当万能语法：容器有 initializer_list 重载，<code>std::vector&lt;int&gt; a{3, 7}</code> 是两个元素 3 和 7，<code>std::vector&lt;int&gt; b(3, 7)</code> 是三个 7。遇到一个类型先看它选中了什么构造函数。</p>
+<p><strong>练习</strong>：增加 <code>const std::string owner{&quot;me&quot;};</code>，输出 owner、title、count；再让 count 从 0 变成 2，调整检查条件。<strong>参考思路</strong>：输出可以连续使用 <code>&lt;&lt;</code>；两次自增或一次 <code>count += 2</code> 都可以。若只修改输出文字而没修改变量值，程序自检应该失败。</p>
+<p><strong>过关标准</strong>：不看答案写出能输出两行文字的程序；能解释初始化与赋值的区别；知道终端报的“找不到程序”和编译器报的“缺少分号”不是同一类问题。</p>
+<h2 id="section-19">F02. 数字与表达式：类型决定计算结果</h2><div class="chapter-tools"><button class="complete-button" data-for="section-19">标记本章已学完</button></div>
+<h3 id="section-20">类型、范围和单位一起思考</h3>
+<p><code>bool</code> 表示真假；<code>char</code> 表示一个字符编码单元；<code>int</code> 是常用整数；<code>double</code> 是常用浮点类型；<code>std::int64_t</code> 在提供它的平台上是恰好 64 位的有符号整数。不要把 int 一律当 32 位保证，查看 <code>std::numeric_limits&lt;int&gt;</code>；也不要把 long 当跨平台固定宽度整数。</p>
+<p>后端中端口、任务 ID、字符串长度、时间各有范围和单位。即使都能存进一个整数，也不表示可以互换。例如 HTTP 的 <code>Content-Length</code> 是字节数，UTF-8 中文标题的字节数不等于显示字符数。</p>
+<p>文件：<code>lessons/foundations/02_numbers.cpp</code></p>
+<pre><span class="language-label">cpp</span><code class="language-cpp">#include &lt;cmath&gt;
+#include &lt;iostream&gt;
+#include &lt;limits&gt;
+#include &lt;optional&gt;
+std::optional&lt;int&gt; checked_add(int a, int b) {
+    const int high = std::numeric_limits&lt;int&gt;::max();
+    const int low = std::numeric_limits&lt;int&gt;::min();
+    if ((b &gt; 0 &amp;&amp; a &gt; high - b) || (b &lt; 0 &amp;&amp; a &lt; low - b))
+        return std::nullopt;
+    return a + b;                        // 检查通过后才执行加法
+}
+int main() {
+    const int done{2};
+    const int total{3};
+    const double ratio = static_cast&lt;double&gt;(done) / total;
+    const auto sum = checked_add(7, 5);
+    const auto overflow = checked_add(std::numeric_limits&lt;int&gt;::max(), 1);
+    std::cout &lt;&lt; &quot;integer=&quot; &lt;&lt; done / total &lt;&lt; &#39;\n&#39;;
+    std::cout &lt;&lt; &quot;ratio=&quot; &lt;&lt; ratio &lt;&lt; &#39;\n&#39;;
+    std::cout &lt;&lt; &quot;sum=&quot; &lt;&lt; sum.value_or(-1) &lt;&lt; &#39;\n&#39;;
+    std::cout &lt;&lt; &quot;overflow=&quot; &lt;&lt; std::boolalpha &lt;&lt; !overflow.has_value() &lt;&lt; &#39;\n&#39;;
+    return sum == 12 &amp;&amp; !overflow &amp;&amp; std::abs(ratio - 2.0 / 3.0) &lt; 1e-9 ? 0 : 1;
+}
+</code></pre>
+<p>输出的关键值为 <code>integer=0</code>、<code>ratio=0.666667</code>、<code>sum=12</code>、<code>overflow=true</code>。<code>2 / 3</code> 两边是整数，先做整数除法，结果是 0；把结果赋给 double 也只能得到 0.0。先把一个操作数转换成 double，另一边才参与浮点运算。</p>
+<p><code>static_cast&lt;double&gt;(done)</code> 明确表达有意转换。强制转换不会自动检查越界，例如浮点转整数时仍要先保证可表示；不要为了消除警告随便加 cast。<code>sizeof(T)</code> 给的是对象大小，单位是 C++ 字节，一个字节有多少位可查 <code>CHAR_BIT</code>。</p>
+<h3 id="section-21">常见运算符及阅读顺序</h3>
+<div class="table-scroll"><table>
+<thead>
+<tr>
+<th>表达式</th>
+<th>含义</th>
+<th>典型错误</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>a + b</code>、<code>a * b</code></td>
+<td>算术</td>
+<td>结果超出类型范围</td>
+</tr>
+<tr>
+<td><code>a / b</code>、<code>a % b</code></td>
+<td>商、整数余数</td>
+<td>b 为 0；误把整数除法当小数</td>
+</tr>
+<tr>
+<td><code>a == b</code>、<code>a != b</code></td>
+<td>相等、不等</td>
+<td>写成赋值</td>
+</tr>
+<tr>
+<td><code>a &lt; b</code>、<code>a &gt;= b</code></td>
+<td>大小比较</td>
+<td>写 <code>0 &lt; x &lt; 10</code></td>
+</tr>
+<tr>
+<td><code>a &amp;&amp; b</code>、`a</td>
+<td></td>
+<td>b`</td>
+</tr>
+<tr>
+<td><code>!ok</code></td>
+<td>逻辑取反</td>
+<td>误以为 optional<bool> 的真假是内部 bool</td>
+</tr>
+<tr>
+<td><code>++n</code>、<code>n++</code></td>
+<td>都使 n 加 1</td>
+<td>同一表达式多次修改同一变量</td>
+</tr>
+</tbody></table></div>
+<p>区间应写成 <code>x &gt; 0 &amp;&amp; x &lt; 10</code>。<code>&amp;&amp;</code> 左侧为 false 就不计算右侧，所以 <code>pointer != nullptr &amp;&amp; pointer-&gt;ready()</code> 可以在右侧访问之前检查空指针；它不能保护悬空指针。优先级拿不准就加括号，避免写需要依靠细微求值顺序才能理解的表达式。</p>
+<h3 id="section-22">为什么必须在加法之前检查溢出</h3>
+<p>有符号整数溢出是未定义行为，不能先算出溢出结果再检查它。<code>checked_add</code> 的逻辑是：正数相加前检查 <code>a &gt; 最大值 - b</code>；负数相加前检查 <code>a &lt; 最小值 - b</code>。检查表达式本身也要在范围内。本例返回 <code>optional&lt;int&gt;</code>，有值表示成功，<code>nullopt</code> 表示无法表示；F11 会完整解释。</p>
+<p>无符号整数按模运算也不等于业务合法。<code>std::size_t size{0}; --size;</code> 会绕到很大的值，所以不要用 <code>i &gt;= 0</code> 配合无符号 i 写倒序循环。使用反向迭代器，或写 <code>for (std::size_t i = values.size(); i &gt; 0; --i) { use(values[i - 1]); }</code>。</p>
+<p>浮点不是十进制实数的精确替身。钱通常使用整数最小货币单位或合适的十进制库；容许误差比较要依据业务量纲和相对/绝对误差选择，例子的 <code>1e-9</code> 只是这个比值的测试阈值。</p>
+<p><strong>练习与参考</strong>：给 <code>checked_add</code> 增加最小值加 -1、最大值加 0、-7 加 5 三个调用，预期分别无值、最大值、-2。解释为什么把 <code>static_cast&lt;double&gt;</code> 移到整个 <code>done / total</code> 外面不能修正结果。F11 会用相同边界意识处理端口输入。</p>
+<h2 id="section-23">F03. 控制流：跟着状态一步一步执行</h2><div class="chapter-tools"><button class="complete-button" data-for="section-23">标记本章已学完</button></div>
+<h3 id="section-24">分支决定走哪一条路</h3>
+<pre><span class="language-label">cpp</span><code class="language-cpp">// 片段：score 已经是一个 int
+if (score &gt;= 90) {
+    std::cout &lt;&lt; &quot;excellent\n&quot;;
+} else if (score &gt;= 60) {
+    std::cout &lt;&lt; &quot;pass\n&quot;;
+} else {
+    std::cout &lt;&lt; &quot;retry\n&quot;;
+}
+</code></pre>
+<p>从上到下检查条件，一旦命中就不进入后面的分支。通常保留花括号，即使暂时只有一行；否则以后加日志时容易把新语句放到条件之外。范围外输入应先拒绝，再做正常分类。</p>
+<p>文件：<code>lessons/foundations/03_control.cpp</code></p>
+<pre><span class="language-label">cpp</span><code class="language-cpp">#include &lt;iostream&gt;
+#include &lt;vector&gt;
+int main() {
+    const std::vector&lt;int&gt; ids{1, 2, 3, 4, 5};
+    int sum{};
+    for (const int id : ids) {
+        if (id == 2) continue;           // 跳过当前这轮
+        if (id &gt; 4) break;               // 结束整个循环
+        sum += id;
+    }
+    int retries{3};
+    while (retries &gt; 0) {
+        --retries;                       // 循环状态必须能够前进
+    }
+    const bool accepted = sum == 8 &amp;&amp; retries == 0;
+    std::cout &lt;&lt; &quot;sum=&quot; &lt;&lt; sum &lt;&lt; &quot;, retries=&quot; &lt;&lt; retries &lt;&lt; &#39;\n&#39;;
+    if (accepted) std::cout &lt;&lt; &quot;accepted\n&quot;;
+    return accepted ? 0 : 1;
+}
+</code></pre>
+<p>手工列出状态表比反复盯着代码更有效：</p>
+<div class="table-scroll"><table>
+<thead>
+<tr>
+<th>id</th>
+<th>行为</th>
+<th>sum</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>1</td>
+<td>加入</td>
+<td>1</td>
+</tr>
+<tr>
+<td>2</td>
+<td>continue</td>
+<td>1</td>
+</tr>
+<tr>
+<td>3</td>
+<td>加入</td>
+<td>4</td>
+</tr>
+<tr>
+<td>4</td>
+<td>加入</td>
+<td>8</td>
+</tr>
+<tr>
+<td>5</td>
+<td>break</td>
+<td>8</td>
+</tr>
+</tbody></table></div>
+<p>输出 <code>sum=8, retries=0</code> 和 <code>accepted</code>。<code>continue</code> 进入下一轮，<code>break</code> 退出最近一层循环；都不会直接退出 main。<code>return</code> 才退出当前函数。嵌套循环时，不要以为一个 break 会退出所有层。</p>
+<h3 id="section-25">三种循环怎样选</h3>
+<p>遍历容器优先 <code>for (const auto&amp; item : items)</code>。需要下标时写普通 for；每轮先判断条件，再执行循环体，最后执行递增语句。<code>while</code> 适合“直到输入结束”；<code>do ... while</code> 至少执行一次，注意末尾分号。</p>
+<pre><span class="language-label">cpp</span><code class="language-cpp">// 独立输入循环片段，需要 &lt;iostream&gt;、&lt;string&gt;
+std::string line;
+while (std::getline(std::cin, line)) {
+    if (line == &quot;quit&quot;) break;
+    if (line.empty()) continue;
+    std::cout &lt;&lt; &quot;received: &quot; &lt;&lt; line &lt;&lt; &#39;\n&#39;;
+}
+</code></pre>
+<p><code>getline</code> 读取一整行并去掉换行分隔符。不要先检查 <code>eof()</code> 再读取，EOF 状态通常是在读取失败后才被设置。<code>std::cin &gt;&gt; number</code> 遇到非法文本会进入失败状态，后续读取不会自动恢复；在 CLI 教学中先读整行再用 F11 的严格解析更容易控制错误。</p>
+<p>如果混用 <code>&gt;&gt;</code> 与 <code>getline</code>，前者可能留下换行，后者马上读到空行；可以统一用 getline，或理解后用 <code>ignore</code> 清理。不要盲目把空行当用户真的没输入。</p>
+<p><code>switch</code> 适用于整数或枚举的离散值；每个 case 常用 break 结束。不写 break 会贯穿到后面的 case，需要这种行为时使用 <code>[[fallthrough]];</code> 明确表达；std::string 不能直接作为 switch 条件。</p>
+<p><strong>练习</strong>：写一个循环接受 add、list、quit 三种命令，其余输出 unknown。先不存储任务。<strong>参考流程</strong>：getline → 判断 quit → 判断 add/list → 其他分支。输入结束时自然退出，不要 while(true) 后忘记 EOF 分支。完成后你已写出 CLI 主循环的骨架。</p>
+<h2 id="section-26">F04. 函数、作用域与契约：把问题拆成能验证的步骤</h2><div class="chapter-tools"><button class="complete-button" data-for="section-26">标记本章已学完</button></div>
+<h3 id="section-27">看函数时问四件事</h3>
+<p>输入是什么、结果是什么、是否修改外部对象、失败怎样表达。这四个问题就是一个小型契约。<code>int add(int a, int b)</code> 还没有说清楚允许多大的 a/b，因此真实输入需要边界规则。</p>
+<p>文件：<code>lessons/foundations/04_functions.cpp</code></p>
+<pre><span class="language-label">cpp</span><code class="language-cpp">#include &lt;iostream&gt;
+#include &lt;string&gt;
+#include &lt;string_view&gt;
+int increment_copy(int value) { return ++value; }
+void increment(int&amp; value) { ++value; }
+bool valid_title(std::string_view title) {
+    return !title.empty() &amp;&amp; title.size() &lt;= 200;
+}
+std::string make_label(int id) {
+    return &quot;task-&quot; + std::to_string(id);   // 按值返回，结果有自己的生命周期
+}
+int main() {
+    int count{3};
+    const int changed_copy = increment_copy(count);
+    const bool copy_unchanged = count == 3;
+    increment(count);
+    const auto label = make_label(count);
+    std::cout &lt;&lt; label &lt;&lt; &#39;\n&#39;;
+    return changed_copy == 4 &amp;&amp; copy_unchanged &amp;&amp; count == 4 &amp;&amp; valid_title(label) &amp;&amp; !valid_title(&quot;&quot;) ? 0 : 1;
+}
+</code></pre>
+<p>输出 <code>task-4</code>。调用 <code>increment_copy(count)</code> 时创建参数 value，它有自己的整数值。返回的 4 存进 changed_copy，原始 count 仍然为 3。<code>increment(int&amp; value)</code> 的参数是调用者对象的别名，因此改变了 count。<code>void</code> 表示函数不返回一个结果值，不表示它没有效果。</p>
+<p><code>valid_title</code> 这里只检查非空及最多 200 字节，未实现最终服务的控制字符等完整规则；练习模型不要被误当生产校验。<code>make_label</code> 返回 string 值，调用者得到一个有自身生命周期的对象。这比返回局部变量引用安全。</p>
+<h3 id="section-28">局部变量能活到哪里</h3>
+<pre><span class="language-label">cpp</span><code class="language-cpp">// 故意错误：不要编译进正常项目
+const std::string&amp; broken() {
+    std::string local{&quot;gone&quot;};
+    return local; // 返回后 local 已销毁，引用悬空
+}
+</code></pre>
+<p>作用域决定名字在哪里可见；生命周期决定对象什么时候存在。两者相关但不同：动态对象可以超过创建它的函数调用而存活；某个引用名仍可见时，被引用对象可能已经被销毁。F08 会用所有权描述这种差别。</p>
+<p>名字被局部同名变量遮蔽也会制造误会；开启 <code>-Wshadow</code> 可以帮助发现。函数应短到能在脑中追踪局部状态，不要让“解析输入、写数据库、发 HTTP、打印日志”全部塞进同一个函数。</p>
+<h3 id="section-29">声明、重载与默认参数</h3>
+<pre><span class="language-label">cpp</span><code class="language-cpp">// 头文件中的声明片段
+int clamp_count(int value, int maximum = 100);
+
+// .cpp 中的定义片段：默认值通常只在声明处写一次
+int clamp_count(int value, int maximum) {
+    if (value &lt; 0) return 0;
+    return value &gt; maximum ? maximum : value;
+}
+</code></pre>
+<p>调用处需要先看见声明，链接时需要找到定义。函数可以按参数类型或数量重载，但不能只按返回类型重载。参数名称可以不同，类型、命名空间、const 等影响匹配的部分必须一致。默认参数在调用处使用，不是一个额外重载函数。</p>
+<p>递归是函数直接或间接调用自己，需要终止条件，每次调用通常消耗调用栈。处理简单任务列表用循环更直接；不要为展示技巧引入深递归和栈耗尽风险。</p>
+<p><strong>练习</strong>：独立写 <code>bool valid_limit(int value)</code>，仅 1～100 返回 true。使用 -1、0、1、100、101 验证。<strong>参考实现</strong>：<code>return value &gt;= 1 &amp;&amp; value &lt;= 100;</code>。然后拆出 <code>.hpp/.cpp</code>，故意漏编译 cpp 观察链接错误；这个实验连接主教材第 2 章和 CMake C04。</p>
+<h2 id="section-30">F05. 引用、指针、const、auto：先说明是否拥有和是否修改</h2><div class="chapter-tools"><button class="complete-button" data-for="section-30">标记本章已学完</button></div>
+<p>文件：<code>lessons/foundations/05_references.cpp</code></p>
+<pre><span class="language-label">cpp</span><code class="language-cpp">#include &lt;iostream&gt;
+#include &lt;string&gt;
+int main() {
+    std::string title{&quot;draft&quot;};
+    auto copy = title;                   // 一个新的 string
+    auto&amp; alias = title;                 // title 的别名
+    const auto&amp; view = title;            // 不允许通过 view 修改 title
+    copy += &quot; copy&quot;;
+    alias += &quot; ready&quot;;
+    std::string* pointer = &amp;title;       // 保存地址，不拥有对象
+    if (pointer != nullptr) pointer-&gt;append(&quot;!&quot;);
+    pointer = nullptr;                  // 不会销毁 title
+    std::cout &lt;&lt; &quot;copy=&quot; &lt;&lt; copy &lt;&lt; &#39;\n&#39;;
+    std::cout &lt;&lt; &quot;original=&quot; &lt;&lt; view &lt;&lt; &#39;\n&#39;;
+    return copy == &quot;draft copy&quot; &amp;&amp; title == &quot;draft ready!&quot; &amp;&amp; pointer == nullptr ? 0 : 1;
+}
+</code></pre>
+<p>输出 <code>copy=draft copy</code> 和 <code>original=draft ready!</code>。把纸上画成两格：title 一格、copy 一格；alias 和 view 都画箭头指向 title，pointer 存储 title 的地址。把 pointer 设成 nullptr 只改变箭头，不影响 title。</p>
+<h3 id="section-31">同一个符号在不同位置有不同含义</h3>
+<div class="table-scroll"><table>
+<thead>
+<tr>
+<th>写法</th>
+<th>含义</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>int&amp; ref = value</code></td>
+<td>声明左值引用，绑定现有对象</td>
+</tr>
+<tr>
+<td><code>&amp;value</code></td>
+<td>取地址</td>
+</tr>
+<tr>
+<td><code>int* ptr = &amp;value</code></td>
+<td>声明指针并存入地址</td>
+</tr>
+<tr>
+<td><code>*ptr</code></td>
+<td>解引用，访问指向对象</td>
+</tr>
+<tr>
+<td><code>ptr-&gt;member</code></td>
+<td>等价于 <code>(*ptr).member</code></td>
+</tr>
+<tr>
+<td><code>a &amp; b</code></td>
+<td>整数按位与，和引用声明无关</td>
+</tr>
+</tbody></table></div>
+<p>引用必须初始化，之后不能改绑；<code>ref = another</code> 是给被引用对象赋值。引用本身没有正常的“空值”状态，但一样可能悬空。指针可以为 nullptr、可以改指向、可以悬空；非空不等于有效。访问前需要知道对象还活着，而不只是检查非空。</p>
+<h3 id="section-32">const 约束的是哪一层</h3>
+<pre><span class="language-label">cpp</span><code class="language-cpp">// 片段
+int value{3};
+const int* p = &amp;value;     // 通过 p 不能修改 value，p 自身能改指向
+int* const q = &amp;value;     // q 不能改指向，通过 q 可以修改 value
+const int* const r = &amp;value; // 两方面都不允许
+</code></pre>
+<p><code>const</code> 不意味着底层对象永不变化，例子中的 value 仍可经其他可写途径修改；也不意味着线程安全。不要用 const_cast 绕过接口约束，如果原对象确实是 const，再写它是未定义行为。</p>
+<h3 id="section-33">auto 不是“无类型变量”</h3>
+<p>auto 在编译期推导出固定类型。普通 <code>auto x = expression</code> 常会去掉顶层 const 和引用并创建值；需要引用就明确写 <code>auto&amp;</code> 或 <code>const auto&amp;</code>。例如 <code>const int n{3}; auto a = n;</code> 的 a 可以修改；<code>const auto&amp; b = n;</code> 借用 n。</p>
+<p>遍历 <code>vector&lt;Task&gt;</code> 时 <code>auto task</code> 每轮复制一个任务，修改它不会更新容器；<code>auto&amp; task</code> 修改原任务；<code>const auto&amp; task</code> 只读且避免复制。也不能一味避免所有复制：复制小整数、string_view 很便宜，按值返回结果常更安全。</p>
+<p>函数参数的一套起点规则：小标量按值；较大对象只读时用 <code>const T&amp;</code>；明确需要修改调用者用 <code>T&amp;</code>；可选的非拥有对象可以用 <code>T*</code>；需要转移所有权时按值接收 <code>unique_ptr&lt;T&gt;</code>。不要把一个裸指针的出现自动解释成“应该 delete”。</p>
+<p><strong>练习与答案</strong>：把 F06 的 <code>auto&amp; title</code> 改为 <code>auto title</code>，预期容器中的字符串不再增加 <code>!</code>，程序自检失败。再改成 <code>const auto&amp;</code> 保留修改语句，预期编译失败，因为 append 操作需要可写对象。先预测，再操作。</p>
+<h2 id="section-34">F06. 数组、字符串与 vector：从长度和失效规则入手</h2><div class="chapter-tools"><button class="complete-button" data-for="section-34">标记本章已学完</button></div>
+<p>文件：<code>lessons/foundations/06_containers.cpp</code></p>
+<pre><span class="language-label">cpp</span><code class="language-cpp">#include &lt;array&gt;
+#include &lt;iostream&gt;
+#include &lt;string&gt;
+#include &lt;vector&gt;
+int main() {
+    const std::array&lt;int, 3&gt; ports{8080, 8081, 8082};
+    std::vector&lt;std::string&gt; tasks{&quot;read&quot;, &quot;code&quot;};
+    tasks.push_back(&quot;test&quot;);
+    for (auto&amp; title : tasks) title += &quot;!&quot;;
+    for (const auto&amp; title : tasks) std::cout &lt;&lt; title &lt;&lt; &#39;\n&#39;;
+    std::cout &lt;&lt; &quot;port=&quot; &lt;&lt; ports.at(0) &lt;&lt; &quot;, size=&quot; &lt;&lt; tasks.size() &lt;&lt; &#39;\n&#39;;
+    return tasks.size() == 3 &amp;&amp; tasks.at(1) == &quot;code!&quot; ? 0 : 1;
+}
+</code></pre>
+<p>输出 read!、code!、test!，最后 <code>port=8080, size=3</code>。<code>std::array&lt;int, 3&gt;</code> 的元素数量是类型的一部分，创建后不变；<code>std::vector&lt;std::string&gt;</code> 的大小可在运行期改变。容器对象自身即使是局部变量，也可以管理另外分配的动态存储，不要把“局部变量”理解成“所有数据都必须在栈内”。</p>
+<h3 id="section-35">size、capacity、reserve、resize 要分清</h3>
+<pre><span class="language-label">cpp</span><code class="language-cpp">// 片段
+std::vector&lt;int&gt; ids;
+ids.reserve(10);  // 预留至少 10 个元素的容量，size 仍然是 0
+// ids[0] = 1;    // 错误：不存在第 0 个元素
+ids.push_back(1); // size 变为 1
+ids.resize(3);    // size 变为 3，新增加的 int 元素值初始化为 0
+</code></pre>
+<p><code>operator[]</code> 不负责边界检查，越界访问是未定义行为；<code>.at(index)</code> 越界抛出 out_of_range。性能敏感的已证明范围内循环可以用 []，外部输入索引需要验证。<code>front()</code>、<code>back()</code> 也要求容器非空。</p>
+<p>vector 扩容时可能搬迁全部元素，先前拿到的引用、指针、迭代器因此失效。reserve 能减少搬迁，但不能承诺以后所有修改都安全；erase 会使删除位置及之后的迭代器/引用失效。不保存容器内部地址，改保存任务 ID 并重新查找，常更适合业务代码。</p>
+<h3 id="section-36">字符、字符串、字符数组不是同一回事</h3>
+<p><code>&#39;a&#39;</code> 是 char，<code>&quot;a&quot;</code> 是含结尾零字符的字符串字面量数组，<code>std::string{&quot;a&quot;}</code> 是拥有内容的字符串对象。std::string 可以包含内部零字节，size 记录实际字节数量；交给只依赖结尾零字符的 C API 时可能被截断。</p>
+<p><code>std::string_view</code> 是非拥有视图，通常可理解为指针加长度。适合函数同步只读参数，不能延长字符串寿命。<code>std::string_view v = std::string{&quot;temporary&quot;};</code> 在语句结束后会悬空。对 view 切片也不保证末尾有零字符，不能无条件把 <code>view.data()</code> 当 C 字符串。</p>
+<p>原始数组 <code>int items[3]</code> 在很多表达式中会退化成指针，函数参数 <code>int items[]</code> 不携带数组长度。优先 array、vector；只读连续区间参数用 <code>std::span&lt;const int&gt;</code>，但 span 同样不拥有元素，也不能阻止生命周期结束。</p>
+<h3 id="section-37">map 与 unordered_map 什么时候再学</h3>
+<p>vector 适合连续遍历和小型任务列表；map 保持按键排序，常见查找复杂度对数级；unordered_map 平均常数级查找但不保证遍历顺序，最坏情况也不是常数级。<code>map[key]</code> 在 key 不存在时会插入默认值；只读查找使用 find/contains，避免查询动作改变数据。</p>
+<p><strong>练习</strong>：给 F06 删除最后一个元素，再验证 size 为 2；尝试 <code>.at(10)</code> 并捕获异常。<strong>参考</strong>：<code>pop_back()</code> 要求非空；异常使用 <code>catch (const std::out_of_range&amp; e)</code>，<code>e.what()</code> 返回说明。不要为了“看看会怎样”在正常测试中执行 [] 越界。</p>
+<h2 id="section-38">F07. struct、class 与构造函数：让对象一直满足规则</h2><div class="chapter-tools"><button class="complete-button" data-for="section-38">标记本章已学完</button></div>
+<h3 id="section-39">数据对象和维护规则的对象</h3>
+<p>struct 与 class 的主要语言区别是默认成员访问权限和默认继承访问权限。可以用 struct 表达简单数据记录，用 class 隐藏不应随意改动的状态。它们都可以有构造函数、成员函数、析构函数和模板。</p>
+<p>文件：<code>lessons/foundations/07_classes.cpp</code></p>
+<pre><span class="language-label">cpp</span><code class="language-cpp">#include &lt;iostream&gt;
+#include &lt;stdexcept&gt;
+#include &lt;string&gt;
+#include &lt;utility&gt;
+class Task {
+public:
+    explicit Task(std::string title) : title_(checked(std::move(title))) {}
+    const std::string&amp; title() const noexcept { return title_; }
+    bool completed() const noexcept { return completed_; }
+    void complete() noexcept { completed_ = true; }
+    void rename(std::string title) { title_ = checked(std::move(title)); }
+private:
+    static std::string checked(std::string title) {
+        if (title.empty()) throw std::invalid_argument(&quot;empty title&quot;);
+        return title;
+    }
+    std::string title_;
+    bool completed_{false};
+};
+int main() {
+    Task task{&quot;learn&quot;};
+    task.complete();
+    bool rejected{false};
+    try { task.rename(&quot;&quot;); }
+    catch (const std::invalid_argument&amp;) { rejected = true; }
+    std::cout &lt;&lt; task.title() &lt;&lt; &quot;: &quot; &lt;&lt; std::boolalpha &lt;&lt; task.completed() &lt;&lt; &#39;\n&#39;;
+    return rejected &amp;&amp; task.title() == &quot;learn&quot; &amp;&amp; task.completed() ? 0 : 1;
+}
+</code></pre>
+<p>输出 <code>learn: true</code>。公开函数形成对象可使用的操作；private 成员阻止调用者直接把 title_ 改为空串。构造函数没有返回类型，它先初始化成员，随后才执行函数体。<code>explicit</code> 阻止这里某些隐式转换；你仍可以明确写 <code>Task{&quot;learn&quot;}</code>。</p>
+<p><code>const std::string&amp; title() const noexcept</code> 分为三段：返回类型是只读引用；函数后面的 const 说明不通过 this 修改普通成员；noexcept 声明异常不应逃出。返回引用只在 Task 及其成员仍有效期间可用；不能把临时 Task 的 title 引用长期保存。</p>
+<h3 id="section-40">初始化列表和赋值的差别</h3>
+<p><code>title_(checked(std::move(title)))</code> 在成员创建时提供初始值。若在函数体里写 <code>title_ = title;</code>，则 title_ 已先默认构造，再被赋值；const 成员、引用成员和无默认构造的成员尤其需要初始化列表。</p>
+<p>成员实际按<strong>类内声明顺序</strong>初始化，与初始化列表的书写顺序无关。成员析构顺序相反。让列表保持与声明一致，避免依赖尚未初始化的成员。</p>
+<h3 id="section-41">不变量与失败后的状态</h3>
+<p>本例的不变量是“title_ 不为空”。构造失败时不会产生一个可供调用者使用的无效 Task；rename 先检查新的字符串，再赋值，所以非法改名不会破坏旧标题。测试先调用非法改名，再确认标题还是 learn，验证的就是这个性质。</p>
+<p><code>static</code> 成员函数没有 this 指针，因此 checked 不直接访问某一个 Task 的成员。<code>this</code> 指向当前对象；同名参数可能遮蔽成员，所以示例通常用尾部下划线区分成员变量。</p>
+<h3 id="section-42">暂时不要急着把所有东西改成继承</h3>
+<p>服务器“拥有一个仓库”用成员对象表达，是组合。若以后需要不同仓库实现可以再考虑抽象接口。用基类指针销毁派生对象时基类通常需要 virtual 析构函数；把派生对象按值传给基类参数会发生切片。当前项目主要依赖组合，理解这些坑即可，不必先建复杂继承树。</p>
+<p><strong>练习</strong>：给 Task 增加 reopen()，使 completed_ 变为 false，并增加成功后检查。再把标题规则加强为不超过 200 字节。<strong>参考</strong>：在 checked 中增加边界检查，构造和 rename 同时获得相同规则；不要在两个地方复制一份校验。</p>
+<h2 id="section-43">F08. 生命周期、RAII、复制与移动：资源必须有明确的负责人</h2><div class="chapter-tools"><button class="complete-button" data-for="section-43">标记本章已学完</button></div>
+<h3 id="section-44">从析构顺序观察资源管理</h3>
+<p>文件：<code>lessons/foundations/08_lifetime.cpp</code></p>
+<pre><span class="language-label">cpp</span><code class="language-cpp">#include &lt;iostream&gt;
+#include &lt;memory&gt;
+#include &lt;string&gt;
+#include &lt;utility&gt;
+struct Trace {
+    explicit Trace(std::string label) : label(std::move(label)) {
+        std::cout &lt;&lt; &quot;open &quot; &lt;&lt; this-&gt;label &lt;&lt; &#39;\n&#39;;
+    }
+    ~Trace() { std::cout &lt;&lt; &quot;close &quot; &lt;&lt; label &lt;&lt; &#39;\n&#39;; }
+    Trace(const Trace&amp;) = delete;
+    Trace&amp; operator=(const Trace&amp;) = delete;
+    std::string label;
+};
+int main() {
+    Trace outer{&quot;outer&quot;};
+    {
+        auto first = std::make_unique&lt;Trace&gt;(&quot;resource&quot;);
+        auto second = std::move(first);  // 转移指针的所有权，不移动 Trace 对象
+        if (first || !second) return 1;
+        std::cout &lt;&lt; &quot;owner moved\n&quot;;
+    }                                   // second 析构，释放 Trace
+    std::cout &lt;&lt; &quot;leaving main\n&quot;;
+}                                       // outer 析构
+</code></pre>
+<p>预期输出依次为：</p>
+<pre><span class="language-label">text</span><code class="language-text">open outer
+open resource
+owner moved
+close resource
+leaving main
+close outer
+</code></pre>
+<p>outer 在 main 的局部作用域中；first/second 在内部作用域中。内部作用域结束时 second 的析构函数释放它拥有的 Trace 对象，first 已经没有对象。注意 <code>std::move(first)</code> 没有把 Trace 移到另一个内存位置，而是把 unique_ptr 的所有权转给 second。</p>
+<p>RAII 的核心是把资源的获取与释放绑定到对象生命周期。对象正常离开作用域或因异常展开栈时，其已构造完成的成员和局部对象会被清理。异常前尚未完成构造的对象不会调用自己的完整析构函数，但已成功构造的子对象会清理。</p>
+<p>这不覆盖断电、强制杀进程、<code>std::abort</code> 等所有退出方式；数据库持久化和事务另有责任。C++ 没有自动保证你任意写的资源管理代码都正确，因此尽量让标准库对象做拥有者。</p>
+<h3 id="section-45">自动存储期、动态存储期和所有权</h3>
+<p>局部 string、vector、unique_ptr 离开作用域自动析构；它们可以拥有动态分配的资源。手工 <code>new</code> 得到的对象若没有匹配释放会泄漏；两次 delete 是错误。优先直接放对象，只有需要动态生命周期等理由才使用 make_unique。裸指针和引用主要表达借用，借用者不负责 delete。</p>
+<p>文件同样可用 RAII：<code>std::ifstream input{&quot;config.txt&quot;};</code> 构造时打开，析构时关闭。打开失败通常要检查流状态，默认不会自动抛异常。mutex 则由 lock_guard 在作用域内持锁，异常路径也会解锁。</p>
+<h3 id="section-46">复制和移动不是两个速度按钮</h3>
+<p>复制通常创建独立的逻辑值；移动允许目标接管源对象的资源。<code>std::move(x)</code> 只是把表达式转换为可参与移动重载选择的形式，本身不搬运资源；如果没有合适的移动操作，也可能发生复制。</p>
+<p>unique_ptr 的移动后状态明确为空；string/vector 的移动后对象通常仍有效但状态未指定，除非某个操作有更强保证。不要断言“所有移动后的字符串一定为空”。可以销毁、重新赋值，调用其他操作时必须满足其前置条件。</p>
+<p><code>const std::string source; std::move(source)</code> 得到 const 右值，常见 string 移动构造不能接收可修改资源的 const 源，因此可能选择复制。不要到处加 std::move，尤其返回本地对象常直接 <code>return value;</code>，让复制消除/隐式移动机制工作。</p>
+<h3 id="section-47">Rule of Zero 与自定义析构的代价</h3>
+<p>让成员使用 string、vector、unique_ptr 等正确的资源拥有者，通常无需自己实现复制、移动、析构，这叫 Rule of Zero。只要自己开始管理裸资源，就必须一起审视复制构造、复制赋值、移动构造、移动赋值和析构，即 Rule of Five。</p>
+<p>示例 Trace 删除复制，是为了避免读者误以为打印 open/close 的模拟资源可以随便复制。最终仓库也删除复制，因为一个连接不应该被两个对象误以为自己独占关闭。</p>
+<p>shared_ptr 表达共享所有权，用引用计数决定何时释放；计数控制块支持多线程并不意味着被管理对象的成员线程安全。互相持有 shared_ptr 会形成环，可使用 weak_ptr 表达不拥有的观察关系。没有共享生命周期需求时不使用它。</p>
+<p><strong>练习</strong>：在输出 owner moved 后抛出 runtime_error，并在 main 的外层 try/catch 接住，预测 close 行的顺序。<strong>参考</strong>：内部资源先清理，再清理 outer（若 outer 位于该 try 内），最后进入 catch。异常练习放到临时副本，不改默认必须返回成功的测试。</p>
+<h2 id="section-48">F09. 迭代器、算法与 lambda：读懂回调的关键准备</h2><div class="chapter-tools"><button class="complete-button" data-for="section-48">标记本章已学完</button></div>
+<p>文件：<code>lessons/foundations/09_algorithms.cpp</code></p>
+<pre><span class="language-label">cpp</span><code class="language-cpp">#include &lt;algorithm&gt;
+#include &lt;iostream&gt;
+#include &lt;string&gt;
+#include &lt;vector&gt;
+struct Task { int id; std::string title; bool done; };
+int main() {
+    std::vector&lt;Task&gt; tasks{{3, &quot;test&quot;, false}, {1, &quot;read&quot;, true}, {2, &quot;code&quot;, false}};
+    std::ranges::sort(tasks, {}, &amp;Task::id);
+    const int wanted{2};
+    const auto it = std::ranges::find_if(tasks, [wanted](const Task&amp; task) {
+        return task.id == wanted;
+    });
+    if (it == tasks.end()) return 1;
+    it-&gt;done = true;
+    const auto removed = std::erase_if(tasks, [](const Task&amp; task) { return task.done; });
+    // erase 后不再使用 it，它可能已经失效。
+    std::cout &lt;&lt; &quot;removed=&quot; &lt;&lt; removed &lt;&lt; &quot;, left=&quot; &lt;&lt; tasks.size() &lt;&lt; &#39;\n&#39;;
+    return removed == 2 &amp;&amp; tasks.front().id == 3 ? 0 : 1;
+}
+</code></pre>
+<p>输出 <code>removed=2, left=1</code>。Task 是简单聚合，花括号按字段顺序初始化。sort 的 <code>{}</code> 表示默认比较器，<code>&amp;Task::id</code> 是成员指针形式的投影，表示按 id 比较。不是对指针地址排序，也不是每次排序都复制一个容器。</p>
+<h3 id="section-49">迭代器是位置，end 是边界</h3>
+<p>begin 指向第一个元素，end 指向最后一个元素之后的位置。区间写成 <code>[begin, end)</code>，左闭右开；空容器 begin 等于 end。find_if 返回 end 表示没找到，在判断前不能 <code>*it</code> 或 <code>it-&gt;title</code>。不能因为程序某次没崩溃就认为解引用 end 合法。</p>
+<p>erase_if 返回删除的数量。传统 <code>remove_if</code> 只把保留元素往前重排并返回逻辑末端，不缩小容器；搭配 erase 才真正改 size。C++20 的 erase_if 更直接，仍必须遵守失效规则。</p>
+<h3 id="section-50">lambda 按“捕获、参数、函数体”拆开</h3>
+<pre><span class="language-label">cpp</span><code class="language-cpp">[wanted](const Task&amp; task) { return task.id == wanted; }
+</code></pre>
+<p><code>[wanted]</code> 把 wanted 的值保存进闭包；<code>const Task&amp; task</code> 是每次算法调用给它的参数；函数体返回匹配与否。lambda 可以理解成带有 operator() 的匿名函数对象。它能携带状态，因此适合网络路由回调。</p>
+<p><code>[&amp;wanted]</code> 借用外部 wanted，外部对象必须活得更久。<code>[]</code> 不捕获局部变量；<code>[=]</code> 按值隐式捕获，<code>[&amp;]</code> 按引用隐式捕获。教学和长期保存的回调优先显式列出捕获，便于审查生命周期。捕获 this 保存的是指针，不会延长当前对象寿命。</p>
+<p>默认 lambda 的按值捕获成员不能在函数体中修改；<code>mutable</code> 允许修改闭包内部副本，并不会因此修改原始值。需要返回闭包时可用 auto 返回类型；std::function 是一种类型擦除包装，可能带来分配和间接调用，并非所有 lambda 都必须放进去。</p>
+<h3 id="section-51">ranges 的惰性不是缓存</h3>
+<pre><span class="language-label">cpp</span><code class="language-cpp">// 片段，需要 &lt;ranges&gt;；tasks 必须在整个遍历期间有效
+auto pending = tasks | std::views::filter([](const Task&amp; task) { return !task.done; });
+for (const auto&amp; task : pending) std::cout &lt;&lt; task.title &lt;&lt; &#39;\n&#39;;
+</code></pre>
+<p>view 通常在遍历时筛选，不一定提前生成新容器；它可能借用原容器。不要返回借用本地 vector 的 view。遍历期间修改底层容器、修改影响筛选的字段，需要认真查看迭代器和视图规则；初学时优先先计算、后修改。</p>
+<p><strong>练习与参考</strong>：改为保留未完成任务并统计数量；用 count_if 可以统计而不删除，循环统计也可以。说明 HTTP 中的 <code>[&amp;repository]</code> 为什么要求仓库活到所有请求处理结束，这就是从算法回调走向服务器回调的连接点。</p>
+<h2 id="section-52">F10. 模板、头文件与命名空间：看懂库的声明</h2><div class="chapter-tools"><button class="complete-button" data-for="section-52">标记本章已学完</button></div>
+<p>文件：<code>lessons/foundations/10_templates.cpp</code></p>
+<pre><span class="language-label">cpp</span><code class="language-cpp">#include &lt;concepts&gt;
+#include &lt;iostream&gt;
+#include &lt;string&gt;
+#include &lt;utility&gt;
+template&lt;class T&gt; class Box {
+public:
+    explicit Box(T value) : value_(std::move(value)) {}
+    const T&amp; get() const noexcept { return value_; }
+private:
+    T value_;
+};
+template&lt;std::integral T&gt; constexpr bool positive(T value) {
+    return value &gt; T{0};
+}
+static_assert(positive(3));
+static_assert(!positive(-1));
+int main() {
+    const Box&lt;std::string&gt; title{&quot;templates&quot;};
+    const Box&lt;int&gt; id{7};
+    std::cout &lt;&lt; title.get() &lt;&lt; &quot;: &quot; &lt;&lt; id.get() &lt;&lt; &#39;\n&#39;;
+    return positive(id.get()) ? 0 : 1;
+}
+</code></pre>
+<p>输出 <code>templates: 7</code>。<code>template&lt;class T&gt;</code> 表示定义一个类型参数，Box<int> 与 Box<string> 是不同的类型；这里的 class 也可以写 typename，不要求 T 一定是用户定义的 class。value_ 的类型在具体实例化时确定，不是在运行时随便变化。</p>
+<h3 id="section-53">普通函数与函数模板</h3>
+<p>把 <code>T</code> 替换为具体类型可以帮助初学阅读，但编译器的真实处理包含名称查找、约束检查等规则，不是简单文本替换。模板类型推导可能无法在多个不同参数类型间选出一致的 T；不要把所有失败都用强转盖住。</p>
+<p><code>template&lt;std::integral T&gt;</code> 限制 T 满足整型概念。它比无约束模板产生更贴近使用要求的错误。<code>positive(1.5)</code> 会因约束不满足而编译失败；这是预期的接口保护。concept 检查表达式和类型条件，不会自动证明业务意义或线程安全。</p>
+<p><code>constexpr</code> 表示在满足条件的上下文中可以常量求值，普通运行期输入仍然可以调用。<code>static_assert</code> 在编译期要求条件为真，和运行时 assert 不一样。<code>const</code> 主要限制修改，不保证某个值一定能用于编译期计算。</p>
+<h3 id="section-54">模板定义通常放头文件</h3>
+<p>使用点常需要看见模板定义才能实例化。如果只在头文件声明 Box 的成员，把所有模板实现藏到普通 cpp，另一个翻译单元使用新类型时可能出现链接错误。显式实例化可以为固定类型解决部分问题，但初学时先把小模板完整定义放头文件。</p>
+<p>头文件要自包含：使用 string 就包含 string，不依赖使用者碰巧先 include 别的头。普通非 inline 函数定义放 cpp，避免重复定义；模板和类内定义的成员函数有相应的规则允许头文件组织。头文件全局变量可使用 C++17 inline 变量或 extern 声明加 cpp 定义，不能随意重复定义。</p>
+<p><code>#pragma once</code> 是常见编译器支持的写法；传统 <code>#ifndef</code> include guard 是另一种。它们防止同一翻译单元重复包含，不会把多个 cpp 自动变成一个翻译单元。</p>
+<h3 id="section-55">命名空间、enum class 与别名</h3>
+<pre><span class="language-label">cpp</span><code class="language-cpp">// 片段：可放在 domain.hpp 的 namespace task 内
+enum class Status { pending, done };
+using TaskId = std::int64_t; // 需要 &lt;cstdint&gt;；别名不是新的独立强类型
+</code></pre>
+<p>枚举使用 <code>Status::pending</code>，避免名字混进外部作用域。不要在公共头文件中写 <code>using namespace std;</code>，否则会改变所有包含者的名称查找环境。cpp 内匿名命名空间可隐藏只供当前翻译单元使用的辅助实现。</p>
+<p><strong>练习</strong>：把 Box 放进 <code>box.hpp</code>，用两个 cpp 分别实例化 Box<int> 和 Box<string>，一起链接。故意调用 positive(1.5) 阅读第一条约束诊断，再恢复。<strong>参考</strong>：不需要在 CMake 中为每个模板实例添加一个 target，两个 cpp 作为同一 executable 的源文件即可。</p>
+<h2 id="section-56">F11. optional、异常和严格输入：错误是接口的一部分</h2><div class="chapter-tools"><button class="complete-button" data-for="section-56">标记本章已学完</button></div>
+<p>文件：<code>lessons/foundations/11_errors.cpp</code></p>
+<pre><span class="language-label">cpp</span><code class="language-cpp">#include &lt;charconv&gt;
+#include &lt;iostream&gt;
+#include &lt;optional&gt;
+#include &lt;string_view&gt;
+#include &lt;system_error&gt;
+std::optional&lt;int&gt; parse_port(std::string_view text) {
+    if (text.empty()) return std::nullopt;
+    int value{};
+    const auto [end, error] = std::from_chars(text.data(), text.data() + text.size(), value);
+    if (error != std::errc{} || end != text.data() + text.size()) return std::nullopt;
+    if (value &lt; 1 || value &gt; 65535) return std::nullopt;
+    return value;
+}
+int main() {
+    for (const auto input : {&quot;8080&quot;, &quot;80x&quot;, &quot;0&quot;, &quot;65536&quot;, &quot;&quot;, &quot;99999999999999999999&quot;}) {
+        const auto value = parse_port(input);
+        std::cout &lt;&lt; &#39;[&#39; &lt;&lt; input &lt;&lt; &quot;] -&gt; &quot;;
+        if (value) std::cout &lt;&lt; *value &lt;&lt; &#39;\n&#39;;
+        else std::cout &lt;&lt; &quot;invalid\n&quot;;
+    }
+    return parse_port(&quot;8080&quot;) == 8080 &amp;&amp; parse_port(&quot;65535&quot;) == 65535 &amp;&amp;
+        !parse_port(&quot;80x&quot;) &amp;&amp; !parse_port(&quot;0&quot;) &amp;&amp; !parse_port(&quot;65536&quot;) &amp;&amp;
+        !parse_port(&quot;&quot;) &amp;&amp; !parse_port(&quot;99999999999999999999&quot;) ? 0 : 1;
+}
+</code></pre>
+<p>只有 <code>[8080] -&gt; 8080</code> 成功，其他展示输入都输出 invalid。解析必须满足三层条件：语法转换成功、整个输入被消耗、数值处于业务范围。<code>80x</code> 前缀能转成 80，不等于输入是合法端口。</p>
+<p><code>from_chars</code> 返回结束指针和 error code，示例用结构化绑定 <code>const auto [end, error]</code> 拆开。它不会像部分流输入那样自动跳过前导空格，也不会接受所有习惯写法；本课程有意使用严格十进制语法，正号、空白等接受策略需要主动设计。</p>
+<h3 id="section-57">optional 的真假是“有没有值”</h3>
+<pre><span class="language-label">cpp</span><code class="language-cpp">// 片段，需要 &lt;optional&gt;
+std::optional&lt;bool&gt; completed{false};
+if (completed) {
+    // 能进入这里，因为它有值；*completed 才是 false
+}
+</code></pre>
+<p><code>nullopt</code>、值 false、值 true 是三种不同状态，恰好适合 PATCH：不传 completed 不修改，传 false 取消完成，传 true 标为完成。先检查存在再 <code>*optional</code>；<code>.value()</code> 在无值时抛 bad_optional_access；<code>value_or(default)</code> 返回实际值或默认值，不适合所有错误都静默吞掉的场景。</p>
+<h3 id="section-58">什么时候用异常</h3>
+<p>用户输错端口很常见，optional 能直接表达失败；构造数据库仓库打不开文件时，无法形成有效对象，抛异常可以沿调用栈交给边界处理。当前 C++20 项目没有使用 C++23 的 std::expected；不需要为了读教材先升级标准。</p>
+<pre><span class="language-label">cpp</span><code class="language-cpp">// 片段，需要 &lt;exception&gt;、&lt;iostream&gt;
+try {
+    run_server(); // 需要你自己的声明与实现
+} catch (const std::exception&amp; error) {
+    std::cerr &lt;&lt; error.what() &lt;&lt; &#39;\n&#39;;
+    return 1;
+}
+</code></pre>
+<p>按 const 引用捕获，避免复制和切片。具体异常的 catch 放一般异常之前。异常跨越作用域时清理局部资源，所以 RAII 与异常配合；不要每层都 catch 后返回“成功”。HTTP 边界应把已知输入错误映射到适当状态码，内部异常记录日志并返回一般错误，避免把 SQL/文件路径暴露给客户端。</p>
+<p>noexcept 不是“忽略异常”：异常逃出 noexcept 函数会触发终止。析构函数应避免抛异常，尤其已经在异常展开时；资源关闭失败需要单独的显式操作/日志策略，而非任意在析构中 throw。</p>
+<h3 id="section-59">文件读写也要检查结果</h3>
+<pre><span class="language-label">cpp</span><code class="language-cpp">// 片段，需要 &lt;fstream&gt;、&lt;string&gt;、&lt;stdexcept&gt;
+std::ifstream input{&quot;settings.txt&quot;};
+if (!input) throw std::runtime_error(&quot;cannot open settings.txt&quot;);
+std::string line;
+while (std::getline(input, line)) {
+    // 在此验证每一行，不把“读到字符串”当作配置合法
+}
+if (input.bad()) throw std::runtime_error(&quot;read failed&quot;);
+</code></pre>
+<p>相对路径按当前工作目录解析，不是按 cpp 文件位置解析；这是 tasks.db “不见了”的常见原因。重要输出还需检查写入/flush/关闭结果，不能只因文件曾成功打开就认为数据一定保存成功。</p>
+<p><strong>练习</strong>：给 parse_port 加入 &quot; 80&quot;、&quot;+80&quot;、&quot;-1&quot;、&quot;1&quot; 和 &quot;65535&quot;，预期前三者无值，后两者成功。再把它改成返回 optional<int64_t> 的正 ID 解析器。比较主教材的 parse_id，关注拒绝输入的规则，而不只看函数名称。</p>
+<h2 id="section-60">F12. 从语法读到服务器：对象关系、线程与学习验收</h2><div class="chapter-tools"><button class="complete-button" data-for="section-60">标记本章已学完</button></div>
+<h3 id="section-61">先用一个可结束的小程序理解共享状态</h3>
+<p>文件：<code>lessons/foundations/12_threads.cpp</code></p>
+<pre><span class="language-label">cpp</span><code class="language-cpp">#include &lt;iostream&gt;
+#include &lt;mutex&gt;
+#include &lt;thread&gt;
+#include &lt;vector&gt;
+int main() {
+    int count{};
+    std::mutex mutex;
+    {
+        std::vector&lt;std::jthread&gt; workers;
+        for (int n = 0; n &lt; 4; ++n) {
+            workers.emplace_back([&amp;count, &amp;mutex] {
+                for (int i = 0; i &lt; 1000; ++i) {
+                    std::lock_guard lock{mutex};
+                    ++count;
+                }
+            });
+        }
+    }                                   // jthread 析构并 join，之后才能读取 count
+    std::cout &lt;&lt; &quot;count=&quot; &lt;&lt; count &lt;&lt; &#39;\n&#39;;
+    return count == 4000 ? 0 : 1;
+}
+</code></pre>
+<p>输出 <code>count=4000</code>。count 和 mutex 比 workers 活得更久；线程闭包按引用捕获它们。每个线程执行 1000 次，四个线程理论上应得到 4000，但普通 <code>++count</code> 是读、修改、写，不是天然原子操作。没有同步的并发访问构成数据竞争时，程序是未定义行为，不能只说“偶尔少加几次”。</p>
+<p>lock_guard 构造时锁定，退出本轮作用域时解锁。一个锁保护的是约定的共享状态，所有访问者必须遵守约定；只给写入一侧加锁而读取不加，不会自动正确。本例最终读取发生在全部 join 后，已经没有工作线程在改它。</p>
+<p>jthread 析构时请求停止并 join；本例工作函数没有接收 stop_token，所以不会因请求停止而提前结束，而是做完有限循环。若线程无限循环且不响应停止，析构仍可能一直等待。join 是等待完成，不是强行杀线程。</p>
+<h3 id="section-62">把陌生的真实声明逐段翻译</h3>
+<pre><span class="language-label">cpp</span><code class="language-cpp">// 摘自配套仓库的接口形式
+[[nodiscard]] std::optional&lt;Task&gt; get(std::int64_t id);
+</code></pre>
+<p><code>[[nodiscard]]</code> 提醒调用者不要随意丢弃结果；optional 表示任务可能不存在；Task 是按值返回的数据；int64_t 是 ID 类型。这个接口没有引用 HTTP 请求对象，所以仓库可以在核心测试中直接使用。</p>
+<pre><span class="language-label">cpp</span><code class="language-cpp">// 概念片段：学习读捕获关系，完整路由见 src/http_api.cpp
+server.Get(&quot;/api/tasks&quot;, [&amp;repository](const httplib::Request&amp; request,
+                                      httplib::Response&amp; response) {
+    // request 是只读借用，response 是可修改借用；repository 也只是借用。
+});
+</code></pre>
+<p>注册路由只保存回调，回调常在后来收到请求时执行。因此不能捕获注册函数中马上要销毁的局部仓库。主程序先构造 repository，再构造 server，正常反向析构有利于先清理服务器；还必须确保请求工作线程已停止，不能仅凭声明顺序就断言任何异步程序都安全。</p>
+<h3 id="section-63">一次请求的四层翻译</h3>
+<p>客户端给出 JSON 文本 → HTTP 层检查媒体类型、语法、字段 → 转为 C++ 数据对象 → 仓库在锁保护下绑定 SQL 参数并读写 → HTTP 层把结果转回 JSON 和状态码。你学的字符串、optional、引用、RAII 和异常，都分别参与其中。</p>
+<p>不要一开始自己重写 HTTP 解析器或内存分配器来证明“懂底层”。先能解释库负责协议、自己负责业务规则的边界，再逐渐研究协议解析、异步 I/O 和内存模型。深度来自能证明行为，而不是每次都从零重写。</p>
+<h3 id="section-64">基础毕业练习：在没有 HTTP 的条件下完成数据操作</h3>
+<p>自己新建 <code>scratch/task_cli.cpp</code>，实现 Task{id,title,completed} 和 vector<Task>。支持 add、list、done、delete、quit，标题用 getline 读取，ID 使用 from_chars 严格解析。找不到任务时保留容器原样；删除后 ID 不重复使用；空标题拒绝；完成与取消完成能区分。</p>
+<p>建议拆出 <code>add_task</code>、<code>find_task</code>、<code>set_completed</code>、<code>erase_task</code> 四个函数。返回迭代器/指针时说明失效条件，返回 optional<Task> 副本时说明修改副本不会改容器。简单教学程序可用递增 int64_t，并在到达上限时拒绝继续创建，不假装整数永不耗尽。</p>
+<p>参考答案在 <code>examples/03_cli.cpp</code>，但先独立写，再对照。至少手动验证：空列表、合法添加、空标题、找不到 ID、完成同一任务两次、删除后再次查找、EOF 退出、带空格标题。程序成功运行一次只证明一条路径，不能替代这些边界。</p>
+<p>最后合上教材回答：值与引用有什么不同？谁拥有字符串？vector 哪些操作会使引用失效？为什么移动后仍要关注对象状态？为什么 optional<bool>{false} 是有值？为什么回调不能随便捕获局部引用？若答不清，回到对应代码做一处修改，再进入完整后端。</p>
+<p>进一步阅读可使用 <a href="https://isocpp.github.io/CppCoreGuidelines/CppCoreGuidelines" target="_blank" rel="noopener noreferrer">C++ Core Guidelines</a> 对照资源管理和接口设计建议；它是工程指导，不是要求初学者逐条背诵的语法教材。</p>
+<!-- EXPANSION_FOUNDATIONS_END -->
+
+<h2 id="section-65">3. 重新整理你已经学过的变量、引用和函数</h2><div class="chapter-tools"><button class="complete-button" data-for="section-65">标记本章已学完</button></div>
+<h3 id="section-66">3.1 优先初始化，让对象从第一刻就有效</h3>
 <pre><span class="language-label">cpp</span><code class="language-cpp">int count{};                 // 0
 bool completed{false};
 std::string title{&quot;CMake&quot;};
 // int broken{3.14};         // 窄化转换，编译拒绝
 </code></pre>
 <p>未初始化的局部基础类型可能带来未定义或其他错误行为。不要靠“我机器上打印出来刚好是 0”判断。花括号初始化有帮助，但要认识容器的 initializer_list：<code>std::vector&lt;int&gt; a(3, 7)</code> 是三个 7；<code>std::vector&lt;int&gt; b{3, 7}</code> 是两个元素 3 和 7。</p>
-<h3 id="section-18">3.2 值、引用、指针分别表达什么</h3>
+<h3 id="section-67">3.2 值、引用、指针分别表达什么</h3>
 <pre><span class="language-label">cpp</span><code class="language-cpp">void observe(const std::string&amp; title); // 借用，只读，不复制整段字符串
 void rename(std::string&amp; title);       // 借用，允许修改调用方对象
 void consume(std::string title);       // 自己拥有一份值，可从调用方复制或移动
@@ -276,7 +936,7 @@ void consume(std::string title);       // 自己拥有一份值，可从调用�
 // 错误示意：不要返回局部变量的引用或指针。
 // const std::string&amp; bad() { std::string x = &quot;x&quot;; return x; }
 </code></pre>
-<h3 id="section-19">3.3 const 和 auto 的实用判断</h3>
+<h3 id="section-68">3.3 const 和 auto 的实用判断</h3>
 <p><code>const</code> 表示不能通过这个名字直接修改该对象。它不是“整个对象世界都不可变”，也不是并发同步机制。</p>
 <pre><span class="language-label">cpp</span><code class="language-cpp">std::string original = &quot;A&quot;;
 auto copy = original;         // 新的 string
@@ -285,7 +945,7 @@ const auto&amp; view = original;  // 只读引用
 alias = &quot;B&quot;;                 // original 和 view 看到 B；copy 仍是 A
 </code></pre>
 <p><code>auto</code> 会推导类型，不是动态类型。特别留意 <code>auto</code> 默认不保留引用，<code>auto&amp;</code> 才明确借用。遍历容器时 <code>for (const auto&amp; task : tasks)</code> 通常能避免复制每个任务。</p>
-<h3 id="section-20">3.4 整数、边界和外部输入</h3>
+<h3 id="section-69">3.4 整数、边界和外部输入</h3>
 <p>数据库 ID 使用 <code>std::int64_t</code>。容器的 <code>size()</code> 常返回无符号类型；混用有符号值要留意负数变成很大的正数。</p>
 <p>不要拿 <code>atoi(&quot;12abc&quot;)</code> 这类宽松转换当接口验证。<code>std::from_chars</code> 给出错误码和停止位置，本项目同时检查这两项：</p>
 <pre><span class="language-label">cpp</span><code class="language-cpp">std::int64_t value{};
@@ -296,8 +956,8 @@ if (error != std::errc{} || end != text.data() + text.size() || value &lt;= 0) {
 </code></pre>
 <p><code>&quot;12abc&quot;</code> 即使读出了 12，仍然必须拒绝，因为没有消费完整输入；特别大的数字必须检查超出范围。完整代码在 <code>src/domain.cpp</code>，函数还会拒绝正负号和空串。</p>
 <p><strong>练习</strong>：自己实现 <code>parse_id</code>，分别输入 <code>1</code>、<code>0</code>、<code>-1</code>、<code>1x</code>、空串和超大整数。<strong>验收</strong>：每个失败都能说出原因，而不是“解析不出来”。</p>
-<h2 id="section-21">4. 类与对象：先维护数据的规则，再考虑继承</h2><div class="chapter-tools"><button class="complete-button" data-for="section-21">标记本章已学完</button></div>
-<h3 id="section-22">4.1 struct 与 class</h3>
+<h2 id="section-70">4. 类与对象：先维护数据的规则，再考虑继承</h2><div class="chapter-tools"><button class="complete-button" data-for="section-70">标记本章已学完</button></div>
+<h3 id="section-71">4.1 struct 与 class</h3>
 <p>它们最主要的语言区别是默认访问权限和默认继承权限。不要把 struct 当成“不能有方法的 C 结构体”。</p>
 <p>本项目的 <code>Task</code> 是简单数据载体：</p>
 <pre><span class="language-label">cpp</span><code class="language-cpp">struct Task {
@@ -307,7 +967,7 @@ if (error != std::errc{} || end != text.data() + text.size() || value &lt;= 0) {
 };
 </code></pre>
 <p>三个字段可直接阅读；没有必要为每个字段写一套没有约束作用的 getter/setter。数据库连接则有更强的规则：成功构造后必须持有有效连接，不能随意复制，这更适合 class 封装。</p>
-<h3 id="section-23">4.2 构造函数与成员初始化列表</h3>
+<h3 id="section-72">4.2 构造函数与成员初始化列表</h3>
 <pre><span class="language-label">cpp</span><code class="language-cpp">class UserName {
 public:
     explicit UserName(std::string text) : text_(std::move(text)) {
@@ -320,17 +980,17 @@ private:
 </code></pre>
 <p>这个片段需要 <code>&lt;string&gt;</code>、<code>&lt;utility&gt;</code>、<code>&lt;stdexcept&gt;</code>。初始化列表直接构造成员；构造函数体执行时，成员已经初始化。成员的初始化次序按<strong>类中的声明顺序</strong>，不是列表中的书写顺序。</p>
 <p><code>explicit</code> 避免不想要的隐式转换。成员函数最后的 <code>const</code> 表示它不通过 this 修改普通成员。<code>noexcept</code> 是不抛异常的承诺；承诺被违反会触发终止，不是“自动忽略错误”。</p>
-<h3 id="section-24">4.3 组合优先，继承按需</h3>
+<h3 id="section-73">4.3 组合优先，继承按需</h3>
 <p>服务器包含仓库，仓库拥有数据库连接；这都是“有一个”的组合关系。只有确实要表达可替换的接口时才引入继承，例如未来的 <code>TaskStore</code> 接口可以同时有 SQLite 和内存实现。</p>
 <p>如果你通过基类指针删除派生对象，通常需要虚析构函数：<code>virtual ~TaskStore() = default;</code>。把派生对象按值复制给基类会发生对象切片。入门阶段不需要为了“看起来面向对象”把每个函数都改成虚函数。</p>
-<h3 id="section-25">4.4 错误使用应尽量在编译阶段阻止</h3>
+<h3 id="section-74">4.4 错误使用应尽量在编译阶段阻止</h3>
 <pre><span class="language-label">cpp</span><code class="language-cpp">TaskRepository(const TaskRepository&amp;) = delete;
 TaskRepository&amp; operator=(const TaskRepository&amp;) = delete;
 </code></pre>
 <p>连接和互斥量不适合被随意复制。删掉复制操作，能让错误的 <code>auto second = repository;</code> 直接编译失败。它比在注释中写“请不要复制”更可靠。</p>
 <p><strong>练习</strong>：给 <code>TaskRepository</code> 写一个复制语句，观察错误，然后删除它。<strong>验收</strong>：能区分“数据值可以复制”与“资源拥有者不可随意复制”。</p>
-<h2 id="section-26">5. RAII、智能指针与移动语义</h2><div class="chapter-tools"><button class="complete-button" data-for="section-26">标记本章已学完</button></div>
-<h3 id="section-27">5.1 资源不仅是内存</h3>
+<h2 id="section-75">5. RAII、智能指针与移动语义</h2><div class="chapter-tools"><button class="complete-button" data-for="section-75">标记本章已学完</button></div>
+<h3 id="section-76">5.1 资源不仅是内存</h3>
 <p>资源包括文件、socket、数据库连接、prepared statement、锁和线程。它们都有“获得”和“释放”操作。手工在函数末尾释放时，提前 return 和异常往往会漏掉清理。</p>
 <p>RAII 的做法是让对象拥有资源，在构造或初始化时建立所有权，在析构时释放。正常离开作用域和异常展开都会析构已经完成构造的自动对象。</p>
 <pre><span class="language-label">cpp</span><code class="language-cpp">{
@@ -340,7 +1000,7 @@ TaskRepository&amp; operator=(const TaskRepository&amp;) = delete;
 }
 </code></pre>
 <p>上面是机制片段，<code>mutex</code> 与函数需要由调用代码定义。先理解“对象生命周期绑定资源生命周期”，再记具体类名。可延伸阅读 <a href="https://isocpp.github.io/CppCoreGuidelines/CppCoreGuidelines#S-resource" target="_blank" rel="noopener noreferrer">C++ Core Guidelines 的资源管理章节</a>。</p>
-<h3 id="section-28">5.2 unique_ptr 表达唯一所有权</h3>
+<h3 id="section-77">5.2 unique_ptr 表达唯一所有权</h3>
 <pre><span class="language-label">cpp</span><code class="language-cpp">auto owner = std::make_unique&lt;Task&gt;(Task{1, &quot;Learn ownership&quot;, false});
 auto* borrowed = owner.get(); // 借用，不接管所有权
 auto next = std::move(owner);
@@ -348,7 +1008,7 @@ auto next = std::move(owner);
 <p>移动后 <code>owner</code> 为空；<code>next</code> 拥有原对象。只要 next 仍然拥有它，borrowed 仍指向那一个对象；next 释放对象后 borrowed 就悬空。智能指针不会神奇地修复所有借用指针的生命周期。</p>
 <p><code>std::move</code> 本身主要做类型转换，使表达式可以被选择为移动来源；实际搬移资源的是被调用的移动构造/赋值操作。对不支持移动的类型，写了 move 也不一定发生资源转移。</p>
 <p>一般的标准库对象移动后应视为有效但状态未指定，除非该类型明确给出更强保证。不要把 unique_ptr 移后为空的特性套到所有类型。</p>
-<h3 id="section-29">5.3 C API 资源也能用 RAII 包起来</h3>
+<h3 id="section-78">5.3 C API 资源也能用 RAII 包起来</h3>
 <p>SQLite 通过 C API 给出 <code>sqlite3*</code>，我们给 unique_ptr 提供一个自定义清理器：</p>
 <pre><span class="language-label">cpp</span><code class="language-cpp">struct DatabaseCloser {
     void operator()(sqlite3* db) const noexcept;
@@ -357,15 +1017,15 @@ std::unique_ptr&lt;sqlite3, DatabaseCloser&gt; db_;
 </code></pre>
 <p>实现中调用 <code>sqlite3_close_v2</code>。这样，构造函数打开连接后即使设置参数失败，已经归 unique_ptr 所有的句柄仍会被关闭。SQLite 打开失败时也可能返回非空句柄，所以先交给拥有者管理，再检查错误码。接口语义见 <a href="https://www.sqlite.org/c3ref/open.html" target="_blank" rel="noopener noreferrer">SQLite 打开连接文档</a>。</p>
 <p>SQL statement 同样使用 unique_ptr 加 <code>sqlite3_finalize</code> 清理器。因为局部 statement 在成员数据库之前销毁，我们不会让 statement 引用一个已销毁的连接。</p>
-<h3 id="section-30">5.4 shared_ptr 不是默认答案</h3>
+<h3 id="section-79">5.4 shared_ptr 不是默认答案</h3>
 <p>只有多个所有者确实需要共同决定生命周期时才用 shared_ptr。它会维护引用计数；<code>shared_ptr&lt;A&gt;</code> 中的 A 不会因此自动线程安全。A 持有 B、B 又持有 A 的强引用会形成环，可能需要 weak_ptr。</p>
 <p>本项目把请求计数器放在 shared_ptr 中，是让注册进服务器的回调共同持有它。数据库仓库没有这个需求：main 中仓库寿命长于 server，回调只借用它。</p>
-<h3 id="section-31">5.5 Rule of Zero 与异常安全</h3>
+<h3 id="section-80">5.5 Rule of Zero 与异常安全</h3>
 <p>能由 string、vector、unique_ptr 等成员完成资源管理时，不要手写一堆复制、移动、析构函数，这叫 Rule of Zero 的设计方向。必须直接管理原始资源时，再认真处理全部特殊成员操作。</p>
 <p>异常安全至少应保证资源不泄漏、对象仍处于有效状态；“强保证”进一步要求失败后状态如同操作未发生。数据库事务是另一层机制：C++ RAII 能释放句柄，但不会自动把多条 SQL 组合成一个原子业务操作。</p>
 <p><strong>练习</strong>：写一个只打印“构造/析构”的小类，在作用域中抛出异常，在外层 catch，观察析构顺序。<strong>验收</strong>：能解释为什么析构函数通常不该抛异常。</p>
-<h2 id="section-32">6. 字符串、容器、optional 与算法</h2><div class="chapter-tools"><button class="complete-button" data-for="section-32">标记本章已学完</button></div>
-<h3 id="section-33">6.1 string 拥有内容，string_view 借用内容</h3>
+<h2 id="section-81">6. 字符串、容器、optional 与算法</h2><div class="chapter-tools"><button class="complete-button" data-for="section-81">标记本章已学完</button></div>
+<h3 id="section-82">6.1 string 拥有内容，string_view 借用内容</h3>
 <p><code>std::string</code> 存储字符序列。<code>std::string_view</code> 通常只保存指针和长度，不拥有字符。它适合短时间只读参数，例如 <code>title_error(std::string_view)</code>。</p>
 <pre><span class="language-label">cpp</span><code class="language-cpp">std::string storage = &quot;Learn CMake&quot;;
 std::string_view view = storage;
@@ -373,7 +1033,7 @@ std::string_view view = storage;
 </code></pre>
 <p>不要返回指向临时 string 的 string_view。不要以为 <code>view.data()</code> 必定以 <code>\0</code> 结尾；它可能只是字符串中间的一段。本项目调用 from_chars 时显式传入首尾指针。</p>
 <p>UTF-8 下 <code>std::string::size()</code> 统计字节，不是屏幕上字符数。本项目明确限制标题为 1～200 个 UTF-8 字节；HTTP JSON 解析器验证输入的 UTF-8，领域层只检查字节长度、ASCII 控制字符和纯 ASCII 空格。全角空格、字素簇等更复杂的 Unicode 规则是后续扩展，不要误称当前规则是“最多 200 个汉字”。</p>
-<h3 id="section-34">6.2 vector 是第一个应该熟练的容器</h3>
+<h3 id="section-83">6.2 vector 是第一个应该熟练的容器</h3>
 <p>vector 连续存储元素，按下标访问快、尾部追加常用。扩容可能搬迁元素，从而使旧引用、指针和迭代器失效。<code>reserve</code> 预留容量，<code>resize</code> 改变元素数量，两者不同。</p>
 <pre><span class="language-label">cpp</span><code class="language-cpp">std::vector&lt;Task&gt; tasks;
 tasks.reserve(100); // size 仍是 0
@@ -381,7 +1041,7 @@ tasks.push_back({1, &quot;Read&quot;, false});
 </code></pre>
 <p>删除 vector 元素后，删除位置及其后的迭代器和引用可能失效。不要一边 erase 一边盲目递增旧迭代器。</p>
 <p><code>std::map</code> 按键排序，<code>std::unordered_map</code> 通常用哈希查找。不要先背哪一个永远更快；根据遍历顺序、键数量、内存和测量结果选择。本项目 CLI 用 vector，服务端查询交给数据库。</p>
-<h3 id="section-35">6.3 optional 表达“可能没有结果”</h3>
+<h3 id="section-84">6.3 optional 表达“可能没有结果”</h3>
 <pre><span class="language-label">cpp</span><code class="language-cpp">std::optional&lt;Task&gt; found = repository.get(42);
 if (found) {
     std::cout &lt;&lt; found-&gt;title;
@@ -390,7 +1050,7 @@ if (found) {
 <p>没找到任务是正常业务结果，用 nullopt 表达；数据库损坏是另一类失败，用异常表达。不要把二者都塞进“返回空对象”。</p>
 <p><code>std::optional&lt;bool&gt;</code> 特别值得练习：<code>if (patch.completed)</code> 检查是否有值，<strong>并不是检查值是否为 true</strong>。所以包含 false 的 optional 仍进入分支，这使 <code>{&quot;completed&quot;: false}</code> 能正确撤销完成状态。</p>
 <p><code>std::variant</code> 表示若干类型中的一种，适合明确的多种结果；访问时可用 <code>std::visit</code>。它与 optional 的定位不同：optional 是“有值/无值”，variant 是“具体是哪一种”。</p>
-<h3 id="section-36">6.4 算法、lambda、投影</h3>
+<h3 id="section-85">6.4 算法、lambda、投影</h3>
 <pre><span class="language-label">cpp</span><code class="language-cpp">auto it = std::ranges::find(tasks, wanted_id, &amp;Task::id);
 if (it != tasks.end()) it-&gt;completed = true;
 </code></pre>
@@ -401,12 +1061,12 @@ if (it != tasks.end()) it-&gt;completed = true;
 </code></pre>
 <p>lambda 可以理解为带着必要上下文的可调用对象。<code>[wanted_id]</code> 拷贝值，<code>[&amp;repository]</code> 借用外部对象，<code>[token = std::move(api_token)]</code> 把一个值移动进回调自身。</p>
 <p>对于保存下来以后才执行的回调，不要默认使用 <code>[&amp;]</code> 捕获一切。函数返回后局部变量可能已经消失。服务器中的路由回调正是这种需要认真检查生命周期的场景。</p>
-<h3 id="section-37">6.5 span 与 ranges view</h3>
+<h3 id="section-86">6.5 span 与 ranges view</h3>
 <p><code>std::span&lt;const int&gt;</code> 可以以统一方式借用数组或连续容器的一段数据。它不拥有内存，不自动延长生命周期，C++20 的普通下标操作也不是保证抛异常的边界检查。</p>
 <p><code>std::views::filter</code> 构造惰性视图，一般不会立即复制出新的容器。视图依赖原范围的有效性；底层容器修改或销毁后不要继续使用旧视图。调试复杂流水线困难时，直接写清楚的循环完全可以。</p>
 <p>运行 <code>lab02_modern</code>，预期最后一行 <code>count=4000</code>。<strong>练习</strong>：添加两个任务，用 find_if 修改指定项；再解释为什么 push_back 之后不该不加判断地继续使用之前保存的引用。</p>
-<h2 id="section-38">7. 模板与现代标准：学到能读懂库即可</h2><div class="chapter-tools"><button class="complete-button" data-for="section-38">标记本章已学完</button></div>
-<h3 id="section-39">7.1 模板把“类型”变成参数</h3>
+<h2 id="section-87">7. 模板与现代标准：学到能读懂库即可</h2><div class="chapter-tools"><button class="complete-button" data-for="section-87">标记本章已学完</button></div>
+<h3 id="section-88">7.1 模板把“类型”变成参数</h3>
 <pre><span class="language-label">cpp</span><code class="language-cpp">template&lt;typename T&gt;
 T choose_larger(T a, T b) {
     return a &lt; b ? b : a;
@@ -419,13 +1079,13 @@ template&lt;std::integral T&gt;
 T twice(T value) { return value + value; }
 </code></pre>
 <p>这不等于防止数值溢出。约束类型和验证数值范围是两件事。通用服务器代码应在输入边界检查范围，不用模板技巧代替业务规则。</p>
-<h3 id="section-40">7.2 constexpr、枚举与命名空间</h3>
+<h3 id="section-89">7.2 constexpr、枚举与命名空间</h3>
 <p><code>constexpr</code> 允许在满足条件时进行常量求值，但不是任何一次调用都必然发生在编译期。<code>enum class</code> 将枚举值放在明确的作用域里，减少隐式转换。</p>
 <pre><span class="language-label">cpp</span><code class="language-cpp">enum class Status { pending, completed };
 constexpr int max_page_size = 100;
 </code></pre>
 <p><code>namespace task</code> 避免和其他库的 Task、Error 等名字冲突。头文件不要写全局 <code>using namespace std;</code>，否则所有包含它的文件都受影响。</p>
-<h3 id="section-41">7.3 C++17、20、23 的学习优先级</h3>
+<h3 id="section-90">7.3 C++17、20、23 的学习优先级</h3>
 <div class="table-scroll"><table>
 <thead>
 <tr>
@@ -453,8 +1113,766 @@ constexpr int max_page_size = 100;
 <p>本项目刻意不把 modules、协程和复杂模板元编程作为前置条件。协程可以表达暂停与恢复，但不会自动把阻塞数据库调用变成非阻塞 I/O；modules 也不能替你设计依赖边界。</p>
 <p><code>std::expected&lt;T, E&gt;</code> 适合需要显式错误返回的接口；本项目选择 optional 表示正常缺失、异常表示数据库故障。选定风格后应统一使用，而不是一个函数混合 errno、魔法负数和异常。</p>
 <p><strong>验收</strong>：能读懂 <code>std::optional&lt;std::int64_t&gt;</code>、<code>std::unique_ptr&lt;sqlite3, DatabaseCloser&gt;</code> 和一个捕获变量的 lambda。模板的第一目标是读懂并正确使用库。</p>
-<h2 id="section-42">8. CMake 从五行开始：亲手创建一个小工程</h2><div class="chapter-tools"><button class="complete-button" data-for="section-42">标记本章已学完</button></div>
-<h3 id="section-43">8.1 新建最小项目</h3>
+<!-- EXPANSION_CMAKE_START -->
+
+<blockquote>
+<p><strong>进入CMake 实验课程 C01～C12</strong>：以下为新增完整课程，完成后继续原有工程主线。</p>
+</blockquote>
+<p>这不是要求你记住所有命令的手册，而是一条能够从空目录复现的练习路线。先理解“谁调用谁、路径相对哪里、要求传给谁”，再把这些关系写进配置。每个实验都附带完整文件；可以先原样运行一次，再在自己新建的目录重写。</p>
+<p>本篇以 CMake <strong>3.24 及以上</strong>、C++20、Ninja 为基础，避免依赖最新文档才有的语法。Windows 主线为 PowerShell + MSYS2 UCRT64 GCC。四个实验在 <code>lessons/cmake/01_hello</code>、<code>02_library</code>、<code>03_project</code>、<code>04_consumer</code>，都是独立 CMake 工程，不需要先构建 HTTP 服务器。</p>
+<p>除明确写出 Push-Location 的预设实验外，命令都在仓库根目录执行。<code>build/cmake01</code> 等是建议的新构建目录；本地若已有不兼容缓存，请选择另一个名字。实验代码不下载依赖，C07 的远程依赖方案另行注明。</p>
+<h2 id="section-91">C01. CMake 工作流：配置、生成、构建、测试、运行</h2><div class="chapter-tools"><button class="complete-button" data-for="section-91">标记本章已学完</button></div>
+<h3 id="section-92">五件不同的事</h3>
+<div class="table-scroll"><table>
+<thead>
+<tr>
+<th>阶段</th>
+<th>典型命令</th>
+<th>具体发生什么</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>配置与生成</td>
+<td><code>cmake -S 源码目录 -B 构建目录 -G Ninja</code></td>
+<td>解释 CMakeLists、检测编译器、建立目标关系并生成 Ninja 文件</td>
+</tr>
+<tr>
+<td>构建</td>
+<td><code>cmake --build 构建目录</code></td>
+<td>调用 Ninja，让它运行编译与链接命令</td>
+</tr>
+<tr>
+<td>测试</td>
+<td><code>ctest --test-dir 构建目录</code></td>
+<td>启动登记的测试程序，检查退出结果</td>
+</tr>
+<tr>
+<td>运行</td>
+<td><code>路径/程序.exe</code></td>
+<td>启动你的程序，读取运行期配置</td>
+</tr>
+<tr>
+<td>安装</td>
+<td><code>cmake --install 构建目录 --prefix 目录</code></td>
+<td>按 install 规则复制已构建的产物和配套文件</td>
+</tr>
+</tbody></table></div>
+<p>一次 <code>cmake -S ... -B ...</code> 通常包含 configure 和 generate 两个阶段。configure 时执行 CMake 语言、创建 targets；generate 时根据完整依赖关系生成构建规则。build 才执行真正的编译工作。项目变更后 Ninja 可能自动触发重新配置，但初学时改完配置主动再运行一次 cmake 更容易看懂。</p>
+<p><code>ctest</code> 一般不会替你先编译新代码；运行前先 build。<code>cmake --install</code> 也不等于自动构建；先 build 再 install。启动服务器后修改 CPP，旧进程不会热更新。</p>
+<h3 id="section-93">先确认自己调用了哪套工具</h3>
+<pre><span class="language-label">powershell</span><code class="language-powershell">Get-Command cmake,g++,ninja
+cmake --version
+g++ --version
+ninja --version
+cmake --help
+</code></pre>
+<p><code>cmake --help</code> 的末尾列出本机可用生成器。Ninja 是构建工具；<code>-G Ninja</code> 是告诉 CMake 要生成它能读的规则。Visual Studio 和 Ninja Multi-Config 生成器使用不同目录布局和配置选择方式，C06 再讲。</p>
+<p>如果系统里有多套 GCC、Python、CMake，打印位置比只看“我已经安装了”更可靠。在 MSYS2 主线中保持 UCRT64 编译器、运行库和依赖一致。编辑器显示的编译器不一定等于终端 PATH 里最先找到的编译器。</p>
+<h3 id="section-94">三种目录，画出来再运行</h3>
+<p>源码目录保存 CMakeLists 和 cpp；构建目录保存 cache、目标文件和程序；当前工作目录决定相对命令路径和运行期相对数据路径。<code>-S</code> 指 source，<code>-B</code> 指 binary/build，它们与终端当前目录可以不同。</p>
+<pre><span class="language-label">text</span><code class="language-text">仓库根目录/                     ← 本篇默认终端位置
+  lessons/cmake/01_hello/        ← -S 指向这里，里面必须有 CMakeLists.txt
+  build/cmake01/                ← -B 指向这里，由 CMake 创建
+</code></pre>
+<p>不要把产物写进源码根目录再到处找垃圾文件；不要手工修改生成的 build.ninja，它下次生成会被覆盖。先学会描述工程，让工具维护派生产物。</p>
+<p><strong>实验</strong>：先只执行 C02 的 configure，观察 build 下出现 cache 和 Ninja 文件，但还没有 hello.exe；执行 build 后再找可执行文件。这样你就亲眼区分了“CMake 成功”和“程序编译成功”。</p>
+<h2 id="section-95">C02. 五行配置逐项解释，并观察一次增量构建</h2><div class="chapter-tools"><button class="complete-button" data-for="section-95">标记本章已学完</button></div>
+<p>第一阶段只有两个文件：</p>
+<p>文件：<code>lessons/cmake/01_hello/main.cpp</code></p>
+<pre><span class="language-label">cpp</span><code class="language-cpp">#include &lt;iostream&gt;
+int main() { std::cout &lt;&lt; &quot;Hello, CMake!\n&quot;; }
+</code></pre>
+<p>文件：<code>lessons/cmake/01_hello/CMakeLists.txt</code></p>
+<pre><span class="language-label">cmake</span><code class="language-cmake">cmake_minimum_required(VERSION 3.24)
+project(hello_cmake VERSION 1.0.0 LANGUAGES CXX)
+add_executable(hello main.cpp)
+target_compile_features(hello PRIVATE cxx_std_20)
+set_target_properties(hello PROPERTIES CXX_EXTENSIONS OFF)
+</code></pre>
+<p>第一行声明最低 CMake 版本并设置相应策略基线，版本不是 C++ 标准版本。第二行命名项目、设置版本、启用 CXX 语言；project 会触发编译器检测。第三行创建逻辑目标 hello，main.cpp 是相对此 CMakeLists 所在源码目录的源文件。第四行为这个目标提出至少 C++20 的编译能力要求。第五行关闭此目标的 C++ 扩展模式，避免不经意依赖 gnu++ 扩展。</p>
+<p><code>hello_cmake</code> 是项目名，<code>hello</code> 是 target 名，<code>hello.exe</code> 是本平台产物名；三者没有必须相同的规定。target 不只是一个文件名，它带有源码、头文件路径、编译特性和依赖关系。</p>
+<pre><span class="language-label">powershell</span><code class="language-powershell">cmake -S lessons/cmake/01_hello -B build/cmake01 -G Ninja -DCMAKE_BUILD_TYPE=Debug
+cmake --build build/cmake01 --parallel 2
+.\build\cmake01\hello.exe
+cmake --build build/cmake01 --verbose
+</code></pre>
+<p>预期程序输出 <code>Hello, CMake!</code>。最后一次没有更改文件，Ninja 通常报告 no work to do。修改 main.cpp 的文字，再 build，只需重新编译受影响的目标并链接。<code>--verbose</code> 在确实有构建工作时显示实际命令，不保证没有改动时也重打历史命令。</p>
+<h3 id="section-96">如果新增一个源文件</h3>
+<pre><span class="language-label">cmake</span><code class="language-cmake"># 替换原来的 add_executable 行，extra.cpp 需真实存在
+add_executable(hello main.cpp extra.cpp)
+# 或在已创建 hello 之后追加：target_sources(hello PRIVATE extra.cpp)
+</code></pre>
+<p>两种方式任选一种，不要把相同实验当成必须同时执行。头文件可以列在 sources 中改善 IDE 展示，但这并不替代 include 路径配置，也不会把普通头文件当独立 cpp 编译。不要 <code>#include &quot;extra.cpp&quot;</code> 来绕过链接问题。</p>
+<h3 id="section-97">为什么课程不用 GLOB 自动搜所有 cpp</h3>
+<p>明确列出源文件能让新增、删除在版本差异中直接出现。GLOB 可用于特定场景，但“新文件是否触发重新配置”和生成器行为需要理解；不要因为少写两行而把重要构建输入变隐含。文件很多时按模块拆 CMakeLists，C05 会做。</p>
+<p><strong>练习及答案</strong>：给 main.cpp 使用的函数创建声明和定义，把定义放 extra.cpp。若忘记把 extra.cpp 加入 target，通常是链接错误；若头文件位置不对，是编译错误。将两种故障各制造一次，保留第一条实质诊断，不必把整个红色日志都背下来。</p>
+<h2 id="section-98">C03. CMake 也是一种语言：参数、变量、列表、作用域</h2><div class="chapter-tools"><button class="complete-button" data-for="section-98">标记本章已学完</button></div>
+<h3 id="section-99">不把 C++ 和 CMake 语法混在一起</h3>
+<p>命令形式是 <code>命令名(参数...)</code>，不需要分号结束语句；<code>#</code> 开始注释。变量名常区分大小写，命令名不区分大小写。一般保持命令小写、自定义项目开关大写，帮助阅读。<code>set(name value)</code> 写变量，<code>${name}</code> 在参数中展开它。</p>
+<p>文件：<code>lessons/cmake/variables.cmake</code></p>
+<pre><span class="language-label">cmake</span><code class="language-cmake">set(label &quot;outer&quot;)
+set(parts alpha beta gamma)
+function(show_scope)
+  set(label &quot;inner&quot;)
+  message(STATUS &quot;function label=${label}&quot;)
+endfunction()
+show_scope()
+message(STATUS &quot;outside label=${label}&quot;)
+foreach(part IN LISTS parts)
+  message(STATUS &quot;part=${part}&quot;)
+endforeach()
+</code></pre>
+<p>运行这个脚本不需要 project，也不会编译 C++：</p>
+<pre><span class="language-label">powershell</span><code class="language-powershell">cmake -P lessons/cmake/variables.cmake
+</code></pre>
+<p>预期先看到 <code>function label=inner</code>，再看到 <code>outside label=outer</code>，随后依次 alpha、beta、gamma。function 建立变量作用域，内部同名变量不会直接改掉外面；<code>PARENT_SCOPE</code> 可以明确向上一层传值，但不要把它当全局变量通道乱用。macro 不建立相同的函数变量作用域，初学封装优先用 function。</p>
+<p><code>set(parts alpha beta gamma)</code> 存成分号分隔的列表。<code>foreach(part IN LISTS parts)</code> 遍历各项；<code>message(&quot;${parts}&quot;)</code> 看到一个整体字符串。路径里有空格时给展开加引号，例如 <code>&quot;${CMAKE_CURRENT_SOURCE_DIR}/include&quot;</code>。带分号的特殊路径仍有列表语义风险，学习工程优先选普通目录名。</p>
+<h3 id="section-100">认识几类相似但不同的变量</h3>
+<div class="table-scroll"><table>
+<thead>
+<tr>
+<th>名称</th>
+<th>从哪里来</th>
+<th>用在哪里</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>${MY_VALUE}</code></td>
+<td>普通变量或 cache 查找</td>
+<td>CMake 执行期间</td>
+</tr>
+<tr>
+<td><code>$ENV{PATH}</code></td>
+<td>当前 CMake 进程环境</td>
+<td>找工具、读取外部配置</td>
+</tr>
+<tr>
+<td><code>-DMY_OPTION=ON</code></td>
+<td>命令行写入 cache</td>
+<td>跨 configure 保存用户选择</td>
+</tr>
+<tr>
+<td><code>MY_DEFINE=1</code></td>
+<td>target_compile_definitions</td>
+<td>传给 C/C++ 预处理器</td>
+</tr>
+<tr>
+<td><code>$&lt;CONFIG:Debug&gt;</code></td>
+<td>生成器表达式</td>
+<td>生成/构建配置相关的目标属性</td>
+</tr>
+</tbody></table></div>
+<p><code>set(APP_PORT 8080)</code> 不会自动让 C++ 代码有 APP_PORT 宏，也不会设置程序运行时环境变量。要生成编译期常量可以 configure_file；最终服务器的 APP_PORT 则是在运行时用 getenv 读取，这是另外一层。</p>
+<h3 id="section-101">条件与目录作用域</h3>
+<pre><span class="language-label">cmake</span><code class="language-cmake"># 放在启用了 CXX 的 CMake 工程里，而不是单纯 -P 脚本中使用
+option(MY_ENABLE_LOGS &quot;Enable extra compile-time logging&quot; OFF)
+if(MY_ENABLE_LOGS)
+  message(STATUS &quot;Extra logs enabled&quot;)
+endif()
+if(CMAKE_CXX_COMPILER_ID STREQUAL &quot;GNU&quot;)
+  message(STATUS &quot;Using GCC&quot;)
+endif()
+</code></pre>
+<p><code>option</code> 创建 BOOL cache 选项；ON/OFF 是 CMake 的真假约定，和 C++ bool 不是同一个对象。STREQUAL 做字符串相等比较，MATCHES 使用正则表达式。include 在当前作用域执行文件；add_subdirectory 处理另一个目录，有自己的目录变量作用域并继承上层设置。</p>
+<p>常见路径变量：CMAKE_CURRENT_SOURCE_DIR 是正在处理目录的源码路径；CMAKE_CURRENT_BINARY_DIR 是其对应构建路径；PROJECT_SOURCE_DIR 是最近 project 的源码根；CMAKE_SOURCE_DIR 是最外层源码根。可复用子项目如果到处使用最外层根路径，嵌入别人的工程时容易失效。</p>
+<p><strong>练习</strong>：把脚本函数里的 label 改成不同值，预测外部输出；再增加 <code>set(result &quot;done&quot; PARENT_SCOPE)</code>，观察 result。<strong>参考</strong>：label 不变，新增 result 被带回调用处；不应为了修改 target 属性使用 PARENT_SCOPE，target_compile_options 等直接修改对应目标即可。</p>
+<h2 id="section-102">C04. 拆成静态库：PUBLIC、PRIVATE、INTERFACE 的真实用法</h2><div class="chapter-tools"><button class="complete-button" data-for="section-102">标记本章已学完</button></div>
+<p>第二阶段把函数放到库，让应用消费它。目录有意让 app 和 include 分开，避免编译器因恰好同目录而掩盖错误。</p>
+<p>文件：<code>lessons/cmake/02_library/include/greeting/greeting.hpp</code></p>
+<pre><span class="language-label">cpp</span><code class="language-cpp">#pragma once
+#include &lt;string&gt;
+#include &lt;string_view&gt;
+namespace greeting {
+std::string greet(std::string_view name);
+}
+</code></pre>
+<p>文件：<code>lessons/cmake/02_library/src/greeting.cpp</code></p>
+<pre><span class="language-label">cpp</span><code class="language-cpp">#include &quot;greeting/greeting.hpp&quot;
+namespace greeting {
+std::string greet(std::string_view name) { return &quot;Hello, &quot; + std::string{name} + &quot;!&quot;; }
+}
+</code></pre>
+<p>文件：<code>lessons/cmake/02_library/app/main.cpp</code></p>
+<pre><span class="language-label">cpp</span><code class="language-cpp">#include &quot;greeting/greeting.hpp&quot;
+#include &lt;iostream&gt;
+int main() {
+    const auto message = greeting::greet(&quot;CMake&quot;);
+    std::cout &lt;&lt; message &lt;&lt; &#39;\n&#39;;
+    return message == &quot;Hello, CMake!&quot; ? 0 : 1;
+}
+</code></pre>
+<p>文件：<code>lessons/cmake/02_library/CMakeLists.txt</code></p>
+<pre><span class="language-label">cmake</span><code class="language-cmake">cmake_minimum_required(VERSION 3.24)
+project(greeting_demo LANGUAGES CXX)
+set(CMAKE_CXX_EXTENSIONS OFF)
+add_library(greeting STATIC src/greeting.cpp)
+target_include_directories(greeting PUBLIC &quot;${CMAKE_CURRENT_SOURCE_DIR}/include&quot;)
+target_compile_features(greeting PUBLIC cxx_std_20)
+add_executable(greeting_app app/main.cpp)
+target_link_libraries(greeting_app PRIVATE greeting)
+include(CTest)
+if(BUILD_TESTING)
+  add_test(NAME greeting_output COMMAND greeting_app)
+endif()
+</code></pre>
+<pre><span class="language-label">powershell</span><code class="language-powershell">cmake -S lessons/cmake/02_library -B build/cmake02 -G Ninja -DCMAKE_BUILD_TYPE=Debug
+cmake --build build/cmake02 --verbose
+ctest --test-dir build/cmake02 --output-on-failure --no-tests=error
+.\build\cmake02\greeting_app.exe
+</code></pre>
+<p>输出 <code>Hello, CMake!</code>。构建先把 greeting.cpp 编译成目标文件，再归档成静态库；应用编译 main.cpp，再把必要的库代码链接进程序。静态库归档不是一个普通可运行进程，也通常不是最终解析所有外部符号的步骤。</p>
+<h3 id="section-103">include 路径从哪里来</h3>
+<p>源代码写 <code>#include &quot;greeting/greeting.hpp&quot;</code>，因此搜索根应是 include，而不是 include/greeting。库自己的 cpp 需要此搜索根，应用在包含公开头时也需要，于是标为 PUBLIC。</p>
+<div class="table-scroll"><table>
+<thead>
+<tr>
+<th>关键字</th>
+<th>当前 target 使用要求</th>
+<th>消费当前 target 的目标得到要求</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>PRIVATE</td>
+<td>有</td>
+<td>不传播该编译使用要求</td>
+</tr>
+<tr>
+<td>PUBLIC</td>
+<td>有</td>
+<td>有</td>
+</tr>
+<tr>
+<td>INTERFACE</td>
+<td>本目标不用</td>
+<td>有</td>
+</tr>
+</tbody></table></div>
+<p>这张表用于理解 include、编译特性等使用要求。静态库的 PRIVATE 链接依赖可能仍需要传递到最终链接步骤，不能推导为“PRIVATE 的库绝不会出现在程序链接命令中”。编译使用要求与最终链接需要分别分析，详见 <a href="https://cmake.org/cmake/help/v3.24/command/target_link_libraries.html" target="_blank" rel="noopener noreferrer">target_link_libraries 官方说明</a>。</p>
+<p>应用 <code>target_link_libraries(greeting_app PRIVATE greeting)</code> 获得 greeting 的使用要求，包括 include 和 C++20；PRIVATE 的意思是应用不再将这条依赖作为自己的公开接口向下传播，不是拒绝继承 greeting 的 PUBLIC 配置。</p>
+<h3 id="section-104">一个能真正观察差异的故障实验</h3>
+<p>在你复制的实验目录中，把 greeting 的 include 改 PRIVATE。库自己仍能编译，但 app 找不到 greeting/greeting.hpp，说明要求未传播。恢复 PUBLIC；重新 configure/build 应通过。不要为了救急给全局 include_directories 加所有路径，这会掩盖真实依赖。</p>
+<p>把库改为 INTERFACE 不能直接“省略 cpp 编译”：普通有实现的 cpp 必须编译。header-only 库才可用 <code>add_library(name INTERFACE)</code> 包装 include 和特性。INTERFACE target 本身通常没有 .a/.lib 产物。</p>
+<p>STATIC、SHARED、OBJECT 分别表示静态库、共享库、目标文件集合。共享库还涉及导出符号和运行时加载路径，尤其 Windows DLL；不能假设把 STATIC 改为 SHARED 后所有平台交付自然完整。本课程先把静态库链路做对。</p>
+<p><strong>练习</strong>：增加 goodbye 声明和实现并从应用调用。只改库 cpp 时，应用 cpp 通常不用重编译，但应用需要重新链接；改公开头可能导致库和应用都重新编译。用 --verbose 对照你的预测。</p>
+<h2 id="section-105">C05. 多目录工程：配置文件如何协作，生成头文件放哪里</h2><div class="chapter-tools"><button class="complete-button" data-for="section-105">标记本章已学完</button></div>
+<p>第三阶段叫 TaskKit，是一个独立的小型标题校验库。它提供小应用和测试，最后安装供第四阶段消费。此处的标题校验只用于构建教学，规则不完全等同于后端的控制字符及 UTF-8 校验。</p>
+<pre><span class="language-label">text</span><code class="language-text">03_project/
+  CMakeLists.txt
+  CMakePresets.json
+  include/taskkit/title.hpp
+  src/CMakeLists.txt、title.cpp
+  app/CMakeLists.txt、main.cpp
+  tests/CMakeLists.txt、title_test.cpp
+  cmake/Warnings.cmake、config.hpp.in、TaskKitConfig.cmake.in
+</code></pre>
+<p>完整根配置如下。第一次先关注 option/include/configure_file/add_subdirectory；后半段 install/export 留到 C09 再拆解。这个文件是完整可构建版本，不需要读者猜测省略的部分。</p>
+<p>文件：<code>lessons/cmake/03_project/CMakeLists.txt</code></p>
+<pre><span class="language-label">cmake</span><code class="language-cmake">cmake_minimum_required(VERSION 3.24)
+project(TaskKit VERSION 1.0.0 LANGUAGES CXX)
+set(CMAKE_CXX_EXTENSIONS OFF)
+set(CMAKE_EXPORT_COMPILE_COMMANDS ON)
+option(TASKKIT_BUILD_APP &quot;Build the demo executable&quot; ON)
+include(CTest)
+include(GNUInstallDirs)
+include(CMakePackageConfigHelpers)
+include(cmake/Warnings.cmake)
+
+configure_file(cmake/config.hpp.in generated/taskkit/config.hpp @ONLY)
+add_subdirectory(src)
+if(TASKKIT_BUILD_APP)
+  add_subdirectory(app)
+endif()
+if(BUILD_TESTING)
+  add_subdirectory(tests)
+endif()
+
+install(TARGETS taskkit EXPORT TaskKitTargets
+  ARCHIVE DESTINATION ${CMAKE_INSTALL_LIBDIR})
+if(TASKKIT_BUILD_APP)
+  install(TARGETS taskkit_app RUNTIME DESTINATION ${CMAKE_INSTALL_BINDIR})
+endif()
+install(DIRECTORY include/ DESTINATION ${CMAKE_INSTALL_INCLUDEDIR})
+install(EXPORT TaskKitTargets NAMESPACE TaskKit::
+  DESTINATION ${CMAKE_INSTALL_LIBDIR}/cmake/TaskKit)
+configure_package_config_file(cmake/TaskKitConfig.cmake.in
+  &quot;${CMAKE_CURRENT_BINARY_DIR}/TaskKitConfig.cmake&quot;
+  INSTALL_DESTINATION ${CMAKE_INSTALL_LIBDIR}/cmake/TaskKit)
+write_basic_package_version_file(&quot;${CMAKE_CURRENT_BINARY_DIR}/TaskKitConfigVersion.cmake&quot;
+  VERSION ${PROJECT_VERSION} COMPATIBILITY SameMajorVersion)
+install(FILES &quot;${CMAKE_CURRENT_BINARY_DIR}/TaskKitConfig.cmake&quot;
+  &quot;${CMAKE_CURRENT_BINARY_DIR}/TaskKitConfigVersion.cmake&quot;
+  DESTINATION ${CMAKE_INSTALL_LIBDIR}/cmake/TaskKit)
+</code></pre>
+<p>根文件管理全局选择和模块顺序；模块内部管理自己的 target。set(CMAKE_CXX_EXTENSIONS OFF) 为之后创建的目标初始化默认属性，而不是神奇地回头改掉所有已经创建的目标。使用项目级默认值要注意出现位置。</p>
+<p>文件：<code>lessons/cmake/03_project/cmake/Warnings.cmake</code></p>
+<pre><span class="language-label">cmake</span><code class="language-cmake">function(taskkit_warnings target_name)
+  if(MSVC)
+    target_compile_options(${target_name} PRIVATE /W4 /permissive- /utf-8)
+  else()
+    target_compile_options(${target_name} PRIVATE -Wall -Wextra -Wpedantic -Wconversion -Wshadow)
+  endif()
+endfunction()
+</code></pre>
+<p>这里没有把警告选项公开传播给别人的代码，每个本项目目标显式调用 taskkit_warnings。MSVC 使用 /W4 等参数，GCC/Clang 使用 -Wall 等参数，不能把某家编译器参数无条件复制给另一家。</p>
+<p>文件：<code>lessons/cmake/03_project/src/CMakeLists.txt</code></p>
+<pre><span class="language-label">cmake</span><code class="language-cmake">add_library(taskkit STATIC title.cpp)
+add_library(TaskKit::taskkit ALIAS taskkit)
+target_compile_features(taskkit PUBLIC cxx_std_20)
+target_include_directories(taskkit
+  PUBLIC
+    &quot;$&lt;BUILD_INTERFACE:${PROJECT_SOURCE_DIR}/include&gt;&quot;
+    &quot;$&lt;INSTALL_INTERFACE:${CMAKE_INSTALL_INCLUDEDIR}&gt;&quot;
+  PRIVATE &quot;${PROJECT_BINARY_DIR}/generated&quot;)
+taskkit_warnings(taskkit)
+</code></pre>
+<p>TaskKit::taskkit 是 taskkit 的别名，不会再编译一次。带 <code>::</code> 的名字清楚表达一个有命名空间的 target，拼错时也更容易得到明确诊断。</p>
+<p>BUILD_INTERFACE 给源码树内消费者使用 include 路径；INSTALL_INTERFACE 给安装后消费者使用安装前缀下的 include 路径。generated 头只被 title.cpp 使用，因此是 PRIVATE。如果某个公开头也包含它，就必须重新设计安装与可见性，而不能靠碰巧存在的 build 目录。</p>
+<p>文件：<code>lessons/cmake/03_project/include/taskkit/title.hpp</code></p>
+<pre><span class="language-label">cpp</span><code class="language-cpp">#pragma once
+#include &lt;string&gt;
+#include &lt;string_view&gt;
+namespace taskkit {
+bool valid_title(std::string_view text);
+std::string version();
+}
+</code></pre>
+<p>文件：<code>lessons/cmake/03_project/src/title.cpp</code></p>
+<pre><span class="language-label">cpp</span><code class="language-cpp">#include &quot;taskkit/title.hpp&quot;
+#include &quot;taskkit/config.hpp&quot;
+namespace taskkit {
+bool valid_title(std::string_view text) {
+    if (text.empty() || text.size() &gt; 200) return false;
+    // 本实验只识别 ASCII 的六种空白，不是完整 Unicode 空白规则。
+    return text.find_first_not_of(&quot; \t\n\r\f\v&quot;) != std::string_view::npos;
+}
+std::string version() { return TASKKIT_VERSION; }
+}
+</code></pre>
+<p>文件：<code>lessons/cmake/03_project/cmake/config.hpp.in</code></p>
+<pre><span class="language-label">cpp</span><code class="language-cpp">#pragma once
+#define TASKKIT_VERSION &quot;@PROJECT_VERSION@&quot;
+</code></pre>
+<p>根文件的 configure_file 把模板里的 PROJECT_VERSION 替换成 1.0.0，输出到<strong>构建树</strong>的 generated/taskkit/config.hpp。不要改生成文件，应该改模板或版本，再重新配置。<code>@ONLY</code> 让它只展开 @VAR@ 形式，避免误处理希望保留的 <code>${...}</code> 文本。相关语义见 <a href="https://cmake.org/cmake/help/v3.24/command/configure_file.html" target="_blank" rel="noopener noreferrer">configure_file</a>。</p>
+<p>文件：<code>lessons/cmake/03_project/app/CMakeLists.txt</code></p>
+<pre><span class="language-label">cmake</span><code class="language-cmake">add_executable(taskkit_app main.cpp)
+target_link_libraries(taskkit_app PRIVATE TaskKit::taskkit)
+taskkit_warnings(taskkit_app)
+</code></pre>
+<p>文件：<code>lessons/cmake/03_project/app/main.cpp</code></p>
+<pre><span class="language-label">cpp</span><code class="language-cpp">#include &quot;taskkit/title.hpp&quot;
+#include &lt;iostream&gt;
+int main() {
+    std::cout &lt;&lt; &quot;TaskKit &quot; &lt;&lt; taskkit::version() &lt;&lt; &#39;\n&#39;
+              &lt;&lt; std::boolalpha &lt;&lt; taskkit::valid_title(&quot;learn&quot;) &lt;&lt; &#39;\n&#39;;
+}
+</code></pre>
+<pre><span class="language-label">powershell</span><code class="language-powershell">cmake -S lessons/cmake/03_project -B build/cmake03 -G Ninja -DCMAKE_BUILD_TYPE=Debug
+cmake --build build/cmake03 --parallel 2
+.\build\cmake03\app\taskkit_app.exe
+</code></pre>
+<p>预期两行：<code>TaskKit 1.0.0</code>、<code>true</code>。多目录示例产物在 app 子目录，别把主后端项目的平铺路径机械照搬过来。<code>cmake --build build/cmake03 --target taskkit</code> 只构建库及它的必要依赖，不构建所有应用和测试。</p>
+<p><strong>练习</strong>：用 <code>-DTASKKIT_BUILD_APP=OFF</code> 配置新的 build/cmake03-libonly，确认还能构建库和测试。解释为什么 src 必须在 app/tests 之前可用。已有同名 executable 残留不会自动代表当前配置仍构建它，因此实验优先使用新 build 目录。</p>
+<h2 id="section-106">C06. Cache、Presets、Debug/Release 与工具链选择</h2><div class="chapter-tools"><button class="complete-button" data-for="section-106">标记本章已学完</button></div>
+<h3 id="section-107">Cache 是用户配置的持久化记录</h3>
+<p>CMakeCache.txt 保存编译器路径、生成器、选项、包查找结果等。普通变量在一次配置的作用域里存在，cache 项保存在构建树内，下次配置可以继续使用。<code>option(X ... ON)</code> 是默认值，不应强行覆盖用户上次选定的 OFF。</p>
+<pre><span class="language-label">powershell</span><code class="language-powershell">cmake -LAH -N build/cmake03
+cmake -S lessons/cmake/03_project -B build/cmake03 -DTASKKIT_BUILD_APP=OFF
+cmake -S lessons/cmake/03_project -B build/cmake03 -DTASKKIT_BUILD_APP=ON
+</code></pre>
+<p><code>-N</code> 只查看而不执行通常的配置/生成，<code>-LAH</code> 展示非高级/高级 cache 值及帮助说明。不要把 cache 当项目源文件提交。更换编译器、体系结构或生成器时使用新构建目录最清楚。</p>
+<p>3.24 提供 <code>--fresh</code> 可重建配置缓存，但它不等于保证清空所有旧产物，更不是对运行中数据的清理工具。初学排错建议直接用新的 build/cmake03-retry 目录，保留旧日志方便比较。</p>
+<h3 id="section-108">单配置与多配置</h3>
+<p>Ninja、Unix Makefiles 常用单配置：configure 时用 CMAKE_BUILD_TYPE 选择 Debug/Release，一个构建树主要对应一个配置。Ninja Multi-Config、Visual Studio 是多配置：构建时 <code>--config Debug</code>，测试 <code>-C Debug</code>，安装 <code>--config Debug</code>。不要用 CMAKE_BUILD_TYPE 来控制后者。</p>
+<pre><span class="language-label">powershell</span><code class="language-powershell"># 独立可选实验：同一 build 树保留多种配置
+cmake -S lessons/cmake/03_project -B build/cmake03-multi -G &quot;Ninja Multi-Config&quot;
+cmake --build build/cmake03-multi --config Debug
+ctest --test-dir build/cmake03-multi -C Debug --output-on-failure --no-tests=error
+.\build\cmake03-multi\app\Debug\taskkit_app.exe
+</code></pre>
+<p>Debug 通常更方便断点与局部变量观察；Release 通常启用优化，但不是“无需测试的正式版”。优化、符号、NDEBUG 等具体参数应看实际构建命令，RelWithDebInfo 可同时提供一定优化与调试信息。不把 assert 当全部测试，因为常见 Release 配置会禁用它。</p>
+<h3 id="section-109">Presets 记录团队常用组合</h3>
+<p>文件：<code>lessons/cmake/03_project/CMakePresets.json</code></p>
+<pre><span class="language-label">json</span><code class="language-json">{
+  &quot;version&quot;: 5,
+  &quot;cmakeMinimumRequired&quot;: {&quot;major&quot;: 3, &quot;minor&quot;: 24, &quot;patch&quot;: 0},
+  &quot;configurePresets&quot;: [
+    {&quot;name&quot;: &quot;debug&quot;, &quot;generator&quot;: &quot;Ninja&quot;, &quot;binaryDir&quot;: &quot;${sourceDir}/build/debug&quot;,
+     &quot;cacheVariables&quot;: {&quot;CMAKE_BUILD_TYPE&quot;: &quot;Debug&quot;, &quot;BUILD_TESTING&quot;: &quot;ON&quot;}},
+    {&quot;name&quot;: &quot;release&quot;, &quot;inherits&quot;: &quot;debug&quot;, &quot;binaryDir&quot;: &quot;${sourceDir}/build/release&quot;,
+     &quot;cacheVariables&quot;: {&quot;CMAKE_BUILD_TYPE&quot;: &quot;Release&quot;}}
+  ],
+  &quot;buildPresets&quot;: [
+    {&quot;name&quot;: &quot;debug&quot;, &quot;configurePreset&quot;: &quot;debug&quot;, &quot;jobs&quot;: 2},
+    {&quot;name&quot;: &quot;release&quot;, &quot;configurePreset&quot;: &quot;release&quot;, &quot;jobs&quot;: 2}
+  ],
+  &quot;testPresets&quot;: [
+    {&quot;name&quot;: &quot;debug&quot;, &quot;configurePreset&quot;: &quot;debug&quot;, &quot;output&quot;: {&quot;outputOnFailure&quot;: true},
+     &quot;execution&quot;: {&quot;noTestsAction&quot;: &quot;error&quot;}},
+    {&quot;name&quot;: &quot;release&quot;, &quot;configurePreset&quot;: &quot;release&quot;, &quot;output&quot;: {&quot;outputOnFailure&quot;: true},
+     &quot;execution&quot;: {&quot;noTestsAction&quot;: &quot;error&quot;}}
+  ]
+}
+</code></pre>
+<p>version 5 是预设文件格式版本，不是项目版本。configurePresets 记录生成器、构建目录与 cache；buildPresets 关联 configurePreset 并设置并行数；testPresets 设置输出和无测试时的失败行为。release 继承 debug 的公共项，再覆盖 build type 与 binaryDir。</p>
+<pre><span class="language-label">powershell</span><code class="language-powershell">Push-Location lessons/cmake/03_project
+cmake --list-presets
+cmake --preset debug
+cmake --build --preset debug
+ctest --preset debug
+cmake --preset release
+cmake --build --preset release
+ctest --preset release
+Pop-Location
+</code></pre>
+<p>Push-Location 进入这个<strong>独立工程</strong>，否则在仓库根目录执行 --preset debug 会配置主后端工程。<code>${sourceDir}</code> 指预设所在项目的源码根。不能把 JSON 里的宏语法照搬到 PowerShell。</p>
+<p>CMakePresets.json 提交给团队；个人机器路径放 CMakeUserPresets.json 并忽略提交。个人预设可继承公共 debug，指定自己的工具链；不要把 <code>D:/某人电脑/编译器</code> 写入团队默认。官方对共享和本地预设的区别见 <a href="https://cmake.org/cmake/help/v3.24/manual/cmake-presets.7.html" target="_blank" rel="noopener noreferrer">Presets 说明</a>。</p>
+<h3 id="section-110">工具链必须在首次语言检测前确定</h3>
+<pre><span class="language-label">powershell</span><code class="language-powershell"># 可选：把路径换成本机真实存在的编译器，使用全新 build 目录
+cmake -S lessons/cmake/03_project -B build/cmake03-gcc -G Ninja &#39;-DCMAKE_CXX_COMPILER=C:/msys64/ucrt64/bin/g++.exe&#39;
+</code></pre>
+<p>设置编译器路径不保证 Ninja、链接器、运行时 DLL 自动就绪；终端 PATH 仍要合理。也可在第一次 configure 前设置 CXX 环境变量，已有 cache 时它通常不会覆盖原选择。不要在 project() 之后突然换编译器。</p>
+<p>交叉编译工具链文件会描述目标系统、处理器、编译器和 sysroot；那时编译产物不一定能在主机直接执行，CTest 需要目标机或模拟器。此篇不假装一个通用 toolchain 模板能适配所有嵌入式平台，先掌握本机的可复现链路。</p>
+<p><strong>练习与答案</strong>：用两个 build 目录分别构建 Debug/Release，查看是否各有 cache；给 library-only 配置关闭 BUILD_TESTING，<code>ctest -N</code> 应找不到本项目测试，不能把这一结果当测试通过。</p>
+<h2 id="section-111">C07. 第三方依赖：源码、find_package、FetchContent 与包管理器</h2><div class="chapter-tools"><button class="complete-button" data-for="section-111">标记本章已学完</button></div>
+<h3 id="section-112">先识别你手中拿到的到底是什么</h3>
+<p>只有头文件的库常用 INTERFACE target；有 cpp/c 源码的库需要编译；预编译库需要与当前平台、架构、编译器 ABI 和运行库兼容。头文件能被找到不代表链接就会成功；链接成功也不代表运行时 DLL 一定能找到。</p>
+<p>最终后端采用 vendored 源码：third_party 随项目附带，版本、许可证与摘要记录在 NOTICE 中。优点是离线和固定输入，代价是仓库变大、升级和漏洞跟踪由维护者负责。新学习项目不要一开始同时混用多个来源的同一个库。</p>
+<pre><span class="language-label">cmake</span><code class="language-cmake"># 概念片段：已准备相应路径时才能使用
+add_library(json_vendor INTERFACE)
+target_include_directories(json_vendor SYSTEM INTERFACE &quot;${CMAKE_CURRENT_SOURCE_DIR}/third_party/json&quot;)
+target_link_libraries(my_app PRIVATE json_vendor)
+</code></pre>
+<p>SYSTEM 通常把该 include 作为系统头目录处理以减少外部警告，但不表示“安全可信”；my_app 必须已创建。INTERFACE 目标也通过 target_link_libraries 使用，因为这个命令表达的不只是 .lib/.a 链接，还包括使用要求。</p>
+<h3 id="section-113">find_package 搜索已提供的包配置</h3>
+<pre><span class="language-label">cmake</span><code class="language-cmake"># C09 的真实实验会安装并查找到这个包
+find_package(TaskKit 1 CONFIG REQUIRED)
+target_link_libraries(consumer PRIVATE TaskKit::taskkit)
+</code></pre>
+<p>CONFIG 模式找 TaskKitConfig.cmake / taskkit-config.cmake。Module 模式找 FindTaskKit.cmake，模块可能来自 CMake 自带或你设置的 CMAKE_MODULE_PATH。CMAKE_PREFIX_PATH 提供安装前缀搜索提示；TaskKit_DIR 则可指向具体 Config 文件所在目录。不要把前者指成 include 子目录后期待自动解决所有事情。</p>
+<p>find_package 通常负责查找和加载使用信息，不等于默认联网安装软件。依赖提供器/包管理器集成可能改变查找流程，所以看清项目实际配置。优先消费库给出的 imported target，它能携带头路径、链接产物和依赖，不要手写几十个绝对 .a 路径。</p>
+<h3 id="section-114">FetchContent 在配置时取得源码</h3>
+<p>下面是独立联网方案的示意，<strong>没有加入本教程默认构建，也未在本次离线实验中执行</strong>：</p>
+<pre><span class="language-label">cmake</span><code class="language-cmake">include(FetchContent)
+FetchContent_Declare(json
+  GIT_REPOSITORY https://github.com/nlohmann/json.git
+  GIT_TAG v3.12.0
+  GIT_SHALLOW TRUE)
+FetchContent_MakeAvailable(json)
+# 在 add_executable(my_app ...) 之后
+target_link_libraries(my_app PRIVATE nlohmann_json::nlohmann_json)
+</code></pre>
+<p>第一次配置需要网络和 Git；受限网络失败不是 C++ 语法错误。课程用固定版本标签演示，严格复现发布更应固定不可变提交或带校验和的归档，记录依赖更新原因。不能把分支 main 当永远不变的输入。与构建时才下载的 ExternalProject 相比，这里需要配置阶段拿到内容，见 <a href="https://cmake.org/cmake/help/v3.24/module/FetchContent.html" target="_blank" rel="noopener noreferrer">FetchContent 官方文档</a>。</p>
+<h3 id="section-115">vcpkg / Conan 的定位</h3>
+<p>包管理器解决依赖取得、版本与构建组合；CMake 继续描述自己工程的 target。以 vcpkg 为例，常在首次 configure 提供它的 toolchain 文件，并用 manifest 记录依赖；Conan 常产生可供 CMake 查找的配置和工具链。具体命令随版本变化，使用时查各自官方文档，不把一个历史安装脚本当普适真理。</p>
+<p>在 Windows 上不要把 MSVC 编译的 C++ 库随意塞给 MinGW GCC，也不要混搭 32/64 位、不同 CRT 或不兼容标准库。静态/动态链接、运行库选择和许可证均要了解。C 接口也需要确认调用约定和 ABI，不代表所有二进制随便互换。</p>
+<p><strong>练习</strong>：从最终项目指出 httplib、json、sqlite 分别是哪种包装 target，找出哪个实际编译了 .c。<strong>参考</strong>：httplib/json 是 INTERFACE，sqlite3_vendor 是 STATIC；SQLite 源码使用 C 编译，因此 project 启用了 C 和 CXX。</p>
+<h2 id="section-116">C08. 测试与调试：让构建结果有可检查的行为</h2><div class="chapter-tools"><button class="complete-button" data-for="section-116">标记本章已学完</button></div>
+<p>文件：<code>lessons/cmake/03_project/tests/CMakeLists.txt</code></p>
+<pre><span class="language-label">cmake</span><code class="language-cmake">add_executable(title_test title_test.cpp)
+target_link_libraries(title_test PRIVATE TaskKit::taskkit)
+taskkit_warnings(title_test)
+add_test(NAME title_rules COMMAND title_test)
+</code></pre>
+<p>文件：<code>lessons/cmake/03_project/tests/title_test.cpp</code></p>
+<pre><span class="language-label">cpp</span><code class="language-cpp">#include &quot;taskkit/title.hpp&quot;
+#include &lt;iostream&gt;
+#include &lt;string&gt;
+int main() {
+    int failures{};
+    const auto check = [&amp;failures](bool ok, const char* name) {
+        if (!ok) { ++failures; std::cerr &lt;&lt; &quot;FAIL: &quot; &lt;&lt; name &lt;&lt; &#39;\n&#39;; }
+    };
+    check(taskkit::valid_title(&quot;learn&quot;), &quot;ordinary title&quot;);
+    check(!taskkit::valid_title(&quot;&quot;), &quot;empty title&quot;);
+    check(!taskkit::valid_title(&quot; \t&quot;), &quot;whitespace title&quot;);
+    check(taskkit::valid_title(std::string(200, &#39;a&#39;)), &quot;200-byte boundary&quot;);
+    check(!taskkit::valid_title(std::string(201, &#39;a&#39;)), &quot;201-byte boundary&quot;);
+    check(taskkit::version() == &quot;1.0.0&quot;, &quot;configured version&quot;);
+    return failures == 0 ? 0 : 1;
+}
+</code></pre>
+<p>根目录 include(CTest) 提供 BUILD_TESTING 选项并在启用时打开测试支持。tests 子目录只有选项开启时才加入；add_test 注册一个测试，COMMAND title_test 引用可执行目标，让 CMake 处理平台后缀和配置路径。</p>
+<p>测试程序有六个检查：普通标题、空串、纯 ASCII 空白、200 字节、201 字节和配置版本。失败时输出具体检查名字并返回非零。一个 CTest 条目可以包含多个内部检查，因此“1 个测试目标”与“6 项断言条件”不是同一统计。</p>
+<pre><span class="language-label">powershell</span><code class="language-powershell">cmake --build build/cmake03 --target title_test
+ctest --test-dir build/cmake03 -N
+ctest --test-dir build/cmake03 -R title_rules --output-on-failure --no-tests=error
+ctest --test-dir build/cmake03 -R title_rules -V
+</code></pre>
+<p><code>-N</code> 列出但不运行；<code>-R</code> 按正则筛选；--output-on-failure 保留失败输出；-V 展示更详细的测试命令和输出。<code>--no-tests=error</code> 避免因为名字写错或没有注册测试而空跑成功。</p>
+<h3 id="section-117">做一个真能抓住错误的实验</h3>
+<p>在你复制的实验中把长度上限从 200 改成 199，重新 build/test。200-byte boundary 应失败；恢复后再通过。只运行 CTest 而不 build，可能还在测试旧程序，这正是本章要求你主动观察的陷阱。</p>
+<p>Release 中测试仍应有效。本例没有把所有断言写成 assert，而是普通运行时判断；因此不会随 NDEBUG 消失。编译成功是语法和链接层的检查，测试检查行为，两者不能互相替代。</p>
+<h3 id="section-118">compile_commands.json 与编辑器</h3>
+<p>CMAKE_EXPORT_COMPILE_COMMANDS 在支持的生成器上输出每个源文件的真实编译命令，可供 clangd 和分析工具使用。编辑器只显示红线但命令行构建成功时，先看它是否读取了正确构建树、标准版本和 include 路径。不要为消除编辑器红线把项目逻辑改坏。</p>
+<p>Ninja 主线可通过 CMake Tools 选择项目与 preset，或让 clangd 指向相应 build 目录。不同时启用多个互相争夺补全和诊断的 C++ 语言服务器；具体设置按所用扩展文档选择。本教程提供命令行作为独立可验证的基准。</p>
+<h3 id="section-119">调试时先保证程序和源码对应</h3>
+<pre><span class="language-label">powershell</span><code class="language-powershell">gdb .\build\cmake03\tests\title_test.exe
+</code></pre>
+<p>在 GDB 内输入 <code>break taskkit::valid_title</code>、<code>run</code>、<code>next</code>、<code>print text</code>、<code>bt</code>、<code>continue</code>、<code>quit</code>。不同标准库的漂亮打印支持影响 string_view 的显示，可先查看字段或更简单局部变量。若优化后变量消失，先改 Debug 并重新构建，而不是断言调试器坏了。</p>
+<p>ASan/UBSan 等检测需编译和链接两侧配置，且依赖工具链与平台支持；主后端的 TASK_ENABLE_SANITIZERS 明确只为 Linux GCC/Clang 开启。不要把 <code>-fsanitize</code> 无条件复制到 MSVC/当前 Windows 教学路线。</p>
+<p><strong>验收</strong>：能让测试主动失败并说明是哪条规则被破坏；能指出测试启动的是哪个 executable；能确认 Release 的检查依旧执行。</p>
+<h2 id="section-120">C09. install 与 export：让另一个项目只依赖安装结果</h2><div class="chapter-tools"><button class="complete-button" data-for="section-120">标记本章已学完</button></div>
+<h3 id="section-121">安装可执行文件和交付可复用库是两种需求</h3>
+<p>主后端 install 只安装 task_server 到 bin，用于运行程序。TaskKit 还需要公开头、静态库、导出的 target 信息和包配置，另一个 CMake 工程才能 <code>find_package</code>。不能只复制头文件就声称库交付完成。</p>
+<p>根配置里 <code>install(TARGETS taskkit EXPORT TaskKitTargets ...)</code> 把库加入导出集合；<code>install(EXPORT ... NAMESPACE TaskKit:: ...)</code> 写出 target 定义；<code>install(DIRECTORY include/ ...)</code> 安装公开头，注意 include/ 的结尾斜杠表示复制其内容。</p>
+<p><code>GNUInstallDirs</code> 提供 bin、lib、include 的惯常变量，避免处处硬写平台目录。静态库使用 ARCHIVE，动态库常还涉及 LIBRARY/RUNTIME 等类别；Windows 的运行时 DLL 与导入库也需要分别考虑。本实验限定静态库。</p>
+<p>文件：<code>lessons/cmake/03_project/cmake/TaskKitConfig.cmake.in</code></p>
+<pre><span class="language-label">cmake</span><code class="language-cmake">@PACKAGE_INIT@
+include(&quot;${CMAKE_CURRENT_LIST_DIR}/TaskKitTargets.cmake&quot;)
+check_required_components(TaskKit)
+</code></pre>
+<p>configure_package_config_file 生成包入口并处理安装前缀相关内容，入口通过自身文件所在目录加载 Targets；write_basic_package_version_file 生成版本匹配信息。SameMajorVersion 表达同主版本的兼容策略，实际 API/ABI 是否兼容仍由作者维护，配置声明不是自动证明。</p>
+<h3 id="section-122">完整安装及消费命令</h3>
+<p>先确认 C05 已完成构建，再运行：</p>
+<pre><span class="language-label">powershell</span><code class="language-powershell">$taskkitPrefix = Join-Path $PWD &#39;install/taskkit&#39;
+cmake --install build/cmake03 --prefix &quot;$taskkitPrefix&quot;
+cmake -S lessons/cmake/04_consumer -B build/cmake04 -G Ninja -DCMAKE_BUILD_TYPE=Debug &quot;-DCMAKE_PREFIX_PATH=$taskkitPrefix&quot;
+cmake --build build/cmake04 --parallel 2
+ctest --test-dir build/cmake04 --output-on-failure --no-tests=error
+.\build\cmake04\consumer.exe
+</code></pre>
+<p>第四阶段的完整文件：</p>
+<p>文件：<code>lessons/cmake/04_consumer/CMakeLists.txt</code></p>
+<pre><span class="language-label">cmake</span><code class="language-cmake">cmake_minimum_required(VERSION 3.24)
+project(taskkit_consumer LANGUAGES CXX)
+set(CMAKE_CXX_EXTENSIONS OFF)
+find_package(TaskKit 1 CONFIG REQUIRED)
+add_executable(consumer main.cpp)
+target_link_libraries(consumer PRIVATE TaskKit::taskkit)
+include(CTest)
+if(BUILD_TESTING)
+  add_test(NAME installed_package COMMAND consumer)
+endif()
+</code></pre>
+<p>文件：<code>lessons/cmake/04_consumer/main.cpp</code></p>
+<pre><span class="language-label">cpp</span><code class="language-cpp">#include &lt;taskkit/title.hpp&gt;
+#include &lt;iostream&gt;
+int main() {
+    std::cout &lt;&lt; &quot;Imported TaskKit &quot; &lt;&lt; taskkit::version() &lt;&lt; &#39;\n&#39;;
+    return taskkit::valid_title(&quot;external app&quot;) &amp;&amp; !taskkit::valid_title(&quot;&quot;) ? 0 : 1;
+}
+</code></pre>
+<p>预期 <code>Imported TaskKit 1.0.0</code>。consumer 没有把第三阶段源码 add_subdirectory 进来，也没有硬写其 build 路径。它通过安装前缀取得 include、库和 C++ 标准使用要求。</p>
+<h3 id="section-123">安装后复用的四种常见错误</h3>
+<p>一是只装 .a 不装头，编译阶段找不到声明；二是装了头但没写 Config/Targets，find_package 找不到包；三是导出接口仍包含开发者电脑上的源码绝对路径，换目录就坏；四是包被找到但 ABI 不兼容，编译/链接/运行仍可能失败。</p>
+<p>本例 BUILD_INTERFACE/INSTALL_INTERFACE 把开发路径和安装路径分开；generated 头只用于构建库，所以不需要安装。如果公开接口依赖其他库，包配置可能需要 <code>find_dependency</code> 查找传递依赖，不能只把自己的 Target 文件扔给消费者。</p>
+<h3 id="section-124">可移动安装位置实验</h3>
+<p>把 install/taskkit 复制到另一个新的目录，用新的 build/cmake04-relocated 配置消费者，CMAKE_PREFIX_PATH 指向复制位置。检查生成的编译命令不再引用旧源码目录。使用全新 build 防止 cache 继续找到旧包。</p>
+<p>这验证的是包路径可移动，不证明不同编译器、不同操作系统之间二进制兼容。动态运行时依赖也不一定被 install 自动收齐，Windows 在开发终端运行成功可能依赖 PATH 中的 GCC DLL，部署到干净机器仍需检查。</p>
+<p><strong>过关标准</strong>：能解释 Config、Targets、Version 三类文件的职责，并在新的 consumer 构建树中运行成功。导入导出整体机制可对照 <a href="https://cmake.org/cmake/help/v3.24/guide/importing-exporting/index.html" target="_blank" rel="noopener noreferrer">CMake 官方指南</a>。</p>
+<h2 id="section-125">C10. 生成器表达式、生成文件与构建依赖：理解执行时间</h2><div class="chapter-tools"><button class="complete-button" data-for="section-125">标记本章已学完</button></div>
+<h3 id="section-126">不同写法发生在不同时间</h3>
+<p><code>set</code>、if 和 configure_file 在配置阶段工作；<code>$&lt;...&gt;</code> 生成器表达式在支持它的属性上下文中稍后求值；编译器、代码生成器和链接器由构建工具按依赖触发。不要在 configure 阶段读取一个只有 build 才产生的文件，然后疑惑它为什么不存在。</p>
+<pre><span class="language-label">cmake</span><code class="language-cmake"># 片段：app 必须已经存在
+target_compile_definitions(app PRIVATE &quot;$&lt;$&lt;CONFIG:Debug&gt;:APP_DEBUG=1&gt;&quot;)
+</code></pre>
+<p>外层条件表达式在 Debug 配置生成 APP_DEBUG=1，其他配置为空，适用于多配置生成器。<code>if(CMAKE_BUILD_TYPE STREQUAL &quot;Debug&quot;)</code> 只是配置时判断变量，对多配置工程无法表达同一个构建树的多种配置。</p>
+<p><code>$&lt;TARGET_FILE:task_server&gt;</code> 指向当前配置下的实际可执行文件路径，主后端的 Python HTTP 测试用它启动服务器。硬写 <code>build/Debug/task_server.exe</code> 会破坏 Linux、Ninja 和用户自定义输出路径。</p>
+<h3 id="section-127">configure_file 与构建时生成命令</h3>
+<p>版本号来自 CMake 变量时使用 configure_file 已够用。若需要根据 schema 调用生成器产出源码，应把输入、输出、命令和依赖纳入构建图。下面是<strong>进阶结构片段</strong>，<code>tools/generate.py</code> 和 <code>schema.txt</code> 是需要你自己实现的扩展输入，不是默认工程内已有文件：</p>
+<pre><span class="language-label">cmake</span><code class="language-cmake">find_package(Python3 COMPONENTS Interpreter REQUIRED)
+set(generated_header &quot;${CMAKE_CURRENT_BINARY_DIR}/generated/schema.hpp&quot;)
+add_custom_command(
+  OUTPUT &quot;${generated_header}&quot;
+  COMMAND &quot;${CMAKE_COMMAND}&quot; -E make_directory &quot;${CMAKE_CURRENT_BINARY_DIR}/generated&quot;
+  COMMAND &quot;${Python3_EXECUTABLE}&quot; &quot;${CMAKE_CURRENT_SOURCE_DIR}/tools/generate.py&quot;
+          &quot;${CMAKE_CURRENT_SOURCE_DIR}/schema.txt&quot; &quot;${generated_header}&quot;
+  DEPENDS &quot;${CMAKE_CURRENT_SOURCE_DIR}/tools/generate.py&quot;
+          &quot;${CMAKE_CURRENT_SOURCE_DIR}/schema.txt&quot;
+  VERBATIM)
+add_custom_target(generate_schema DEPENDS &quot;${generated_header}&quot;)
+add_dependencies(app generate_schema)
+target_include_directories(app PRIVATE &quot;${CMAKE_CURRENT_BINARY_DIR}/generated&quot;)
+</code></pre>
+<p>OUTPUT 是实际产物；DEPENDS 指定输入变化时要重跑；VERBATIM 帮助正确转义命令参数，不是自动执行任意 shell 语法。生成脚本必须失败返回非零并且真的写出目标文件。漏掉 DEPENDS 会导致输入已改、产物却没更新；多个独立规则写同一个输出会造成并行竞争。</p>
+<p>add_custom_target 本身通常总被认为需要构建，但本例的文件规则由 OUTPUT 的时间戳决定是否重跑。add_dependencies 建立目标顺序；target_link_libraries 还表达链接与使用要求，二者不能相互替代。语义可查 <a href="https://cmake.org/cmake/help/v3.24/command/add_custom_command.html" target="_blank" rel="noopener noreferrer">add_custom_command 官方文档</a>。</p>
+<h3 id="section-128">公共头改变为什么会触发重新编译</h3>
+<p>编译器会给 Ninja 提供头文件依赖信息，实际包含某个头的源文件会受它变化影响。CMake 描述工程层依赖，编译器参与发现文本包含依赖；不是每次改头都全量编译所有项目，也不是不把头列在 sources 就永远检测不到。</p>
+<p>不要在配置脚本中随意执行网络下载、改系统环境或修改源码树的副作用。一个可复现工程应尽量让源码是输入、构建树是输出；同一份源码可以对应 Debug、Release、不同工具链的多个构建树。</p>
+<p><strong>练习与参考</strong>：把 TaskKit 的版本改成 1.0.1，configure 后观察 generated 头，再 build。测试的版本契约也需相应更新。只改生成头会在下次配置时被模板覆盖，说明正确修改位置是 project VERSION 和对应测试预期。</p>
+<h2 id="section-129">C11. 回到真实后端：逐段读懂完整 CMakeLists</h2><div class="chapter-tools"><button class="complete-button" data-for="section-129">标记本章已学完</button></div>
+<p>到这里不要再把根配置当成一整段魔法。下面是配套服务当前的完整配置，随后逐块说明为什么存在：</p>
+<p>文件：<code>CMakeLists.txt</code></p>
+<pre><span class="language-label">cmake</span><code class="language-cmake">cmake_minimum_required(VERSION 3.24)
+project(task_server VERSION 1.0.0 LANGUAGES C CXX)
+
+set(CMAKE_CXX_EXTENSIONS OFF)
+set(CMAKE_EXPORT_COMPILE_COMMANDS ON)
+option(TASK_ENABLE_SANITIZERS &quot;Enable ASan and UBSan (Linux GCC/Clang)&quot; OFF)
+include(CTest)
+find_package(Threads REQUIRED)
+
+add_library(project_options INTERFACE)
+target_compile_features(project_options INTERFACE cxx_std_20)
+if(MSVC)
+  target_compile_options(project_options INTERFACE /W4 /permissive- /utf-8 /EHsc)
+else()
+  target_compile_options(project_options INTERFACE -Wall -Wextra -Wpedantic -Wconversion -Wshadow)
+endif()
+if(TASK_ENABLE_SANITIZERS)
+  if(CMAKE_SYSTEM_NAME STREQUAL &quot;Linux&quot; AND CMAKE_CXX_COMPILER_ID MATCHES &quot;GNU|Clang&quot;)
+    target_compile_options(project_options INTERFACE -fsanitize=address,undefined -fno-omit-frame-pointer)
+    target_link_options(project_options INTERFACE -fsanitize=address,undefined)
+  else()
+    message(FATAL_ERROR &quot;This sanitizer preset is configured for Linux GCC/Clang only&quot;)
+  endif()
+endif()
+
+add_library(sqlite3_vendor STATIC third_party/sqlite/sqlite3.c)
+target_include_directories(sqlite3_vendor SYSTEM PUBLIC third_party/sqlite)
+target_compile_definitions(sqlite3_vendor PRIVATE SQLITE_THREADSAFE=1 SQLITE_OMIT_LOAD_EXTENSION)
+target_link_libraries(sqlite3_vendor PUBLIC Threads::Threads ${CMAKE_DL_LIBS})
+if(UNIX)
+  target_link_libraries(sqlite3_vendor PUBLIC m)
+endif()
+
+add_library(json_vendor INTERFACE)
+target_include_directories(json_vendor SYSTEM INTERFACE third_party/json)
+add_library(httplib_vendor INTERFACE)
+target_include_directories(httplib_vendor SYSTEM INTERFACE third_party/httplib)
+target_link_libraries(httplib_vendor INTERFACE Threads::Threads)
+if(WIN32)
+  target_link_libraries(httplib_vendor INTERFACE ws2_32 crypt32)
+endif()
+
+add_library(task_core STATIC src/domain.cpp src/repository.cpp)
+target_include_directories(task_core PUBLIC include)
+target_compile_features(task_core PUBLIC cxx_std_20)
+target_link_libraries(task_core PRIVATE sqlite3_vendor project_options)
+
+add_executable(task_server src/main.cpp src/http_api.cpp)
+target_link_libraries(task_server PRIVATE task_core httplib_vendor json_vendor project_options)
+
+add_executable(lab01_hello examples/01_hello.cpp)
+add_executable(lab02_modern examples/02_modern.cpp)
+add_executable(lab03_cli examples/03_cli.cpp)
+add_executable(lab04_http examples/04_http.cpp)
+target_link_libraries(lab01_hello PRIVATE project_options)
+target_link_libraries(lab02_modern PRIVATE project_options Threads::Threads)
+target_link_libraries(lab03_cli PRIVATE task_core project_options)
+target_link_libraries(lab04_http PRIVATE httplib_vendor json_vendor project_options)
+
+if(BUILD_TESTING)
+  add_executable(core_tests tests/core_tests.cpp)
+  target_link_libraries(core_tests PRIVATE task_core project_options Threads::Threads)
+  add_test(NAME core COMMAND core_tests)
+  add_test(NAME modern_examples COMMAND lab02_modern)
+  find_package(Python3 COMPONENTS Interpreter)
+  if(Python3_Interpreter_FOUND)
+    add_test(NAME http_integration
+      COMMAND ${Python3_EXECUTABLE} ${CMAKE_CURRENT_SOURCE_DIR}/tests/http_test.py $&lt;TARGET_FILE:task_server&gt;)
+    set_tests_properties(http_integration PROPERTIES TIMEOUT 60)
+  else()
+    message(WARNING &quot;Python3 missing: HTTP integration test not registered&quot;)
+  endif()
+endif()
+
+install(TARGETS task_server RUNTIME DESTINATION bin)
+</code></pre>
+<h3 id="section-130">从 project 到 project_options</h3>
+<p><code>LANGUAGES C CXX</code> 为 SQLite 的 C 源码和业务的 C++ 源码分别检测编译器。CMAKE_CXX_EXTENSIONS 控制 C++ 扩展默认值，COMPILE_COMMANDS 提供编辑器/工具输入。TASK_ENABLE_SANITIZERS 是用户可选诊断开关，include(CTest) 决定测试选项，Threads 查找平台线程使用要求。</p>
+<p>project_options 是本项目代码复用的 INTERFACE 配置包。应用/库 PRIVATE 依赖它得到 C++20 和警告；第三方源码不无条件继承我们的严格警告。sanitizer 同时加入 compile 和 link 选项，并限制在已经明确配置的 Linux GCC/Clang 路线上。</p>
+<h3 id="section-131">三个第三方 target</h3>
+<p>sqlite3_vendor 编译 sqlite3.c，PUBLIC 提供其头路径，PRIVATE 的 SQLITE_* 宏配置 SQLite 自身构建。Threads::Threads 是跨平台线程依赖，CMAKE_DL_LIBS 表达平台动态加载库需求，UNIX 上的 m 是数学库需求；不要把这些 Unix 参数复制进所有 Windows target。</p>
+<p>json_vendor 和 httplib_vendor 为 header-only 依赖提供 include。httplib 的模板/内联实现由包含它的使用者编译，因此相关线程和 Windows socket 库需要通过 INTERFACE 传递。Windows 分支加入 ws2_32、crypt32，具体 SSL/TLS 能力并不因出现 crypt32 就全部开启。</p>
+<h3 id="section-132">业务库与应用</h3>
+<p>task_core 收纳 domain.cpp 与 repository.cpp，公开 include/task，公开 C++20 特性。SQLite 只出现在实现里，公开头通过前置声明 sqlite3 和自定义删除器减少直接依赖；因此 PRIVATE 链接 sqlite3_vendor。最终可执行文件仍必须满足 SQLite 链接需要，这与“头文件搜索要求不公开”并不矛盾。</p>
+<p>task_server 把入口和 HTTP 适配层连到核心库、HTTP/JSON 包装和项目选项。几个 lab 是并列可执行目标，共用需要的依赖；不存在“必须先运行 lab 再启动服务”的构建顺序。</p>
+<h3 id="section-133">测试与安装</h3>
+<p>core_tests 直接测领域和仓库；modern_examples 运行语言示例；http_integration 用 Python 启动真实服务、发送请求和检查行为。Python 未找到时明确警告，CTest 条目数会变少，所以要确认不是空跑或漏测。</p>
+<p>安装只将 task_server 放进 bin。它没有承诺打包 Windows GCC 运行时 DLL、创建 systemd 用户、迁移线上数据库或部署 HTTPS。构建系统、运行环境和发布操作需要相互配合，主教材后面分别讲述。</p>
+<h3 id="section-134">本配置的学习型取舍</h3>
+<p>核心库显式 STATIC，依赖固定在仓库中，没有复杂包管理器初始化；线程模型和平台分支尽量少。等你能独立复现，再考虑模块拆分、依赖升级、安装包和交叉编译。增加一个 cpp 时优先判断它属于哪个 target，而不是先寻找哪里再粘贴一串 flags。</p>
+<p><strong>练习</strong>：新建 <code>examples/05_config.cpp</code> 输出环境变量 APP_PORT（为空时输出默认值），增加独立 executable，链接 project_options，并添加一个自检。<strong>参考路线</strong>：仿照 lab01 增加 add_executable → target_link_libraries → 在 BUILD_TESTING 内 add_test；运行期环境变量无需变成编译宏。</p>
+<h2 id="section-135">C12. 排错顺序、独立练习与完整验收</h2><div class="chapter-tools"><button class="complete-button" data-for="section-135">标记本章已学完</button></div>
+<h3 id="section-136">按阶段定位，先看第一条实质错误</h3>
+<div class="table-scroll"><table>
+<thead>
+<tr>
+<th>现象</th>
+<th>先检查</th>
+<th>如何验证</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>source directory does not contain CMakeLists</td>
+<td>-S 和当前目录</td>
+<td>查看指定目录是否有文件</td>
+</tr>
+<tr>
+<td>CXX compiler not found</td>
+<td>工具是否安装、PATH、cache</td>
+<td>Get-Command，换新 build 后指定工具链</td>
+</tr>
+<tr>
+<td>Ninja / make program not found</td>
+<td>-G 与构建工具</td>
+<td>ninja --version、cmake --help</td>
+</tr>
+<tr>
+<td>generator does not match</td>
+<td>旧目录生成器不一致</td>
+<td>用全新 build 目录</td>
+</tr>
+<tr>
+<td>头文件找不到</td>
+<td>include 搜索根、PUBLIC 传播</td>
+<td>--verbose 看 -I 路径</td>
+</tr>
+<tr>
+<td>undefined reference / unresolved external</td>
+<td>定义是否编译、签名是否一致、库是否链接</td>
+<td>看 target sources 与最终链接命令</td>
+</tr>
+<tr>
+<td>multiple definition</td>
+<td>非 inline 定义重复放头、cpp 被重复包含</td>
+<td>每个普通定义只保留一次</td>
+</tr>
+<tr>
+<td>find_package 失败</td>
+<td>Config 是否安装、前缀是否正确</td>
+<td>检查 TaskKitConfig.cmake；必要时 --debug-find</td>
+</tr>
+<tr>
+<td>找不到 exe</td>
+<td>构建是否成功、多配置和子目录路径</td>
+<td>看链接输出，确认实际配置</td>
+</tr>
+<tr>
+<td>缺 DLL</td>
+<td>运行库是否可找到</td>
+<td>在正确工具链终端运行；规划部署依赖</td>
+</tr>
+<tr>
+<td>CTest 没有测试</td>
+<td>BUILD_TESTING、Python、-R 筛选</td>
+<td>ctest -N、--no-tests=error</td>
+</tr>
+<tr>
+<td>改代码无效果</td>
+<td>构建了另一个目录、旧进程未重启</td>
+<td>查看 exe 路径、重建、停止旧服务</td>
+</tr>
+</tbody></table></div>
+<p>错误排查要留证据：完整命令、当前目录、工具路径、首条实质错误、你刚修改的文件。先改一个原因再验证，不要同时切编译器、改生成器、删缓存、换依赖，让问题失去可解释性。</p>
+<h3 id="section-137">练习一：不看现成 CMakeLists 重建两文件项目</h3>
+<p>main.cpp 调用 calculator.cpp 中的 checked_add。公开声明放 include/calculator.hpp，目标 app 链接 calculator 静态库。要求 C++20，Debug，开启合理警告。</p>
+<p>参考结构为 add_library(calculator STATIC ...) → PUBLIC include → PUBLIC cxx_std_20 → add_executable(app ...) → PRIVATE 链接 calculator。验证普通加法和超范围返回无值；不要用单个“输出 hello”假装业务检查。</p>
+<h3 id="section-138">练习二：给 TaskKit 增加端口解析模块</h3>
+<p>把 F11 的 parse_port 放到 include/taskkit/port.hpp 与 src/port.cpp。返回 optional<int>，范围 1～65535，全串消费。增加独立测试，覆盖空串、80x、0、65536、1、65535。库的 add_library 需要新源文件；公开头安装规则已经覆盖 include 目录，但你要实际重装并让 consumer 调用新函数证明完成。</p>
+<p>参考拆解：先实现并测试库 → 更新应用或 consumer → build/test → install 到新的前缀 → 新 consumer build。保持 TaskKit 版本兼容策略合理。如果只在源码树里跑通而安装包缺文件，任务还没有完成。</p>
+<h3 id="section-139">练习三：从一台开发机走向可复现交付</h3>
+<p>在一个没有旧 build 的新目录解压源码，按 README 配置、编译、测试。确认不依赖原作者的盘符、私人头文件路径或未写入说明的环境变量。为 Debug 和 Release 都保留结果，运行期产生的数据库留在交付包外。</p>
+<p>单机通过后再在 Linux/CI 目标环境验收，记录不同平台的结果；不要把生成了工作流 YAML 当成云端已经执行成功。更换编译器或依赖版本是一种新实验，要重新检查 ABI、警告和行为测试。</p>
+<h3 id="section-140">CMake 毕业检查</h3>
+<p>你应当能解释 -S/-B/-G/-D，区分 configure/build/test/install，添加 cpp 与静态库，正确传播 include 和标准要求，读懂 cache/preset，定位编译与链接错误，运行不会因 Release 消失的测试，并让独立消费者从安装前缀找到库。</p>
+<p>若某项仍只能复制现有配置才能完成，回到相应实验重写一次。后续学习顺序建议是依赖包管理 → 共享库与运行时加载 → 安装包/CPack → 交叉编译 → 更复杂生成器与缓存加速。先让当前工程能解释、能复现，再增加构建复杂度。</p>
+<p>需要进一步查证时使用 <a href="https://cmake.org/cmake/help/v3.24/" target="_blank" rel="noopener noreferrer">CMake 3.24 文档</a> 和 <a href="https://cmake.org/cmake/help/latest/guide/tutorial/index.html" target="_blank" rel="noopener noreferrer">官方循序教程</a>。最新版页面可能出现高于本课程最低版本的功能，复制前检查 Added in version，不为了一个示例无意提高整个工程的环境要求。</p>
+<!-- EXPANSION_CMAKE_END -->
+
+<h2 id="section-141">8. CMake 从五行开始：亲手创建一个小工程</h2><div class="chapter-tools"><button class="complete-button" data-for="section-141">标记本章已学完</button></div>
+<h3 id="section-142">8.1 新建最小项目</h3>
 <p>在项目根目录建立 <code>scratch/cmake-first</code>，放入 <code>main.cpp</code>：</p>
 <pre><span class="language-label">cpp</span><code class="language-cpp">#include &lt;iostream&gt;
 int main() { std::cout &lt;&lt; &quot;CMake works\n&quot;; }
@@ -473,7 +1891,7 @@ cmake --build scratch/cmake-first/build
 </code></pre>
 <p><code>-S</code> 指源码目录，<code>-B</code> 指构建目录，<code>-G</code> 指生成器。<code>-D名称=值</code> 设置缓存变量；它不是直接传给 C++ 编译器的宏。</p>
 <p>第一条命令先读取 CMake 脚本、检测编译器和依赖，再生成 Ninja 规则。第二条命令才调用实际构建工具。你修改 <code>.cpp</code> 后通常只要 build；修改 CMakeLists 后 build 工具通常会触发重新配置，手动再 configure 也可以。</p>
-<h3 id="section-44">8.2 把一个函数拆成静态库</h3>
+<h3 id="section-143">8.2 把一个函数拆成静态库</h3>
 <p>加入 <code>greet.hpp</code>、<code>greet.cpp</code>，声明和定义一个 <code>std::string greeting()</code>，在 main 中打印它。CMake 改成：</p>
 <pre><span class="language-label">cmake</span><code class="language-cmake">cmake_minimum_required(VERSION 3.24)
 project(first_project LANGUAGES CXX)
@@ -485,7 +1903,7 @@ target_link_libraries(first_app PRIVATE greeting)
 </code></pre>
 <p><code>greeting</code> 和 <code>first_app</code> 都是 target。target 是一组源文件、属性、依赖和使用要求组成的构建对象，不只是磁盘上的文件名。</p>
 <p>当 first_app 链接 greeting 时，CMake 知道应先构建库，还能把库公开的 include 目录、所需语言标准传播给消费者。这就是现代 CMake 的核心工作方式。</p>
-<h3 id="section-45">8.3 PRIVATE、PUBLIC、INTERFACE 到底区别在哪</h3>
+<h3 id="section-144">8.3 PRIVATE、PUBLIC、INTERFACE 到底区别在哪</h3>
 <div class="table-scroll"><table>
 <thead>
 <tr>
@@ -512,12 +1930,12 @@ target_link_libraries(first_app PRIVATE greeting)
 </tbody></table></div>
 <p>例如 <code>task_core</code> 的公开头文件位于 include，消费者必须能包含它，因此 include 路径是 PUBLIC。警告策略是项目自身开发要求，一般 PRIVATE，避免把你的所有警告强加给外部库使用者。</p>
 <p>静态库有一个容易误解的细节：库本身不完成最终的可执行文件链接。它 PRIVATE 依赖的另一个库，最终仍可能作为“仅链接依赖”被带到可执行程序链接步骤中。这不代表那个库的所有编译使用要求都变成 PUBLIC。详见 <a href="https://cmake.org/cmake/help/latest/command/target_link_libraries.html" target="_blank" rel="noopener noreferrer">target_link_libraries 官方语义</a>。</p>
-<h3 id="section-46">8.4 为什么不用全局 include_directories</h3>
+<h3 id="section-145">8.4 为什么不用全局 include_directories</h3>
 <p>全局设置使后面的很多 target 隐式受到影响，规模一大很难解释哪个目标为什么能找到某个头文件。优先用 <code>target_include_directories</code>、<code>target_compile_options</code>、<code>target_link_libraries</code> 把要求贴到真正需要它的目标上。</p>
 <p>不要对全部源码统一强加 <code>-Werror</code>，尤其不要把第三方源码警告当成自己的错误。项目对第三方包含目录使用 SYSTEM，减少外部头文件诊断对学习的干扰。</p>
 <p><strong>练习</strong>：把 greeting 的 include 改成 PRIVATE，分析 main 是否还因为文件恰好同目录而能找到头文件；再把公开头文件移进独立 include 目录观察区别。<strong>验收</strong>：能画出 first_app → greeting 的依赖，并解释标准和头文件路径从哪里传来。</p>
-<h2 id="section-47">9. CMake 进阶：读懂真实项目的构建</h2><div class="chapter-tools"><button class="complete-button" data-for="section-47">标记本章已学完</button></div>
-<h3 id="section-48">9.1 先从依赖图读，不从第一行硬背</h3>
+<h2 id="section-146">9. CMake 进阶：读懂真实项目的构建</h2><div class="chapter-tools"><button class="complete-button" data-for="section-146">标记本章已学完</button></div>
+<h3 id="section-147">9.1 先从依赖图读，不从第一行硬背</h3>
 <pre><span class="language-label">text</span><code class="language-text">task_server
   ├── task_core
   │     └── sqlite3_vendor
@@ -532,7 +1950,7 @@ lab04_http → httplib_vendor + json_vendor
 <p>本项目 <code>project(... LANGUAGES C CXX)</code> 同时开启 C 和 C++，因为 SQLite amalgamation 是 C 源文件。不要为了“都是一个项目”强行把第三方 C 代码当 C++ 编译。</p>
 <p><code>add_library(sqlite3_vendor STATIC ...)</code> 产生真正的静态库。<code>add_library(json_vendor INTERFACE)</code> 则描述只有使用要求的目标，因为这里用的是 JSON 库的单头文件形式，没有独立的库源文件要编译。</p>
 <p>头文件库不等于零编译成本；包含它的每个翻译单元仍要处理相关模板和定义。因此不要把很重的第三方头文件无差别地放进所有公开头文件。</p>
-<h3 id="section-49">9.2 编译选项、编译定义、链接选项</h3>
+<h3 id="section-148">9.2 编译选项、编译定义、链接选项</h3>
 <pre><span class="language-label">cmake</span><code class="language-cmake">target_compile_options(my_target PRIVATE -Wall -Wextra)
 target_compile_definitions(my_target PRIVATE APP_FEATURE=1)
 target_link_options(my_target PRIVATE -fsanitize=address)
@@ -540,7 +1958,7 @@ target_link_options(my_target PRIVATE -fsanitize=address)
 <p>这是命令形态示例，<code>my_target</code> 要先创建。compile options 控制编译阶段；compile definitions 定义 C/C++ 宏，代码里可以 <code>#if APP_FEATURE</code>；link options 控制链接器。不要把三者都揉成一长串全局 flags。</p>
 <p>MSVC 不认识所有 GCC 参数，因此用 <code>if(MSVC)</code> 分支。项目的 GCC/Clang 警告包括 <code>-Wconversion</code> 和 <code>-Wshadow</code>；MSVC 使用 <code>/W4</code>、<code>/utf-8</code> 等。平台库同样分支：Windows socket 需要 <code>ws2_32</code>，线程依赖优先交给 <code>Threads::Threads</code>。</p>
 <p><code>target_compile_features(... cxx_std_20)</code> 要求至少支持 C++20。为了减少 GNU 扩展与标准 C++ 的差异，项目关闭 <code>CMAKE_CXX_EXTENSIONS</code>。</p>
-<h3 id="section-50">9.3 Debug、Release 与生成器</h3>
+<h3 id="section-149">9.3 Debug、Release 与生成器</h3>
 <p>Ninja 是单配置生成器：一个构建目录主要对应一种配置，用 <code>CMAKE_BUILD_TYPE</code> 选择 Debug 或 Release。Visual Studio、Ninja Multi-Config 属于多配置生成器，通常在 build 时用 <code>--config Debug</code> 选择配置。</p>
 <pre><span class="language-label">powershell</span><code class="language-powershell"># 本教程使用单配置 Ninja
 cmake -S . -B build/manual-debug -G Ninja -DCMAKE_BUILD_TYPE=Debug
@@ -552,13 +1970,13 @@ cmake --build build/manual-debug --parallel 2
 </code></pre>
 <p>Debug 便于观察变量和单步；Release 开启更多优化，代码行与实际执行顺序未必一一对应。性能测量使用 Release，错误定位常从 Debug 开始。</p>
 <p>不要在同一个 build 目录来回切换 GCC 与 MSVC，或切换 Ninja 与 Visual Studio。换工具链时新建构建目录最容易理解。</p>
-<h3 id="section-51">9.4 CMake cache 是什么</h3>
+<h3 id="section-150">9.4 CMake cache 是什么</h3>
 <p>构建目录内 <code>CMakeCache.txt</code> 保存检测结果与缓存变量，例如编译器位置。后来改 PATH，不一定使旧构建目录自动换编译器。可以先看缓存，或者用新目录验证。</p>
 <pre><span class="language-label">powershell</span><code class="language-powershell">cmake -LA -N build/debug
 cmake --build build/debug --verbose
 </code></pre>
 <p>第一条查看缓存，第二条显示实际编译/链接命令。把 IDE 里的“找不到头文件”与真正构建时的 include 参数对照，经常能迅速定位问题。不要手动改 Ninja 自动生成文件来修复项目，应改 CMakeLists。</p>
-<h3 id="section-52">9.5 Presets 把团队约定写进文件</h3>
+<h3 id="section-151">9.5 Presets 把团队约定写进文件</h3>
 <p>打开本项目 <code>CMakePresets.json</code>。configure preset 指定 Ninja、构建目录和缓存变量；build preset 指向对应 configure preset；test preset 设置测试行为。</p>
 <pre><span class="language-label">powershell</span><code class="language-powershell">cmake --list-presets
 cmake --preset debug
@@ -567,7 +1985,7 @@ ctest --preset debug
 </code></pre>
 <p>release 通过 <code>inherits</code> 继承 debug 的共有设置，但使用不同 build 目录。asan 只在 Linux 上启用，避免把一套不适用的链接参数直接塞进当前 Windows 工具链。</p>
 <p>公共规则放 <code>CMakePresets.json</code> 并提交 Git；自己的绝对编译器路径等放 <code>CMakeUserPresets.json</code>，不提交。预设格式版本与 CMake 版本不是同一个数字。本项目预设格式 version 5 对应最低 CMake 3.24。参阅 <a href="https://cmake.org/cmake/help/latest/manual/cmake-presets.7.html" target="_blank" rel="noopener noreferrer">CMake presets 文档</a>。</p>
-<h3 id="section-53">9.6 第三方依赖的三种常见管理方式</h3>
+<h3 id="section-152">9.6 第三方依赖的三种常见管理方式</h3>
 <p><strong>方式一：源码随项目附带。</strong> 本教材采用这种方式，便于离线复现。必须记录版本、来源、许可证和文件摘要；后续升级需要主动维护。</p>
 <p><strong>方式二：FetchContent。</strong> 配置时取得源码并将其加入构建，例如：</p>
 <pre><span class="language-label">cmake</span><code class="language-cmake">include(FetchContent)
@@ -586,7 +2004,7 @@ target_link_libraries(my_app PRIVATE nlohmann_json::nlohmann_json)
 <pre><span class="language-label">powershell</span><code class="language-powershell">cmake -S . -B build/vcpkg -G Ninja -DCMAKE_TOOLCHAIN_FILE=C:/dev/vcpkg/scripts/buildsystems/vcpkg.cmake
 </code></pre>
 <p>该命令要求你先安装 vcpkg 并按实际路径修改。清单还应固定 baseline；triplet 要和平台、架构及工具链一致。不要把 MSVC 构建的 C++ 二进制库直接混进 MinGW 程序。完整操作以 <a href="https://learn.microsoft.com/en-us/vcpkg/users/buildsystems/cmake-integration" target="_blank" rel="noopener noreferrer">vcpkg 的 CMake 集成文档</a> 为准。</p>
-<h3 id="section-54">9.7 测试与安装也属于构建工程</h3>
+<h3 id="section-153">9.7 测试与安装也属于构建工程</h3>
 <pre><span class="language-label">cmake</span><code class="language-cmake">include(CTest)
 if(BUILD_TESTING)
   add_executable(core_tests tests/core_tests.cpp)
@@ -600,8 +2018,8 @@ install(TARGETS task_server RUNTIME DESTINATION bin)
 </code></pre>
 <p>会安装应用程序到 install/bin。当前 install 规则没有自动打包 MinGW 运行库 DLL；在另一台 Windows 机器发布时，需要同工具链运行库或专门的打包方案。不要以为 install 自动等于“所有平台都能独立运行”。</p>
 <p><strong>本章任务</strong>：添加自己的 <code>lab05_summary</code> target，只链接真正需要的依赖；再用 <code>--target lab05_summary</code> 单独构建它。<strong>通过标准</strong>：能从 verbose 输出指出编译器、标准参数、include 路径和最终链接库。</p>
-<h2 id="section-55">10. Git、编辑器和调试：让工程可持续修改</h2><div class="chapter-tools"><button class="complete-button" data-for="section-55">标记本章已学完</button></div>
-<h3 id="section-56">10.1 每个提交表达一个完整变化</h3>
+<h2 id="section-154">10. Git、编辑器和调试：让工程可持续修改</h2><div class="chapter-tools"><button class="complete-button" data-for="section-154">标记本章已学完</button></div>
+<h3 id="section-155">10.1 每个提交表达一个完整变化</h3>
 <p>在你自己的学习副本中：</p>
 <pre><span class="language-label">powershell</span><code class="language-powershell">git init
 git status
@@ -612,7 +2030,7 @@ git commit -m &quot;Build task API learning project&quot;
 <p>首次 commit 可能需要配置姓名和邮箱；使用你自己的信息。第一次想保存完整项目时，还应把 README、部署文件和 third_party 等必要文件加入版本控制。提交前查看 diff，确认没有把数据库、token、编译产物和日志提交进去。</p>
 <p><code>git diff</code> 看尚未暂存的变化；<code>git diff --cached</code> 看即将提交的变化。<code>git status</code> 告诉你文件处于哪一层。不要遇到问题就执行不理解的 <code>reset --hard</code>。</p>
 <p>练习新需求前创建分支：<code>git switch -c feature/task-priority</code>。一个合理的小提交顺序是：先添加迁移，再实现接口，最后补测试。每一步尽量保持可构建、可解释。</p>
-<h3 id="section-57">10.2 VS Code 的最小配置思路</h3>
+<h3 id="section-156">10.2 VS Code 的最小配置思路</h3>
 <p>打开的是整个项目文件夹。安装 C/C++ 与 CMake Tools 扩展，选择匹配实际 GCC 的工具链或使用项目 preset。不要只打开一个 cpp 文件，然后期待编辑器自动知道整个工程。</p>
 <p>CMake 的 <code>compile_commands.json</code> 记录每个源文件真实的编译参数。clangd 或相关编辑器配置可读取它，避免手工再维护一份 includePath。该文件在构建目录，而不是源代码根目录。</p>
 <p>对于 VS Code + GDB，可参考如下 launch 配置形态，路径须对应你的构建目录：</p>
@@ -631,7 +2049,7 @@ git commit -m &quot;Build task API learning project&quot;
 }
 </code></pre>
 <p>Linux 的 program 去掉 <code>.exe</code>。调试前先构建。编辑器和 MinGW 的安装配合见 <a href="https://code.visualstudio.com/docs/cpp/config-mingw" target="_blank" rel="noopener noreferrer">VS Code 官方 GCC 配置说明</a>。</p>
-<h3 id="section-58">10.3 不依赖 IDE 的 GDB 练习</h3>
+<h3 id="section-157">10.3 不依赖 IDE 的 GDB 练习</h3>
 <pre><span class="language-label">powershell</span><code class="language-powershell">gdb .\build\debug\lab03_cli.exe
 </code></pre>
 <p>在 GDB 提示符输入：</p>
@@ -644,7 +2062,7 @@ continue
 </code></pre>
 <p>断点处变量是否已经初始化取决于当前行；看不到 next_id 时继续 next 到声明执行之后。<code>next</code> 跨过函数调用；<code>step</code> 进入函数；<code>backtrace</code> 查看调用链；<code>frame 1</code> 切到上层栈帧；<code>continue</code> 恢复执行。</p>
 <p>接口调试时，在 <code>TaskRepository::create</code> 设置断点，从另一个终端发 POST，再观察 title 和调用栈。若函数名匹配不到，使用 <code>break src/repository.cpp:实际行号</code>。</p>
-<h3 id="section-59">10.4 格式化、静态检查与 sanitizer</h3>
+<h3 id="section-158">10.4 格式化、静态检查与 sanitizer</h3>
 <p>项目附带 <code>.clang-format</code>。安装 clang-format 后只格式化自己的 src/include/examples/tests，避免把 third_party 改得面目全非。clang-tidy 可以利用编译数据库检查部分误用；它不是编译器的替代品。</p>
 <p>在 Linux 调试内存问题：</p>
 <pre><span class="language-label">bash</span><code class="language-bash">cmake --preset asan
@@ -653,8 +2071,8 @@ ctest --preset asan
 </code></pre>
 <p>ASan 检测许多越界、释放后使用等问题；UBSan 检测某些未定义行为。它们不能证明程序没有 bug。线程数据竞争可使用单独的 TSan 构建，不应把 TSan 与 ASan 随意混合。当前提供的 asan 预设不全面覆盖第三方 SQLite C 源码的插桩，重点检查自有 C++ 目标及最终程序。</p>
 <p><strong>验收</strong>：亲手暂停一次请求，查看调用栈并继续；能从 Git 中找到这个修改之前的版本。</p>
-<h2 id="section-60">11. 里程碑一：命令行任务管理器</h2><div class="chapter-tools"><button class="complete-button" data-for="section-60">标记本章已学完</button></div>
-<h3 id="section-61">11.1 为什么先做 CLI</h3>
+<h2 id="section-159">11. 里程碑一：命令行任务管理器</h2><div class="chapter-tools"><button class="complete-button" data-for="section-159">标记本章已学完</button></div>
+<h3 id="section-160">11.1 为什么先做 CLI</h3>
 <p>HTTP 只是输入输出方式，业务核心是接收操作、验证数据、找到任务、改变状态并返回结果。如果你先用网络和数据库同时包围业务，出错时很难知道哪一层有问题。</p>
 <p>先运行：</p>
 <pre><span class="language-label">powershell</span><code class="language-powershell">cmake --build build/debug --target lab03_cli
@@ -671,7 +2089,7 @@ list
 quit
 </code></pre>
 <p>第二次 list 中任务 1 前应显示 <code>[x]</code>；删除后任务 2 不再出现。程序重启后数据消失，这是这个阶段只使用内存的预期结果。</p>
-<h3 id="section-62">11.2 手把手重写：先只有循环</h3>
+<h3 id="section-161">11.2 手把手重写：先只有循环</h3>
 <p>先在自己的练习文件中只写 <code>getline</code> 循环，用 istringstream 读取命令词，识别 quit。能正常退出后，再加入 vector 和 next_id。不要一次把所有 if 分支都抄进去。</p>
 <pre><span class="language-label">cpp</span><code class="language-cpp">std::vector&lt;task::Task&gt; tasks;
 std::int64_t next_id = 1;
@@ -684,23 +2102,23 @@ for (std::string line; std::getline(std::cin, line);) {
 }
 </code></pre>
 <p>这是 main 内的中间状态；需要 domain.hpp、vector、string、sstream、iostream。完整可编译文件见 examples/03_cli.cpp。</p>
-<h3 id="section-63">11.3 再实现 add 和 list</h3>
+<h3 id="section-162">11.3 再实现 add 和 list</h3>
 <p><code>std::getline(input &gt;&gt; std::ws, title)</code> 会先略过前导空白，再读取剩下的一整段标题，因而标题可以含空格。先调用 title_error，通过后再 push_back 并递增 ID。</p>
 <p>列表循环读取每个 Task，只打印，不修改，因此使用 <code>const auto&amp;</code>。这个阶段可以不设计抽象接口，不要为了未来的可能需求先加入十层继承。</p>
-<h3 id="section-64">11.4 最后实现 done 与 delete</h3>
+<h3 id="section-163">11.4 最后实现 done 与 delete</h3>
 <p>把参数读成 string，调用严格的 parse_id，再检查是否还有多余参数。查找时按 Task::id，而不是直接把 ID 当 vector 下标。删除后 ID 可能不连续，所以 <code>tasks[id - 1]</code> 是错误假设。</p>
 <p>找到任务后：done 修改 completed；delete 调用 erase。删除之后就不要继续使用那个迭代器。</p>
-<h3 id="section-65">11.5 自测清单</h3>
+<h3 id="section-164">11.5 自测清单</h3>
 <p>输入 <code>done abc</code>、<code>delete 9999</code>、<code>add</code>、<code>done 1 extra</code>，程序应该给出错误并继续接受下一条命令。按 Ctrl+Z 再回车（Windows 的 EOF 输入方式可能随终端而异），或者关闭标准输入，循环也应结束。</p>
 <p><strong>扩展练习</strong>：添加 <code>rename ID TITLE</code>，要求不存在的 ID 不创建新任务，空标题不覆盖旧标题。<strong>提示</strong>：先解析 ID 和剩余标题，再验证全部输入，最后才修改状态。<strong>验收</strong>：失败的输入不会破坏原任务。</p>
-<h2 id="section-66">12. 网络基础：理解一次请求穿过哪些层</h2><div class="chapter-tools"><button class="complete-button" data-for="section-66">标记本章已学完</button></div>
-<h3 id="section-67">12.1 IP、端口、socket、进程</h3>
+<h2 id="section-165">12. 网络基础：理解一次请求穿过哪些层</h2><div class="chapter-tools"><button class="complete-button" data-for="section-165">标记本章已学完</button></div>
+<h3 id="section-166">12.1 IP、端口、socket、进程</h3>
 <p>IP 用来定位网络中的主机或接口；端口帮助操作系统把流量交给相应的服务。<code>127.0.0.1</code> 是本机回环地址；服务器监听这个地址时通常只能由本机连接。<code>0.0.0.0</code> 作为监听地址表示监听所有 IPv4 接口，不是客户端应当访问的目标地址。</p>
 <p>socket 是操作系统提供的通信端点。典型 TCP 服务器执行 bind → listen → accept → read/write；这些调用并不等于你的业务接口。cpp-httplib 把底层细节包装好，让本项目把精力集中到接口和资源管理。</p>
-<h3 id="section-68">12.2 TCP 是字节流，没有 JSON 消息边界</h3>
+<h3 id="section-167">12.2 TCP 是字节流，没有 JSON 消息边界</h3>
 <p>一次 send 不保证对端一次 recv 就能完整得到相同长度的数据。消息可能分段，也可能多次发送被一起读取。若直接编写 socket 协议，需要自行定义长度、分隔和部分读写处理。</p>
 <p>HTTP/1.1 定义了请求行、头部、消息体以及消息长度等规则，成熟库负责解析。不要简单搜索 <code>\r\n\r\n</code> 后就假设收到了完整请求，也不要手写一个只认识 GET 的解析器后直接当公网 HTTP 服务器使用。</p>
-<h3 id="section-69">12.3 HTTP 消息长什么样</h3>
+<h3 id="section-168">12.3 HTTP 消息长什么样</h3>
 <pre><span class="language-label">http</span><code class="language-http">POST /api/tasks HTTP/1.1
 Host: 127.0.0.1:8080
 Content-Type: application/json
@@ -716,7 +2134,7 @@ Location: /api/tasks/1
 {&quot;id&quot;:1,&quot;title&quot;:&quot;Learn HTTP&quot;,&quot;completed&quot;:false}
 </code></pre>
 <p>真实响应还会包含库生成的长度等头部。客户端通过状态码判断总体结果，通过 JSON 获得业务字段。</p>
-<h3 id="section-70">12.4 请求从入口到数据库</h3>
+<h3 id="section-169">12.4 请求从入口到数据库</h3>
 <pre><span class="language-label">text</span><code class="language-text">客户端
   → TCP/HTTP 库
   → 请求体大小等限制
@@ -728,12 +2146,12 @@ Location: /api/tasks/1
   → HTTP 响应与日志
 </code></pre>
 <p>注意，有些错误在路由前就被库拒绝，这类响应不一定拥有应用层生成的 request ID。日志与监控设计需要接受这种边界。</p>
-<h3 id="section-71">12.5 幂等、重试与超时</h3>
+<h3 id="section-170">12.5 幂等、重试与超时</h3>
 <p>GET 通常读取资源；POST 创建资源，重复提交可能产生重复任务；本项目 PATCH 是给字段赋值，重复相同操作通常得到相同最终状态；DELETE 重复后资源仍然不存在，虽然第一次返回 204、第二次返回 404，状态码不同不自动否定其幂等性。</p>
 <p>客户端超时不能证明服务器没有完成写入。如果 POST 完成数据库提交后响应丢失，客户端盲目重试会创建第二个任务。需要可靠重试的系统应设计幂等键，并在数据库中对它加唯一约束。</p>
 <p><strong>练习</strong>：使用 <code>curl.exe -v</code> 访问 healthz，指出连接地址、请求头、响应头和 JSON 的位置。<strong>验收</strong>：能区分“连不上端口”“HTTP 404”“JSON 校验失败”。</p>
-<h2 id="section-72">13. 里程碑二：你的第一个 HTTP 服务</h2><div class="chapter-tools"><button class="complete-button" data-for="section-72">标记本章已学完</button></div>
-<h3 id="section-73">13.1 先只保留一条路由</h3>
+<h2 id="section-171">13. 里程碑二：你的第一个 HTTP 服务</h2><div class="chapter-tools"><button class="complete-button" data-for="section-171">标记本章已学完</button></div>
+<h3 id="section-172">13.1 先只保留一条路由</h3>
 <p><code>examples/04_http.cpp</code> 的关键代码：</p>
 <pre><span class="language-label">cpp</span><code class="language-cpp">httplib::Server server;
 server.Get(&quot;/healthz&quot;, [](const httplib::Request&amp;, httplib::Response&amp; response) {
@@ -743,7 +2161,7 @@ return server.listen(&quot;127.0.0.1&quot;, 8081) ? 0 : 1;
 </code></pre>
 <p>Get 注册一个处理 GET 的回调；注册阶段不会立刻处理请求。listen 开始监听并进入服务循环，通常会阻塞当前主线程。服务器运行期间终端没有出现新的命令提示符，是正常现象。</p>
 <p>库使用阻塞 I/O 与线程池，主要支持 HTTP/1.1；本教程据此设计小规模 API，不将它解释为无限并发框架。见 <a href="https://yhirose.github.io/cpp-httplib/en/" target="_blank" rel="noopener noreferrer">cpp-httplib 官方介绍</a>。</p>
-<h3 id="section-74">13.2 用两个终端</h3>
+<h3 id="section-173">13.2 用两个终端</h3>
 <p>终端 A：</p>
 <pre><span class="language-label">powershell</span><code class="language-powershell">cmake --build build/debug --target lab04_http
 .\build\debug\lab04_http.exe
@@ -752,16 +2170,16 @@ return server.listen(&quot;127.0.0.1&quot;, 8081) ? 0 : 1;
 <pre><span class="language-label">powershell</span><code class="language-powershell">curl.exe -i http://127.0.0.1:8081/healthz
 </code></pre>
 <p>预期状态 200，响应体 <code>{&quot;status&quot;:&quot;ok&quot;}</code>。输入错误路径应返回 404。实验完在终端 A 按 Ctrl+C。这个最小样例只展示基本启动，最终项目另外处理退出协调。</p>
-<h3 id="section-75">13.3 把输出 JSON 与字符串拼接分开</h3>
+<h3 id="section-174">13.3 把输出 JSON 与字符串拼接分开</h3>
 <pre><span class="language-label">cpp</span><code class="language-cpp">nlohmann::json result = {{&quot;title&quot;, &quot;a \&quot;quoted\&quot; task&quot;}, {&quot;completed&quot;, false}};
 response.set_content(result.dump(), &quot;application/json&quot;);
 </code></pre>
 <p>dump 负责引号转义等编码工作。不要直接拼接 <code>&quot;{\&quot;title\&quot;:\&quot;&quot; + user_input + &quot;\&quot;}&quot;</code>，用户标题包含引号时会破坏 JSON。</p>
-<h3 id="section-76">13.4 一次独立修改</h3>
+<h3 id="section-175">13.4 一次独立修改</h3>
 <p>自己增加 <code>GET /hello</code>，返回 <code>{&quot;message&quot;:&quot;hello&quot;}</code>。操作顺序：停止旧程序 → 编辑源码 → build → 重启 → curl。否则你可能测试的仍是旧进程，即使磁盘上的新程序已经编译完。</p>
 <p><strong>验收</strong>：能从空文件写出一条路由，解释 request 与 response 分别属于哪一方向；能指出为什么回调要在 server 的生命周期内保持有效。</p>
-<h2 id="section-77">14. 在编码前写清 API 契约</h2><div class="chapter-tools"><button class="complete-button" data-for="section-77">标记本章已学完</button></div>
-<h3 id="section-78">14.1 创建、更新与列表的输入输出</h3>
+<h2 id="section-176">14. 在编码前写清 API 契约</h2><div class="chapter-tools"><button class="complete-button" data-for="section-176">标记本章已学完</button></div>
+<h3 id="section-177">14.1 创建、更新与列表的输入输出</h3>
 <p>创建只接受一个字段：</p>
 <pre><span class="language-label">json</span><code class="language-json">{&quot;title&quot;:&quot;Learn SQLite&quot;}
 </code></pre>
@@ -776,7 +2194,7 @@ response.set_content(result.dump(), &quot;application/json&quot;);
 <pre><span class="language-label">json</span><code class="language-json">{&quot;items&quot;:[{&quot;id&quot;:1,&quot;title&quot;:&quot;Learn SQLite&quot;,&quot;completed&quot;:false}],&quot;limit&quot;:20,&quot;offset&quot;:0}
 </code></pre>
 <p>分页参数必须完整解析成整数，重复 limit/offset 被拒绝。当前版本忽略其他未知查询参数。若希望 typo 也返回 400，可以作为契约强化练习，修改后同步更新测试。</p>
-<h3 id="section-79">14.2 状态码与统一错误体</h3>
+<h3 id="section-178">14.2 状态码与统一错误体</h3>
 <div class="table-scroll"><table>
 <thead>
 <tr>
@@ -844,12 +2262,12 @@ response.set_content(result.dump(), &quot;application/json&quot;);
 <pre><span class="language-label">json</span><code class="language-json">{&quot;error&quot;:{&quot;code&quot;:&quot;validation_error&quot;,&quot;message&quot;:&quot;title must be a string&quot;}}
 </code></pre>
 <p>message 给人看，code 适合客户端程序判断。不要让客户端靠匹配某一句自然语言错误文本来实现业务逻辑。</p>
-<h3 id="section-80">14.3 为什么要限制请求</h3>
+<h3 id="section-179">14.3 为什么要限制请求</h3>
 <p>一个任务标题只有 200 字节，允许无限大的 HTTP body 没有意义。最大 body、线程数、队列长度、读写超时共同限定服务器愿意投入的资源。队列满时底层库可能直接关闭连接，不能保证一律得到 JSON 503。</p>
 <p>本项目使用库的默认 JSON 重复键处理策略，重复字段通常保留后出现的值；它没有实现“所有重复 JSON 键一律拒绝”。需要严格金融协议、签名消息等场景时，应额外设计确定的解析规则。这是契约细节，不要留给客户端猜测。</p>
 <p><strong>练习</strong>：先在纸上写出 <code>POST {&quot;title&quot;:123}</code> 应返回什么，再找代码中的校验位置。<strong>验收</strong>：不能只描述正常请求；每个输入边界都有明确结果。</p>
-<h2 id="section-81">15. SQL 与 SQLite：让数据跨越进程生命周期</h2><div class="chapter-tools"><button class="complete-button" data-for="section-81">标记本章已学完</button></div>
-<h3 id="section-82">15.1 SQLite 是嵌入式数据库</h3>
+<h2 id="section-180">15. SQL 与 SQLite：让数据跨越进程生命周期</h2><div class="chapter-tools"><button class="complete-button" data-for="section-180">标记本章已学完</button></div>
+<h3 id="section-181">15.1 SQLite 是嵌入式数据库</h3>
 <p>本项目把 SQLite 编译进程序，数据库主要保存在一个文件中，不需要先启动独立数据库服务。它适合教学和很多单机应用；未来高并发、多节点共享状态等需求需要重新评估数据库和部署结构。</p>
 <p>关系型数据库把任务存成一张表，每行一个任务，每列一个字段：</p>
 <pre><span class="language-label">sql</span><code class="language-sql">CREATE TABLE IF NOT EXISTS tasks (
@@ -860,7 +2278,7 @@ response.set_content(result.dump(), &quot;application/json&quot;);
 </code></pre>
 <p><code>PRIMARY KEY</code> 唯一标识一行；NOT NULL 禁止缺值；CHECK 限制列的合法范围。应用层和数据库层都做必要验证，能防止以后其他写入路径绕过应用规则。</p>
 <p>这里 CAST 为 BLOB 是为了按字节计数，与 API 的 200 字节约束一致。AUTOINCREMENT 减少已提交历史 ID 的重用，但不保证 ID 连续，且有额外开销；用户不可把它当作任务总数。</p>
-<h3 id="section-83">15.2 先认识 CRUD 对应的 SQL</h3>
+<h3 id="section-182">15.2 先认识 CRUD 对应的 SQL</h3>
 <pre><span class="language-label">sql</span><code class="language-sql">INSERT INTO tasks(title) VALUES(&#39;Learn SQL&#39;);
 SELECT id,title,completed FROM tasks ORDER BY id LIMIT 20 OFFSET 0;
 SELECT id,title,completed FROM tasks WHERE id=1;
@@ -868,13 +2286,13 @@ UPDATE tasks SET completed=1 WHERE id=1;
 DELETE FROM tasks WHERE id=1;
 </code></pre>
 <p>WHERE 限制操作范围。忘写 WHERE 的 UPDATE/DELETE 会影响全部行，所以在自己的练习数据库中操作。SELECT 的结果顺序需要显式 ORDER BY；不要依赖当前偶然看到的顺序。</p>
-<h3 id="section-84">15.3 预处理语句与参数绑定</h3>
+<h3 id="section-183">15.3 预处理语句与参数绑定</h3>
 <p>程序中的 SQL 应写成：</p>
 <pre><span class="language-label">sql</span><code class="language-sql">INSERT INTO tasks(title) VALUES(?1);
 </code></pre>
 <p>再用 bind 把标题作为数据传入。若标题是 <code>x&#39;); DROP TABLE tasks; --</code>，它仍应存成普通文本，而不是被解释为新的 SQL。</p>
 <p>占位符适用于值，通常不能直接代替表名、列名或排序方向。动态排序字段必须从允许列表中选择，不能把任意客户端字符串拼进 SQL 标识符位置。</p>
-<h3 id="section-85">15.4 事务解决“多步必须一起成功”</h3>
+<h3 id="section-184">15.4 事务解决“多步必须一起成功”</h3>
 <p>单条 INSERT/UPDATE/DELETE 自身具有事务语义。若未来创建任务后必须同时写一条审计记录，应该：</p>
 <pre><span class="language-label">sql</span><code class="language-sql">BEGIN IMMEDIATE;
 INSERT INTO tasks(title) VALUES(?1);
@@ -883,10 +2301,10 @@ COMMIT;
 </code></pre>
 <p>中间失败则 ROLLBACK。这段是扩展设计示意，当前项目没有 audit_log 表，不要直接对附带数据库执行。事务应尽量短；不要在持有数据库写事务时请求远程 HTTP 服务。</p>
 <p>ACID 中的原子性关心整体成功或整体失败；隔离性关心并发事务彼此如何可见。数据库保证不能替你定义业务上“允许哪一种更新覆盖哪一种”的规则。</p>
-<h3 id="section-86">15.5 WAL、锁与忙等待</h3>
+<h3 id="section-185">15.5 WAL、锁与忙等待</h3>
 <p>本项目启用 WAL。它允许许多情况下读与写更好地并行，但 SQLite 仍不是多个写者可以无限同时写入的数据库。WAL 文件和共享内存文件与主库一起参与运行；不要在服务运行时只复制 <code>.db</code> 就认定备份完整。机制见 <a href="https://sqlite.org/wal.html" target="_blank" rel="noopener noreferrer">SQLite WAL 文档</a>。</p>
 <p><code>sqlite3_busy_timeout(..., 3000)</code> 让某些锁冲突先等待一段时间，仍无法获得锁时再报忙。它不是“给所有数据库操作设置总执行时间 3 秒”。参阅 <a href="https://sqlite.org/c3ref/busy_timeout.html" target="_blank" rel="noopener noreferrer">busy_timeout 接口</a>。</p>
-<h3 id="section-87">15.6 查看数据库，而不修改它</h3>
+<h3 id="section-186">15.6 查看数据库，而不修改它</h3>
 <p>停止服务后，在根目录进入 Python：</p>
 <pre><span class="language-label">powershell</span><code class="language-powershell">python
 </code></pre>
@@ -897,11 +2315,11 @@ db.close()
 </code></pre>
 <p>mode=ro 防止路径写错时悄悄创建空库。运行时 APP_DB 若指定了其他位置，这里必须跟着改。首次还没有创建数据库时会报无法打开，这是预期的。</p>
 <p><strong>练习</strong>：创建任务，关闭服务器，再打开数据库查询；重新启动服务后 GET 同一个 ID。<strong>验收</strong>：明确知道数据库文件实际位于哪里，而不是只知道“程序好像保存了”。</p>
-<h2 id="section-88">16. 手把手实现数据库仓库</h2><div class="chapter-tools"><button class="complete-button" data-for="section-88">标记本章已学完</button></div>
-<h3 id="section-89">16.1 仓库只处理任务存取，不接触 HTTP</h3>
+<h2 id="section-187">16. 手把手实现数据库仓库</h2><div class="chapter-tools"><button class="complete-button" data-for="section-187">标记本章已学完</button></div>
+<h3 id="section-188">16.1 仓库只处理任务存取，不接触 HTTP</h3>
 <p>先看 <code>include/task/repository.hpp</code> 的接口：create、list、get、update、erase。这里没有 HTTP 状态码，没有 request/response，没有 JSON。将来换一个命令行入口，也可以继续使用这个仓库。</p>
 <p>get/update 返回 optional，表达“找不到”；erase 返回 bool，表达是否删到行；数据库错误抛 DatabaseError。只有非常小的一层负责将数据库错误转换成 HTTP。</p>
-<h3 id="section-90">16.2 从连接构造开始</h3>
+<h3 id="section-189">16.2 从连接构造开始</h3>
 <p>构造函数按这个顺序做事：</p>
 <ol>
 <li><code>sqlite3_open_v2</code> 打开数据库。</li>
@@ -911,16 +2329,16 @@ db.close()
 <li>执行建表语句。</li>
 </ol>
 <p><code>SQLITE_OPEN_FULLMUTEX</code> 是 SQLite 自身的连接串行化选项。我们还使用仓库互斥量，让一次完整仓库操作成为应用层的临界区。它们所保护的边界并不完全相同。</p>
-<h3 id="section-91">16.3 写一个只能安全释放的 Statement</h3>
+<h3 id="section-190">16.3 写一个只能安全释放的 Statement</h3>
 <p>内部 Statement 把 <code>sqlite3_stmt*</code> 装进 unique_ptr。构造时 prepare；bind 时检查返回码；row 时区分 SQLITE_ROW、SQLITE_DONE、其他错误；析构时 finalize。</p>
 <p>你应先只实现 prepare → step → finalize，执行 SELECT 1；再补 bind 与 Task 映射。这样每加入一个能力都有很小的验证范围。</p>
 <p>不要在 <code>sqlite3_column_text</code> 返回内部指针后就立刻析构 statement，再返回该指针。当前 task() 会在 statement 仍有效时复制成 std::string，因此返回的 Task 独立拥有标题。</p>
-<h3 id="section-92">16.4 bind_text 的最后一个参数关乎生命周期</h3>
+<h3 id="section-191">16.4 bind_text 的最后一个参数关乎生命周期</h3>
 <pre><span class="language-label">cpp</span><code class="language-cpp">sqlite3_bind_text(stmt, 1, value.data(), static_cast&lt;int&gt;(value.size()), SQLITE_TRANSIENT);
 </code></pre>
 <p><code>SQLITE_TRANSIENT</code> 要求 SQLite 在调用返回前复制数据，原 string 后来变化不会让 SQLite 继续引用失效内存。相对地，SQLITE_STATIC 要求调用者保证更长时间的数据有效性，不能随便用。参阅 <a href="https://www.sqlite.org/c3ref/bind_blob.html" target="_blank" rel="noopener noreferrer">SQLite 参数绑定文档</a>。</p>
 <p>这里长度转 int 的前提是标题已经限制到 200 字节。若封装用于任意大数据，必须先检查大小，不应无条件窄化。</p>
-<h3 id="section-93">16.5 create：先验证，后加锁，再执行</h3>
+<h3 id="section-192">16.5 create：先验证，后加锁，再执行</h3>
 <p>创建 SQL 使用 RETURNING，写入并获得 id/title/completed。取得一行后仍继续 step 到 DONE，确保写语句完成且提交阶段错误有机会被发现，再返回任务。</p>
 <pre><span class="language-label">cpp</span><code class="language-cpp">Statement stmt(db_.get(), &quot;INSERT INTO tasks(title) VALUES(?1) RETURNING id,title,completed;&quot;);
 stmt.bind(1, title);
@@ -930,7 +2348,7 @@ auto result = stmt.task();
 return result;
 </code></pre>
 <p>这段位于持锁的方法内部，相关定义见完整源码。现代 SQLite 支持 RETURNING；本教程固定的版本符合要求。不要仅把“拿到一行”误解为所有数据库工作都完成。</p>
-<h3 id="section-94">16.6 update：缺省字段保持原值</h3>
+<h3 id="section-193">16.6 update：缺省字段保持原值</h3>
 <pre><span class="language-label">sql</span><code class="language-sql">UPDATE tasks
 SET title=COALESCE(?1,title), completed=COALESCE(?2,completed)
 WHERE id=?3
@@ -938,21 +2356,21 @@ RETURNING id,title,completed;
 </code></pre>
 <p>没提供的字段绑定 SQL NULL；COALESCE 选第一个非 NULL 值，因此保留原列。提供 false 时绑定整数 0，0 不是 NULL，所以能正确更新。</p>
 <p>这把字段更新放在一条 SQL 中，不需要先 SELECT 再 UPDATE。两个请求同时改不同字段时，避免应用层“读取旧整行再整行覆盖”的典型问题。不过两个请求同时改同一个字段，仍是后写覆盖前写；这不是具备版本冲突检测的乐观锁系统。</p>
-<h3 id="section-95">16.7 list 和 erase 的细节</h3>
+<h3 id="section-194">16.7 list 和 erase 的细节</h3>
 <p>list 严格限制分页范围，然后循环 SQLITE_ROW 收集结果直到 DONE。erase 执行删除后使用 <code>sqlite3_changes</code> 判断是否影响了一行，并把整个过程放在同一把锁内，避免别的操作抢先改变连接的 changes 状态。</p>
 <p><strong>重写任务</strong>：在自己的分支按“构造连接 → list → create → get → update → erase”实现，每完成一步跑 core_tests。<strong>验收</strong>：能指出所有资源的拥有者、所有释放位置，以及为什么异常发生后锁不会一直占着。</p>
-<h2 id="section-96">17. 手把手把数据库接到 HTTP</h2><div class="chapter-tools"><button class="complete-button" data-for="section-96">标记本章已学完</button></div>
-<h3 id="section-97">17.1 先做没有输入的 healthz</h3>
+<h2 id="section-195">17. 手把手把数据库接到 HTTP</h2><div class="chapter-tools"><button class="complete-button" data-for="section-195">标记本章已学完</button></div>
+<h3 id="section-196">17.1 先做没有输入的 healthz</h3>
 <p>在 main 创建仓库和 server，然后调用 <code>register_routes(server, repository, token)</code>。注册函数只是配置路由，真正监听仍由 main 负责。你可以先只注册 healthz，编译运行成功，再逐条打开其他路由。</p>
 <p>这样拆分后，main 负责进程层面的启动与退出；http_api.cpp 负责协议适配；repository.cpp 负责存储。文件数量来自职责差异，不是越多越专业。</p>
-<h3 id="section-98">17.2 再实现序列化函数</h3>
+<h3 id="section-197">17.2 再实现序列化函数</h3>
 <pre><span class="language-label">cpp</span><code class="language-cpp">Json as_json(const Task&amp; value) {
     return {{&quot;id&quot;, value.id}, {&quot;title&quot;, value.title}, {&quot;completed&quot;, value.completed}};
 }
 </code></pre>
 <p>不要把数据库实现细节直接暴露出去。例如将来新增内部审计字段，不应该因为“把所有成员自动转 JSON”就意外暴露给 API 客户端。这里明确列出对外字段。</p>
 <p><code>respond</code> 统一设置 HTTP 状态码和 JSON Content-Type；<code>fail</code> 在它上面构造统一错误结构。减少路由间出现某条返回 JSON、某条返回裸字符串的不一致。</p>
-<h3 id="section-99">17.3 实现 body_object：语法合法不等于业务合法</h3>
+<h3 id="section-198">17.3 实现 body_object：语法合法不等于业务合法</h3>
 <p>完整顺序是：检查 Content-Type → 解析 JSON → 确认顶层是 object → 检查字段集合 → 检查字段类型 → 检查取值范围。</p>
 <pre><span class="language-label">cpp</span><code class="language-cpp">auto body = Json::parse(request.body, nullptr, false);
 if (body.is_discarded()) {
@@ -964,7 +2382,7 @@ if (!body.is_object()) {
 </code></pre>
 <p>这里 false 表示解析语法错误时使用 discarded 结果，而不是按默认方式抛解析异常；它不能承诺“任何情况下绝不抛异常”，例如内存分配仍可能失败。具体选项见 <a href="https://json.nlohmann.me/api/basic_json/parse/" target="_blank" rel="noopener noreferrer">JSON parse 文档</a>。</p>
 <p>访问字段先 <code>contains</code>、再 <code>is_string</code> 或 <code>is_boolean</code>，再 get。不要直接把所有输入都 <code>get&lt;std::string&gt;()</code> 然后把类型异常误判为服务器 500。</p>
-<h3 id="section-100">17.4 先接列表，再接创建</h3>
+<h3 id="section-199">17.4 先接列表，再接创建</h3>
 <p>列表路由解析分页，调用 repository.list，把每个 Task 转成 JSON 并放进 array。空列表必须是 <code>[]</code>，不要不小心构造成 null。</p>
 <p>创建路由调用 read_title 验证，再执行 repository.create。数据库成功之后才设置 201 和 Location。输入验证失败时不能先写库再试图“撤销”。</p>
 <pre><span class="language-label">cpp</span><code class="language-cpp">const auto value = repository.create(read_title(body));
@@ -972,20 +2390,20 @@ response.set_header(&quot;Location&quot;, &quot;/api/tasks/&quot; + std::to_stri
 respond(response, 201, as_json(value));
 </code></pre>
 <p>先通过 POST 新建，紧接着 GET 列表，应看到刚写入的数据。这个验收能同时覆盖网络、JSON、数据库和序列化。</p>
-<h3 id="section-101">17.5 读取、修改与删除</h3>
+<h3 id="section-200">17.5 读取、修改与删除</h3>
 <p>使用 <code>&quot;/api/tasks/:id&quot;</code> 路由参数，从 <code>request.path_params</code> 取出 id 字符串，再调用 parse_id。不要用匹配字符串直接参与 SQL 拼接。</p>
 <p>GET 找不到返回 404；PATCH 把 JSON 映射到 TaskPatch，再调用 update；DELETE 成功设置 204，不再追加 JSON body。</p>
 <p>写 generic lambda 时，复杂的依赖类型有时需要 <code>template</code> 消歧。本项目对解析后的 body 明确写 <code>const Json body</code>，让类型直观、避免初学者在 <code>get&lt;bool&gt;()</code> 的模板解析细节上停住。现代 C++ 并不要求能用 auto 的地方全部都写 auto。</p>
-<h3 id="section-102">17.6 最后接异常边界和日志</h3>
+<h3 id="section-201">17.6 最后接异常边界和日志</h3>
 <p>仓库抛出的异常穿过路由后，由统一 exception handler 转成响应。HttpError 保留明确的客户端错误；DatabaseError 把忙/锁定映射到 503；未知故障返回笼统 500。</p>
 <p>客户端不需要知道你的数据库绝对路径、内部 SQL、服务器安装目录。内部日志可记录诊断码；生产系统可以在受控日志中保留更多异常上下文，但也要过滤 token、密码和请求中的隐私数据。</p>
 <p>exception handler 必须考虑 <code>catch (...)</code>，因为 C++ 可以抛出非 std::exception 类型。第三方库行为随版本变化，不能假设任何回调异常都在任意版本中以相同方式处理。相关接口见 <a href="https://github.com/yhirose/cpp-httplib" target="_blank" rel="noopener noreferrer">cpp-httplib 官方仓库</a>。</p>
-<h3 id="section-103">17.7 主程序对象的顺序也是设计</h3>
+<h3 id="section-202">17.7 主程序对象的顺序也是设计</h3>
 <p>main 先构造 repository，再构造 server，再构造退出观察线程。离开作用域时顺序反过来：先结束观察线程，再销毁 server，最后销毁仓库。</p>
 <p>这让 server 内捕获 <code>&amp;repository</code> 的回调不会正常地活得比 repository 更久。理解这个顺序后，你就知道这里不用把数据库仓库胡乱改成 shared_ptr。</p>
 <p><strong>验收</strong>：不看答案，画出 POST 的调用链；把标题上限改成 120 字节时，能列出需要同步修改的校验、数据库约束、文档和测试。</p>
-<h2 id="section-104">18. 里程碑三：完整运行一次 CRUD</h2><div class="chapter-tools"><button class="complete-button" data-for="section-104">标记本章已学完</button></div>
-<h3 id="section-105">18.1 终端 A 启动服务器</h3>
+<h2 id="section-203">18. 里程碑三：完整运行一次 CRUD</h2><div class="chapter-tools"><button class="complete-button" data-for="section-203">标记本章已学完</button></div>
+<h3 id="section-204">18.1 终端 A 启动服务器</h3>
 <p>在项目根目录，用 PowerShell：</p>
 <pre><span class="language-label">powershell</span><code class="language-powershell">cmake --preset debug
 cmake --build --preset debug
@@ -996,7 +2414,7 @@ Remove-Item Env:APP_TOKEN -ErrorAction SilentlyContinue
 .\build\debug\task_server.exe
 </code></pre>
 <p>APP_TOKEN 此时为空，便于纯本机入门实验。删除的是当前终端中的环境变量，不是数据库文件。程序打印监听地址后，保持终端 A 运行。</p>
-<h3 id="section-106">18.2 终端 B 用 PowerShell 创建任务</h3>
+<h3 id="section-205">18.2 终端 B 用 PowerShell 创建任务</h3>
 <pre><span class="language-label">powershell</span><code class="language-powershell">$base = &#39;http://127.0.0.1:8080&#39;
 Invoke-RestMethod &quot;$base/healthz&quot;
 $json = @{ title = &#39;学习 CMake&#39; } | ConvertTo-Json -Compress
@@ -1006,20 +2424,20 @@ $created
 $id = $created.id
 </code></pre>
 <p>把 JSON 显式转换成 UTF-8 字节，避免不同 PowerShell 版本的默认字符串编码差异。成功输出包含正整数 id、标题和 completed=False。不要假设 ID 永远等于 1；已有数据库中会继续增长。</p>
-<h3 id="section-107">18.3 查询和更新</h3>
+<h3 id="section-206">18.3 查询和更新</h3>
 <pre><span class="language-label">powershell</span><code class="language-powershell">Invoke-RestMethod &quot;$base/api/tasks?limit=20&amp;offset=0&quot;
 Invoke-RestMethod &quot;$base/api/tasks/$id&quot;
 $patch = [System.Text.Encoding]::UTF8.GetBytes(&#39;{&quot;completed&quot;:true}&#39;)
 Invoke-RestMethod -Method Patch -Uri &quot;$base/api/tasks/$id&quot; -ContentType &#39;application/json&#39; -Body $patch
 </code></pre>
 <p>预期 completed 变为 True。再发送 <code>{&quot;completed&quot;:false}</code>，应变回 False。这是最容易暴露 optional<bool> 理解错误的一条测试。</p>
-<h3 id="section-108">18.4 验证持久化，再删除</h3>
+<h3 id="section-207">18.4 验证持久化，再删除</h3>
 <p>在 A 按 Ctrl+C，等待退出后重新执行启动命令；在 B 再 GET 同一个 id，应仍能找到它。最后：</p>
 <pre><span class="language-label">powershell</span><code class="language-powershell">Invoke-WebRequest -UseBasicParsing -Method Delete -Uri &quot;$base/api/tasks/$id&quot;
 curl.exe -i &quot;$base/api/tasks/$id&quot;
 </code></pre>
 <p>删除返回 204；后续查询返回 404。PowerShell 的 Invoke-RestMethod 对非成功状态通常会抛客户端异常；为了查看原始错误体，初学阶段用 curl.exe -i 更直接。</p>
-<h3 id="section-109">18.5 Linux / bash 的等价命令</h3>
+<h3 id="section-208">18.5 Linux / bash 的等价命令</h3>
 <pre><span class="language-label">bash</span><code class="language-bash">export APP_HOST=127.0.0.1 APP_PORT=8080 APP_DB=tasks.db
 unset APP_TOKEN
 ./build/debug/task_server
@@ -1030,7 +2448,7 @@ curl -i -X POST http://127.0.0.1:8080/api/tasks -H &#39;Content-Type: applicatio
 curl -i &#39;http://127.0.0.1:8080/api/tasks?limit=20&amp;offset=0&#39;
 </code></pre>
 <p>根据创建返回的 ID，再请求 <code>/api/tasks/实际ID</code>。shell 中查询参数含 <code>&amp;</code> 时把 URL 加引号，否则它可能被解释成 shell 操作符。</p>
-<h3 id="section-110">18.6 配置项与优先级</h3>
+<h3 id="section-209">18.6 配置项与优先级</h3>
 <div class="table-scroll"><table>
 <thead>
 <tr>
@@ -1064,30 +2482,30 @@ curl -i &#39;http://127.0.0.1:8080/api/tasks?limit=20&amp;offset=0&#39;
 <p>非回环监听要求 token 至少 32 字节；长度检查不等于随机性检查，所以要用随机生成器创建 token。数据库路径的父目录需要存在并可写，否则启动失败。配置变化需要重启，当前程序不自动热加载。</p>
 <p>Windows 的窄字符环境变量读取可能受运行库代码页影响。主线练习优先把 APP_DB 设置到英文路径；若必须通过环境变量传入中文绝对路径，应额外实现 Windows 宽字符环境读取并转换为 UTF-8，再交给 SQLite。本项目验证了 UTF-8 任务内容，没有声称验证了所有 Windows 非 ASCII 路径组合。</p>
 <p><strong>验收</strong>：完整做完“创建 → 查询 → 更新 → 重启 → 查询 → 删除 → 404”，每一步记下状态码。</p>
-<h2 id="section-111">19. 并发：先证明正确，再追求吞吐量</h2><div class="chapter-tools"><button class="complete-button" data-for="section-111">标记本章已学完</button></div>
-<h3 id="section-112">19.1 两个请求可能同时执行</h3>
+<h2 id="section-210">19. 并发：先证明正确，再追求吞吐量</h2><div class="chapter-tools"><button class="complete-button" data-for="section-210">标记本章已学完</button></div>
+<h3 id="section-211">19.1 两个请求可能同时执行</h3>
 <p>cpp-httplib 的工作线程可以同时调用不同路由。两个线程同时读写同一个没有同步保护的 vector、字符串或计数器，可能产生数据竞争，结果不只是“偶尔数字不对”，而可能是未定义行为。</p>
 <p>最开始可以通过一把互斥量保护共享数据，先建立清晰的正确性边界。本项目仓库的方法在访问单一 SQLite 连接时都持有同一把 mutex。</p>
-<h3 id="section-113">19.2 锁住一项完整操作</h3>
+<h3 id="section-212">19.2 锁住一项完整操作</h3>
 <pre><span class="language-label">cpp</span><code class="language-cpp">std::lock_guard lock(mutex_);
 // prepare → bind → step → 读取结果/changes
 </code></pre>
 <p>如果只在 <code>sqlite3_step</code> 外面加锁，其他线程仍可能在你读取连接相关状态之前执行自己的语句，破坏应用假设。锁的范围要围绕需要保持一致的操作设计。</p>
 <p>代价是仓库访问被串行化。线程池不是“数据库并行写入器”；一把锁加一个连接的方案有明确扩展上限。对于学习和小应用，这个限制换来了容易检查的行为。</p>
-<h3 id="section-114">19.3 原子变量解决很小的共享状态</h3>
+<h3 id="section-213">19.3 原子变量解决很小的共享状态</h3>
 <p>请求 ID 计数器使用 atomic 的 fetch_add。这里要求的是不重复分配进程内递增号码，不是用计数器发布其他对象状态，因此 relaxed 顺序足够。它不是跨进程、跨重启全局唯一的追踪 ID。</p>
 <p>不要把任意数据结构里的所有字段都改成 atomic 就认定整体线程安全。余额扣减、库存与订单关联等问题需要组合不变量，可能涉及锁或数据库事务。</p>
-<h3 id="section-115">19.4 jthread 管理线程生命周期</h3>
+<h3 id="section-214">19.4 jthread 管理线程生命周期</h3>
 <p><code>std::jthread</code> 析构时请求停止并 join，降低忘记 join 导致的问题。stop_token 是协作式停止请求，线程代码要主动检查，不是强行在任意指令中断线程。</p>
 <p>本项目独立线程每 100 毫秒检查退出标志，看到标志后在正常线程上下文里调用 server.stop。信号处理函数只设置<strong>保证无锁的 atomic<bool></strong>，通过 static_assert 检查这一前提。不要在信号处理函数里打印日志、分配内存、拿 mutex 或直接调用复杂的停止流程。</p>
-<h3 id="section-116">19.5 停止不等于瞬间结束所有请求</h3>
+<h3 id="section-215">19.5 停止不等于瞬间结束所有请求</h3>
 <p>server.stop 停止监听；库关闭队列时仍可能等待已有工作结束。读写超时、数据库忙等待和外部服务调用都会影响退出时间。systemd 或容器的停止宽限时间应与这些上限相配。</p>
 <p>本项目没有实现严格的全局请求截止时间和完整 draining 状态机；Linux 上 SIGTERM 路径仍需在部署环境实际验证。不要把 Windows 上结束进程的测试当成 Linux 优雅停机已经被验证。</p>
-<h3 id="section-117">19.6 以后怎样扩展</h3>
+<h3 id="section-216">19.6 以后怎样扩展</h3>
 <p>先测数据库锁等待和查询延迟。如果瓶颈在串行数据库访问，可以评估多个连接、读写分离策略或 PostgreSQL；如果瓶颈在大量等待网络连接，可以研究事件循环和异步 I/O。不要同时引入连接池、协程和无锁队列，再试图猜哪一项导致 bug。</p>
 <p><strong>练习</strong>：运行 lab02_modern，解释为什么 count 的检查要在 workers 作用域结束后。<strong>验收</strong>：能回答共享数据是什么、谁在并发访问、锁保护哪段逻辑。</p>
-<h2 id="section-118">20. 测试：让修改后的正确性有证据</h2><div class="chapter-tools"><button class="complete-button" data-for="section-118">标记本章已学完</button></div>
-<h3 id="section-119">20.1 本项目的三类检查</h3>
+<h2 id="section-217">20. 测试：让修改后的正确性有证据</h2><div class="chapter-tools"><button class="complete-button" data-for="section-217">标记本章已学完</button></div>
+<h3 id="section-218">20.1 本项目的三类检查</h3>
 <p><code>core_tests</code> 直接调用领域函数和仓库，使用 <code>:memory:</code> 数据库，验证 ID、标题、CRUD、分页、SQL 文本绑定和并发写入。</p>
 <p><code>modern_examples</code> 运行语言示例，检查移动所有权、span/concepts 与线程计数。</p>
 <p><code>http_integration</code> 真正启动服务进程，使用临时数据库，从 HTTP 端口调用接口，并测试重启后的持久化。它不会使用或删除你手动创建的 tasks.db。</p>
@@ -1095,14 +2513,14 @@ curl -i &#39;http://127.0.0.1:8080/api/tasks?limit=20&amp;offset=0&#39;
 ctest --test-dir build/debug -R core --output-on-failure
 ctest --test-dir build/debug -R http_integration --verbose
 </code></pre>
-<h3 id="section-120">20.2 测试必须比较结果，不能只是执行代码</h3>
+<h3 id="section-219">20.2 测试必须比较结果，不能只是执行代码</h3>
 <pre><span class="language-label">cpp</span><code class="language-cpp">const auto created = repo.create(&quot;first&quot;);
 require(created.id &gt; 0, &quot;positive id&quot;);
 require(repo.get(created.id)-&gt;title == &quot;first&quot;, &quot;read returns written title&quot;);
 </code></pre>
 <p>附带的 require 在条件失败时抛异常，使测试程序非零退出。没有把全部检查写成 assert，是因为 Release 中定义 NDEBUG 后普通 assert 可能被移除，造成“测试运行了但没检查”的错觉。</p>
 <p>小项目用这种最小测试入口足够理解机制。需要分组、fixture、参数化、mock 和更好报告时，可以引入 Catch2 或 GoogleTest；新增依赖前先明确它解决的痛点。</p>
-<h3 id="section-121">20.3 用行为分类设计测试</h3>
+<h3 id="section-220">20.3 用行为分类设计测试</h3>
 <div class="table-scroll"><table>
 <thead>
 <tr>
@@ -1144,23 +2562,23 @@ require(repo.get(created.id)-&gt;title == &quot;first&quot;, &quot;read returns 
 </tr>
 </tbody></table></div>
 <p>表格同时是后续补测清单，不代表每一个组合都已穷尽；具体已实现覆盖看 tests 文件和验证记录。并发测试通过不能证明不存在所有可能的竞争，需要结合代码的同步边界审查。</p>
-<h3 id="section-122">20.4 每修一个 bug，先留下会失败的测试</h3>
+<h3 id="section-221">20.4 每修一个 bug，先留下会失败的测试</h3>
 <p>假设你发现 <code>{&quot;completed&quot;:false}</code> 被忽略：先添加“true → false”测试，确认旧代码失败；再修复判断 optional 的逻辑；最后运行全部测试。这样错误不会在未来重构时悄悄回来。</p>
 <p>不要只写“实现调用了哪个私有函数”这种紧贴实现的测试。更有价值的是外部可观察结果：字段是否变更、状态码是否正确、数据库是否保留数据。</p>
-<h3 id="section-123">20.5 CI 是同一组命令在干净环境再执行</h3>
+<h3 id="section-222">20.5 CI 是同一组命令在干净环境再执行</h3>
 <p>附带 <code>.github/workflows/ci.yml</code> 展示 Ubuntu 构建、测试和 sanitizer 构建。把项目放到自己的 GitHub 仓库后，push/PR 触发工作流。文件出现在本地不代表已经在 GitHub 跑过；本次交付没有创建仓库或远程执行 CI。</p>
 <p>首次上 CI 失败时，重点检查是否遗漏提交依赖文件、是否写死本机路径、是否混用大小写。Windows 文件系统上碰巧能找到 <code>Task.hpp</code>，Linux 上未必能找到实际名为 <code>task.hpp</code> 的文件。</p>
 <p><strong>练习</strong>：把标题上限临时改成 10，让一个预期合法的边界测试失败，再恢复。<strong>验收</strong>：能解释失败测试是在验证需求，而不是只是为了得到“全绿”。</p>
-<h2 id="section-124">21. 日志、配置、鉴权与后端的边界</h2><div class="chapter-tools"><button class="complete-button" data-for="section-124">标记本章已学完</button></div>
-<h3 id="section-125">21.1 可检索日志比随手打印更有价值</h3>
+<h2 id="section-223">21. 日志、配置、鉴权与后端的边界</h2><div class="chapter-tools"><button class="complete-button" data-for="section-223">标记本章已学完</button></div>
+<h3 id="section-224">21.1 可检索日志比随手打印更有价值</h3>
 <pre><span class="language-label">json</span><code class="language-json">{&quot;method&quot;:&quot;POST&quot;,&quot;path&quot;:&quot;/api/tasks&quot;,&quot;status&quot;:201,&quot;request_id&quot;:&quot;12&quot;}
 </code></pre>
 <p>实际键顺序可能不同。JSON 转义能避免客户端路径里特殊字符伪造新日志行；osyncstream 让多个线程的整条输出更容易保持完整。本项目没有记录请求 body 和 Authorization。</p>
 <p>目前日志没有持久日志轮转、精确请求耗时和跨服务追踪。扩展时加入时间戳、耗时、服务版本和相关 ID；可以交给 systemd journal 或容器日志系统收集。不要把所有数据库错误都只记成没有上下文的“failed”。</p>
-<h3 id="section-126">21.2 healthz 与 readyz 区别</h3>
+<h3 id="section-225">21.2 healthz 与 readyz 区别</h3>
 <p>healthz 返回进程仍可处理基本请求。本项目没有访问数据库来做 healthz，因此它不证明数据库可写。</p>
 <p>以后可以增加 readyz，在极小开销下检查当前是否愿意接业务流量。读检查也不能证明下一次写一定成功。健康检查本身应快、少分配、不会因为探测频繁制造更大负载。</p>
-<h3 id="section-127">21.3 Bearer token 的实际用法</h3>
+<h3 id="section-226">21.3 Bearer token 的实际用法</h3>
 <p>在终端 A 生成随机 token：</p>
 <pre><span class="language-label">powershell</span><code class="language-powershell">$env:APP_TOKEN = (python -c &quot;import secrets; print(secrets.token_urlsafe(32))&quot;).Trim()
 </code></pre>
@@ -1170,29 +2588,29 @@ $headers = @{ Authorization = &quot;Bearer $token&quot; }
 Invoke-RestMethod -Uri &#39;http://127.0.0.1:8080/api/tasks&#39; -Headers $headers
 </code></pre>
 <p>缺失或错误 token 返回 401。任何得到 token 的人都可以操作全部任务，所以它适合单用户或受控服务调用，不提供用户身份隔离。源码中的普通字符串比较也不是经过侧信道审计的认证模块；有更严格要求时交由成熟身份系统和密码库处理。</p>
-<h3 id="section-128">21.4 登录功能为什么是一条独立主线</h3>
+<h3 id="section-227">21.4 登录功能为什么是一条独立主线</h3>
 <p>真正多用户系统至少要处理用户唯一标识、密码哈希、会话/令牌签发和撤销、登录失败限制、授权、用户禁用、凭据轮换。</p>
 <p>密码不能明文存储，也不能仅用普通 SHA-256 当密码存储方案。应使用成熟库的专用密码哈希实现，例如 Argon2id，并按库的当前官方指引配置。这里不手写密码算法，也没有声称已实现登录功能。</p>
 <p>最关键的授权查询应形如 <code>WHERE id=? AND owner_id=?</code>，owner_id 来自服务端验证过的会话，而不是用户提交的 JSON。否则攻击者换一个任务 ID 就可能访问别人的数据。</p>
-<h3 id="section-129">21.5 CORS、CSRF 和 HTTPS 各解决不同问题</h3>
+<h3 id="section-228">21.5 CORS、CSRF 和 HTTPS 各解决不同问题</h3>
 <p>CORS 是浏览器跨源访问规则，不是服务端身份认证；curl 不会因为你没配 CORS 就停止发送请求。使用 cookie 自动携带凭据的浏览器应用还要考虑 CSRF。Bearer token 放 Authorization 的调用方式有不同风险面，依然需要妥善存储 token 并防止 XSS 泄露。</p>
 <p>TLS/HTTPS 保护传输，反向代理负责证书和外部连接；它不会自动判断用户是否拥有某条任务。公网部署章节使用 HTTPS + token，但这仍是单用户服务。</p>
 <p><strong>练习</strong>：在不带 token 的情况下请求 healthz 和 api/tasks，解释为什么一个成功一个失败。<strong>验收</strong>：能区分认证“你是谁/凭据是否有效”和授权“你能操作哪条数据”。</p>
-<h2 id="section-130">22. 性能与排错：先测量，再决定改哪里</h2><div class="chapter-tools"><button class="complete-button" data-for="section-130">标记本章已学完</button></div>
-<h3 id="section-131">22.1 三个基础指标</h3>
+<h2 id="section-229">22. 性能与排错：先测量，再决定改哪里</h2><div class="chapter-tools"><button class="complete-button" data-for="section-229">标记本章已学完</button></div>
+<h3 id="section-230">22.1 三个基础指标</h3>
 <p>吞吐量表示单位时间完成多少请求；延迟表示单次请求耗时；错误率表示多少请求失败。只看平均延迟会隐藏慢请求，因此常看 p50、p95、p99。</p>
 <p>p95=80ms 可以理解为这次采样中大约 95% 的请求延迟不高于这个值。它不意味着所有时间、所有用户都保证在 80ms 内完成。样本数、请求种类、并发数和客户端能力都会影响结果。</p>
-<h3 id="section-132">22.2 运行附带的小型负载工具</h3>
+<h3 id="section-231">22.2 运行附带的小型负载工具</h3>
 <p>使用 Release 构建启动服务器，再在另一个终端：</p>
 <pre><span class="language-label">powershell</span><code class="language-powershell">python scripts/load_test.py --url http://127.0.0.1:8080/healthz --requests 200 --workers 8
 python scripts/load_test.py --url &#39;http://127.0.0.1:8080/api/tasks?limit=20&#39; --requests 200 --workers 8
 </code></pre>
 <p>如果 API 开启了 token，当前客户端终端也要设置相同 APP_TOKEN。脚本统计成功请求吞吐量及成功请求延迟，同时单独报告错误数。发生错误时不要只把成功样本的低延迟拿来宣传性能。</p>
 <p>该脚本每次请求新建连接，使用 Python 线程，本机客户端与服务器还可能竞争 CPU，因此它是观察趋势的学习工具，不是正式容量评估。不要把 healthz 的数字当成复杂数据库业务吞吐量。</p>
-<h3 id="section-133">22.3 逐项定位瓶颈</h3>
+<h3 id="section-232">22.3 逐项定位瓶颈</h3>
 <p>按 workers=1、4、8、16 依次测同样的请求，记录错误率和 p95。每次只改一个因素。若线程数增加但吞吐没有提高，可能是数据库锁串行化；若 CPU 很高，可能是序列化或查询；若大部分时间等待 I/O，增加 CPU 未必有效。</p>
 <p>数据库慢查询先看条件、排序和索引。<code>SELECT ... ORDER BY id</code> 已可利用主键顺序。给每一列都加索引会增加写入和存储成本。增加索引前用 EXPLAIN QUERY PLAN 观察查询计划。</p>
-<h3 id="section-134">22.4 一套从外向内的排错路径</h3>
+<h3 id="section-233">22.4 一套从外向内的排错路径</h3>
 <ol>
 <li>客户端使用的地址、端口、HTTP/HTTPS 是否正确。</li>
 <li>进程是否存在，启动日志是否报错，端口是否监听。</li>
@@ -1204,8 +2622,8 @@ python scripts/load_test.py --url &#39;http://127.0.0.1:8080/api/tasks?limit=20&
 </ol>
 <p>Windows 可用 <code>Get-NetTCPConnection -LocalPort 8080 -ErrorAction SilentlyContinue</code> 查看监听情况；Linux 用 <code>ss -ltnp</code>。看到占用端口的进程后先确认它是谁，不要随手结束不认识的服务。</p>
 <p><strong>验收</strong>：写下同一接口在两种并发数下的结果、环境和一个待验证假设；没有数据时不宣称“提高了十倍性能”。</p>
-<h2 id="section-135">23. Linux 部署：从终端程序变成后台服务</h2><div class="chapter-tools"><button class="complete-button" data-for="section-135">标记本章已学完</button></div>
-<h3 id="section-136">23.1 两条部署路线任选其一</h3>
+<h2 id="section-234">23. Linux 部署：从终端程序变成后台服务</h2><div class="chapter-tools"><button class="complete-button" data-for="section-234">标记本章已学完</button></div>
+<h3 id="section-235">23.1 两条部署路线任选其一</h3>
 <p>本章用原生 Linux 构建 + systemd 管理。下一章用 Docker。先熟练一种，不需要在同一个端口同时运行两种服务。</p>
 <p>准备一台你有权限管理的 Linux 机器，把整个项目源码复制过去。可以用自己的 Git 仓库克隆，也可以用 scp 复制解压后的项目。下面命令假设当前目录就是项目根目录。</p>
 <pre><span class="language-label">bash</span><code class="language-bash">sudo apt update
@@ -1215,14 +2633,14 @@ cmake --build --preset release
 ctest --preset release
 </code></pre>
 <p>先让测试通过，再考虑后台化。当前交付环境没有实际可用的 Linux 执行环境，部署配置属于需在目标机验收的步骤；本机 Windows 编译通过不能替代这里的测试。</p>
-<h3 id="section-137">23.2 建立专用运行身份和数据目录</h3>
+<h3 id="section-236">23.2 建立专用运行身份和数据目录</h3>
 <p>以下命令用于你自己的部署机，需要管理权限，不在普通 Windows PowerShell 中执行：</p>
 <pre><span class="language-label">bash</span><code class="language-bash">sudo useradd --system --user-group --home-dir /var/lib/task-server --shell /usr/sbin/nologin taskapi
 sudo install -d -o taskapi -g taskapi -m 750 /var/lib/task-server
 sudo install -m 755 build/release/task_server /usr/local/bin/task_server
 </code></pre>
 <p>如果 taskapi 已存在，不要重复创建；先确认它确实是为这个应用准备的账号。运行用户只需要写数据目录，不需要修改系统程序目录。</p>
-<h3 id="section-138">23.3 写入配置，启动 systemd</h3>
+<h3 id="section-237">23.3 写入配置，启动 systemd</h3>
 <p>先生成随机 token，并把它安全保存供客户端使用：</p>
 <pre><span class="language-label">bash</span><code class="language-bash">TOKEN=$(python3 -c &#39;import secrets; print(secrets.token_urlsafe(32))&#39;)
 printf &#39;APP_TOKEN=%s\n&#39; &quot;$TOKEN&quot; | sudo tee /etc/task-server.env &gt; /dev/null
@@ -1239,7 +2657,7 @@ curl -i http://127.0.0.1:8080/api/tasks -H &quot;Authorization: Bearer $TOKEN&qu
 sudo journalctl -u task-server -n 100 --no-pager
 </code></pre>
 <p>测试完成后可以 <code>unset TOKEN</code>，但要确保 token 已保存在你管理凭据的位置。修改配置后用 <code>sudo systemctl restart task-server</code>，并再次检查状态和日志。</p>
-<h3 id="section-139">23.4 反向代理与 HTTPS</h3>
+<h3 id="section-238">23.4 反向代理与 HTTPS</h3>
 <p>先让自己的域名 DNS 指向服务器，确认公网到服务器的 80/443 端口可达。应用自身继续监听 127.0.0.1:8080，由 Caddy 接收外部 HTTPS，再转发到本机应用。</p>
 <pre><span class="language-label">text</span><code class="language-text">互联网客户端 → HTTPS :443 → Caddy → HTTP 127.0.0.1:8080 → Task Server
 </code></pre>
@@ -1254,15 +2672,15 @@ sudo systemctl reload caddy
 </code></pre>
 <p>符合条件时 Caddy 会管理 HTTPS 证书；域名解析、证书校验方式和端口要求参阅 <a href="https://caddyserver.com/docs/automatic-https" target="_blank" rel="noopener noreferrer">自动 HTTPS 文档</a>。Caddy 没成功取得证书时应查它的日志，不应关闭客户端证书验证来掩盖问题。</p>
 <p>公网只开放实际需要的入口；应用 8080 不必暴露。是否允许 SSH、使用哪种防火墙和云安全组取决于你的机器环境，不要照抄可能把自己锁在服务器外的防火墙规则。</p>
-<h3 id="section-140">23.5 部署验收</h3>
+<h3 id="section-239">23.5 部署验收</h3>
 <p>从另一台机器访问真实域名 healthz；不带 token 请求 API 应为 401；带正确 token 完成一次 CRUD；重启服务后检查数据；再重启机器确认服务自动恢复。最后记录应用版本、数据库路径、启动命令和查看日志的命令。</p>
 <p><strong>验收</strong>：你关闭 SSH 窗口后服务仍在运行；进程失败时有日志，并能由 systemd 按规则重启。</p>
-<h2 id="section-141">24. Docker：把构建与运行环境写成文件</h2><div class="chapter-tools"><button class="complete-button" data-for="section-141">标记本章已学完</button></div>
-<h3 id="section-142">24.1 镜像和容器不是一回事</h3>
+<h2 id="section-240">24. Docker：把构建与运行环境写成文件</h2><div class="chapter-tools"><button class="complete-button" data-for="section-240">标记本章已学完</button></div>
+<h3 id="section-241">24.1 镜像和容器不是一回事</h3>
 <p>镜像是程序和环境的打包模板；容器是基于镜像启动的进程环境；volume 保存不应随容器替换而消失的数据。</p>
 <p>Dockerfile 使用两个阶段：build 阶段安装编译器并运行测试；runtime 阶段只放运行库和可执行文件。多阶段构建的机制可查 <a href="https://docs.docker.com/build/building/multi-stage/" target="_blank" rel="noopener noreferrer">Docker 官方说明</a>。</p>
 <p>这里固定 <code>ubuntu:24.04</code>，但发行版标签内的软件更新仍会变化。严格可重复交付还需固定镜像 digest、管理系统包来源并记录构建环境；当前文件并不声称实现位级可重复构建。</p>
-<h3 id="section-143">24.2 先准备 Docker 引擎，再运行命令</h3>
+<h3 id="section-242">24.2 先准备 Docker 引擎，再运行命令</h3>
 <p>确认 <code>docker version</code> 和 <code>docker compose version</code> 可用。Docker 安装涉及系统虚拟化和服务配置，使用其官方安装文档，不由本教程自动修改你的系统。</p>
 <p>PowerShell，在项目根目录：</p>
 <pre><span class="language-label">powershell</span><code class="language-powershell">$env:APP_TOKEN = (python -c &quot;import secrets; print(secrets.token_urlsafe(32))&quot;).Trim()
@@ -1275,10 +2693,10 @@ curl.exe -i http://127.0.0.1:8080/api/tasks -H &quot;Authorization: Bearer $env:
 <pre><span class="language-label">bash</span><code class="language-bash">export APP_TOKEN=$(python3 -c &#39;import secrets; print(secrets.token_urlsafe(32))&#39;)
 </code></pre>
 <p>每次启动不要无意生成新 token 导致原客户端失效。长期使用应妥善管理固定凭据并有计划地轮换。Compose 的 <code>.env</code> 只是便利的本地输入文件，不是加密的凭据仓库。</p>
-<h3 id="section-144">24.3 理解两处监听地址</h3>
+<h3 id="section-243">24.3 理解两处监听地址</h3>
 <p>容器内 APP_HOST=0.0.0.0，让 Docker 转发进来的连接到达应用；宿主机端口映射写 <code>127.0.0.1:8080:8080</code>，只让宿主机本地访问该端口。二者属于不同网络命名空间，并不矛盾。</p>
 <p>宿主机上运行的 Caddy 可以代理到这个映射端口。如果 Caddy 也放在另一个容器，不能继续把 127.0.0.1 当作 api 容器地址，需要使用共享 Docker 网络与服务名，这属于另一个部署拓扑。</p>
-<h3 id="section-145">24.4 持久化与停止</h3>
+<h3 id="section-244">24.4 持久化与停止</h3>
 <pre><span class="language-label">powershell</span><code class="language-powershell">docker compose down
 docker compose up -d
 </code></pre>
@@ -1286,15 +2704,15 @@ docker compose up -d
 <p>容器通过非 root 用户运行；新的命名卷使用镜像中 <code>/data</code> 的初始权限。已有卷若权限不匹配会报无法打开数据库，应确认卷所有者与 UID=10001，而不是把目录权限一律改成 777。</p>
 <p>此项目没有定义 Docker HEALTHCHECK。需要编排系统健康状态时，应单独设计探测工具或由外部系统访问 healthz；不能因为有 healthz 路由就说 Docker 已经执行健康检查。</p>
 <p><strong>验收</strong>：创建一条任务 → down → up → 原任务仍存在。再看镜像中没有整个编译工具链，理解多阶段构建为何有用。</p>
-<h2 id="section-146">25. 备份、迁移和发布：数据比进程更长寿</h2><div class="chapter-tools"><button class="complete-button" data-for="section-146">标记本章已学完</button></div>
-<h3 id="section-147">25.1 用 SQLite backup API 创建一致备份</h3>
+<h2 id="section-245">25. 备份、迁移和发布：数据比进程更长寿</h2><div class="chapter-tools"><button class="complete-button" data-for="section-245">标记本章已学完</button></div>
+<h3 id="section-246">25.1 用 SQLite backup API 创建一致备份</h3>
 <p>在能访问数据库文件的环境中：</p>
 <pre><span class="language-label">powershell</span><code class="language-powershell">python scripts/backup_db.py tasks.db backups/tasks-2026-10-18.db
 </code></pre>
 <p>输出 <code>Backup verified: ...</code> 表示备份 API 完成且 integrity_check 返回 ok。目标已存在时脚本拒绝覆盖，请换一个文件名。在线备份可能等待写入活动；在负载低时执行并监控完成状态。</p>
 <p>SQLite 的 <a href="https://sqlite.org/backup.html" target="_blank" rel="noopener noreferrer">在线备份接口</a> 用于获得一致快照，比运行中只复制主 db 文件更合适。备份脚本使用 Python 自带 SQLite，版本可能与应用编译的 SQLite 不同；当前简单表结构通常兼容，但引入新扩展或文件格式特性后必须验证。</p>
 <p>Docker named volume 内的文件不直接等于宿主项目目录下的 tasks.db。备份需从能访问卷的辅助环境执行，或先有序停机后按卷路径管理，不能对宿主机一个同名空文件误做备份。</p>
-<h3 id="section-148">25.2 恢复演练比“备份文件存在”更有说服力</h3>
+<h3 id="section-247">25.2 恢复演练比“备份文件存在”更有说服力</h3>
 <p>先停止原服务，把备份复制为一个新的数据库文件，例如 <code>restored-check.db</code>。用另一端口启动验证：</p>
 <pre><span class="language-label">powershell</span><code class="language-powershell">Copy-Item backups/tasks-2026-10-18.db restored-check.db
 $env:APP_DB = (Resolve-Path restored-check.db).Path
@@ -1302,7 +2720,7 @@ $env:APP_PORT = &#39;8082&#39;
 .\build\debug\task_server.exe
 </code></pre>
 <p>文件名应选择尚不存在的测试目标；不要覆盖你原来的数据库。在另一个终端读取任务并核对关键内容。验证后停止测试服务，恢复 APP_DB 和 APP_PORT。真正替换生产数据库前还需保留原库和确认回滚办法。</p>
-<h3 id="section-149">25.3 为什么 CREATE TABLE IF NOT EXISTS 不是迁移系统</h3>
+<h3 id="section-248">25.3 为什么 CREATE TABLE IF NOT EXISTS 不是迁移系统</h3>
 <p>原来任务只有 title/completed，后来增加 priority。即使你把建表语句改了，已经存在的旧表也不会自动长出新列。</p>
 <p>迁移需要记录数据库当前版本，并按顺序执行一次性变化。例如版本 0 → 1：</p>
 <pre><span class="language-label">sql</span><code class="language-sql">BEGIN IMMEDIATE;
@@ -1317,16 +2735,16 @@ python scripts/migrate_priority_example.py tasks.db
 </code></pre>
 <p>第一次输出 <code>Schema migrated: 0 -&gt; 1</code>，第二次输出 <code>Schema already at version 1</code>。这只证明 schema 迁移完成；要让 API 返回 priority，还需要完成下一章的 C++ 修改。</p>
 <p>增加列、改变约束、删除列的能力和限制不同，具体操作先查 <a href="https://www.sqlite.org/lang_altertable.html" target="_blank" rel="noopener noreferrer">SQLite ALTER TABLE 文档</a>。更复杂迁移可能要建新表、复制数据、重建索引并检查外键。</p>
-<h3 id="section-150">25.4 一个可执行的发布顺序</h3>
+<h3 id="section-249">25.4 一个可执行的发布顺序</h3>
 <p>先在副本数据库上测试迁移与新应用；做并验证备份；停止或控制写入；执行迁移；部署新程序；检查健康与关键接口；观察错误率和日志。</p>
 <p>代码回滚不等于数据库回滚。新版本写入了旧版本不认识的数据后，简单把旧 EXE 换回来可能不够。尽量采用能兼容一段时间的 schema 变化，并明确哪些迁移不可逆。</p>
 <p><strong>验收</strong>：从一份备份启动成功；能回答“如果刚升级的程序启动失败，数据怎样恢复”。</p>
-<h2 id="section-151">26. 毕业任务：独立添加 priority，而不是再抄一遍 CRUD</h2><div class="chapter-tools"><button class="complete-button" data-for="section-151">标记本章已学完</button></div>
+<h2 id="section-250">26. 毕业任务：独立添加 priority，而不是再抄一遍 CRUD</h2><div class="chapter-tools"><button class="complete-button" data-for="section-250">标记本章已学完</button></div>
 <p>这个任务把语言、CMake、SQL、HTTP 和测试串起来。先阅读需求与验收条件，再关闭答案部分自己实现。</p>
-<h3 id="section-152">26.1 需求</h3>
+<h3 id="section-251">26.1 需求</h3>
 <p>Task 新增整数 priority，允许 0、1、2，默认 1。创建时可省略；PATCH 可以只修改 priority；列表新增可选过滤 <code>?priority=2</code>，仍按 id 升序并支持分页。旧数据库必须迁移，旧任务默认 priority=1。</p>
 <p>需要通过的行为：创建省略字段返回 1；显式传 0/2 保存成功；传 -1、3、1.5、&quot;1&quot;、true、null 返回 422；PATCH 只含 priority 合法；过滤只返回相应任务；重启后仍存在；迁移执行两次不会重复添加列。</p>
-<h3 id="section-153">26.2 分解工作，而不是同时改十个文件</h3>
+<h3 id="section-252">26.2 分解工作，而不是同时改十个文件</h3>
 <ol>
 <li><strong>数据模型</strong>：Task 加 <code>int priority{1}</code>，TaskPatch 加 <code>std::optional&lt;int&gt; priority</code>。</li>
 <li><strong>数据库</strong>：先备份，再迁移旧表，并为新数据库设计相同字段。</li>
@@ -1336,7 +2754,7 @@ python scripts/migrate_priority_example.py tasks.db
 <li><strong>文档</strong>：更新示例 JSON、接口契约与 README。</li>
 </ol>
 <p>注意 JSON 布尔不是这里想要的整数；不要因为 C++ 中 bool 能转 int 就接受 true。还要拒绝超出 int 范围的巨大 JSON 整数，先比较 JSON 数值允许范围或使用安全转换策略。</p>
-<h3 id="section-154">26.3 提示与参考设计</h3>
+<h3 id="section-253">26.3 提示与参考设计</h3>
 <p>如果过滤参数缺省，可让仓库接收 <code>std::optional&lt;int&gt; priority</code>。SQL 使用固定语句与绑定参数：</p>
 <pre><span class="language-label">sql</span><code class="language-sql">SELECT id,title,completed,priority FROM tasks
 WHERE (?1 IS NULL OR priority=?1)
@@ -1345,29 +2763,29 @@ ORDER BY id LIMIT ?2 OFFSET ?3;
 <p>数据量增大后评估这个可选条件对查询计划的影响，必要时拆成两条固定 SQL。不要只为了少写一条语句而忽略索引效果。</p>
 <p>更新可以延续 COALESCE；priority=0 不是缺省，也不是 NULL。与 optional<bool> 相同，判断的是 optional 是否有值，而非内部整数是否非零。</p>
 <p>创建原本要求 body.size()==1，需要修改字段允许规则；只加读取 priority 的代码却忘记调整这个入口，会让所有带 priority 的 POST 都被旧校验拒绝。</p>
-<h3 id="section-155">26.4 独立完成的定义</h3>
+<h3 id="section-254">26.4 独立完成的定义</h3>
 <p>从空文件夹重建一个类似项目，不必记住每个 API 名，但能查官方文档并解释选择；别人给出一个失败请求，你能复现、定位到一层并写回归测试；增加字段时知道它影响存储、协议、错误处理和已有数据。</p>
 <p>做到这些，你已经从“写一些 C++ 代码”走到“能独立交付一个小型后端服务”。这比会背很多零散语言特性更接近工程能力。</p>
-<h2 id="section-156">27. 后续扩展路线：按真实需求继续学习</h2><div class="chapter-tools"><button class="complete-button" data-for="section-156">标记本章已学完</button></div>
-<h3 id="section-157">27.1 多用户与权限</h3>
+<h2 id="section-255">27. 后续扩展路线：按真实需求继续学习</h2><div class="chapter-tools"><button class="complete-button" data-for="section-255">标记本章已学完</button></div>
+<h3 id="section-256">27.1 多用户与权限</h3>
 <p>先设计 users 表和 tasks.owner_id；所有任务查询基于服务端得到的用户身份过滤；再接入成熟会话/身份方案。密码存储的参数与方案参考 <a href="https://cheatsheetseries.owasp.org/cheatsheets/Password_Storage_Cheat_Sheet.html" target="_blank" rel="noopener noreferrer">OWASP 密码存储指南</a>，不要凭感觉实现。</p>
 <p>验收要有两个用户 A/B：A 创建的任务 B 看不到，也不能通过直接改 ID 来删除。列表接口和单项接口都需要检查，不能只保护 UI 上的按钮。</p>
-<h3 id="section-158">27.2 PostgreSQL 与连接池</h3>
+<h3 id="section-257">27.2 PostgreSQL 与连接池</h3>
 <p>把仓库接口保留，替换底层实现。学习连接认证、事务隔离、prepared statement、连接池耗尽、连接断开后的恢复。不要把数据库连接放成一个毫无保护的全局对象。</p>
 <p>可以从 PostgreSQL 的 <a href="https://www.postgresql.org/docs/current/libpq.html" target="_blank" rel="noopener noreferrer">libpq 官方接口</a> 理解协议与结果管理，再按项目选择 C++ 包装库。迁移数据库不仅是改一个链接库名，SQL 方言、自增 ID、错误码和并发假设都需要重新验证。</p>
-<h3 id="section-159">27.3 乐观锁与分页演进</h3>
+<h3 id="section-258">27.3 乐观锁与分页演进</h3>
 <p>给任务增加 version，每次更新使用 <code>WHERE id=? AND version=?</code>，成功后 version+1，匹配不到时返回冲突。这解决多人编辑“后写默默覆盖前写”的问题，不能简单用内存 mutex 替代，因为客户端读取与提交之间可能隔了很久。</p>
 <p>大 offset 查询可能越来越慢，数据变化时也容易跳项。可以增加 <code>after_id</code> 的游标分页：<code>WHERE id&gt;? ORDER BY id LIMIT ?</code>。需明确稳定排序和游标含义。</p>
-<h3 id="section-160">27.4 异步网络与协程</h3>
+<h3 id="section-259">27.4 异步网络与协程</h3>
 <p>在熟悉当前阻塞模型后，学习事件循环、非阻塞 socket、就绪通知、异步操作生命周期与取消。协程函数返回后，局部变量和捕获对象在何处存活是新的重点。</p>
 <p>不要简单把每个同步方法加上 co_await 就认为架构自动升级。阻塞数据库调用若仍在事件循环线程里执行，整个循环照样被阻塞。需要将阻塞任务安排到合适的执行环境，并限制队列和并发。</p>
-<h3 id="section-161">27.5 缓存、后台任务与消息系统</h3>
+<h3 id="section-260">27.5 缓存、后台任务与消息系统</h3>
 <p>只有测量说明数据库读取确实成为瓶颈时再加缓存，同时设计失效策略。只有请求中确实存在耗时任务时才拆后台执行，并定义任务状态、失败重试和幂等性。</p>
 <p>不要第一版就同时引入 Redis、消息队列和微服务；每引入一个外部系统，就多出连接、超时、配置、部署和故障恢复问题。学习顺序应由业务需求推动。</p>
-<h3 id="section-162">27.6 进一步学习 CMake 工程化</h3>
+<h3 id="section-261">27.6 进一步学习 CMake 工程化</h3>
 <p>将 task_core 变成可以安装给其他项目使用的库；学习 install(EXPORT)、包配置文件、命名空间 target、BUILD_INTERFACE/INSTALL_INTERFACE、版本兼容规则、交叉编译工具链文件。</p>
 <p>本项目只是安装可执行文件，没有假装已经提供一个可复用的 CMake SDK。深入时从 <a href="https://cmake.org/cmake/help/latest/guide/tutorial/index.html" target="_blank" rel="noopener noreferrer">CMake 官方教程</a> 的安装、依赖发现与 target 章节逐步实践。</p>
-<h2 id="section-163">28. 常见错误速查</h2><div class="chapter-tools"><button class="complete-button" data-for="section-163">标记本章已学完</button></div>
+<h2 id="section-262">28. 常见错误速查</h2><div class="chapter-tools"><button class="complete-button" data-for="section-262">标记本章已学完</button></div>
 <div class="table-scroll"><table>
 <thead>
 <tr>
@@ -1488,8 +2906,9 @@ ORDER BY id LIMIT ?2 OFFSET ?3;
 </tr>
 </tbody></table></div>
 <p>排错记录模板：实际命令、当前目录、工具版本、完整第一条错误、预期结果、实际结果、最近改动。把这些信息写全，往往比反复复制报错最后一行更有效。</p>
-<h2 id="section-164">29. 学习安排、回顾与自检答案</h2><div class="chapter-tools"><button class="complete-button" data-for="section-164">标记本章已学完</button></div>
-<h3 id="section-165">29.1 建议的学习周次</h3>
+<h2 id="section-263">29. 学习安排、回顾与自检答案</h2><div class="chapter-tools"><button class="complete-button" data-for="section-263">标记本章已学完</button></div>
+<h3 id="section-264">29.1 建议的学习周次</h3>
+<p>下表是进入后端主线后的安排。刚学 C++ 的读者应先完成新增 F01～F12 与 C01～C12；可以按每周 2～3 个基础专题推进，卡住时以练习完成为准。原有第 3～9 章用作复习与连接真实项目，不要求第一遍就跳过详细基础课。</p>
 <div class="table-scroll"><table>
 <thead>
 <tr>
@@ -1540,7 +2959,7 @@ ORDER BY id LIMIT ?2 OFFSET ?3;
 </tr>
 </tbody></table></div>
 <p>遇到某章卡住，不必追赶日程。先缩小到一个可运行例子，再回到项目。工具文档可以查，资源生命周期和接口边界要真正理解。</p>
-<h3 id="section-166">29.2 第一晚只做这五件事</h3>
+<h3 id="section-265">29.2 第一晚只做这五件事</h3>
 <ol>
 <li>打开 README，确认终端位置和工具版本。</li>
 <li>configure → build → ctest，保存输出。</li>
@@ -1549,7 +2968,7 @@ ORDER BY id LIMIT ?2 OFFSET ?3;
 <li>回到第 2 章解释这次构建发生了什么。</li>
 </ol>
 <p>先获得一条可重复的闭环；第二天再深入生命周期和 CMake，避免一晚上只安装工具却没运行过自己的程序。</p>
-<h3 id="section-167">29.3 高频自检题与参考答案</h3>
+<h3 id="section-266">29.3 高频自检题与参考答案</h3>
 <p><strong>为什么可以返回局部 string 的值，不能返回它的引用？</strong> 返回值创建或传递一个由调用方拥有的结果，可能有拷贝消除；引用只指向已经结束生命周期的局部对象。</p>
 <p><strong>为什么数据库句柄用 unique_ptr 加自定义清理器？</strong> 它不是用 new 分配的普通对象，需要 sqlite3_close_v2 释放；unique_ptr 表达唯一所有权并负责异常路径清理。</p>
 <p><strong>为什么 optional<bool> 中 false 仍算“有值”？</strong> optional 的是否参与状态与内部 bool 值分别存储；has_value 判断字段是否提供，解引用后才是业务布尔值。</p>
@@ -1560,7 +2979,7 @@ ORDER BY id LIMIT ?2 OFFSET ?3;
 <p><strong>为什么数据库开 WAL 仍加 mutex？</strong> WAL 处理数据库层读写并发；mutex 保护本进程共享连接和一项完整仓库操作，职责不同。</p>
 <p><strong>为什么要测 Release？</strong> 优化和 NDEBUG 等配置会改变程序及测试行为；Debug 通过不能替代 Release 验证。</p>
 <p><strong>为什么源代码跑通不等于部署完成？</strong> 部署还需要运行身份、路径、环境变量、启动管理、网络入口、日志、备份和目标平台验证。</p>
-<h3 id="section-168">29.4 最终独立验收清单</h3>
+<h3 id="section-267">29.4 最终独立验收清单</h3>
 <ul>
 <li>从空目录创建一个 C++20 + CMake 工程，能解释所有直接依赖。</li>
 <li>在自己的代码中正确使用值、引用、optional、vector 和 RAII。</li>
@@ -1574,7 +2993,7 @@ ORDER BY id LIMIT ?2 OFFSET ?3;
 </ul>
 <p>配套 <code>源码导读.md</code> 按依赖顺序收录完整自有代码，可用作核对；先读接口和调用关系，再逐个方法阅读。第三方实现已放在 third_party，初次学习无需从数万行库源码开始。</p>
 <footer>现代 C++ 后端实战教程 · 配套源码、测试与部署示例<br>先运行，再解释，再独立重写。</footer></article></main><script>
-const key='cpp-book-'+location.pathname;let saved={};try{saved=JSON.parse(localStorage.getItem(key)||'{}');if(localStorage.getItem('cpp-theme')==='dark')document.body.dataset.theme='dark'}catch{}
+const key='cpp-book-expanded-v2-'+location.pathname;let saved={};try{saved=JSON.parse(localStorage.getItem(key)||'{}');if(localStorage.getItem('cpp-theme')==='dark')document.body.dataset.theme='dark'}catch{}
 const save=()=>{try{localStorage.setItem(key,JSON.stringify(saved))}catch{}};
 document.getElementById('theme').onclick=()=>{const dark=document.body.dataset.theme!=='dark';document.body.dataset.theme=dark?'dark':'';try{localStorage.setItem('cpp-theme',dark?'dark':'light')}catch{}};
 document.getElementById('print').onclick=()=>window.print();

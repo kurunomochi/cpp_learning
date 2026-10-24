@@ -1,0 +1,5 @@
+cmake_minimum_required(VERSION 3.24)
+project(hello_cmake VERSION 1.0.0 LANGUAGES CXX)
+add_executable(hello main.cpp)
+target_compile_features(hello PRIVATE cxx_std_20)
+set_target_properties(hello PROPERTIES CXX_EXTENSIONS OFF)

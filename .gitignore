@@ -1,6 +1,6 @@
-/build/
-/install/
-/scratch/
+build/
+install/
+scratch/
 *.db
 *.db-shm
 *.db-wal
